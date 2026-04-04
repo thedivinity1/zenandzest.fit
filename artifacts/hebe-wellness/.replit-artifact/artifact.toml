@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Hebe Wellness"
+version = "1.0.0"
+id = "artifacts/hebe-wellness"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18210
+
+[services.development]
+run = "pnpm --filter @workspace/hebe-wellness run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hebe-wellness", "run", "build" ]
+publicDir = "artifacts/hebe-wellness/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18210"
+BASE_PATH = "/"

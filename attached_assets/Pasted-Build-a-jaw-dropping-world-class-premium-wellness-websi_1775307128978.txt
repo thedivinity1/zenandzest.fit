@@ -1,0 +1,28 @@
+Build a jaw-dropping, world-class premium wellness website called "Hebe Wellness" - React + Vite. Use inline styles with these exact colors: Forest Green #1a3d2e, Darkest #0a1a0f, Gold #c9a84c, Cream #fdf8f0. NEVER use CBD/cannabinoids/THC/hemp - say 'plant botanicals', 'adaptogenic extracts', 'Vijaya botanical complex'. Pages: /, /blog, /tools, /shop, /quiz, /about, /consult with React Router.
+
+HOMEPAGE:
+1. Navbar: fixed, rgba(10,26,15,0.95) bg + backdropFilter blur, gold 'H' logo badge + 'Hebe Wellness' in gold italic, white nav links, gold 'Free Consult' button, gold scroll progress bar top
+2. Hero: 100vh, radial-gradient #1a3d2e to #0a1a0f, 3 floating gold orbs CSS animation, badge 'India #1 Plant-Botanical Authority', H1 'Reclaim Your Natural Balance' (white+gold gradient), 2 CTA buttons, SVG wave bottom
+3. Marquee trust bar: cream bg, infinite scroll '🌿 Ministry of Ayush Licensed ◆ ⚗️ Lab Tested ◆ 👨‍⚕️ Doctor Backed ◆ 50,000+ Lives ◆ 🔬 Clinically Studied'
+4. Stats: #1a3d2e bg, animated count-up numbers in gold (50000+, 100%, 15+, 99%), white labels
+5. Products: cream bg, 5 cards with CSS gradient image areas (no img tags), hover lift, gold prices, dark green Add to Cart buttons. Products: Botanical Sleep Drops Rs.2999, Adaptogenic Stress Relief Rs.3499, Hair Vitality Elixir Rs.2499, Skin Radiance Oil Rs.2999, Gut Balance Botanical Rs.1999
+6. Problem-Solution: #0f1f17 bg, 3 flip cards (Sleep/Stress/Hair) - click shows gold bg with botanical solution
+7. How It Works: 4 steps with large gold stroke numbers behind content
+8. Science: #1a3d2e bg, particle dots animation, pulsing SVG rings, 3 glassmorphism cards (ECS, HPA Axis, Gut-Brain)
+9. Tools Preview: cream bg, 6 dark green cards hovering to gold - Sleep Calculator, Stress Test, Hair Analyzer, Skin Finder, Wellness Score, Adaptogen Finder
+10. Blog Preview: magazine layout, 1 large + 2 small, colorful category pills
+11. Testimonials: #fdf8f0 bg, initials-only avatars NO PHOTOS, gold quotation marks, auto-cycle
+12. Expert Network: #0f1f17 bg, 4 cards with emoji icons ONLY (🩺👨‍🔬🌿🧠) NO FAKE PHOTOS, gold specialty text, 'Book Consultation' CTA
+13. Ingredient Explorer: #0a1a0f bg, 8 circular cards (Ashwagandha, Brahmi, Bhringraj, Saffron, Turmeric, Rosemary, Lion's Mane, Berberine), click = modal with benefits
+14. Newsletter: gold gradient bg, dark green text, rounded-full input
+15. Footer: #0a1a0f bg, 4 cols, disclaimer, FSSAI mention
+
+BLOG PAGE: #1a3d2e hero, gold title, 50 articles with category filters (Sleep/Stress/Hair/Skin/Nutrition/Ayurveda)
+TOOLS PAGE: #1a3d2e hero, 8 working multi-step assessment tools with recharts results
+SHOP PAGE: cream bg, CSS gradient product cards
+QUIZ PAGE: dark green bg, glassmorphism question cards, gold progress bar
+ABOUT/CONSULT: complete pages
+
+CSS in index.css: Google Fonts Playfair Display+Inter, keyframes for float/pulse-ring/marquee/spin-slow
+All sections: IntersectionObserver fade-in-up animations with staggered children
+Make this look like Rs.50 lakh website. Fully functional.
