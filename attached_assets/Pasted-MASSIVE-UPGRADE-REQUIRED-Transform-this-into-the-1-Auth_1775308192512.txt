@@ -1,0 +1,60 @@
+MASSIVE UPGRADE REQUIRED - Transform this into the #1 Authority Wellness Website of 2026. Build everything below in full:
+
+**HOMEPAGE - 20+ SECTIONS (all beautifully designed, dark green/gold theme):**
+1. Hero - already done, keep it
+2. Animated trust ticker bar (scrolling logos/stats)
+3. Our Mission & Philosophy section
+4. Shop Featured Products (6 premium product cards with hover effects, flip animation, ingredients badge, add-to-cart)
+5. Interactive Wellness Quiz CTA section ("Find Your Perfect Botanical Ritual" with animated quiz preview)
+6. Blog/Knowledge Hub (6 featured article cards with category tags, read time, rich images placeholder with gradient)
+7. Advanced Wellness Tools Section (6 tool cards: Sleep Quality Calculator, Stress Score Tracker, Hair Health Analyser, Skin Type Finder, BMI + Wellness Index, Adaptogen Finder Quiz)
+8. Ingredient Spotlight (interactive ingredient explorer - click each ingredient card to expand modal with benefits, science, usage)
+9. How It Works (3-step animated process)
+10. Science & Research Section (with expandable research papers/studies cards)
+11. Comparison Table (Hebe Wellness vs competitors - feature checklist table)
+12. Video/Testimonial Section (video placeholder + 6 review cards with star ratings, no fake doctors, use genuine-sounding customer names)
+13. Before & After Results Section (split cards with progress stories)
+14. Subscription Box Section (3 wellness subscription plans - Basic/Premium/Elite)
+15. Free Resources Library (eBooks, guides, checklists download cards)
+16. Community/Forum CTA section
+17. Newsletter with lead magnet (Free Wellness Assessment)
+18. Instagram/Social Feed mockup grid
+19. FAQ Accordion (12+ questions)
+20. Footer with full sitemap, certifications, links
+
+**50+ BLOG ARTICLES** - Create a BlogsPage.tsx with full listing of 50 real, SEO-optimized article titles (no fake authors), organized by categories:
+- Sleep Health (10 articles)
+- Stress & Anxiety (10 articles)
+- Hair Health & Natural Remedies (10 articles)
+- Skin Care & Botanical Actives (10 articles)
+- Holistic Wellness & Lifestyle (10 articles)
+Each article card should have: title, excerpt, category tag, read time, date, gradient image placeholder, hover effects
+
+**INTERACTIVE TOOLS PAGE (ToolsPage.tsx):**
+1. Sleep Quality Score Calculator (inputs: sleep hours, wake-ups, morning energy, screen time - outputs score + personalized tips)
+2. Stress Level Tracker (10 question quiz, outputs low/moderate/high with botanical recommendations)
+3. Hair Health Analyser (inputs: hair type, concerns, diet, lifestyle - outputs personalised routine)
+4. Skin Type Finder (interactive quiz - 8 questions - outputs skin type + product recommendations)
+5. BMI + Holistic Wellness Index (BMI + lifestyle factors = overall wellness score)
+6. Adaptogen Matchmaker (quiz to find best adaptogens for your goals)
+7. Sleep Debt Calculator (track sleep over 7 days, calculate deficit)
+8. Daily Wellness Ritual Builder (drag-and-drop or selection tool to build morning/night routine)
+
+**RESOURCES PAGE (ResourcesPage.tsx):**
+- Free downloadable guides (PDF card style, no actual download needed - just UI)
+- Research citations library
+- Glossary of botanical/wellness terms (A-Z searchable)
+- Video learning library mockup
+
+**DESIGN REQUIREMENTS:**
+- ZERO plain white sections - everything uses dark forest green (#1a3a2a), rich cream (#f5f0e8), warm gold (#c9a84c), or deep charcoal
+- Glassmorphism cards throughout
+- Smooth scroll animations (fade-in on scroll using Intersection Observer)
+- Micro-interactions on all buttons and cards
+- NO FAKE DOCTOR PHOTOS - use abstract botanical/wellness icons or gradient avatars
+- NO CBD, cannabinoid, hemp, THC terms anywhere - use: plant botanical, adaptogen, phytonutrient, herbal extract, botanical complex
+- Premium typography: Playfair Display for headings, Inter for body
+- Mobile-first responsive
+- Loading animations
+
+Build ALL of this now completely. Do not truncate or skip any section.
