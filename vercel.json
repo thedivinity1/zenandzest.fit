@@ -1,4 +1,5 @@
 {
+  "outputDirectory": "artifacts/hebe-wellness/dist",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
