@@ -186,6 +186,34 @@ const editorialArticles = [
     color: '#c084fc',
     bgGradient: 'linear-gradient(135deg, #1a0a2e 0%, #2d1845 100%)',
     borderColor: 'rgba(192, 132, 252, 0.2)'
+  },
+  {
+    id: 8,
+    title: 'Ashwagandha: The Ultimate Adaptogen',
+    subtitle: 'Why 5,000 years of Ayurveda and modern science agree',
+    category: 'Adaptogens',
+    excerpt: 'From Harvard Medical School studies to ancient Charaka Samhita, Ashwagandha stands alone. It lowers cortisol, boosts testosterone, improves sleep quality, and builds lasting mental resilience.',
+    author: 'Dr. Ananya Krishnan, MD',
+    authorTitle: 'Integrative Medicine, AIIMS',
+    readTime: '7 min read',
+    icon: '🌱',
+    color: '#4ade80',
+    bgGradient: 'linear-gradient(135deg, #051a0e 0%, #0d3321 100%)',
+    borderColor: 'rgba(74, 222, 128, 0.2)'
+  },
+  {
+    id: 9,
+    title: 'The Hormone-Skin Connection',
+    subtitle: 'Why your cortisol is ruining your complexion',
+    category: 'Hormonal Skin',
+    excerpt: 'Breakouts, dullness, premature wrinkles — they\'re all hormonal. When cortisol is chronically high it breaks down collagen, triggers inflammation, and disrupts your skin\'s microbiome. Here\'s the fix.',
+    author: 'Dr. Sarah Chen, MD',
+    authorTitle: 'Integrative Endocrinologist',
+    readTime: '6 min read',
+    icon: '💆',
+    color: '#f472b6',
+    bgGradient: 'linear-gradient(135deg, #1f0a18 0%, #3d1530 100%)',
+    borderColor: 'rgba(244, 114, 182, 0.2)'
   }
 ];
 
@@ -397,7 +425,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div style={{ background: 'var(--darkest)', color: 'white', minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ background: 'var(--section-void)', color: 'white', minHeight: '100vh', overflowX: 'hidden' }}>
 
       {/* ===== ANNOUNCEMENT TICKER ===== */}
       <div style={{
@@ -658,10 +686,12 @@ export default function HomePage() {
 
       {/* ===== TRUST & METRICS BAR ===== */}
       <section style={{
-        background: 'rgba(10, 26, 15, 0.6)',
-        borderTop: '1px solid rgba(229,197,117,0.12)',
-        borderBottom: '1px solid rgba(229,197,117,0.12)',
-        padding: '2.5rem 0'
+        background: 'linear-gradient(135deg, #06081a 0%, #0a0c1f 50%, #060814 100%)',
+        borderTop: '1px solid rgba(99,102,241,0.18)',
+        borderBottom: '1px solid rgba(99,102,241,0.15)',
+        padding: '2.5rem 0',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
         <div className="container">
           <div style={{
@@ -694,8 +724,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== CTA STRIP 1 — QUIZ INVITE ===== */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0e0a02 0%, #1c1304 60%, #0a0800 100%)',
+        borderTop: '1px solid rgba(245,158,11,0.12)',
+        borderBottom: '1px solid rgba(245,158,11,0.12)',
+        padding: '3.5rem 0'
+      }}>
+        <div className="container">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
+            <div>
+              <div style={{ fontSize: '0.72rem', color: '#f59e0b', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.5rem' }}>🎯 FREE 2-MINUTE ASSESSMENT</div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.2rem, 2.5vw, 1.7rem)', fontWeight: 900, color: 'white', lineHeight: 1.2, marginBottom: '0.5rem' }}>
+                Not Sure Where to Start?
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: 480 }}>
+                Take our personalised wellness quiz. In 2 minutes, you'll know exactly which herbs and protocols your body needs most right now.
+              </p>
+            </div>
+            <Link href="/quiz" style={{
+              background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+              color: '#0a0600',
+              padding: '1rem 2.5rem',
+              borderRadius: 100,
+              fontWeight: 800,
+              textDecoration: 'none',
+              fontSize: '0.95rem',
+              boxShadow: '0 4px 25px rgba(245,158,11,0.3)',
+              whiteSpace: 'nowrap',
+              display: 'inline-block',
+              flexShrink: 0,
+              transition: 'transform 0.2s, box-shadow 0.2s'
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 35px rgba(245,158,11,0.45)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 25px rgba(245,158,11,0.3)'; }}
+            >
+              Take the Free Quiz →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ===== WELLNESS CONCERN EXPLORER ===== */}
-      <section style={{ background: 'var(--darkest)', padding: '6rem 0 4rem 0', borderBottom: '1px solid rgba(201,168,76,0.1)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #040609 0%, #060814 40%, #080a18 100%)', padding: '6rem 0 4rem 0', borderBottom: '1px solid rgba(99,102,241,0.1)' }}>
         <div className="container">
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -818,10 +889,51 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== CTA STRIP 2 — LONGEVITY HUB ===== */}
+      <section style={{
+        background: 'linear-gradient(135deg, #050a08 0%, #071510 50%, #030705 100%)',
+        borderTop: '1px solid rgba(16,185,129,0.1)',
+        borderBottom: '1px solid rgba(16,185,129,0.1)',
+        padding: '3.5rem 0'
+      }}>
+        <div className="container">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <div style={{ fontSize: '3rem', filter: 'drop-shadow(0 0 20px rgba(16,185,129,0.4))' }}>⏳</div>
+              <div>
+                <div style={{ fontSize: '0.72rem', color: '#10b981', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>🌿 LONGEVITY HUB</div>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', fontWeight: 900, color: 'white', lineHeight: 1.2 }}>
+                  Science-Backed Protocols to Live Longer, Better
+                </h3>
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/longevity-hub" style={{
+                background: 'rgba(16,185,129,0.1)',
+                border: '1px solid rgba(16,185,129,0.3)',
+                color: '#34d399',
+                padding: '0.85rem 1.75rem',
+                borderRadius: 100,
+                fontWeight: 700,
+                textDecoration: 'none',
+                fontSize: '0.88rem',
+                display: 'inline-block',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(16,185,129,0.2)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(16,185,129,0.1)'; }}
+              >
+                Explore Longevity Hub →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ========================================================== */}
-      {/* ===== EDITORIAL BLOG JOURNAL — 7-ARTICLE EXPANDED GRID ===== */}
+      {/* ===== EDITORIAL BLOG JOURNAL — 9-ARTICLE EXPANDED GRID ===== */}
       {/* ========================================================== */}
-      <section id="featured-articles" style={{ padding: '7rem 0', background: 'linear-gradient(180deg, var(--darkest) 0%, var(--mid-dark) 100%)' }}>
+      <section id="featured-articles" style={{ padding: '7rem 0', background: 'linear-gradient(180deg, #04060d 0%, #060912 50%, #080b18 100%)' }}>
         <div className="container">
           
           <Reveal>
@@ -1012,8 +1124,70 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== CTA STRIP 3 — APOTHECARY TEASER ===== */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0c0800 0%, #1a1000 50%, #0e0900 100%)',
+        padding: '4rem 0',
+        borderTop: '1px solid rgba(201,168,76,0.15)',
+        borderBottom: '1px solid rgba(201,168,76,0.12)',
+        overflow: 'hidden',
+        position: 'relative'
+      }}>
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 65%)'
+        }} />
+        <div className="container" style={{ position: 'relative' }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>🏺 THE APOTHECARY IS OPEN</div>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 900, color: 'white', lineHeight: 1.2, marginBottom: '0.75rem' }}>
+              Every Remedy. Clinically Verified. Naturally Pure.
+            </h3>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.92rem', maxWidth: 520, margin: '0 auto 2rem', lineHeight: 1.7 }}>
+              Doctor-formulated botanical blends made with third-party tested, pharmaceutical-grade herbs. No fillers. No synthetic shortcuts.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/shop" style={{
+                background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%)',
+                color: '#0a0700',
+                padding: '0.95rem 2.25rem',
+                borderRadius: 100,
+                fontWeight: 800,
+                textDecoration: 'none',
+                fontSize: '0.92rem',
+                boxShadow: '0 4px 25px rgba(201,168,76,0.25)',
+                display: 'inline-block',
+                transition: 'transform 0.2s'
+              }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'}
+              >
+                🏺 Shop The Apothecary
+              </Link>
+              <Link href="/case-studies" style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                color: 'rgba(255,255,255,0.75)',
+                padding: '0.95rem 2rem',
+                borderRadius: 100,
+                fontWeight: 700,
+                textDecoration: 'none',
+                fontSize: '0.92rem',
+                display: 'inline-block',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.08)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'; }}
+              >
+                Read Case Studies →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== SHOP THE APOTHECARY — PRODUCT GRID ===== */}
-      <section style={{ background: 'var(--mid-dark)', padding: '7rem 0', borderTop: '1px solid rgba(229,197,117,0.08)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #060509 0%, #09060f 40%, #0c0714 100%)', padding: '7rem 0', borderTop: '1px solid rgba(139,92,246,0.1)' }}>
         <div className="container">
           
           <Reveal>
@@ -1109,7 +1283,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== CIRCADIAN HORMONE SIMULATOR ===== */}
-      <section style={{ background: 'var(--mid-dark)', padding: '7rem 0', borderTop: '1px solid rgba(229,197,117,0.08)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #020608 0%, #030a0e 50%, #040c0f 100%)', padding: '7rem 0', borderTop: '1px solid rgba(56,189,248,0.1)' }}>
         <div className="container">
           <Reveal>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '4rem', alignItems: 'center' }} className="editorial-lead-card">
@@ -1193,7 +1367,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== OUR WELLNESS EXPERTS ===== */}
-      <section style={{ background: 'var(--darkest)', padding: '7rem 0', borderTop: '1px solid rgba(229,197,117,0.08)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #070509 0%, #0d0814 50%, #0f091a 100%)', padding: '7rem 0', borderTop: '1px solid rgba(192,132,252,0.1)' }}>
         <div className="container">
           
           <Reveal>
@@ -1240,7 +1414,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== GEO-TARGETED WELLNESS ADVISOR ===== */}
-      <section style={{ background: 'var(--mid-dark)', padding: '5rem 0', borderTop: '1px solid rgba(229,197,117,0.06)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #050909 0%, #060e0e 50%, #040b0a 100%)', padding: '5rem 0', borderTop: '1px solid rgba(52,211,153,0.1)' }}>
         <div className="container">
           <Reveal>
             <GeoOptimizer />
@@ -1248,10 +1422,50 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== CTA STRIP 4 — CASE STUDIES ===== */}
+      <section style={{
+        background: 'linear-gradient(135deg, #070410 0%, #0d0620 50%, #080316 100%)',
+        padding: '3.5rem 0',
+        borderTop: '1px solid rgba(139,92,246,0.15)',
+        borderBottom: '1px solid rgba(139,92,246,0.1)'
+      }}>
+        <div className="container">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
+            <div>
+              <div style={{ fontSize: '0.72rem', color: '#a78bfa', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.5rem' }}>📋 REAL RESULTS FROM REAL PEOPLE</div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)', fontWeight: 900, color: 'white', lineHeight: 1.2, marginBottom: '0.5rem' }}>
+                Documented Wellness Transformations
+              </h3>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.6, maxWidth: 440 }}>
+                Read our detailed case studies — real people, real struggles, real outcomes. Tracked over 8–24 weeks with their consent.
+              </p>
+            </div>
+            <Link href="/case-studies" style={{
+              background: 'rgba(139,92,246,0.12)',
+              border: '1px solid rgba(139,92,246,0.35)',
+              color: '#c4b5fd',
+              padding: '0.9rem 2rem',
+              borderRadius: 100,
+              fontWeight: 700,
+              textDecoration: 'none',
+              fontSize: '0.9rem',
+              display: 'inline-block',
+              flexShrink: 0,
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(139,92,246,0.22)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(139,92,246,0.12)'; }}
+            >
+              Read Case Studies →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ===== NEWSLETTER SIGNUP ===== */}
       <section style={{
         padding: '6rem 0',
-        background: 'linear-gradient(180deg, var(--mid-dark) 0%, #060f0a 100%)',
+        background: 'linear-gradient(180deg, #06040c 0%, #030208 100%)',
         borderTop: '1px solid rgba(229,197,117,0.1)',
         textAlign: 'center'
       }}>

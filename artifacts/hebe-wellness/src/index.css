@@ -8,36 +8,50 @@
 }
 
 :root {
+  /* Core Brand */
   --forest-green: #1a3d2e;
-  --darkest: #0a1a0f;
+  --darkest: #050908;
   --gold: #c9a84c;
   --gold-light: #e8c97a;
   --gold-dark: #a87e30;
   --cream: #fdf8f0;
   --cream-dark: #f5edd8;
   --mid-dark: #0f1f17;
+
+  /* Section Backgrounds — each feels completely different */
+  --section-void: #030405;
+  --section-navy: #060814;
+  --section-indigo: #090a18;
+  --section-forest: #040b08;
+  --section-warm: #0c0805;
+  --section-rose: #0a0508;
+  --section-teal: #030c0b;
+  --section-slate: #070810;
+
+  /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Glow Colors */
+  --glow-gold: rgba(201, 168, 76, 0.15);
+  --glow-emerald: rgba(16, 185, 129, 0.12);
+  --glow-blue: rgba(59, 130, 246, 0.12);
+  --glow-purple: rgba(139, 92, 246, 0.12);
+  --glow-rose: rgba(244, 63, 94, 0.10);
+  --glow-amber: rgba(245, 158, 11, 0.12);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-sans) !important;
-  background-color: var(--darkest) !important;
+  background-color: var(--section-void) !important;
   color: #ffffff !important;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #ffffff;
-}
-
-p {
-  color: rgba(255, 255, 255, 0.85);
-}
+h1, h2, h3, h4, h5, h6 { color: #ffffff; }
+p { color: rgba(255, 255, 255, 0.85); }
 
 /* ===== KEYFRAME ANIMATIONS ===== */
 @keyframes float {
@@ -78,14 +92,8 @@ p {
 }
 
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-in {
@@ -113,6 +121,52 @@ p {
 @keyframes wave {
   0%, 100% { d: path("M0,80 C150,120 350,40 500,80 C650,120 850,40 1000,80 L1000,100 L0,100 Z"); }
   50% { d: path("M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 L1000,100 L0,100 Z"); }
+}
+
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(60px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px var(--glow-gold); }
+  50% { box-shadow: 0 0 50px var(--glow-gold), 0 0 80px var(--glow-gold); }
+}
+
+@keyframes border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tilt-in {
+  from { opacity: 0; transform: perspective(600px) rotateX(20deg) translateY(30px); }
+  to { opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes progressBar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ===== UTILITY CLASSES ===== */
