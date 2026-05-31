@@ -4,19 +4,19 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer className="footer" style={{ borderTop: '1px solid rgba(229, 197, 117, 0.15)', background: 'var(--darkest)' }}>
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '3rem', marginBottom: '3rem' }}>
           {/* Brand */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
-              <div className="nav-logo-badge">H</div>
-              <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--gold)', fontWeight: 700 }}>
-                Hebe Wellness
+              <div className="nav-logo-badge" style={{ background: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 50%, #d97706 100%)', color: 'var(--darkest)' }}>O</div>
+              <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--gold-light)', fontWeight: 700, fontSize: '1.2rem' }}>
+                Ojas Sanctuary
               </span>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
-              India's premier plant botanical authority, combining ancient Ayurvedic wisdom with modern clinical science.
+              India's premier botanical wellness collective, combining ancient Ayurvedic wisdom with modern life-extending science.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
               {['📘', '📷', '🐦', '▶️'].map((icon, i) => (
@@ -34,10 +34,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Products */}
+          {/* Marketplace */}
           <div>
             <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1rem' }}>
-              Products
+              The Apothecary
             </h4>
             {['Botanical Sleep Drops', 'Adaptogenic Stress Relief', 'Hair Vitality Elixir', 'Skin Radiance Oil', 'Gut Balance Botanical'].map(p => (
               <Link key={p} href="/shop" className="footer-link">{p}</Link>
@@ -89,8 +89,8 @@ export default function Footer() {
             <div key={i} style={{
               display: 'flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.5rem 1rem',
-              background: 'rgba(201,168,76,0.06)',
-              border: '1px solid rgba(201,168,76,0.15)',
+              background: 'rgba(229,197,117,0.06)',
+              border: '1px solid rgba(229,197,117,0.15)',
               borderRadius: '100px',
               fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)'
             }}>
@@ -103,13 +103,13 @@ export default function Footer() {
         {/* Disclaimer */}
         <div className="footer-disclaimer">
           <p>
-            <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Disclaimer:</strong> The products and statements on this website have not been evaluated by the Food Safety and Standards Authority of India (FSSAI) for treating, curing, or preventing any disease. Hebe Wellness products are food supplements and are not intended to diagnose, treat, cure, or prevent any disease or health condition. Always consult a qualified healthcare professional before starting any supplement regimen. Individual results may vary.
+            <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Disclaimer:</strong> The products and statements on this website have not been evaluated by the Food Safety and Standards Authority of India (FSSAI) for treating, curing, or preventing any disease. Ojas Sanctuary products are food supplements and are not intended to diagnose, treat, cure, or prevent any disease or health condition. Always consult a qualified healthcare professional before starting any supplement regimen. Individual results may vary.
           </p>
           <p style={{ marginTop: '0.75rem' }}>
-            FSSAI License No.: 10019022003840 · Registered Address: Hebe Wellness Pvt. Ltd., 4th Floor, DLF Cyber City, Gurugram, Haryana 122002, India
+            FSSAI License No.: 10019022003840 · Registered Address: Ojas Sanctuary Pvt. Ltd., Gurugram, Haryana 122002, India
           </p>
           <p style={{ marginTop: '0.75rem' }}>
-            © {year} Hebe Wellness Pvt. Ltd. All rights reserved. Vijaya botanical complex and related formulations are compliant with all applicable Indian laws and regulations.
+            © {year} Ojas Sanctuary Pvt. Ltd. All rights reserved. Botanical formulations are compliant with all applicable Indian laws and regulations.
           </p>
         </div>
       </div>

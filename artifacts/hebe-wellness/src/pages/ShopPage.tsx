@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
+import { useCart } from '../context/CartContext';
+import ProductDrawer from '../components/ProductDrawer';
 
 const categories = ['All', 'Sleep', 'Stress', 'Hair', 'Skin', 'Gut'];
 
@@ -104,18 +106,20 @@ const products = [
 
 export default function ShopPage() {
   const [activeCategory, setActiveCategory] = useState('All');
-  const [cart, setCart] = useState<string[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
+  const { cartCount, addToCart, setCartOpen } = useCart();
   const [addedItem, setAddedItem] = useState<string | null>(null);
 
   const filtered = activeCategory === 'All'
     ? products
     : products.filter(p => p.category === activeCategory);
 
-  const addToCart = (name: string) => {
-    setCart([...cart, name]);
+  const handleAddToCart = (name: string) => {
+    addToCart(name);
     setAddedItem(name);
     setTimeout(() => setAddedItem(null), 2000);
   };
+
 
   return (
     <div>
@@ -179,13 +183,17 @@ export default function ShopPage() {
               </button>
             ))}
           </div>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-            color: 'var(--gold)', fontWeight: 600, fontSize: '0.9rem',
-            cursor: 'pointer', padding: '0.5rem 1rem',
-            border: '1px solid rgba(201,168,76,0.3)', borderRadius: '100px'
-          }}>
-            🛒 Cart ({cart.length})
+          <div 
+            onClick={() => setCartOpen(true)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              color: 'var(--gold)', fontWeight: 600, fontSize: '0.9rem',
+              cursor: 'pointer', padding: '0.5rem 1rem',
+              border: '1px solid rgba(201,168,76,0.3)', borderRadius: '100px',
+              background: 'rgba(201,168,76,0.05)'
+            }}
+          >
+            🛒 Cart ({cartCount})
           </div>
         </div>
       </div>
@@ -196,12 +204,15 @@ export default function ShopPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
             {filtered.map((product, i) => (
               <ScrollAnimator key={i} className={`stagger-${(i % 3) + 1}`}>
-                <div style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: 20, overflow: 'hidden',
-                  transition: 'all 0.3s ease'
-                }}
+                <div 
+                  onClick={() => setSelectedProduct(product.name)}
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: 20, overflow: 'hidden',
+                    transition: 'all 0.3s ease',
+                    cursor: 'pointer'
+                  }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as HTMLElement;
                     el.style.transform = 'translateY(-6px)';
@@ -287,7 +298,7 @@ export default function ShopPage() {
                     </div>
 
                     <button
-                      onClick={() => addToCart(product.name)}
+                      onClick={(e) => { e.stopPropagation(); handleAddToCart(product.name); }}
                       style={{
                         width: '100%', padding: '0.75rem',
                         background: 'linear-gradient(135deg, var(--forest-green) 0%, #0d2a1c 100%)',
@@ -336,6 +347,9 @@ export default function ShopPage() {
         </div>
         <style>{`@media(max-width:700px){.shop-hero+div+div+div .container>div{grid-template-columns:repeat(2,1fr)!important}}`}</style>
       </section>
+
+      {/* Product Detail Drawer */}
+      <ProductDrawer productName={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   );
 }

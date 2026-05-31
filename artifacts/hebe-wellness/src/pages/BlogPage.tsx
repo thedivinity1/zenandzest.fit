@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 
-const allArticles = [
+export const allArticles = [
   { id: 1, title: 'Why You Wake Up at 3 AM: The Science of Cortisol & Circadian Disruption', category: 'Sleep', excerpt: 'Waking between 2-4 AM is a hallmark of elevated cortisol and HPA axis dysregulation. Here is exactly what is happening in your body and how to fix it with botanical science.', readTime: '7 min', date: 'Apr 1, 2026', icon: '🌙', gradient: 'linear-gradient(135deg, #1a237e, #0d1459)' },
   { id: 2, title: '5 Botanical Ingredients Clinically Proven to Improve Sleep Quality', category: 'Sleep', excerpt: 'Clinical trials confirm these 5 plant compounds — Ashwagandha, Valerian, L-Theanine, Magnolia Bark, and Glycine — outperform many conventional sleep aids without dependency.', readTime: '6 min', date: 'Mar 25, 2026', icon: '🌿', gradient: 'linear-gradient(135deg, #1a3d2e, #0a2e1e)' },
   { id: 3, title: 'Sleep Debt: How to Calculate Yours & Why It Is Destroying Your Health', category: 'Sleep', excerpt: 'Chronic sleep debt impairs cognition, metabolic health, and immunity in compounding ways. Understand your deficit and the botanical tools that accelerate recovery.', readTime: '8 min', date: 'Mar 18, 2026', icon: '😴', gradient: 'linear-gradient(135deg, #2d1f4e, #1a0f2e)' },
@@ -54,11 +54,11 @@ const allArticles = [
   { id: 50, title: 'Building Your Daily Wellness Protocol: A Complete Guide for Indian Lifestyles', category: 'Wellness', excerpt: 'A practical, evidence-based daily ritual integrating plant botanicals, lifestyle practices, and mindfulness tools designed specifically for the Indian urban professional.', readTime: '11 min', date: 'Feb 1, 2026', icon: '📋', gradient: 'linear-gradient(135deg, #1f2d4e, #0f1a30)' },
 ];
 
-const categories = ['All', 'Sleep', 'Stress', 'Hair Health', 'Skin', 'Wellness'];
-
-const catTagColors: Record<string, string> = {
+export const catTagColors: Record<string, string> = {
   Sleep: '#1a237e', Stress: '#4e1f0a', 'Hair Health': '#1f3a4e', Skin: '#4e2d1f', Wellness: '#1a3d2e',
 };
+
+const categories = ['All', 'Sleep', 'Stress', 'Hair Health', 'Skin', 'Wellness'];
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -114,24 +114,26 @@ export default function BlogPage() {
           ) : (
             <div className="blog-grid">
               {filtered.map((a) => (
-                <div key={a.id} className="blog-card" style={{ borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)', transition: 'transform 0.3s ease, border-color 0.3s ease', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-6px)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.25)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'; }}>
-                  <div style={{ height: '160px', background: a.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.5rem', position: 'relative', overflow: 'hidden', flexShrink: 0 }}>
-                    {a.icon}
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 60%, rgba(0,0,0,0.25))' }} />
-                    <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '100px', padding: '0.2rem 0.6rem', fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)' }}>{a.readTime}</div>
-                  </div>
-                  <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.875rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <span style={{ background: `${catTagColors[a.category] || '#1a3d2e'}55`, color: 'var(--gold-light)', padding: '0.2rem 0.65rem', borderRadius: '100px', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.06em' }}>{a.category.toUpperCase()}</span>
-                      <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem' }}>{a.date}</span>
+                <Link key={a.id} href={`/blog/${a.id}`} style={{ textDecoration: 'none', display: 'flex' }}>
+                  <div className="blog-card" style={{ width: '100%', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)', transition: 'transform 0.3s ease, border-color 0.3s ease', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-6px)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.25)'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'; }}>
+                    <div style={{ height: '160px', background: a.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.5rem', position: 'relative', overflow: 'hidden', flexShrink: 0 }}>
+                      {a.icon}
+                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 60%, rgba(0,0,0,0.25))' }} />
+                      <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '100px', padding: '0.2rem 0.6rem', fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)' }}>{a.readTime}</div>
                     </div>
-                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: '#fff', lineHeight: 1.5, marginBottom: '0.75rem', fontWeight: 700, flex: 1 }}>{a.title}</h3>
-                    <p style={{ color: 'rgba(255,255,255,0.48)', fontSize: '0.83rem', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', marginBottom: '1.25rem' }}>{a.excerpt}</p>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--gold)', fontSize: '0.83rem', fontWeight: 600 }}>Read Article →</div>
+                    <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.875rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                        <span style={{ background: `${catTagColors[a.category] || '#1a3d2e'}55`, color: 'var(--gold-light)', padding: '0.2rem 0.65rem', borderRadius: '100px', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.06em' }}>{a.category.toUpperCase()}</span>
+                        <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem' }}>{a.date}</span>
+                      </div>
+                      <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: '#fff', lineHeight: 1.5, marginBottom: '0.75rem', fontWeight: 700, flex: 1 }}>{a.title}</h3>
+                      <p style={{ color: 'rgba(255,255,255,0.48)', fontSize: '0.83rem', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', marginBottom: '1.25rem' }}>{a.excerpt}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--gold)', fontSize: '0.83rem', fontWeight: 600 }}>Read Article →</div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}

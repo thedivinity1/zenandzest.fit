@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
+import { useCart } from '../context/CartContext';
 
 const questions = [
   {
@@ -63,7 +64,7 @@ const questions = [
 ];
 
 const recommendations: Record<string, { products: string[]; protocol: string; headline: string }> = {
-  '0_0': { products: ['Botanical Sleep Drops', 'Brahmi Caps'], protocol: 'Sleep Restoration Protocol', headline: 'Your personalized sleep restoration stack is ready.' },
+  '0_0': { products: ['Botanical Sleep Drops', 'Cognitive Performance Stack'], protocol: 'Sleep Restoration Protocol', headline: 'Your personalized sleep restoration stack is ready.' },
   '0_1': { products: ['Adaptogenic Stress Relief', 'Botanical Sleep Drops'], protocol: 'Calm & Sleep Stack', headline: 'Stress-driven sleep disruption — we have the formula.' },
   '1_0': { products: ['Adaptogenic Stress Relief', 'Cognitive Performance Stack'], protocol: 'Stress Resilience Protocol', headline: 'Your HPA axis needs botanical support.' },
   '2_0': { products: ['Hair Vitality Elixir', 'Gut Balance Botanical'], protocol: 'Hair Revival Protocol', headline: 'Targeting your hair loss at the root cause.' },
@@ -76,6 +77,7 @@ export default function QuizPage() {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<{ q: number; a: number }[]>([]);
   const [done, setDone] = useState(false);
+  const { addToCart, applyDiscountCode, setCartOpen } = useCart();
 
   const progress = ((currentQ) / questions.length) * 100;
 
@@ -237,23 +239,58 @@ export default function QuizPage() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <Link href="/shop" style={{
-                flex: 1, padding: '0.875rem', textAlign: 'center',
+            {/* Auto Discount highlight */}
+            <div style={{
+              background: 'rgba(76, 201, 135, 0.08)',
+              border: '1px dashed rgba(76, 201, 135, 0.3)',
+              borderRadius: '12px',
+              padding: '1rem',
+              marginBottom: '1.5rem',
+              textAlign: 'center'
+            }}>
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#4cc987', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                🎉 PROMO CODE: <strong>QUIZ15</strong> AUTO-APPLIED FOR 15% BUNDLE SAVINGS!
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <button onClick={() => {
+                result.products.forEach(p => addToCart(p));
+                applyDiscountCode('QUIZ15');
+                setCartOpen(true);
+              }} style={{
+                width: '100%', padding: '1rem', textAlign: 'center',
                 background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%)',
                 color: 'var(--darkest)', borderRadius: 12,
-                textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem'
-              }}>
-                Shop My Protocol →
-              </Link>
-              <Link href="/consult" style={{
-                flex: 1, padding: '0.875rem', textAlign: 'center',
-                background: 'transparent', border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: 12, color: 'white',
-                textDecoration: 'none', fontWeight: 600, fontSize: '0.9rem'
-              }}>
-                Talk to an Expert
-              </Link>
+                fontWeight: 800, fontSize: '0.95rem', cursor: 'pointer', border: 'none',
+                boxShadow: '0 4px 20px rgba(201,168,76,0.25)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+                transition: 'transform 0.2s'
+              }}
+              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                ⚡ Add Recommended Protocol to Cart & Checkout (15% Off)
+              </button>
+              
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem' }}>
+                <Link href="/shop" style={{
+                  flex: 1, padding: '0.85rem', textAlign: 'center',
+                  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 12, color: 'white',
+                  textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem'
+                }}>
+                  Browse Shop
+                </Link>
+                <Link href="/consult" style={{
+                  flex: 1, padding: '0.85rem', textAlign: 'center',
+                  background: 'transparent', border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: 12, color: 'white',
+                  textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem'
+                }}>
+                  Talk to an Expert
+                </Link>
+              </div>
             </div>
             <button onClick={reset} style={{
               marginTop: '1rem', background: 'none', border: 'none',

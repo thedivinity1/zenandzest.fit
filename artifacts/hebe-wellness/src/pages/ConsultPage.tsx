@@ -14,19 +14,44 @@ export default function ConsultPage() {
   const [selectedExpert, setSelectedExpert] = useState<number | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [selectedConcerns, setSelectedConcerns] = useState<string[]>([]);
+  const [prakriti, setPrakriti] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState<string>('June 1, 2026');
+  const [uploading, setUploading] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
 
   const toggleConcern = (concern: string) => {
-    setSelectedConcerns(prev =>
-      prev.includes(concern) ? prev.filter(c => c !== concern) : [...prev, concern]
-    );
+    setSelectedConcerns(prev => {
+      const next = prev.includes(concern) ? prev.filter(c => c !== concern) : [...prev, concern];
+      // Autonomously recommend the best expert matching the symptom profile
+      if (next.includes('Sleep Disorders') || next.includes('Chronic Stress') || next.includes('Hormonal Imbalance')) {
+        setSelectedExpert(3); // Dr. Meera Krishnan (Neuroscience)
+      } else if (next.includes('Hair Loss') || next.includes('Skin Health')) {
+        setSelectedExpert(0); // Dr. Priya Sharma (Phytotherapy)
+      } else if (next.includes('Digestive Issues')) {
+        setSelectedExpert(2); // Vaidya Anand Joshi (Ayurveda)
+      }
+      return next;
+    });
+  };
+
+  const simulateUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setTimeout(() => {
+      setUploading(false);
+      setUploadedFile(file.name);
+    }, 1500);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
   };
+
+  const dates = ['June 1, 2026', 'June 2, 2026', 'June 3, 2026', 'June 4, 2026'];
 
   return (
     <div>
@@ -38,19 +63,19 @@ export default function ConsultPage() {
           background: 'radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)'
         }} />
         <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-          <div className="section-tag">Free Expert Consultation</div>
+          <div className="section-tag">Free Expert Clinical Intake</div>
           <h1 className="section-title" style={{ marginBottom: '1.5rem' }}>
-            Talk to a Real <span className="gold-gradient-text">Ayurvedic Expert</span>
+            Book Your Clinical <span className="gold-gradient-text">Longevity Assessment</span>
           </h1>
           <p className="section-subtitle" style={{ margin: '0 auto 2rem' }}>
-            45-minute one-on-one with our board-certified Ayurvedic physicians. 100% free. No obligation. Real answers.
+            45-minute one-on-one with our board-certified BAMS vaidyas & integrative MDs. Complete Prakriti constitution audits and diagnostic biomarker mapping.
           </p>
           <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             {[
-              { icon: '⏱️', label: '45 minutes' },
+              { icon: '⏱️', label: '45-Min Consult' },
               { icon: '💚', label: '100% Free' },
-              { icon: '📱', label: 'Video call' },
-              { icon: '🔒', label: 'Confidential' },
+              { icon: '🧪', label: 'Biomarker Mapping' },
+              { icon: '🌿', label: 'Prakriti Assessment' },
             ].map((item, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem' }}>
                 <span>{item.icon}</span>
@@ -65,12 +90,41 @@ export default function ConsultPage() {
       <section style={{ background: 'var(--darkest)', padding: '6rem 0' }}>
         <div className="container">
           {!submitted ? (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: '4rem', alignItems: 'start' }}>
-              {/* Expert Selection */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.3fr', gap: '4rem', alignItems: 'start' }}>
+              
+              {/* Expert & Date Selection */}
               <div>
                 <ScrollAnimator>
-                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 800, color: 'white', marginBottom: '1.5rem' }}>
-                    Choose Your Expert
+                  
+                  {/* Calendar Widget */}
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
+                    1. Select Consultation Date
+                  </h3>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', marginBottom: '2rem' }}>
+                    {dates.map(d => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setSelectedDate(d)}
+                        style={{
+                          padding: '0.6rem',
+                          borderRadius: '10px',
+                          border: `1px solid ${selectedDate === d ? 'var(--gold)' : 'rgba(255,255,255,0.1)'}`,
+                          background: selectedDate === d ? 'rgba(201,168,76,0.12)' : 'rgba(255,255,255,0.02)',
+                          color: selectedDate === d ? 'var(--gold)' : 'rgba(255,255,255,0.7)',
+                          fontSize: '0.8rem',
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          transition: 'all 0.2s'
+                        }}
+                      >
+                        📅 {d}
+                      </button>
+                    ))}
+                  </div>
+
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: 'white', marginBottom: '1.25rem' }}>
+                    2. Select Your Longevity Expert
                   </h2>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -82,9 +136,19 @@ export default function ConsultPage() {
                           padding: '1.25rem', borderRadius: 14, cursor: 'pointer',
                           border: `1px solid ${selectedExpert === i ? 'rgba(201,168,76,0.5)' : 'rgba(255,255,255,0.08)'}`,
                           background: selectedExpert === i ? 'rgba(201,168,76,0.06)' : 'rgba(255,255,255,0.03)',
-                          transition: 'all 0.2s ease'
+                          transition: 'all 0.2s ease',
+                          position: 'relative'
                         }}
                       >
+                        {selectedExpert === i && (
+                          <div style={{
+                            position: 'absolute', top: '0.75rem', right: '0.75rem',
+                            background: '#4cc987', color: '#000', padding: '0.2rem 0.5rem',
+                            borderRadius: '100px', fontSize: '0.62rem', fontWeight: 800
+                          }}>
+                            100% MATCH
+                          </div>
+                        )}
                         <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                           <span style={{ fontSize: '2.5rem' }}>{expert.emoji}</span>
                           <div style={{ flex: 1 }}>
@@ -92,36 +156,31 @@ export default function ConsultPage() {
                             <div style={{ color: 'var(--gold)', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem' }}>{expert.specialty}</div>
                             <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>{expert.available}</div>
                           </div>
-                          {selectedExpert === i && (
-                            <div style={{
-                              width: 20, height: 20, borderRadius: '50%',
-                              background: 'var(--gold)', flexShrink: 0,
-                              display: 'flex', alignItems: 'center', justifyContent: 'center',
-                              fontSize: '0.7rem', color: 'var(--darkest)', fontWeight: 900
-                            }}>✓</div>
-                          )}
                         </div>
 
                         {/* Time slots */}
                         {selectedExpert === i && (
-                          <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            {expert.slots.map(slot => (
-                              <button
-                                key={slot}
-                                onClick={(e) => { e.stopPropagation(); setSelectedSlot(slot); }}
-                                style={{
-                                  padding: '0.35rem 0.85rem',
-                                  borderRadius: '100px',
-                                  border: `1px solid ${selectedSlot === slot ? 'var(--gold)' : 'rgba(255,255,255,0.15)'}`,
-                                  background: selectedSlot === slot ? 'var(--gold)' : 'transparent',
-                                  color: selectedSlot === slot ? 'var(--darkest)' : 'rgba(255,255,255,0.6)',
-                                  fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer',
-                                  transition: 'all 0.2s'
-                                }}
-                              >
-                                {slot}
-                              </button>
-                            ))}
+                          <div style={{ marginTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.75rem' }}>
+                            <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', marginBottom: '0.5rem' }}>Select Time Slot for {selectedDate}:</div>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                              {expert.slots.map(slot => (
+                                <button
+                                  key={slot}
+                                  onClick={(e) => { e.stopPropagation(); setSelectedSlot(slot); }}
+                                  style={{
+                                    padding: '0.35rem 0.85rem',
+                                    borderRadius: '100px',
+                                    border: `1px solid ${selectedSlot === slot ? 'var(--gold)' : 'rgba(255,255,255,0.15)'}`,
+                                    background: selectedSlot === slot ? 'var(--gold)' : 'transparent',
+                                    color: selectedSlot === slot ? 'var(--darkest)' : 'rgba(255,255,255,0.6)',
+                                    fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer',
+                                    transition: 'all 0.2s'
+                                  }}
+                                >
+                                  {slot}
+                                </button>
+                              ))}
+                            </div>
                           </div>
                         )}
                       </div>
@@ -130,11 +189,11 @@ export default function ConsultPage() {
                 </ScrollAnimator>
               </div>
 
-              {/* Form */}
+              {/* Form & Uploaders */}
               <ScrollAnimator>
                 <form onSubmit={handleSubmit} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20, padding: '2.5rem' }}>
                   <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 800, color: 'white', marginBottom: '1.5rem' }}>
-                    Your Details
+                    Assessment Profile Details
                   </h2>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
@@ -148,13 +207,83 @@ export default function ConsultPage() {
                     </div>
                   </div>
 
-                  <div style={{ marginBottom: '1rem' }}>
-                    <label className="form-label">Email Address *</label>
-                    <input required type="email" className="form-input" placeholder="you@example.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div style={{ gridColumn: 'span 2' }}>
+                      <label className="form-label">Email Address *</label>
+                      <input required type="email" className="form-input" placeholder="you@example.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+                    </div>
+                  </div>
+
+                  {/* Ayurvedic Prakriti selector */}
+                  <div style={{ marginBottom: '1.25rem' }}>
+                    <label className="form-label">Your Ayurvedic Constitution (Prakriti)</label>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      {['Vata (Air/Space)', 'Pitta (Fire/Water)', 'Kapha (Earth/Water)', 'Not Sure / Need Audit'].map(p => (
+                        <button
+                          key={p}
+                          type="button"
+                          onClick={() => setPrakriti(p)}
+                          style={{
+                            padding: '0.4rem 0.8rem',
+                            borderRadius: '100px',
+                            border: `1px solid ${prakriti === p ? 'var(--gold)' : 'rgba(255,255,255,0.15)'}`,
+                            background: prakriti === p ? 'rgba(201,168,76,0.15)' : 'transparent',
+                            color: prakriti === p ? 'var(--gold)' : 'rgba(255,255,255,0.6)',
+                            fontSize: '0.78rem',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            transition: 'all 0.2s'
+                          }}
+                        >
+                          {p}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* NABL Lab Uploader */}
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <label className="form-label">🧬 Upload NABL Lab Blood Panel (Optional)</label>
+                    <div style={{
+                      border: '1px dashed rgba(201,168,76,0.3)',
+                      borderRadius: '12px',
+                      padding: '1.25rem',
+                      textAlign: 'center',
+                      background: 'rgba(0,0,0,0.15)',
+                      position: 'relative',
+                      cursor: 'pointer'
+                    }}>
+                      <input
+                        type="file"
+                        accept=".pdf,.png,.jpg,.jpeg"
+                        onChange={simulateUpload}
+                        style={{
+                          position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', width: '100%'
+                        }}
+                      />
+                      {uploading ? (
+                        <div>
+                          <div style={{ fontSize: '0.78rem', color: 'var(--gold-light)', marginBottom: '0.5rem', fontWeight: 600 }}>🧬 Parsing Lab Biomarkers...</div>
+                          <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '100px', overflow: 'hidden', width: '150px', margin: '0 auto' }}>
+                            <div style={{ height: '100%', width: '70%', background: 'var(--gold)', animation: 'scroll-progress 1.5s linear infinite' }} />
+                          </div>
+                        </div>
+                      ) : uploadedFile ? (
+                        <div style={{ color: '#4cc987', fontSize: '0.8rem', fontWeight: 700 }}>
+                          ✓ {uploadedFile} parsed (Biomarkers Auto-Linked)
+                        </div>
+                      ) : (
+                        <div>
+                          <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>📂</div>
+                          <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Drag or drop NABL report PDF here to parse biomarkers</div>
+                          <span style={{ fontSize: '0.68rem', color: 'rgba(201,168,76,0.5)' }}>Supports PDF, JPG (max 8MB)</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <label className="form-label">Primary Health Concerns</label>
+                    <label className="form-label">Primary Health Concerns (Select to auto-match physician)</label>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
                       {concerns.map(concern => (
                         <button
@@ -179,7 +308,7 @@ export default function ConsultPage() {
                     <label className="form-label">Tell us more about your health journey</label>
                     <textarea
                       className="form-input"
-                      rows={4}
+                      rows={3}
                       placeholder="Any medical history, current medications, specific symptoms or questions for the consultation..."
                       style={{ resize: 'vertical', fontFamily: 'var(--font-sans)' }}
                       value={form.message}
@@ -196,7 +325,7 @@ export default function ConsultPage() {
                         Selected Appointment
                       </div>
                       <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
-                        {experts[selectedExpert].name} · {selectedSlot}
+                        {experts[selectedExpert].name} on {selectedDate} at {selectedSlot}
                       </div>
                     </div>
                   )}

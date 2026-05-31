@@ -1,0 +1,199 @@
+import { useState } from 'react';
+import ScrollAnimator from '../components/ScrollAnimator';
+import { Calculator, Award, Info, AlertTriangle } from 'lucide-react';
+
+interface HerbDosageDetail {
+  name: string;
+  activeBioactive: string;
+  rawPurityPct: number; // e.g. 0.2% active constituent
+  standardPurityPct: number; // e.g. 5.0% active constituent
+  maxRecommendedDoseMg: number;
+  dangerDoseMg: number;
+}
+
+const herbDb: Record<string, HerbDosageDetail> = {
+  'ashwagandha': {
+    name: 'KSM-66 Ashwagandha (Withania somnifera)',
+    activeBioactive: 'Withanolides',
+    rawPurityPct: 0.25,
+    standardPurityPct: 5.0,
+    maxRecommendedDoseMg: 600,
+    dangerDoseMg: 2000
+  },
+  'saffron': {
+    name: 'Kashmiri Saffron (Crocus sativus)',
+    activeBioactive: 'Crocin Carotenoid',
+    rawPurityPct: 0.12,
+    standardPurityPct: 3.0,
+    maxRecommendedDoseMg: 45,
+    dangerDoseMg: 200
+  },
+  'brahmi': {
+    name: 'Wayanad Brahmi (Bacopa monnieri)',
+    activeBioactive: 'Bacosides A & B',
+    rawPurityPct: 1.5,
+    standardPurityPct: 50.0,
+    maxRecommendedDoseMg: 500,
+    dangerDoseMg: 1500
+  }
+};
+
+export default function BotanicalDosagePage() {
+  const [selectedHerb, setSelectedHerb] = useState<string>('ashwagandha');
+  const [rawGrams, setRawGrams] = useState<number>(3); // 3 grams of raw powder
+
+  const herb = herbDb[selectedHerb];
+
+  // Calculated variables
+  const rawActiveYieldMg = Math.round((rawGrams * 1000) * (herb.rawPurityPct / 100));
+  const equivalentExtractMg = Math.round((rawActiveYieldMg / (herb.standardPurityPct / 100)));
+  const concentrationRatio = Math.round(herb.standardPurityPct / herb.rawPurityPct);
+
+  const isHighDose = equivalentExtractMg > herb.maxRecommendedDoseMg;
+  const isDangerDose = equivalentExtractMg > herb.dangerDoseMg;
+
+  return (
+    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <div className="container" style={{ maxWidth: '1000px' }}>
+        
+        <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div className="section-tag">Molecular Potency & Safety</div>
+          <h1 className="section-title">Molecular Potency <span className="gold-gradient-text">Dose Auditor</span></h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
+            Determine active molecular yields. Compare generic agricultural powders with clinical-grade standardized extracts according to USP standards.
+          </p>
+        </ScrollAnimator>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem', alignItems: 'start' }}>
+          
+          {/* Interactive Calculator */}
+          <ScrollAnimator>
+            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'white', marginBottom: '1.5rem', fontWeight: 900, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Calculator size={22} color="var(--gold)" /> Potency Calculator
+              </h2>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                <div>
+                  <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', display: 'block', marginBottom: '0.5rem' }}>Select Botanical Ingredient</label>
+                  <select
+                    value={selectedHerb}
+                    onChange={(e) => setSelectedHerb(e.target.value)}
+                    style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                  >
+                    <option value="ashwagandha">KSM-66 Ashwagandha</option>
+                    <option value="saffron">Kashmiri Saffron</option>
+                    <option value="brahmi">Wayanad Brahmi</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', display: 'block', marginBottom: '0.5rem' }}>Daily Raw Powder Dosage (Grams)</label>
+                  <input
+                    type="number"
+                    step="0.5"
+                    min="0.5"
+                    max="20"
+                    value={rawGrams}
+                    onChange={(e) => setRawGrams(Math.max(0.1, parseFloat(e.target.value) || 0))}
+                    style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                  />
+                </div>
+              </div>
+
+              {/* Calculations Output */}
+              <div style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', marginBottom: '1.5rem' }}>
+                <h4 style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                  Audited Molecular Yields
+                </h4>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.9rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Bioactive Molecular Compound:</span>
+                    <strong style={{ color: 'white' }}>{herb.activeBioactive}</strong>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Active Compound Yield in Raw Powder:</span>
+                    <strong style={{ color: 'white' }}>{rawActiveYieldMg} mg</strong>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Concentration Potency Ratio:</span>
+                    <strong style={{ color: 'var(--gold)' }}>{concentrationRatio}x Stronger</strong>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '0.25rem' }}>
+                    <span style={{ color: 'rgba(255,255,255,0.6)' }}>Equiv. Standardized Extract Dose:</span>
+                    <strong style={{ color: 'var(--gold-light)', fontSize: '1.1rem' }}>{equivalentExtractMg} mg</strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* Safety Alerts */}
+              {isDangerDose ? (
+                <div style={{ background: 'rgba(244,67,54,0.1)', border: '1px solid rgba(244,67,54,0.3)', borderRadius: '12px', padding: '1rem', display: 'flex', gap: '0.75rem', color: '#ff7b72', fontSize: '0.82rem', alignItems: 'start' }}>
+                  <AlertTriangle size={18} style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+                  <div>
+                    <strong>Toxicity Risk:</strong> This dosage yields an active molecule payload of {rawActiveYieldMg}mg, crossing the biological danger threshold ({herb.dangerDoseMg}mg equivalent extract) for this plant. Please reduce raw powder dosage immediately.
+                  </div>
+                </div>
+              ) : isHighDose ? (
+                <div style={{ background: 'rgba(255,152,0,0.1)', border: '1px solid rgba(255,152,0,0.3)', borderRadius: '12px', padding: '1rem', display: 'flex', gap: '0.75rem', color: '#ffb454', fontSize: '0.82rem', alignItems: 'start' }}>
+                  <Info size={18} style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+                  <div>
+                    <strong>High Dose Advisory:</strong> This equivalent dose ({equivalentExtractMg}mg) exceeds the standard recommended therapeutic window of {herb.maxRecommendedDoseMg}mg. Maintain safety hydration protocols.
+                  </div>
+                </div>
+              ) : (
+                <div style={{ background: 'rgba(76,175,80,0.08)', border: '1px solid rgba(76,175,80,0.2)', borderRadius: '12px', padding: '1rem', display: 'flex', gap: '0.75rem', color: '#85e89d', fontSize: '0.82rem', alignItems: 'start' }}>
+                  <Award size={18} style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+                  <div>
+                    <strong>Optimal Dose:</strong> This dose is within the safe, scientifically validated, therapeutic clinical window. Excellent for cellular longevity.
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </ScrollAnimator>
+
+          {/* Scientific Educational Table */}
+          <ScrollAnimator>
+            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--gold)', marginBottom: '1.25rem', fontWeight: 900 }}>
+                Why Standardized Extracts Matter
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.92rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+                Standard agricultural powders consist of ground dry root or leaf. The actual concentration of the active longevity compounds (like withanolides or bacosides) fluctuates widely based on rainfall, soil quality, and storage duration, rendering therapeutic dosing impossible.
+              </p>
+              
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.88rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                **Standardized extracts** guarantee an exact, repeatable, biochemical dose in every capsule, backed by HPLC validation, ensuring that you achieve physiological results without toxic variations.
+              </p>
+
+              <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '16px', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--gold)', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'block', marginBottom: '0.75rem' }}>
+                  Active Purity Comparison
+                </span>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.85rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.4rem' }}>
+                    <span>KSM-66 Withanolides:</span>
+                    <strong>5.0% vs. 0.25% in raw root</strong>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.4rem' }}>
+                    <span>Wayanad Brahmi Bacosides:</span>
+                    <strong>50.0% vs. 1.5% in raw leaf</strong>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Kashmiri Crocin:</span>
+                    <strong>3.0% vs. 0.12% in raw saffron</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollAnimator>
+
+        </div>
+
+      </div>
+    </div>
+  );
+}
