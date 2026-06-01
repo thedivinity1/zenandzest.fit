@@ -214,6 +214,10 @@ importers:
         version: 3.1.0
 
   artifacts/hebe-wellness:
+    dependencies:
+      '@rollup/rollup-win32-x64-msvc':
+        specifier: ^4.61.0
+        version: 4.61.0
     devDependencies:
       '@hookform/resolvers':
         specifier: ^3.10.0
@@ -1510,6 +1514,11 @@ packages:
     resolution: {integrity: sha512-3AHmtQq/ppNuUspKAlvA8HtLybkDflkMuLK4DPo77DfthRb71V84/c4MlWJXixZz4uruIH4uaa07IqoAkG64fg==}
     cpu: [x64]
     os: [linux]
+
+  '@rollup/rollup-win32-x64-msvc@4.61.0':
+    resolution: {integrity: sha512-tkuFxhvKO/HlGd0VsINF6vHSYH8AF8W0TcNxKDK6JZmrehngFj78pToc8iemtnvwilDjs2G/qSzYFhe9U8q+fw==}
+    cpu: [x64]
+    os: [win32]
 
   '@scalar/helpers@0.2.18':
     resolution: {integrity: sha512-w1d4tpNEVZ293oB2BAgLrS0kVPUtG3eByNmOCJA5eK9vcT4D3cmsGtWjUaaqit0BQCsBFHK51rasGvSWnApYTw==}
@@ -4178,6 +4187,8 @@ snapshots:
 
   '@rollup/rollup-linux-x64-gnu@4.59.0':
     optional: true
+
+  '@rollup/rollup-win32-x64-msvc@4.61.0': {}
 
   '@scalar/helpers@0.2.18': {}
 
