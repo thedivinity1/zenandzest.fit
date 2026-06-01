@@ -554,11 +554,12 @@ export default function HomePage() {
               {slide.headline}
               <br />
               <span style={{
-                background: slide.accent,
+                backgroundImage: slide.accent,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                transition: 'all 0.5s ease'
+                color: 'transparent',
+                display: 'inline-block'
               }}>
                 {slide.headlineAccent}
               </span>
@@ -964,6 +965,7 @@ export default function HomePage() {
                 cursor: 'pointer',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease'
               }}
+              className="two-col-grid"
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 50px rgba(229,197,117,0.1)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
               >

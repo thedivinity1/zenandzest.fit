@@ -41,13 +41,21 @@
   --glow-amber: rgba(245, 158, 11, 0.12);
 }
 
-html { scroll-behavior: smooth; }
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
 
 body {
   font-family: var(--font-sans) !important;
   background-color: var(--section-void) !important;
   color: #ffffff !important;
+}
+
+#root {
   overflow-x: hidden;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 { color: #ffffff; }
@@ -1369,4 +1377,30 @@ p { color: rgba(255, 255, 255, 0.85); }
   padding: 1rem;
   margin: 1.5rem 0;
 }
+
+/* ===== GLOBAL MOBILE GRID RESPONSIVENESS OVERRIDES ===== */
+@media (max-width: 900px) {
+  /* Collapse all inline grid layouts on pages to 1 column for proper mobile rendering, except inside navigation, footers, mobile menu, and drawers */
+  main div[style*="display: grid"],
+  main div[style*="display:grid"],
+  .quiz-question-card div[style*="display: grid"],
+  .quiz-question-card div[style*="display:grid"],
+  div[style*="display: grid"]:not(footer *, .navbar *, .mobile-menu *, .drawer-content *),
+  div[style*="display:grid"]:not(footer *, .navbar *, .mobile-menu *, .drawer-content *) {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Fix CSS Grid blowout (min-width: auto) causing horizontal overflow */
+  main div[style*="display: grid"] > *,
+  main div[style*="display:grid"] > *,
+  .quiz-question-card div[style*="display: grid"] > *,
+  .quiz-question-card div[style*="display:grid"] > *,
+  div[style*="display: grid"]:not(footer *, .navbar *, .mobile-menu *, .drawer-content *) > *,
+  div[style*="display:grid"]:not(footer *, .navbar *, .mobile-menu *, .drawer-content *) > *,
+  .blog-detail-grid > *, .grid-2 > *, .grid-3 > *, .grid-4 > *, .grid-5 > * {
+    min-width: 0 !important;
+  }
+}
+
 

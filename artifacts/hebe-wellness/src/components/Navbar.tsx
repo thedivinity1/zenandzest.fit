@@ -190,10 +190,11 @@ export default function Navbar() {
               }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(229, 197, 117, 0.1)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.05)'; }}
+              className="nav-cart-btn"
             >
               🛒 Cart ({cartCount})
             </button>
-            <Link href="/consult" className="nav-cta" style={{ display: 'inline-block', background: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 50%, #d97706 100%)', color: 'var(--darkest)' }}>
+            <Link href="/consult" className="nav-cta nav-cta-desktop" style={{ display: 'inline-block', background: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 50%, #d97706 100%)', color: 'var(--darkest)' }}>
               Free Consult
             </Link>
             <button
@@ -247,6 +248,10 @@ export default function Navbar() {
         @media (max-width: 900px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: block !important; }
+        }
+        @media (max-width: 500px) {
+          .nav-cta-desktop { display: none !important; }
+          .nav-cart-btn { padding: 0.4rem 0.6rem !important; font-size: 0.75rem !important; }
         }
       `}</style>
     </>
