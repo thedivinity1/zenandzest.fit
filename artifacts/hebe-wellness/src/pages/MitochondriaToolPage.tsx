@@ -1,6 +1,19 @@
 import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 
+const mitochondriaSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How does mitochondrial health affect cellular energy and aging?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Mitochondria are the cellular engines producing ATP energy. Age-related decay reduces ATP yields while increasing reactive oxygen species. Improving mitochondrial efficiency through PGC-1α pathway activation, CoQ10 support, and adaptogenic botanicals preserves cellular vitality and slows biological aging."
+    }
+  }]
+};
+
 export default function MitochondriaToolPage() {
   const [fatigue, setFatigue] = useState(5);
   const [brainFog, setBrainFog] = useState(5);
@@ -30,20 +43,21 @@ export default function MitochondriaToolPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(mitochondriaSchema) }} />
       <div className="container" style={{ maxWidth: '700px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <div className="section-tag">Mitochondria & Bioenergetics</div>
           <h1 className="section-title">Mitochondrial Health & <span className="gold-gradient-text">ATP Calculator</span></h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.75rem', fontSize: '0.92rem' }}>
-            Mitochondria are the absolute engines of cellular life. Use this assessment to estimate your ATP energy production efficiency and mitochondrial decay rates.
+          <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.75rem', fontSize: '0.92rem', lineHeight: 1.6 }}>
+            <strong>Answer-First:</strong> Mitochondrial health determines cellular ATP production. Age-related decay reduces ATP levels, causing fatigue and brain fog. Use this tool to calculate your ATP bioenergetic efficiency and get recommendations to stimulate mitochondrial biogenesis via PGC-1α pathway activation.
           </p>
         </ScrollAnimator>
 
         <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '2.5rem', marginBottom: '2.5rem' }}>
-          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1.5rem', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1.5rem', textAlign: 'center' }}>
             Bioenergetic Metric Inputs
-          </h3>
+          </h2>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
             {[

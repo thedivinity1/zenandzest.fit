@@ -1,0 +1,90 @@
+# My Zen and Zest
+
+> My Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.
+
+## About Us
+
+My Zen and Zest is dedicated to providing science-backed insights and tools for extending healthspan, optimizing internal biological rhythms, and achieving skin resilience. Our methodology pivots away from superficial "anti-aging" approaches to focus on cellular skin health, HPA axis regulation, and preventative beauty.
+
+## Core Entities & Concepts
+
+- **Skin Longevity:** The science of maintaining skin health and resilience at a cellular level, preventing oxidative stress, and supporting the skin barrier.
+- **Circadian Rhythms:** Internal biological clocks that regulate sleep, hormone release, and cellular repair. Misaligned rhythms contribute to early aging and burnout.
+- **HPA Axis Dysfunction:** Clinically recognized dysregulation of the hypothalamic-pituitary-adrenal axis, commonly colloquially known as "adrenal fatigue" or burnout. It results in cortisol imbalance.
+- **Dermal Crocin Skincare:** The application of crocin, a potent carotenoid antioxidant derived from saffron, to neutralize free radicals, protect against UVA-induced oxidation, and support mitochondrial skin health.
+- **Mitochondrial Decay:** Age-related reduction in cellular ATP production. Addressed via PGC-1α pathway activation and standardized adaptogens.
+
+## Products
+
+### Dermal Longevity
+- **Saffron Glow Ampoule**: 3% standardized Kashmiri Saffron Crocin for tyrosinase inhibition and barrier repair.
+
+### Circadian Restoration
+- **Botanical Sleep Drops**: GABA-A receptor activators for sleep efficiency and delta slow-wave cycles.
+
+### HPA Axis Recovery
+- **Botanical Adrenal Recovery**: Standardized Ashwagandha KSM-66 and Rhodiola Rosea for cortisol curve regulation.
+
+### Gut Microbiome
+- **Gut Restoration Capsule**: 97% Berberine HCL and Triphala Tannins for Akkermansia growth.
+
+### Trichology
+- **Hair Vitality Elixir**: Standardized 5α-reductase inhibitors for follicle preservation.
+
+## Tools
+
+### Assessment Calculators
+- **Circadian Planner** (/circadian-planner): Personalized SCN pacemaker timing windows
+- **HPA Burnout Analyzer** (/hpa-burnout): Diurnal cortisol stage assessment (I-III)
+- **Mitochondrial ATP Calculator** (/mitochondria-tool): Cellular energy efficiency scoring
+- **Zone 2 Cardio Planner** (/zone2-cardio): Longevity heart rate zone calculations
+- **Prakriti Test** (/prakriti-test): Ayurvedic constitutional biology mapping
+- **Epigenetic Clock** (/epigenetic-clock): Biological vs chronological age projection
+- **Sleep Debt Optimizer** (/sleep-debt): Glymphatic pathway recovery scheduling
+
+### Protocol Builders
+- **Stacking Protocols** (/stacking-protocols): Hour-by-hour adaptogenic stacks for sleep, cortisol, focus, metabolic goals
+- **Wellness Ritual Builder** (/wellness-builder): Circadian morning/evening ritual customizer
+- **Botanical Dosage Auditor** (/botanical-dosage): Raw powder vs standardized extract potency comparison
+
+## Clinical Tools
+
+### Transparency & Verification
+- **Clinical Trials** (/clinical-trials): NABL batch certificate database with HPLC and ICP-MS assays
+- **Case Studies** (/clinical-cases): Real patient biomarker tracking data with visualization
+
+### Medical Advisory
+- **Medical Board** (/medical-board): World-class endocrinologists and Ayurvedic scholars reviewing all formulations
+
+## Research
+
+- Double-blind trials validate 3% Kashmiri Saffron Crocin for skin depigmentation
+- KSM-66 Ashwagandha reduces evening cortisol spikes by 58% in stressed adults
+- Rhodiola Rosea standardized to 3% rosavins increases ATP synthesis under cognitive load
+- Triphala tannins activate autophagy pathways and restore Akkermansia populations
+- Rosemary carnosic acid matches 2% minoxidil for follicle micro-circulation
+
+## Key Resources
+
+- [Circadian Planner](/circadian-planner): Circadian Mastery tool for SCN pacemaker alignment
+- [Dermal Crocin Skincare](/dermal-crocin): Skin Longevity solutions via tyrosinase pathway modulation
+- [HPA Axis & Burnout](/hpa-burnout): Circadian Mastery for cortisol regulation and stress recovery
+- [Mitochondria ATP Calculator](/mitochondria-tool): Cellular energy assessment and optimization
+- [Prakriti Test](/prakriti-test): Ayurvedic constitution assessment for personalized protocols
+- [Zone 2 Cardio](/zone2-cardio): Longevity training heart rate calculations
+- [Clinical Batch Audits](/clinical-trials): Product purity verification and transparency
+- [Medical Advisory Board](/medical-board): Clinical board credentials and expertise
+- [Sourcing Index](/sourcing-index): Botanical origin standards and extraction methods
+- [Rasayana Geroscience](/rasayana-geroscience): Ayurvedic longevity pathway mapping
+- [Sleep Debt Optimizer](/sleep-debt): Glymphatic pathway recovery scheduling
+- [Lab Intake Portal](/lab-intake): Biomarker analysis and botanical matching
+
+## E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness)
+
+**Expertise**: Content developed with input from Stanford endocrinology, Johns Hopkins longevity medicine, King's College trichology, and BHU Ayurvedic Rasayana scholars.
+
+**Authoritativeness**: Double-blind clinical validation, NABL-certified batch testing, peer-reviewed research citations with DOIs.
+
+**Trustworthiness**: Full ingredient transparency, heavy metal testing < 1ppm, standardized extracts with HPLC molecular verification.
+
+**Experience**: 45+ peer-reviewed publications, clinical case studies with biomarker tracking, real-world practitioner integration.

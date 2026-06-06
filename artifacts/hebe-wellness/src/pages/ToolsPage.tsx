@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useRoute, Link } from 'wouter';
+import { ArrowRight } from 'lucide-react';
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 
 /* ===== SLEEP QUALITY CALCULATOR ===== */
@@ -884,15 +886,15 @@ function BDNFIndexCalc() {
 function DosageAuditMatrix() {
   const [genericDose, setGenericDose] = useState(500);
   const [activePercentage, setActivePercentage] = useState(1);
-  const [result, setResult] = useState<null | { activeGeneric: number; activeOjas: number; ratio: number; explanation: string }>(null);
+  const [result, setResult] = useState<null | { activeGeneric: number; activeZen: number; ratio: number; explanation: string }>(null);
 
   const calculate = () => {
     const activeGeneric = (genericDose * activePercentage) / 100;
-    const activeOjas = (genericDose * 5) / 100;
+    const activeZen = (genericDose * 5) / 100;
     const ratio = 5 / activePercentage;
-    const explanation = `At ${genericDose}mg, your generic raw herbal powder supplement yields only ${activeGeneric}mg of active biomarkers. Ojas Sanctuary's clinical standardized extract yields a certified ${activeOjas}mg of pure active compounds — ${Math.round(ratio)}x more. This is why standardized extracts produce real clinical results, while raw powders fall short.`;
+    const explanation = `At ${genericDose}mg, your generic raw herbal powder supplement yields only ${activeGeneric}mg of active biomarkers. My Zen and Zest's clinical standardized extract yields a certified ${activeZen}mg of pure active compounds — ${Math.round(ratio)}x more. This is why standardized extracts produce real clinical results, while raw powders fall short.`;
 
-    setResult({ activeGeneric, activeOjas, ratio, explanation });
+    setResult({ activeGeneric, activeZen, ratio, explanation });
   };
 
   return (
@@ -930,8 +932,8 @@ function DosageAuditMatrix() {
               <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase' }}>Generic Active Payload</div>
             </div>
             <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.04)', borderRadius: '12px', border: '1px solid var(--gold)' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#4cc987' }}>{result.activeOjas} mg</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--gold-light)', textTransform: 'uppercase' }}>Ojas Sanctuary Active Payload</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#4cc987' }}>{result.activeZen} mg</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--gold-light)', textTransform: 'uppercase' }}>My Zen and Zest Active Payload</div>
             </div>
           </div>
           <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.83rem', lineHeight: 1.6, fontStyle: 'italic' }}>
@@ -960,8 +962,34 @@ const tools = [
 ];
 
 export default function ToolsPage() {
-  const [activeTool, setActiveTool] = useState<string | null>(null);
-  const active = tools.find(t => t.id === activeTool);
+  const [match, params] = useRoute("/tools/:id");
+  const activeToolId = match ? params.id : null;
+  const active = tools.find(t => t.id === activeToolId);
+
+  if (active) {
+    return (
+      <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--gold-light)', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', fontSize: '0.9rem', transition: 'color 0.2s' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--gold-light)'; }}>
+            ← Back to All Tools
+          </Link>
+          
+          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '24px', padding: '2.5rem', backdropFilter: 'blur(10px)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+              <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `${active.color}ee`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem', border: '1px solid rgba(201,168,76,0.2)' }}>{active.icon}</div>
+              <div>
+                <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.25rem', fontWeight: 800 }}>{active.name}</h1>
+                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>{active.desc}</p>
+              </div>
+            </div>
+            <div style={{ maxWidth: '680px' }}>{active.component}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh' }}>
@@ -973,8 +1001,8 @@ export default function ToolsPage() {
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#fff', marginBottom: '1rem', fontWeight: 900 }}>
             Know Your Body. <span style={{ color: 'var(--gold)' }}>Optimize Your Life.</span>
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75 }}>
-            8 science-backed assessment tools developed by our clinical team. Free, personalized, instant results.
+          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '680px', margin: '0 auto', lineHeight: 1.75 }}>
+            <strong>Answer-First:</strong> Our suite of 13 wellness assessment tools estimates critical health metrics including circadian chronotype alignment, epigenetic biological cell age, and VO2 max cardiovascular outputs. These tools provide instant, personalized protocol recommendations reviewed by our medical board.
           </p>
         </div>
       </section>
@@ -984,35 +1012,52 @@ export default function ToolsPage() {
         <div className="container">
           <div className="tools-grid">
             {tools.map(tool => (
-              <button key={tool.id} onClick={() => setActiveTool(activeTool === tool.id ? null : tool.id)} style={{ width: '100%', padding: '2rem', background: activeTool === tool.id ? `${tool.color}bb` : `${tool.color}66`, border: `1px solid ${activeTool === tool.id ? 'rgba(201,168,76,0.5)' : 'rgba(201,168,76,0.12)'}`, borderRadius: '20px', cursor: 'pointer', textAlign: 'left', transition: 'all 0.3s ease', color: 'inherit' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.4)'; }}
-                onMouseLeave={e => { if (activeTool !== tool.id) { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.12)'; } }}>
-                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', marginBottom: '1rem' }}>{tool.icon}</div>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: '#fff', marginBottom: '0.5rem', textAlign: 'left' }}>{tool.name}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem', lineHeight: 1.6, textAlign: 'left' }}>{tool.desc}</p>
-                <div style={{ color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, marginTop: '1rem', textAlign: 'left' }}>{activeTool === tool.id ? 'Close Tool ↑' : 'Launch Tool →'}</div>
-              </button>
+              <Link key={tool.id} href={`/tools/${tool.id}`} style={{ textDecoration: 'none', display: 'block' }}>
+                <div 
+                  className="tool-select-card"
+                  style={{ 
+                    width: '100%', 
+                    padding: '2rem', 
+                    background: `${tool.color}55`, 
+                    border: '1px solid rgba(201,168,76,0.12)', 
+                    borderRadius: '20px', 
+                    cursor: 'pointer', 
+                    textAlign: 'left', 
+                    transition: 'all 0.3s ease', 
+                    color: 'inherit',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}
+                  onMouseEnter={e => { 
+                    e.currentTarget.style.transform = 'translateY(-4px)'; 
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)'; 
+                    e.currentTarget.style.background = `${tool.color}88`;
+                  }}
+                  onMouseLeave={e => { 
+                    e.currentTarget.style.transform = 'translateY(0)'; 
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.12)'; 
+                    e.currentTarget.style.background = `${tool.color}55`;
+                  }}
+                >
+                  <div>
+                    <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>{tool.icon}</div>
+                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: '#fff', marginBottom: '0.5rem', textAlign: 'left', fontWeight: 700 }}>{tool.name}</h2>
+                    <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem', lineHeight: 1.6, textAlign: 'left' }}>{tool.desc}</p>
+                  </div>
+                  <div style={{ color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, marginTop: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                    Launch Tool <ArrowRight size={12} />
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
-
-          {/* Active Tool Panel */}
-          {active && (
-            <div style={{ marginTop: '2rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '24px', padding: '2.5rem', backdropFilter: 'blur(10px)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `${active.color}aa`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem' }}>{active.icon}</div>
-                <div>
-                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: '#fff', marginBottom: '0.25rem' }}>{active.name}</h2>
-                  <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem' }}>{active.desc}</p>
-                </div>
-              </div>
-              <div style={{ maxWidth: '680px' }}>{active.component}</div>
-            </div>
-          )}
         </div>
       </section>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg, #0a1f12, #1a3d2e)', padding: '5rem 0', textAlign: 'center' }}>
+      <section style={{ background: 'linear-gradient(135deg, #0a1f12, #1a3d2e)', padding: '5rem 0', textAlign: 'center', borderTop: '1px solid rgba(229, 197, 117, 0.15)' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: '#fff', marginBottom: '1rem' }}>Want a Deeper <span style={{ color: 'var(--gold)' }}>Clinical Analysis?</span></h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, marginBottom: '2rem' }}>Book a free 45-minute expert consultation. Our integrative medicine physicians will create a comprehensive botanical protocol tailored to your biology.</p>

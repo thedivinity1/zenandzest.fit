@@ -426,6 +426,12 @@ export default function HomePage() {
 
   return (
     <div style={{ background: 'var(--section-void)', color: 'white', minHeight: '100vh', overflowX: 'hidden' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "My Zen and Zest - Skin Longevity & Circadian Mastery",
+        "description": "An authority in skin longevity, circadian rhythm mastery, and holistic wellness. Science-backed insights into HPA axis regulation and preventative beauty."
+      }) }} />
 
       {/* ===== ANNOUNCEMENT TICKER ===== */}
       <div style={{
@@ -776,7 +782,7 @@ export default function HomePage() {
                 Tell Us What You're <span className="gold-gradient-text">Struggling With</span>
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '580px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                Choose a concern below. We'll show you exactly what's happening inside your body — and how nature can help.
+                <strong>Answer-First:</strong> Chronic symptoms like burnout, dull skin, and poor sleep stem from HPA axis dysfunction and cellular oxidative stress. Choose a concern below, and we'll show you exactly how nature and chronobiology can resolve it at the root.
               </p>
             </div>
           </Reveal>
@@ -1379,7 +1385,7 @@ export default function HomePage() {
                 Guided by Real <span className="gold-gradient-text">Medical Experts</span>
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '600px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                Every article, product, and protocol at Ojas Sanctuary is reviewed and approved by our board of practising integrative medicine doctors and Ayurvedic physicians.
+                Every article, product, and protocol at My Zen and Zest is reviewed and approved by our board of practising integrative medicine doctors and Ayurvedic physicians.
               </p>
             </div>
           </Reveal>
@@ -1480,7 +1486,7 @@ export default function HomePage() {
             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.93rem', lineHeight: 1.7, marginBottom: '2rem' }}>
               Get our free weekly wellness letter — simple, science-backed tips on sleep, gut health, skin, and longevity. No jargon, no spam. Just genuinely useful guidance.
             </p>
-            <form onSubmit={e => { e.preventDefault(); alert('Welcome to the Ojas Sanctuary community! 🌿'); }} style={{
+            <form onSubmit={e => { e.preventDefault(); alert('Welcome to the My Zen and Zest community! 🌿'); }} style={{
               display: 'flex',
               gap: '0.5rem',
               maxWidth: '480px',

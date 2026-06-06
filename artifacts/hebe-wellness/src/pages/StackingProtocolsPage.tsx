@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Layers, Check, Clock, ShieldAlert } from 'lucide-react';
 
+const stackingSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do adaptogenic stacks work for wellness protocols?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Adaptogenic stacks combine botanical compounds with synergistic timing to target specific biological pathways. Morning cortisol stacks use Ashwagandha to buffer ACTH receptors, afternoon focus stacks enhance BDNF via Brahmi, and evening sleep stacks activate GABA-A receptors for delta-wave sleep. Proper timing ensures optimal biochemical synergy."
+    }
+  }]
+};
+
 interface StackingProtocol {
   name: string;
   focus: string;
@@ -81,13 +94,14 @@ export default function StackingProtocolsPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(stackingSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Adaptogen Stacking Protocols</div>
           <h1 className="section-title">Standardized <span className="gold-gradient-text">Stack Library</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Select your biological wellness goal and generate a clinically precise, hour-by-hour adaptogenic stacking protocol reviewed by endocrinologists.
+            <strong>Answer-First:</strong> Adaptogenic stacks combine botanical compounds with precise timing to target biological pathways. Morning cortisol stacks buffer ACTH receptors, afternoon focus stacks enhance BDNF via Brahmi, and evening sleep stacks activate GABA-A receptors for delta-wave restoration.
           </p>
         </ScrollAnimator>
 

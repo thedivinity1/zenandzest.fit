@@ -53,7 +53,7 @@ export default function CartDrawer() {
     if (!name || !email || !phone || !pincode || !address) return;
     
     // Create mock order ID
-    const randomId = 'OJAS-' + Math.floor(100000 + Math.random() * 900000);
+    const randomId = 'ZEN-' + Math.floor(100000 + Math.random() * 900000);
     setOrderId(randomId);
     setCheckoutStep('success');
   };

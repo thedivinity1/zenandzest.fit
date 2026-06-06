@@ -2,6 +2,19 @@ import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { Search, ShieldAlert, Award, FileText, CheckCircle2 } from 'lucide-react';
 
+const clinicalTrialsSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do clinical batch audits verify product purity and standardization?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "My Zen and Zest products undergo NABL-certified HPLC and ICP-MS testing to verify active molecular yields and heavy metal safety. Each batch is assigned a unique certificate ID enabling full transparency from raw sourcing through finished formulation, ensuring 99.8% heavy metal clearance and standardized active compounds."
+    }
+  }]
+};
+
 interface BatchCertificate {
   batchId: string;
   product: string;
@@ -13,8 +26,8 @@ interface BatchCertificate {
 }
 
 const certificates: Record<string, BatchCertificate> = {
-  'OJAS-SA-9011': {
-    batchId: 'OJAS-SA-9011',
+  'ZEN-SA-9011': {
+    batchId: 'ZEN-SA-9011',
     product: 'Saffron Glow Ampoule (Active Crocin)',
     testDate: '2026-04-18',
     labName: 'NABL Certified Phytochemical Labs Inc.',
@@ -31,8 +44,8 @@ const certificates: Record<string, BatchCertificate> = {
       { metal: 'Mercury (Hg)', limit: '< 0.1 ppm', detected: '< 0.001 ppm', status: 'Passed' }
     ]
   },
-  'OJAS-AS-7704': {
-    batchId: 'OJAS-AS-7704',
+  'ZEN-AS-7704': {
+    batchId: 'ZEN-AS-7704',
     product: 'Botanical Adrenal Recovery (KSM-66)',
     testDate: '2026-05-02',
     labName: 'Eurofins Biological Analytics Division',
@@ -48,8 +61,8 @@ const certificates: Record<string, BatchCertificate> = {
       { metal: 'Mercury (Hg)', limit: '< 0.1 ppm', detected: '< 0.001 ppm', status: 'Passed' }
     ]
   },
-  'OJAS-BE-8812': {
-    batchId: 'OJAS-BE-8812',
+  'ZEN-BE-8812': {
+    batchId: 'ZEN-BE-8812',
     product: 'Gut Restoration Capsule (Berberine 97%)',
     testDate: '2026-05-14',
     labName: 'Intertek Food & Phytochemical Services',
@@ -69,7 +82,7 @@ const certificates: Record<string, BatchCertificate> = {
 
 export default function ClinicalTrialsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedBatch, setSelectedBatch] = useState<BatchCertificate | null>(certificates['OJAS-SA-9011']);
+  const [selectedBatch, setSelectedBatch] = useState<BatchCertificate | null>(certificates['ZEN-SA-9011']);
   const [error, setError] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
@@ -85,28 +98,29 @@ export default function ClinicalTrialsPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicalTrialsSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Batch Quality & Transparency</div>
           <h1 className="section-title">Clinical & Lab <span className="gold-gradient-text">Batch Audits</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Verify the molecular purity, active standardizations, and heavy metals assays of your specific bottle. Absolute clinical transparency for professional longevity practitioners.
+            <strong>Answer-First:</strong> Clinical batch audits verify product purity, standardized molecular concentrations, and safety metrics for every product batch. We assign each batch a unique ID (like ZEN-SA-9011) linked to HPLC analysis and heavy metal testing under 1ppm.
           </p>
         </ScrollAnimator>
 
         {/* Search Bar */}
         <ScrollAnimator>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem', marginBottom: '2.5rem' }}>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1rem', fontWeight: 700 }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1rem', fontWeight: 700 }}>
               Query Your Bottle Batch Certificate
-            </h3>
+            </h2>
             <form onSubmit={handleSearch} style={{ display: 'flex', gap: '1rem' }}>
               <div style={{ position: 'relative', flex: 1 }}>
                 <Search size={18} color="rgba(255,255,255,0.4)" style={{ position: 'absolute', top: '50%', left: '1rem', transform: 'translateY(-50%)' }} />
                 <input
                   type="text"
-                  placeholder="Enter Batch ID (e.g. OJAS-SA-9011, OJAS-AS-7704, OJAS-BE-8812)"
+                  placeholder="Enter Batch ID (e.g. ZEN-SA-9011, ZEN-AS-7704, ZEN-BE-8812)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{ width: '100%', padding: '0.9rem 1rem 0.9rem 2.8rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '100px', color: 'white', fontSize: '0.9rem' }}
@@ -170,9 +184,9 @@ export default function ClinicalTrialsPage() {
 
               {/* Active Phytochemical Assay */}
               <div style={{ marginBottom: '2rem' }}>
-                <h4 style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <h3 style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <FileText size={16} /> Phytochemical Active Ingredient Assays
-                </h4>
+                </h3>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
                   <thead>
                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', textAlign: 'left' }}>
@@ -197,9 +211,9 @@ export default function ClinicalTrialsPage() {
 
               {/* Heavy Metals Sweep */}
               <div>
-                <h4 style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <h3 style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   🛡 Heavy Metals Residue Scan (ICP-MS)
-                </h4>
+                </h3>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
                   <thead>
                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', textAlign: 'left' }}>

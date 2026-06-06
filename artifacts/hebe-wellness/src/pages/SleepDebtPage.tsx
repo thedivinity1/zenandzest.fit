@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Clock, Info, CheckCircle2, ChevronRight } from 'lucide-react';
 
+const sleepDebtSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How much sleep debt is dangerous and how do you repay it?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sleep debt exceeding 4 hours weekly triggers HPA axis stress and impairs glymphatic brain clearing. Repayment requires extending sleep by 30-45 minutes nightly plus NSDR sessions. Severe debt (>10 hours) may take 3 weeks to recover. Sleep drops and magnesium glycinate support delta slow-wave cycle restoration."
+    }
+  }]
+};
+
 export default function SleepDebtPage() {
   const [targetHours, setTargetHours] = useState<number>(8);
   const [sleepLogs, setSleepLogs] = useState<number[]>([6, 5.5, 7, 6.5, 5, 6, 7]); // Last 7 days
@@ -39,6 +52,7 @@ export default function SleepDebtPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sleepDebtSchema) }} />
       <div className="container" style={{ maxWidth: '900px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>

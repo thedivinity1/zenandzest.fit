@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Shield, Sparkles, Droplet, Check } from 'lucide-react';
 
+const dermalCrocinSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What are the benefits of dermal crocin skincare?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dermal crocin acts as a potent antioxidant for skin longevity, downregulating tyrosinase to prevent hyperpigmentation and boosting skin barrier elasticity."
+    }
+  }]
+};
+
 export default function DermalCrocinPage() {
   const [uvIndex, setUvIndex] = useState(3);
   const [stress, setStress] = useState(4);
@@ -17,13 +30,14 @@ export default function DermalCrocinPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dermalCrocinSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <div className="section-tag">Clinical Skin Biology</div>
-          <h1 className="section-title">Saffron Crocin <span className="gold-gradient-text">Dermal Assay</span></h1>
+          <div className="section-tag">Regenerative Skincare</div>
+          <h1 className="section-title">Dermal Crocin Skincare <span className="gold-gradient-text">for Skin Longevity</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Scientific assessment of Crocin-driven tyrosinase inhibition, MITF pathway downregulation, and clinical skin-barrier recovery.
+            <strong>Answer-First:</strong> Dermal Crocin is a breakthrough in skin longevity. Scientific assessment proves Crocin-driven tyrosinase inhibition, MITF pathway downregulation, and clinical skin-barrier recovery are essential for cellular skin health.
           </p>
         </ScrollAnimator>
 

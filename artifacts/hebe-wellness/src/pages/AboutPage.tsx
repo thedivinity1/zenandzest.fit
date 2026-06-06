@@ -2,7 +2,7 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { Link } from 'wouter';
 
 const milestones = [
-  { year: '2018', event: 'Ojas Sanctuary founded by two IIT alumni passionate about Ayurvedic science' },
+  { year: '2018', event: 'My Zen and Zest founded by two IIT alumni passionate about Ayurvedic science' },
   { year: '2019', event: 'First product launched — Botanical Sleep Drops. 500 founding members.' },
   { year: '2020', event: 'Ministry of Ayush licensing obtained. First clinical study initiated.' },
   { year: '2021', event: '10,000 customers. Expanded to full adaptogen range. Doctor network established.' },
@@ -28,9 +28,33 @@ const team = [
   { emoji: '🌿', name: 'Priya Sharma', role: 'Head of Sustainability', bio: 'Former WWF India. Certified B Corp auditor. Leads our ethical sourcing and environmental programs.' },
 ];
 
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "My Zen and Zest",
+    "url": "https://myzenandzest.com",
+    "logo": "https://myzenandzest.com/logo.png",
+    "description": "My Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.",
+    "foundingDate": "2018",
+    "founders": [
+      {
+        "@type": "Person",
+        "name": "Aryan Kapoor"
+      },
+      {
+        "@type": "Person",
+        "name": "Dr. Riya Mehta"
+      }
+    ]
+  }
+};
+
 export default function AboutPage() {
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
       {/* Hero */}
       <section className="about-hero">
         <div className="container" style={{ textAlign: 'center' }}>
@@ -38,8 +62,8 @@ export default function AboutPage() {
           <h1 className="section-title" style={{ marginBottom: '1.5rem' }}>
             Where Ancient Wisdom Meets <span className="gold-gradient-text">Modern Science</span>
           </h1>
-          <p className="section-subtitle" style={{ margin: '0 auto', maxWidth: 600 }}>
-            Founded in 2018 by a team of scientists, physicians, and wellness advocates who believed India deserved better than the supplement industry's status quo.
+          <p className="section-subtitle" style={{ margin: '0 auto', maxWidth: 700, lineHeight: 1.8 }}>
+            <strong>Answer-First:</strong> My Zen and Zest is dedicated to providing science-backed insights and tools for extending healthspan, optimizing internal biological rhythms, and achieving skin resilience. We combine India's 5,000-year-old Ayurvedic tradition with rigorous modern clinical research to create formulations that actually work.
           </p>
         </div>
       </section>
@@ -58,7 +82,7 @@ export default function AboutPage() {
                   For too long, the wellness industry has been dominated by unsubstantiated claims, proprietary blends that hide ineffective doses, and marketing speak that obscures the truth.
                 </p>
                 <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1rem', lineHeight: 1.8, marginBottom: '2rem' }}>
-                  Ojas Sanctuary was founded to change that. We combine India's 5,000-year-old Ayurvedic tradition with rigorous modern clinical research to create formulations that actually work — and we publish the data to prove it.
+                  My Zen and Zest was founded to change that. We combine India's 5,000-year-old Ayurvedic tradition with rigorous modern clinical research to create formulations that actually work — and we publish the data to prove it.
                 </p>
                 <Link href="/consult" className="hero-cta-primary" style={{ display: 'inline-block' }}>
                   Meet Our Experts
@@ -124,7 +148,7 @@ export default function AboutPage() {
         <div className="container">
           <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <div className="section-tag">Our Journey</div>
-            <h2 className="section-title">The Ojas Sanctuary <span className="gold-gradient-text">Story</span></h2>
+            <h2 className="section-title">The My Zen and Zest <span className="gold-gradient-text">Story</span></h2>
           </ScrollAnimator>
           <div style={{ maxWidth: 800, margin: '0 auto', position: 'relative' }}>
             <div style={{

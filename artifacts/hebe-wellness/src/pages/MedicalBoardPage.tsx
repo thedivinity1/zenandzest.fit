@@ -1,6 +1,19 @@
 import ScrollAnimator from '../components/ScrollAnimator';
 import { Award, GraduationCap, BookOpen, Quote } from 'lucide-react';
 
+const medicalBoardSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Who comprises the My Zen and Zest medical advisory board?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The My Zen and Zest advisory council includes Stanford endocrinology specialists, Johns Hopkins longevity researchers, King's College trichology experts, and BHU Ayurvedic Rasayana scholars. This combines modern neuroendocrinology, geroscience, dermatology, and traditional longevity medicine for comprehensive protocol development."
+    }
+  }]
+};
+
 const members = [
   {
     name: 'Dr. Sarah Chen, MD',
@@ -21,7 +34,7 @@ const members = [
   {
     name: 'Dr. Priya Sharma, MD',
     role: 'Chief Trichology & Follicular Pathologist',
-    bio: 'Dr. Sharma is a global authority on androgenic alopecia follicular pathway signaling. She validates Ojas Sanctuary\'s scalp hair follicle DHT-blocking ratios and standardises rosemary and crocin dermal recovery assays.',
+    bio: 'Dr. Sharma is a global authority on androgenic alopecia follicular pathway signaling. She validates My Zen and Zest\'s scalp hair follicle DHT-blocking ratios and standardises rosemary and crocin dermal recovery assays.',
     education: 'MD in Dermatology, King’s College London; Spec. Board in Hair Pathologies.',
     publications: 'Author of "The Role of Standardized 5α-Reductase Botanical Inhibitors in Scalp Tissue Preservation."',
     quote: 'By combining scalp barrier crocin restoration with active 5α-reductase blockage, we preserve hair density at a genetic level.'
@@ -39,13 +52,14 @@ const members = [
 export default function MedicalBoardPage() {
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalBoardSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Clinical Review Council</div>
-          <h1 className="section-title">The Ojas Sanctuary <span className="gold-gradient-text">Advisory Council</span></h1>
+          <h1 className="section-title">The My Zen and Zest <span className="gold-gradient-text">Advisory Council</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Our formulations, clinical audits, and scientific guides are thoroughly reviewed and vetted by world-class endocrinologists, longevity doctors, and traditional scholars.
+            <strong>Answer-First:</strong> Our Medical Advisory Board brings together Stanford endocrinologists, Johns Hopkins longevity physicians, and Ayurvedic scholars to evaluate and validate clinical formulas. Every recommendation and diagnostic calculator is thoroughly vetted to align with peer-reviewed endocrinology and geroscience.
           </p>
         </ScrollAnimator>
 
@@ -82,9 +96,9 @@ export default function MedicalBoardPage() {
                     {member.name.split(' ').pop()?.replace(',', '')?.[0] || 'DR'}
                   </div>
                   
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', fontWeight: 900, marginBottom: '0.25rem' }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', fontWeight: 900, marginBottom: '0.25rem' }}>
                     {member.name}
-                  </h3>
+                  </h2>
                   <div style={{ color: 'var(--gold)', fontSize: '0.82rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '1rem', lineHeight: 1.4 }}>
                     {member.role}
                   </div>
@@ -99,7 +113,7 @@ export default function MedicalBoardPage() {
 
                 {/* Right Panel: Academic Credentials */}
                 <div style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', paddingLeft: '2rem' }}>
-                  <h4 style={{ color: 'white', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.75rem' }}>Core Longevity Competency</h4>
+                  <h3 style={{ color: 'white', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.75rem' }}>Core Longevity Competency</h3>
                   <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.92rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                     {member.bio}
                   </p>

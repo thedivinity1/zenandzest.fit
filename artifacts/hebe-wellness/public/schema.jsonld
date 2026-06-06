@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://myzenandzest.com/#website",
+      "url": "https://myzenandzest.com/",
+      "name": "My Zen and Zest",
+      "description": "My Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.",
+      "publisher": {
+        "@id": "https://myzenandzest.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://myzenandzest.com/#organization",
+      "name": "My Zen and Zest",
+      "url": "https://myzenandzest.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://myzenandzest.com/logo.png"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/myzenandzest",
+        "https://www.instagram.com/myzenandzest"
+      ]
+    }
+  ]
+}

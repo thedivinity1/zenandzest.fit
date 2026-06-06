@@ -1,6 +1,19 @@
 import ScrollAnimator from '../components/ScrollAnimator';
 import { Leaf, Award, ShieldAlert, Cpu } from 'lucide-react';
 
+const sourcingSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What extraction methods ensure botanical supplement purity and potency?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Supercritical CO2 extraction operates at low temperatures (31.1°C) preserving thermolabile longevity molecules while leaving zero toxic residues. Unlike chemical solvents (hexane, methanol), CO2 fully evaporates upon pressure release, ensuring 99.8% heavy metal clearance and standardized active molecular yields verified by NABL-certified HPLC assays."
+    }
+  }]
+};
+
 const sources = [
   {
     herb: 'Kashmiri Saffron (Crocus sativus)',
@@ -28,13 +41,14 @@ const sources = [
 export default function SourcingIndexPage() {
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sourcingSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Harvesting & Extraction Standards</div>
           <h1 className="section-title">Standardized <span className="gold-gradient-text">Sourcing Index</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Learn how we select biological origins and leverage green chemical extraction methods to guarantee high molecular yield without leaving toxic chemical residues.
+            <strong>Answer-First:</strong> Supercritical CO2 extraction at 31.1°C preserves thermolabile longevity molecules without toxic residues. This zero-waste method delivers 15-20x concentration ratios versus raw powders while ensuring 99.8% heavy metal clearance through NABL-certified HPLC validation.
           </p>
         </ScrollAnimator>
 
@@ -62,7 +76,7 @@ export default function SourcingIndexPage() {
               {/* CO2 Extraction */}
               <div style={{ background: 'rgba(76,175,80,0.04)', border: '1px solid rgba(76,175,80,0.2)', borderRadius: '16px', padding: '1.5rem' }}>
                 <h4 style={{ color: '#4caf50', fontWeight: 800, fontSize: '0.95rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  🌿 Supercritical CO₂ (Ojas Sanctuary Standard)
+                  🌿 Supercritical CO₂ (My Zen and Zest Standard)
                 </h4>
                 <ul style={{ paddingLeft: '1.25rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <li>Uses recycled carbon dioxide compressed into a fluid state.</li>

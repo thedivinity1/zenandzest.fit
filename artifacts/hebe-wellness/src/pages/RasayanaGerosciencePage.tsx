@@ -1,6 +1,19 @@
 import ScrollAnimator from '../components/ScrollAnimator';
 import { BookOpen, RefreshCw, Layers } from 'lucide-react';
 
+const rasayanaSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is Rasayana and how does it connect to modern geroscience?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Rasayana is ancient Ayurvedic rejuvenation science focused on cellular longevity through the SIRT1-AMPK-autophagy pathway axis. Modern geroscience identifies the same targets: sirtuin activation for DNA repair, AMP-activated protein kinase for metabolic regulation, and autophagy for cellular cleanup."
+    }
+  }]
+};
+
 const pathways = [
   {
     pathway: 'SIRT1 Expression (Sirtuin Longevity Gene)',
@@ -28,6 +41,7 @@ const pathways = [
 export default function RasayanaGerosciencePage() {
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rasayanaSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>

@@ -1,5 +1,18 @@
 import ScrollAnimator from '../components/ScrollAnimator';
 
+const gutSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How does gut microbiome restoration improve overall health?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Your gut microbiome governs 95% of systemic serotonin synthesis and directly regulates vagal brain communication. Restoring Akkermansia muciniphila and tightening intestinal junctions reduces systemic inflammation, improves HPA axis regulation, and supports cognitive function through the gut-brain axis."
+    }
+  }]
+};
+
 const steps = [
   {
     title: 'Phase I: Pathogen Removal & Cleansing (Weeks 1-3)',
@@ -21,13 +34,14 @@ const steps = [
 export default function GutRestorationPage() {
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(gutSchema) }} />
       <div className="container" style={{ maxWidth: '800px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Gut Microbiome & Gastric Biology</div>
           <h1 className="section-title">Akkermansia Gut <span className="gold-gradient-text">Microbiome Plan</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '650px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Your gut microbiome governs 95% of systemic serotonin synthesis and directly regulates vagal brain communication. Explore our 3-phase clinical plan to restore tight gut junctions.
+            <strong>Answer-First:</strong> Your gut microbiome governs 95% of systemic serotonin synthesis and directly regulates vagal brain communication. The 3-phase protocol restores Akkermansia populations and intestinal tight junctions to reduce systemic inflammation and support HPA axis regulation.
           </p>
         </ScrollAnimator>
 

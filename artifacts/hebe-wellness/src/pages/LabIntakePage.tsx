@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { UploadCloud, CheckCircle2, Shield, Activity, RefreshCw } from 'lucide-react';
 
+const labIntakeSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do lab biomarker analyses inform botanical supplement recommendations?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Lab biomarkers like cortisol, DHT, and Akkermansia levels directly correlate with specific botanical interventions. Elevated cortisol (>8ng/mL) indicates HPA axis stress requiring Ashwagandha protocols. High DHT (>600pg/mL) suggests follicle thinning needing 5α-reductase inhibitors. Low Akkermansia (<1%) signals leaky gut requiring Berberine and Triphala intervention."
+    }
+  }]
+};
+
 export default function LabIntakePage() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
@@ -41,6 +54,7 @@ export default function LabIntakePage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(labIntakeSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>

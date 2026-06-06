@@ -74,7 +74,7 @@ const articleDataList: Record<number, ArticleData> = {
       },
       {
         heading: 'Standardized Concentrates vs. Raw Herbal Powders',
-        content: 'For therapeutic results, raw root powder is insufficient. Standardized extracts guarantee a precise therapeutic concentration of active compounds. For example, Ojas Sanctuary Sleep Drops utilize KSM-66 Ashwagandha standardized to 5% withanolides, providing up to 40 times the active molecular density of standard store-bought powders. Standardizing is non-negotiable for clinical efficacy in circadian repair.'
+        content: 'For therapeutic results, raw root powder is insufficient. Standardized extracts guarantee a precise therapeutic concentration of active compounds. For example, My Zen and Zest Sleep Drops utilize KSM-66 Ashwagandha standardized to 5% withanolides, providing up to 40 times the active molecular density of standard store-bought powders. Standardizing is non-negotiable for clinical efficacy in circadian repair.'
       }
     ],
     recommendedProduct: 'Botanical Sleep Drops'
@@ -348,8 +348,34 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
     });
   };
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": article.title,
+    "description": article.excerpt,
+    "datePublished": article.date,
+    "author": {
+      "@type": "Organization",
+      "name": "My Zen and Zest",
+      "url": "https://myzenandzest.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "My Zen and Zest",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://myzenandzest.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://myzenandzest.com/blog/${article.id}`
+    }
+  };
+
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', paddingBottom: '6rem', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       {/* Article Header */}
       <section style={{ 
         background: article.gradient, 
@@ -416,9 +442,9 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
               overflow: 'hidden'
             }}>
               <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--gold)' }} />
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', color: 'var(--gold-light)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                ✨ Search Generative Insights (SGE Takeaways)
-              </h3>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', color: 'var(--gold-light)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                ✨ Search Generative Insights (Answer-First SGE Takeaways)
+              </h2>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', paddingLeft: '1.25rem', color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', lineHeight: 1.6 }}>
                 {article.sgeHighlights.map((highlight, idx) => (
                   <li key={idx}>{highlight}</li>
@@ -462,7 +488,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
                   <thead>
                     <tr style={{ background: 'rgba(201,168,76,0.08)', borderBottom: '1px solid rgba(201,168,76,0.2)' }}>
                       <th style={{ padding: '1rem', color: 'var(--gold-light)' }}>Concentration Metric</th>
-                      <th style={{ padding: '1rem', color: 'var(--gold-light)' }}>Ojas Sanctuary Standardized Extracts</th>
+                      <th style={{ padding: '1rem', color: 'var(--gold-light)' }}>My Zen and Zest Standardized Extracts</th>
                       <th style={{ padding: '1rem', color: 'rgba(255,255,255,0.5)' }}>Raw Herbal Powder</th>
                       <th style={{ padding: '1rem', color: 'var(--gold-light)' }}>Clinical Multiplier</th>
                     </tr>
@@ -503,9 +529,9 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
               position: 'sticky',
               top: '100px'
             }}>
-              <h4 style={{ fontFamily: 'var(--font-serif)', color: 'var(--gold-light)', fontSize: '0.95rem', fontWeight: 700, marginBottom: '1rem', borderBottom: '1px solid rgba(201,168,76,0.15)', paddingBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--gold-light)', fontSize: '0.95rem', fontWeight: 700, marginBottom: '1rem', borderBottom: '1px solid rgba(201,168,76,0.15)', paddingBottom: '0.5rem' }}>
                 PROTOCOL CONTENTS
-              </h4>
+              </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.85rem' }}>
                 {article.contentSections.map((sec, idx) => (
                   <a 
@@ -544,7 +570,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
                 <div style={{ fontSize: '3rem' }}>{product.icon}</div>
                 <div>
                   <span style={{ fontSize: '0.65rem', background: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold-light)', padding: '0.2rem 0.6rem', borderRadius: '100px', fontWeight: 700, letterSpacing: '0.05em' }}>RECOMMENDED FORMULA</span>
-                  <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'white', marginTop: '0.5rem', fontWeight: 800 }}>{product.name}</h4>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'white', marginTop: '0.5rem', fontWeight: 800 }}>{product.name}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.78rem', lineHeight: 1.5, marginTop: '0.25rem' }}>
                     {product.desc.substring(0, 80)}...
                   </p>

@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Award, UserCheck, TrendingDown, TrendingUp } from 'lucide-react';
 
+const clinicalCasesSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What clinical evidence supports My Zen and Zest botanical interventions?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "My Zen and Zest tracks real patient biomarkers across HPA axis modulation, DHT block protocols, sleep efficiency improvements, and Akkermansia restoration. Case studies demonstrate measurable outcomes: cortisol normalization in 12 weeks, 18.2% hair density increase, 27% sleep efficiency improvement, and 15-fold Akkermansia recovery with standardized botanical stacks."
+    }
+  }]
+};
+
 interface CaseStudy {
   id: string;
   title: string;
@@ -101,13 +114,14 @@ export default function ClinicalCasesPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicalCasesSchema) }} />
       <div className="container" style={{ maxWidth: '1100px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Clinical Evidence & Biomarkers</div>
           <h1 className="section-title">Patient Biomarker <span className="gold-gradient-text">Case Studies</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Review real patient biomarkers tracked before and after Ojas Sanctuary standardized botanical interventions. Scientifically validated outcomes demonstrating physiological recovery.
+            <strong>Answer-First:</strong> Our clinical cases track real patient biomarkers before and after standardized botanical interventions. Quantifiable outcomes validate our methodologies, showing cortisol stabilization within 12 weeks, 18.2% hair density increase, 27% delta sleep efficiency gains, and 15-fold Akkermansia restoration.
           </p>
         </ScrollAnimator>
 
@@ -187,7 +201,7 @@ export default function ClinicalCasesPage() {
                       <Tooltip contentStyle={{ background: 'var(--mid-dark)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }} />
                       <Legend wrapperStyle={{ fontSize: 11 }} />
                       <Line type="monotone" dataKey="baseline" name="Control (No Treatment)" stroke="#ff6b6b" strokeWidth={2} dot={{ r: 4 }} />
-                      <Line type="monotone" dataKey="treatment" name="Ojas Sanctuary Protocol" stroke="var(--gold)" strokeWidth={3} dot={{ r: 5 }} />
+                      <Line type="monotone" dataKey="treatment" name="My Zen and Zest Protocol" stroke="var(--gold)" strokeWidth={3} dot={{ r: 5 }} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>

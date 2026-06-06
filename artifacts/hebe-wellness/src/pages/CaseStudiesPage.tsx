@@ -155,6 +155,19 @@ const caseStudiesList: CaseStudy[] = [
   }
 ];
 
+const caseStudiesSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What clinical outcomes are documented in My Zen and Zest case studies?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "My Zen and Zest's case studies track salivary cortisol stabilization, deep sleep cycles, hair follicle diameter, HbA1c metabolic markers, and serum BDNF. Key results include cortisol stabilization in 12 weeks, deep sleep restoration to 94 minutes, daily hair shedding reduction by 79%, HbA1c levels dropping from 6.2% to 5.4%, and serum BDNF rising from 18.4 to 34.8 ng/mL."
+    }
+  }]
+};
+
 export default function CaseStudiesPage() {
   const [selectedCaseId, setSelectedCaseId] = useState('1');
   const { addToCart, setCartOpen, applyDiscountCode } = useCart();
@@ -169,6 +182,7 @@ export default function CaseStudiesPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudiesSchema) }} />
       <div className="container">
         
         {/* Header */}
@@ -178,7 +192,7 @@ export default function CaseStudiesPage() {
             Protocol Efficacy & <span className="gold-gradient-text">Patient Case Studies</span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '650px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Read peer-reviewed, medically supervised patient trials documenting exact salivary cortisol curves, sleep architecture deep sleep phases, and follicular density changes before and after Ojas Sanctuary protocols.
+            <strong>Answer-First:</strong> Our patient case studies track physiological biomarkers under standardized botanical protocols. Documented outcomes demonstrate clinical efficacy, including diurnal salivary cortisol normalization within 12 weeks, 18.2% hair density recovery, 27% sleep efficiency gains, and 15-fold Akkermansia microbiome restoration.
           </p>
         </div>
 
@@ -235,9 +249,9 @@ export default function CaseStudiesPage() {
               {/* Profile details */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '1rem' }}>
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'white', fontWeight: 800 }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'white', fontWeight: 800 }}>
                     Patient: {currentCase.name} · Age {currentCase.age}
-                  </h3>
+                  </h2>
                   <span style={{ fontSize: '0.8rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Diagnosis: {currentCase.condition}
                   </span>
@@ -261,9 +275,9 @@ export default function CaseStudiesPage() {
 
               {/* Chart Visual Vector */}
               <div style={{ marginBottom: '2.5rem' }}>
-                <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
+                <h3 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
                   📊 BIOMARKER TRACKING DATA VISUALIZATION
-                </h4>
+                </h3>
 
                 <div style={{ height: '300px', background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   {currentCase.chartType === 'cortisol' && (
@@ -327,9 +341,9 @@ export default function CaseStudiesPage() {
 
               {/* Biomarkers Audit List */}
               <div>
-                <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                <h3 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1rem' }}>
                   🧪 BIOMARKER AUDIT METRICS
-                </h4>
+                </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} className="two-col-grid">
                   {currentCase.biomarkers.map((bio, index) => (
                     <div key={index} style={{
@@ -375,7 +389,7 @@ export default function CaseStudiesPage() {
                 justifyContent: 'center',
                 margin: '0 auto 1rem auto'
               }}>{currentCase.doctorImg}</div>
-              <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 800, color: 'white', marginBottom: '0.25rem' }}>Verified Trial Review</h4>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 800, color: 'white', marginBottom: '0.25rem' }}>Verified Trial Review</h3>
               <p style={{ fontSize: '0.78rem', color: 'var(--gold-light)', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase' }}>
                 {currentCase.reviewedBy}
               </p>
@@ -395,9 +409,9 @@ export default function CaseStudiesPage() {
                 ACTIVE BUNDLED STACKS
               </span>
 
-              <h4 style={{ fontFamily: 'var(--font-serif)', color: 'white', fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.25rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', color: 'white', fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.25rem' }}>
                 Shop the Recommended Protocol
-              </h4>
+              </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
                 {currentCase.protocol.map((prod, index) => (

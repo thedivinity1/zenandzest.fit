@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Activity, Heart, Shield, RefreshCw } from 'lucide-react';
 
+const zone2Schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is Zone 2 cardio and how does it promote longevity?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Zone 2 cardio is aerobic exercise at 60-70% of heart rate reserve, where lactate production matches clearing. This intensity triggers PGC-1α pathways for mitochondrial biogenesis, increases cellular ATP efficiency, and improves VO2 max - the strongest predictor of all-cause mortality with up to 5-fold mortality risk reduction."
+    }
+  }]
+};
+
 export default function Zone2CardioPage() {
   const [age, setAge] = useState<number>(35);
   const [rhr, setRhr] = useState<number>(65);
@@ -22,13 +35,14 @@ export default function Zone2CardioPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(zone2Schema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Performance & Aerobic Capacity</div>
           <h1 className="section-title">Zone 2 Cardio <span className="gold-gradient-text">Longevity Planner</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Optimize mitochondrial density, cardiorespiratory fitness, and capillary development through personalized metabolic zone calculations.
+            <strong>Answer-First:</strong> Zone 2 cardio is exercise performed at 60–70% of heart rate reserve, where lactate clearance keeps pace with production. This metabolic zone is optimal for triggering PGC-1α pathways and mitochondrial biogenesis, which directly improves VO2 max—the single most powerful biological predictor of longevity.
           </p>
         </ScrollAnimator>
 
@@ -50,7 +64,7 @@ export default function Zone2CardioPage() {
                     <Activity size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h4 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Mitochondrial Volume Density</h4>
+                    <h3 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Mitochondrial Volume Density</h3>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Zone 2 training specifically forces Type I (slow-twitch) muscle fibers to generate ATP exclusively from fat oxidation, maximizing mitochondrial efficiency.
                     </p>
@@ -62,7 +76,7 @@ export default function Zone2CardioPage() {
                     <Heart size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h4 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>VO2 Max Healthspan Multiplier</h4>
+                    <h3 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>VO2 Max Healthspan Multiplier</h3>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Moving from the lowest quartile of cardiorespiratory fitness to the highest reduces all-cause mortality risk by up to **5-fold (500%)**.
                     </p>
@@ -74,7 +88,7 @@ export default function Zone2CardioPage() {
                     <Shield size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h4 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Lactate Clearance Pathways</h4>
+                    <h3 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Lactate Clearance Pathways</h3>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Upregulates **MCT-1 transporters**, allowing skeletal muscle to recycle lactic acid into fuel and preserving muscle glycogen reserves.
                     </p>

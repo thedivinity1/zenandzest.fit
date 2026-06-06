@@ -73,6 +73,21 @@ const recommendations: Record<string, { products: string[]; protocol: string; he
   default: { products: ['Adaptogenic Stress Relief', 'Botanical Sleep Drops', 'Gut Balance Botanical'], protocol: 'Comprehensive Wellness Protocol', headline: 'A complete botanical wellness overhaul.' },
 };
 
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the wellness quiz recommend protocols?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The quiz evaluates your primary health concerns, stress indexes, sleep qualities, and lifestyles to recommend targeted, standardized botanical protocols tailored to your biological profile."
+      }
+    }
+  ]
+};
+
 export default function QuizPage() {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<{ q: number; a: number }[]>([]);
@@ -108,14 +123,15 @@ export default function QuizPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'radial-gradient(ellipse at top, var(--forest-green) 0%, var(--darkest) 60%)' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(quizSchema) }} />
       {/* Header */}
       <div style={{ paddingTop: '8rem', paddingBottom: '2rem', textAlign: 'center' }}>
         <div className="section-tag" style={{ marginBottom: '1rem' }}>Wellness Quiz</div>
         <h1 className="section-title" style={{ marginBottom: '0.75rem' }}>
           Find Your <span className="gold-gradient-text">Perfect Protocol</span>
         </h1>
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', maxWidth: 400, margin: '0 auto' }}>
-          6 questions · 2 minutes · Personalized botanical recommendation
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', maxWidth: 700, margin: '0 auto', lineHeight: 1.6 }}>
+          <strong>Answer-First:</strong> Our wellness constitution quiz maps your symptom profile to recommended longevity protocols. Complete these 6 brief questions to receive direct, science-backed botanical selections for sleep, stress, hair, skin, or digestion, customized to your biology.
         </p>
       </div>
 
@@ -218,9 +234,9 @@ export default function QuizPage() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem', textAlign: 'left' }}>
-              <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem', textAlign: 'center' }}>
+              <h3 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem', textAlign: 'center' }}>
                 Recommended Products
-              </h4>
+              </h3>
               {result.products.map((product, i) => (
                 <div key={i} style={{
                   display: 'flex', alignItems: 'center', gap: '1rem',

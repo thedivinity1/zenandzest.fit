@@ -114,6 +114,38 @@ export const productsList: Product[] = [
     size: '60 Capsules',
     certifications: ['FSSAI', 'GMP', 'Nootropic Grade'],
   },
+  {
+    name: 'Botanical Adrenal Recovery',
+    category: 'Stress',
+    price: 2999,
+    originalPrice: 3999,
+    rating: 4.8,
+    reviews: 956,
+    badge: 'KSM-66 Clinical',
+    badgeColor: '#7c3aed',
+    gradient: 'linear-gradient(135deg, #2d1f4e 0%, #1a1030 60%, #2d1f4e 100%)',
+    icon: '⚡',
+    desc: 'HPA axis adrenal restoration with standardized KSM-66 Ashwagandha and Rhodiola Rosea. Clinically proven cortisol regulation and stress resilience.',
+    features: ['KSM-66 Ashwagandha 5%', 'Rhodiola Rosea 3% rosavins', 'Shatavari Root', 'Holy Basil (Tulsi)'],
+    size: '60 Capsules',
+    certifications: ['FSSAI', 'GMP', 'Doctor Approved'],
+  },
+  {
+    name: 'Gut Restoration Capsule',
+    category: 'Gut',
+    price: 2499,
+    originalPrice: 3299,
+    rating: 4.8,
+    reviews: 734,
+    badge: '97% Berberine',
+    badgeColor: '#1a3d2e',
+    gradient: 'linear-gradient(135deg, #2d4e1f 0%, #1a2e0f 60%, #2d4e1f 100%)',
+    icon: '🌿',
+    desc: 'Intestinal Akkermansia restoration with 97% pure Berberine HCL and Triphala tannins for gut-brain axis balance.',
+    features: ['Berberine HCl 97%', 'Triphala Complex', 'Prebiotic Fiber', 'Digestive Enzymes'],
+    size: '60 Capsules',
+    certifications: ['FSSAI', 'GMP', 'Clinically Studied'],
+  },
 ];
 
 export interface CartItem {
@@ -146,7 +178,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Sync cart from LocalStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('ojas_cart');
+    const savedCart = localStorage.getItem('zen_cart');
     if (savedCart) {
       try {
         setCartItems(JSON.parse(savedCart));
@@ -159,7 +191,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Save cart to LocalStorage when changed
   const saveCart = (items: CartItem[]) => {
     setCartItems(items);
-    localStorage.setItem('ojas_cart', JSON.stringify(items));
+    localStorage.setItem('zen_cart', JSON.stringify(items));
   };
 
   const addToCart = (name: string, quantity: number = 1) => {
@@ -200,7 +232,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const applyDiscountCode = (code: string): boolean => {
     const formattedCode = code.toUpperCase().trim();
-    if (formattedCode === 'OJAS15' || formattedCode === 'QUIZ15') {
+    if (formattedCode === 'ZEN15' || formattedCode === 'QUIZ15') {
       setDiscountCode(formattedCode);
       setDiscountPercentage(15);
       return true;

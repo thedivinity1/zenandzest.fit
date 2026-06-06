@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Sun, Moon, Sunrise, Coffee, Layers, CheckCircle2 } from 'lucide-react';
 
+const wellnessSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What are the key circadian rituals for optimal wellness?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Morning rituals include outdoor sunlight CAR pulse (15 min) to reset the SCN pacemaker, followed by Ashwagandha for cortisol buffering. Afternoon focuses on caffeine cutoff and NSDR for parasympathetic activation. Evening emphasizes blue screen blocking, sleep drops for GABA-A activation, and magnesium for delta wave sleep."
+    }
+  }]
+};
+
 interface RitualItem {
   id: string;
   name: string;
@@ -52,6 +65,7 @@ export default function WellnessBuilderPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(wellnessSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>

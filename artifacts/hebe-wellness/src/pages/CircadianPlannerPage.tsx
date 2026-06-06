@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Sun, Moon, Coffee, ShieldAlert, Award, Clock } from 'lucide-react';
 
+const circadianSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How does circadian rhythm affect burnout and HPA axis?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Misaligned circadian rhythms disrupt the HPA axis by altering cortisol release, which can lead directly to systemic burnout and metabolic fatigue."
+    }
+  }]
+};
+
 export default function CircadianPlannerPage() {
   const [wakingTime, setWakingTime] = useState<string>('06:00');
   const { addToCart, setCartOpen } = useCart();
@@ -26,13 +39,14 @@ export default function CircadianPlannerPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(circadianSchema) }} />
       <div className="container" style={{ maxWidth: '900px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <div className="section-tag">Circadian Optimization</div>
-          <h1 className="section-title">Circadian Rhythm <span className="gold-gradient-text">Planner</span></h1>
+          <div className="section-tag">Circadian Mastery & Wellness</div>
+          <h1 className="section-title">Circadian Rhythm <span className="gold-gradient-text">Mastery Planner</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Align your sleep-wake schedule with your central master pacemaker (Suprachiasmatic Nucleus) using light pulses, caffeine cutoffs, and melatonin priming.
+            <strong>Answer-First:</strong> A stable circadian rhythm is the foundation of longevity and wellness. Align your sleep-wake schedule with your central master pacemaker (Suprachiasmatic Nucleus) using light pulses, caffeine cutoffs, and melatonin priming to prevent burnout and support the HPA axis.
           </p>
         </ScrollAnimator>
 

@@ -1,6 +1,19 @@
 import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 
+const hpaSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is HPA axis dysfunction?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "HPA axis dysfunction (often colloquially called adrenal fatigue) is the dysregulation of cortisol and stress hormones, leading to chronic stress, fatigue even after sleeping, and brain fog."
+    }
+  }]
+};
+
 export default function HpaBurnoutPage() {
   const [morningEnergy, setMorningEnergy] = useState(5);
   const [caffeineDep, setCaffeineDep] = useState(5);
@@ -21,16 +34,16 @@ export default function HpaBurnoutPage() {
     ];
 
     if (score > 7) {
-      stage = 'Stage III: Adrenal Burnout (Exhaustion Phase)';
+      stage = 'Stage III: HPA Axis Dysfunction (Exhaustion Phase)';
       cortisolCurve = 'Completely flattened curve';
-      desc = 'Your HPA axis feedback loop is severely blunted. The hypothalamic receptors are non-reactive, yielding depleted morning cortisol output and high systemic metabolic fatigue.';
+      desc = 'Your HPA axis feedback loop is severely blunted. The hypothalamic receptors are non-reactive, yielding depleted morning cortisol output and high systemic metabolic fatigue (formerly known as severe adrenal fatigue).';
       recs = [
         'Integrate powerful adaptogenic Rhodiola Rosea (3% rosavins) in the morning to upregulate dopamine and block physical exhaustion cycles.',
         'Use specialized Shatavari root extract to modulate baseline DHEA-S levels, returning cellular homeostasis.',
         'Restrict high-intensity cardiovascular training; prioritize low-heart-rate Zone 2 cardio (max 30 mins) or cyclic pranayama breathing.'
       ];
     } else if (score > 4) {
-      stage = 'Stage II: Adrenal Resistance (Resistive Phase)';
+      stage = 'Stage II: HPA Axis Resistance (Resistive Phase)';
       cortisolCurve = 'Erratic spikes & afternoon crashes';
       desc = 'Your body is struggling to maintain homeostasis. Cortisol peaks are erratic, leading to classic 3 PM energy crashes, low morning drive, and an HPA axis that is highly vulnerable to minor stress overrides.';
       recs = [
@@ -45,13 +58,14 @@ export default function HpaBurnoutPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hpaSchema) }} />
       <div className="container" style={{ maxWidth: '700px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <div className="section-tag">Endocrine & Stress</div>
-          <h1 className="section-title">HPA-Axis Adrenal <span className="gold-gradient-text">Burnout Stage Analyzer</span></h1>
+          <div className="section-tag">Cortisol Regulation & Recovery</div>
+          <h1 className="section-title">HPA Axis Dysfunction <span className="gold-gradient-text">& Burnout Analyzer</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.75rem', fontSize: '0.92rem' }}>
-            Assess HPA axis dysfunction stages (Adaptive, Resistive, or Exhausted) by auditing diurnal cortisol curves and neuroendocrine stress indicators.
+            <strong>Answer-First:</strong> Assess HPA axis dysfunction stages (Adaptive, Resistive, or Exhausted) by auditing diurnal cortisol curves and neuroendocrine stress indicators to aid in chronic stress recovery.
           </p>
         </ScrollAnimator>
 

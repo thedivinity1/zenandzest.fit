@@ -10,6 +10,29 @@ const experts = [
 
 const concerns = ['Sleep Disorders', 'Chronic Stress', 'Hair Loss', 'Skin Health', 'Digestive Issues', 'Hormonal Imbalance', 'Cognitive Performance', 'Weight Management', 'Immunity', 'General Wellness'];
 
+const consultSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the consultation really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% free. No credit card required. No hidden charges. We believe everyone deserves access to expert Ayurvedic guidance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens during the consultation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 45-minute one-on-one video call with a board-certified expert. They'll assess your constitution (Prakriti), current symptoms, lifestyle, and create a personalized botanical protocol."
+      }
+    }
+  ]
+};
+
 export default function ConsultPage() {
   const [selectedExpert, setSelectedExpert] = useState<number | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
@@ -55,6 +78,7 @@ export default function ConsultPage() {
 
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(consultSchema) }} />
       {/* Hero */}
       <section className="consult-hero" style={{ position: 'relative', overflow: 'hidden' }}>
         <div style={{
@@ -67,8 +91,8 @@ export default function ConsultPage() {
           <h1 className="section-title" style={{ marginBottom: '1.5rem' }}>
             Book Your Clinical <span className="gold-gradient-text">Longevity Assessment</span>
           </h1>
-          <p className="section-subtitle" style={{ margin: '0 auto 2rem' }}>
-            45-minute one-on-one with our board-certified BAMS vaidyas & integrative MDs. Complete Prakriti constitution audits and diagnostic biomarker mapping.
+          <p className="section-subtitle" style={{ margin: '0 auto 2rem', maxWidth: 700, lineHeight: 1.8 }}>
+            <strong>Answer-First:</strong> Our free clinical consultations connect you with board-certified BAMS physicians and integrative MDs for 45-minute wellness assessments. Get personalized Prakriti constitutional mapping and clinical biomarker evaluations to build your targeted longevity protocols.
           </p>
           <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             {[
@@ -97,9 +121,9 @@ export default function ConsultPage() {
                 <ScrollAnimator>
                   
                   {/* Calendar Widget */}
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
                     1. Select Consultation Date
-                  </h3>
+                  </h2>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', marginBottom: '2rem' }}>
                     {dates.map(d => (
                       <button
@@ -398,9 +422,9 @@ export default function ConsultPage() {
                   border: '1px solid rgba(255,255,255,0.1)',
                   borderRadius: 12, padding: '1.5rem'
                 }}>
-                  <h4 style={{ fontWeight: 700, color: 'var(--gold)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>
+                  <h3 style={{ fontWeight: 700, color: 'var(--gold)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>
                     {faq.q}
-                  </h4>
+                  </h3>
                   <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.875rem', lineHeight: 1.7 }}>
                     {faq.a}
                   </p>

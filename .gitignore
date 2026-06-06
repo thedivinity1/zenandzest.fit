@@ -54,3 +54,7 @@ Thumbs.db
 # Lockfiles
 package-lock.json
 yarn.lock
+
+# Scratch files
+scratch/
+

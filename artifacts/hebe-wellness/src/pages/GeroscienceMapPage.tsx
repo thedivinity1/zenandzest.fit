@@ -1,5 +1,18 @@
 import ScrollAnimator from '../components/ScrollAnimator';
 
+const geroscienceSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What are the hallmarks of cellular aging?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The nine hallmarks of aging include genomic instability, telomere attrition, mitochondrial decay, cellular senescence, stem cell exhaustion, altered intercellular communication, disabled macroautophagy, deregulated nutrient sensing, and chronic inflammation. Each hallmark represents a target for longevity interventions."
+    }
+  }]
+};
+
 const hallmarks = [
   {
     title: '1. Genomic Instability & DNA Repair',
@@ -36,13 +49,14 @@ const hallmarks = [
 export default function GeroscienceMapPage() {
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(geroscienceSchema) }} />
       <div className="container" style={{ maxWidth: '800px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Science & Geroscience Map</div>
           <h1 className="section-title">The Hallmarks of <span className="gold-gradient-text">Cellular Aging</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '650px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Every adaptogenic stack we formulate is designed at the molecular level to address the underlying hallmarks of aging. Explore how plant chemistry blocks cellular decay.
+            <strong>Answer-First:</strong> Geroscience research identifies the key hallmarks of cellular aging—such as genomic instability, telomere attrition, and mitochondrial decay—as the root drivers of physical degeneration. Our protocols target these pathways with standardized botanicals validated to reduce biomarkers of decay.
           </p>
         </ScrollAnimator>
 
@@ -58,9 +72,9 @@ export default function GeroscienceMapPage() {
               }}>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--gold)' }} />
                 
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', fontWeight: 800, marginBottom: '0.75rem' }}>
+                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', fontWeight: 800, marginBottom: '0.75rem' }}>
                   {item.title}
-                </h3>
+                </h2>
                 
                 <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
                   {item.desc}

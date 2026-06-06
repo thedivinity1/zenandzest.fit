@@ -10,9 +10,9 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
-              <div className="nav-logo-badge" style={{ background: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 50%, #d97706 100%)', color: 'var(--darkest)' }}>O</div>
+              <div className="nav-logo-badge" style={{ background: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 50%, #d97706 100%)', color: 'var(--darkest)' }}>Z</div>
               <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'var(--gold-light)', fontWeight: 700, fontSize: '1.2rem' }}>
-                Ojas Sanctuary
+                My Zen and Zest
               </span>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.85rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
@@ -49,10 +49,11 @@ export default function Footer() {
             <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1rem' }}>
               Resources
             </h4>
-            {[
+{[
               { label: 'Blog', href: '/blog' },
               { label: 'Wellness Tools', href: '/tools' },
               { label: 'Wellness Quiz', href: '/quiz' },
+              { label: 'Knowledge Library', href: '/resources' },
               { label: 'About Us', href: '/about' },
               { label: 'Consult an Expert', href: '/consult' }
             ].map(link => (
@@ -103,13 +104,13 @@ export default function Footer() {
         {/* Disclaimer */}
         <div className="footer-disclaimer">
           <p>
-            <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Disclaimer:</strong> The products and statements on this website have not been evaluated by the Food Safety and Standards Authority of India (FSSAI) for treating, curing, or preventing any disease. Ojas Sanctuary products are food supplements and are not intended to diagnose, treat, cure, or prevent any disease or health condition. Always consult a qualified healthcare professional before starting any supplement regimen. Individual results may vary.
+            <strong style={{ color: 'rgba(255,255,255,0.5)' }}>Disclaimer:</strong> The products and statements on this website have not been evaluated by the Food Safety and Standards Authority of India (FSSAI) for treating, curing, or preventing any disease. My Zen and Zest products are food supplements and are not intended to diagnose, treat, cure, or prevent any disease or health condition. Always consult a qualified healthcare professional before starting any supplement regimen. Individual results may vary.
           </p>
           <p style={{ marginTop: '0.75rem' }}>
-            FSSAI License No.: 10019022003840 · Registered Address: Ojas Sanctuary Pvt. Ltd., Gurugram, Haryana 122002, India
+            FSSAI License No.: 10019022003840 · Registered Address: My Zen and Zest Pvt. Ltd., Gurugram, Haryana 122002, India
           </p>
           <p style={{ marginTop: '0.75rem' }}>
-            © {year} Ojas Sanctuary Pvt. Ltd. All rights reserved. Botanical formulations are compliant with all applicable Indian laws and regulations.
+            © {year} My Zen and Zest Pvt. Ltd. All rights reserved. Botanical formulations are compliant with all applicable Indian laws and regulations.
           </p>
         </div>
       </div>

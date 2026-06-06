@@ -27,9 +27,10 @@ export default function Navbar() {
     setDropdownOpen(false);
   }, [location]);
 
-  // Restructured nav links order: Home, Longevity Hub (dropdown), Tools, Blog, Quiz, Case Studies, The Apothecary
+  // Restructured nav links order: Home, Longevity Hub, Tools, Blog, Quiz, Case Studies, The Apothecary
   const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/longevity-hub', label: 'Longevity Hub' },
     { href: '/tools', label: 'Tools' },
     { href: '/blog', label: 'Blog' },
     { href: '/quiz', label: 'Quiz' },
@@ -69,7 +70,7 @@ export default function Navbar() {
       <nav className="navbar" style={{ background: 'rgba(8, 15, 12, 0.95)', borderBottom: '1px solid rgba(229, 197, 117, 0.15)' }}>
         <div className="container flex-between" style={{ height: 70 }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
-            <div className="nav-logo-badge" style={{ background: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 50%, #d97706 100%)', color: 'var(--darkest)' }}>O</div>
+            <div className="nav-logo-badge" style={{ background: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 50%, #d97706 100%)', color: 'var(--darkest)' }}>Z</div>
             <span style={{
               fontFamily: 'var(--font-serif)',
               fontStyle: 'italic',
@@ -78,7 +79,7 @@ export default function Navbar() {
               color: 'var(--gold-light)',
               letterSpacing: '0.02em'
             }}>
-              Ojas Sanctuary
+              My Zen and Zest
             </span>
           </Link>
 
@@ -94,7 +95,8 @@ export default function Navbar() {
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
-              <button 
+              <Link 
+                href="/longevity-hub"
                 style={{
                   background: 'none',
                   border: 'none',
@@ -105,11 +107,12 @@ export default function Navbar() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.25rem',
-                  padding: '0.5rem 0'
+                  padding: '0.5rem 0',
+                  textDecoration: 'none'
                 }}
               >
                 Longevity Hub <ChevronDown size={14} />
-              </button>
+              </Link>
 
               {dropdownOpen && (
                 <div style={{
@@ -161,7 +164,7 @@ export default function Navbar() {
             </div>
 
             {/* Render rest of navLinks: Tools, Blog, Quiz, Case Studies, The Apothecary */}
-            {navLinks.slice(1).map(link => (
+            {navLinks.slice(1).filter(link => link.href !== '/longevity-hub').map(link => (
               <Link key={link.href} href={link.href} className="nav-link" style={{
                 color: link.href === '/shop' ? 'var(--gold-light)' : 'rgba(255,255,255,0.85)',
                 fontWeight: link.href === '/shop' ? 700 : 600

@@ -1,15 +1,18 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { useEffect } from "react";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import ToolsPage from "./pages/ToolsPage";
+import LongevityHubPage from "./pages/LongevityHubPage";
 import ShopPage from "./pages/ShopPage";
 import QuizPage from "./pages/QuizPage";
 import AboutPage from "./pages/AboutPage";
 import ConsultPage from "./pages/ConsultPage";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
+import ResourcesPage from "./pages/ResourcesPage";
 
 // New clinical pages imports
 import PrakritiTestPage from "./pages/PrakritiTestPage";
@@ -75,10 +78,13 @@ function Router() {
       <Route path="/blog/:id" component={({ params }) => <Layout><BlogDetailPage id={parseInt(params.id)} /></Layout>} />
       <Route path="/case-studies" component={() => <Layout><CaseStudiesPage /></Layout>} />
       <Route path="/tools" component={() => <Layout><ToolsPage /></Layout>} />
+      <Route path="/tools/:id" component={() => <Layout><ToolsPage /></Layout>} />
+      <Route path="/longevity-hub" component={() => <Layout><LongevityHubPage /></Layout>} />
       <Route path="/shop" component={() => <Layout><ShopPage /></Layout>} />
       <Route path="/quiz" component={() => <><Navbar /><QuizPage /><Footer /></>} />
       <Route path="/about" component={() => <Layout><AboutPage /></Layout>} />
       <Route path="/consult" component={() => <Layout><ConsultPage /></Layout>} />
+      <Route path="/resources" component={() => <Layout><ResourcesPage /></Layout>} />
 
       {/* New Longevity Geroscience Routes */}
       <Route path="/prakriti-test" component={() => <Layout><PrakritiTestPage /></Layout>} />
@@ -107,10 +113,21 @@ function Router() {
   );
 }
 
+function ScrollToTop() {
+  const [pathname] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <CartProvider>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+        <ScrollToTop />
         <Router />
       </WouterRouter>
       <CartDrawer />

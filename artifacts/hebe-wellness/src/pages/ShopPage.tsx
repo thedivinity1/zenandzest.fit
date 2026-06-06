@@ -5,6 +5,21 @@ import ProductDrawer from '../components/ProductDrawer';
 
 const categories = ['All', 'Sleep', 'Stress', 'Hair', 'Skin', 'Gut'];
 
+const shopSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are My Zen and Zest products lab certified?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every batch of My Zen and Zest products is tested at NABL accredited laboratories for active phytochemical purity, potency, and safety (clearing all heavy metal testing under 1ppm)."
+      }
+    }
+  ]
+};
+
 const products = [
   {
     name: 'Botanical Sleep Drops',
@@ -123,6 +138,7 @@ export default function ShopPage() {
 
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(shopSchema) }} />
       {/* Hero */}
       <section className="shop-hero" style={{ position: 'relative', overflow: 'hidden' }}>
         <div style={{
@@ -135,8 +151,8 @@ export default function ShopPage() {
           <h1 className="section-title" style={{ marginBottom: '1rem', maxWidth: 600 }}>
             Premium Plant <span className="gold-gradient-text">Botanical Formulations</span>
           </h1>
-          <p className="section-subtitle" style={{ maxWidth: 500, marginBottom: '2rem' }}>
-            Every product is lab-tested, clinically studied, and crafted from the world's most potent plant botanicals.
+          <p className="section-subtitle" style={{ maxWidth: 700, marginBottom: '2rem', lineHeight: 1.8 }}>
+            <strong>Answer-First:</strong> Our premium plant botanical formulations target sleep efficiency, stress recovery, hair vitality, skin resilience, and gut health. Every capsule or tincture is standardized to guarantee active molecular yields, verified by NABL-certified HPLC testing, and clear of heavy metals.
           </p>
           <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
             {[
@@ -253,9 +269,9 @@ export default function ShopPage() {
 
                   {/* Body */}
                   <div style={{ padding: '1.5rem' }}>
-                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 800, color: 'white', marginBottom: '0.5rem' }}>
+                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 800, color: 'white', marginBottom: '0.5rem' }}>
                       {product.name}
-                    </h3>
+                    </h2>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
                       <span style={{ color: 'var(--gold)', fontSize: '0.85rem' }}>
                         {'★'.repeat(Math.floor(product.rating))}
@@ -338,7 +354,7 @@ export default function ShopPage() {
               <ScrollAnimator key={i} className={`stagger-${i + 1}`}>
                 <div>
                   <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>{item.icon}</div>
-                  <h4 style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--gold)', marginBottom: '0.5rem' }}>{item.title}</h4>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--gold)', marginBottom: '0.5rem' }}>{item.title}</h3>
                   <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.65 }}>{item.desc}</p>
                 </div>
               </ScrollAnimator>

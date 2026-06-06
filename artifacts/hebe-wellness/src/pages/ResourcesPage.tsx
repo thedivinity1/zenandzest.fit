@@ -12,7 +12,7 @@ const glossaryTerms = [
   { term: 'DHT (Dihydrotestosterone)', definition: 'A potent androgen derived from testosterone via 5-alpha reductase enzyme. DHT miniaturizes hair follicles causing androgenic alopecia. Plant botanicals like Saw Palmetto and Bhringraj inhibit this enzyme.', category: 'D' },
   { term: 'Endocannabinoid System', definition: 'A complex cell-signaling system throughout the human body involving endogenous cannabinoids, cannabinoid receptors (CB1, CB2), and metabolic enzymes. Regulates mood, sleep, appetite, pain, and immune function.', category: 'E' },
   { term: 'Entourage Effect', definition: 'The synergistic interaction between all compounds in a whole-plant botanical extract, which produces a greater therapeutic effect than isolated single compounds.', category: 'E' },
-  { term: 'FSSAI', definition: 'Food Safety and Standards Authority of India — the regulatory body governing food and food supplement safety and labeling standards in India. All Ojas Sanctuary products are FSSAI compliant.', category: 'F' },
+  { term: 'FSSAI', definition: 'Food Safety and Standards Authority of India — the regulatory body governing food and food supplement safety and labeling standards in India. All My Zen and Zest products are FSSAI compliant.', category: 'F' },
   { term: 'GMP Certification', definition: 'Good Manufacturing Practice — an internationally recognized quality assurance system ensuring products are consistently produced and controlled according to quality standards. Required for pharmaceutical-grade botanical production.', category: 'G' },
   { term: 'HPA Axis', definition: 'Hypothalamic-Pituitary-Adrenal Axis — the body\'s central stress response system. Chronic HPA activation leads to burnout, adrenal fatigue, insomnia, and hormonal dysfunction. Adaptogens directly modulate HPA signaling.', category: 'H' },
   { term: 'Herbal Extract', definition: 'A concentrated preparation made by extracting the active compounds from plant material using solvents (water, alcohol, or supercritical CO2). Standardized extracts guarantee minimum levels of key bioactive compounds.', category: 'H' },
@@ -58,6 +58,21 @@ const videoLibrary = [
   { title: 'The HPA Axis & Burnout Recovery', duration: '28:55', thumbnail: '⚡', category: 'Stress', views: '22.3K' },
 ];
 
+const resourcesSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are the wellness guides in the library free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. All our clinical-grade wellness guides, research citations, and glossaries are 100% free to view and download with no email or registration required."
+      }
+    }
+  ]
+};
+
 export default function ResourcesPage() {
   const [activeSection, setActiveSection] = useState<'guides' | 'research' | 'glossary' | 'video'>('guides');
   const [glossarySearch, setGlossarySearch] = useState('');
@@ -73,6 +88,7 @@ export default function ResourcesPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(resourcesSchema) }} />
       {/* Hero */}
       <section style={{ background: 'linear-gradient(135deg, #0a1a0f 0%, #1a3d2e 50%, #0a1a0f 100%)', padding: '5rem 0 3rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />
@@ -81,8 +97,8 @@ export default function ResourcesPage() {
           <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#fff', marginBottom: '1rem', fontWeight: 900 }}>
             Free Wellness <span style={{ color: 'var(--gold)' }}>Knowledge Library</span>
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '600px', margin: '0 auto', lineHeight: 1.75 }}>
-            Guides, research citations, glossaries, and video content curated by our clinical team. All free. No email required.
+          <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '700px', margin: '0 auto', lineHeight: 1.75 }}>
+            <strong>Answer-First:</strong> Our wellness resources library provides free access to clinical-grade download guides, peer-reviewed research citations, a comprehensive biological and botanical glossary, and an educational video learning library curated by our medical board.
           </p>
         </div>
       </section>

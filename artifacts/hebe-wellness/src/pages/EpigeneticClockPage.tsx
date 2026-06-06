@@ -3,6 +3,19 @@ import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Shield, Sparkles, Activity, Clock } from 'lucide-react';
 
+const epigeneticSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is biological age versus chronological age?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Biological age measures cellular function and DNA methylation patterns through epigenetic clocks like Horvath's method. It reflects how well your cells are aging versus your chronological years. Lifestyle factors including sleep, exercise, diet, stress, and pollutants can accelerate or decelerate biological aging by 1-5 years relative to chronological age."
+    }
+  }]
+};
+
 export default function EpigeneticClockPage() {
   const [chronoAge, setChronoAge] = useState<number>(35);
   const [sleep, setSleep] = useState<number>(7); // hours
@@ -59,6 +72,7 @@ export default function EpigeneticClockPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(epigeneticSchema) }} />
       <div className="container" style={{ maxWidth: '780px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3.5rem' }}>

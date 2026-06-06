@@ -1,5 +1,18 @@
 import ScrollAnimator from '../components/ScrollAnimator';
 
+const dhtSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How does DHT cause hair loss and how can it be blocked naturally?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dihydrotestosterone (DHT) miniaturizes hair follicles in 95% of androgenic alopecia cases by binding to androgen receptors at the scalp. Natural 5α-reductase inhibitors like standardized Saw Palmetto, Eclipta Alba, and Rosemary Carnosic Acid block DHT conversion and protect follicle shaft diameter."
+    }
+  }]
+};
+
 const mechanisms = [
   {
     title: '1. 5-Alpha Reductase Inhibition',
@@ -21,6 +34,7 @@ const mechanisms = [
 export default function DhtBlockPage() {
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dhtSchema) }} />
       <div className="container" style={{ maxWidth: '800px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -87,7 +101,7 @@ export default function DhtBlockPage() {
                 </thead>
                 <tbody>
                   {[
-                    { type: 'Ojas Sanctuary Hair Vitality Elixir', density: '20:1 Bhringraj + 5% Carnosic Acid', block: 'High (84% inhibition)', densityChange: '+18.2% (Clinically Measured)' },
+                    { type: 'My Zen and Zest Hair Vitality Elixir', density: '20:1 Bhringraj + 5% Carnosic Acid', block: 'High (84% inhibition)', densityChange: '+18.2% (Clinically Measured)' },
                     { type: 'Store-Bought Rosemary Oil', density: 'Unstandardized lipids (<0.5%)', block: 'Minimal (<12% inhibition)', densityChange: '+1.5% (No change)' },
                     { type: 'Generic Raw Herbal Powder', density: 'Raw roots (<0.1% active)', block: 'Negligible (Trace block)', densityChange: '+0.4% (No change)' }
                   ].map((row, idx) => (

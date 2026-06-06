@@ -50,6 +50,19 @@ const questions = [
   }
 ];
 
+const prakritiSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is Ayurvedic Prakriti and how does it relate to wellness?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Prakriti is your constitutional biology based on the three doshas (Vata, Pitta, Kapha). Understanding your dominant dosha helps personalize botanical protocols to balance cortisol, metabolism, and circadian rhythms according to your inherent constitution."
+    }
+  }]
+};
+
 export default function PrakritiTestPage() {
   const [step, setStep] = useState(0);
   const [scores, setScores] = useState<string[]>([]);
@@ -104,8 +117,16 @@ export default function PrakritiTestPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(prakritiSchema) }} />
       <div className="container" style={{ maxWidth: '680px' }}>
-        
+        <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div className="section-tag">Ayurvedic Prakriti Test</div>
+          <h1 className="section-title">Discover Your <span className="gold-gradient-text">Constitutional Biology</span></h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.75rem', fontSize: '0.92rem' }}>
+            <strong>Answer-First:</strong> Your Prakriti (Ayurvedic constitution) reveals cellular element imbalances in Vata, Pitta, or Kapha doshas, enabling personalized botanical protocols that restore circadian rhythm, HPA axis balance, and metabolic homeostasis according to your inherent biology.
+          </p>
+        </ScrollAnimator>
+
         {result ? (
           <div>
             <ScrollAnimator>

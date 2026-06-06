@@ -2,6 +2,19 @@ import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { Calculator, Award, Info, AlertTriangle } from 'lucide-react';
 
+const dosageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "How do you calculate the right botanical supplement dosage?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Compare raw powder active percentages (typically 0.1-1.5%) with standardized extract percentages (typically 5-50%). Use the formula: equivalent extract dose = (raw grams × 1000 × raw percentage) ÷ extract percentage. Always stay below danger thresholds and verify therapeutic windows with NABL-certified HPLC validation."
+    }
+  }]
+};
+
 interface HerbDosageDetail {
   name: string;
   activeBioactive: string;
@@ -54,13 +67,14 @@ export default function BotanicalDosagePage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dosageSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Molecular Potency & Safety</div>
           <h1 className="section-title">Molecular Potency <span className="gold-gradient-text">Dose Auditor</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
-            Determine active molecular yields. Compare generic agricultural powders with clinical-grade standardized extracts according to USP standards.
+            <strong>Answer-First:</strong> Active botanical dosage calculations compare raw plant powders (0.1–1.5% active yields) with standardized extracts (5–50% purity levels). Standardizing ensures consistent, therapeutic dosages without risk of toxicity or heavy metal exposure.
           </p>
         </ScrollAnimator>
 
@@ -103,9 +117,9 @@ export default function BotanicalDosagePage() {
 
               {/* Calculations Output */}
               <div style={{ background: 'rgba(201,168,76,0.05)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', marginBottom: '1.5rem' }}>
-                <h4 style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+                <h3 style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1rem' }}>
                   Audited Molecular Yields
-                </h4>
+                </h3>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.9rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
