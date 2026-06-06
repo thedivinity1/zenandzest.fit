@@ -1,3 +1,7 @@
+# AI Agents & LLM Discovery Context
+# LLM Context: https://myzenandzest.com/llms.txt
+# AI Directives: https://myzenandzest.com/ai.txt
+
 User-agent: PerplexityBot
 Allow: /
 
