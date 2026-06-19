@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 
 const mitochondriaSchema = {

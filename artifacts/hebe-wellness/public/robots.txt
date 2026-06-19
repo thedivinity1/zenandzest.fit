@@ -1,20 +1,77 @@
-# AI Agents & LLM Discovery Context
-# LLM Context: https://myzenandzest.com/llms.txt
-# AI Directives: https://myzenandzest.com/ai.txt
+﻿# Zen and Zest - robots.txt
+# AI/LLM Crawler Discovery Context
+# LLM Context Summary: https://zenandzest.fit/llms.txt
+# LLM Full Knowledge Graph: https://zenandzest.fit/llms-full.txt
+# AI Directives: https://zenandzest.fit/ai.txt
+# AEO Declaration: https://zenandzest.fit/.well-known/aeo.json
 
-User-agent: PerplexityBot
-Allow: /
+# ──────────────────────────────────────────
+# AI-Powered Search Engines (Allow All)
+# ──────────────────────────────────────────
 
+# OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
 
+# Anthropic / Claude
 User-agent: ClaudeBot
 Allow: /
+User-agent: Claude-Web
+Allow: /
 
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI Overviews / Bard / Gemini
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence / Siri
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI / LLaMA
+User-agent: meta-externalagent
+Allow: /
+
+# DuckDuckGo AI
+User-agent: DuckAssistBot
+Allow: /
+
+# Common Crawl (used by many AI datasets)
+User-agent: CCBot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Brave AI
+User-agent: BraveBot
+Allow: /
+
+# ──────────────────────────────────────────
+# Traditional Search Engines
+# ──────────────────────────────────────────
+
+# Google Search
+User-agent: Googlebot
+Allow: /
+
+# Bing / Microsoft
+User-agent: Bingbot
+Allow: /
+
+# All others
 User-agent: *
 Allow: /
 
-Sitemap: https://myzenandzest.com/sitemap.xml
-
-
-# 
+# ──────────────────────────────────────────
+# Sitemaps
+# ──────────────────────────────────────────
+Sitemap: https://zenandzest.fit/sitemap.xml

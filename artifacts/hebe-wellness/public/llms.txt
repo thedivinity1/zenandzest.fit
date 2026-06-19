@@ -1,10 +1,10 @@
-# My Zen and Zest
+﻿# Zen and Zest
 
-> My Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.
+> Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.
 
 ## About Us
 
-My Zen and Zest is dedicated to providing science-backed insights and tools for extending healthspan, optimizing internal biological rhythms, and achieving skin resilience. Our methodology pivots away from superficial "anti-aging" approaches to focus on cellular skin health, HPA axis regulation, and preventative beauty.
+Zen and Zest is dedicated to providing science-backed insights and tools for extending healthspan, optimizing internal biological rhythms, and achieving skin resilience. Our methodology pivots away from superficial "anti-aging" approaches to focus on cellular skin health, HPA axis regulation, and preventative beauty.
 
 ## Core Entities & Concepts
 
@@ -34,6 +34,7 @@ My Zen and Zest is dedicated to providing science-backed insights and tools for 
 ## Tools
 
 ### Assessment Calculators
+- **Longevity Hub** (/longevity-hub): Central index of all 20+ clinical calculators, tools, and diagnostic planners — the primary entry point for wellness assessment
 - **Circadian Planner** (/circadian-planner): Personalized SCN pacemaker timing windows
 - **HPA Burnout Analyzer** (/hpa-burnout): Diurnal cortisol stage assessment (I-III)
 - **Mitochondrial ATP Calculator** (/mitochondria-tool): Cellular energy efficiency scoring

@@ -3,9 +3,13 @@ import { Link } from 'wouter';
 import { useCart } from '../context/CartContext';
 import GeoOptimizer from '../components/GeoOptimizer';
 import { AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
+import { useTheme } from '../context/ThemeContext';
 
 /* ===== SCROLL REVEAL ===== */
 function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -34,8 +38,8 @@ const heroSlides = [
     secondaryCta: 'Take the Sleep Quiz',
     secondaryLink: '/quiz',
     accent: 'linear-gradient(135deg, #e5c575 0%, #c9a84c 100%)',
-    glowColor: 'rgba(229, 197, 117, 0.12)',
-    bgGradient: 'radial-gradient(ellipse at 30% 50%, rgba(30, 60, 40, 0.5) 0%, rgba(8, 15, 12, 0.95) 70%)',
+    glowColorDark: 'rgba(229, 197, 117, 0.12)', glowColorLight: 'rgba(251, 191, 36, 0.35)',
+    bgGradientDark: 'radial-gradient(ellipse at 30% 50%, rgba(30, 60, 40, 0.5) 0%, rgba(8, 15, 12, 0.95) 70%)', bgGradientLight: 'radial-gradient(ellipse at 30% 50%, rgba(16, 185, 129, 0.15) 0%, rgba(255, 255, 255, 0.9) 70%)',
     icon: '🌙',
     stat1: { num: '72%', label: 'Better Sleep Onset' },
     stat2: { num: '28%', label: 'Cortisol Reduction' },
@@ -55,8 +59,8 @@ const heroSlides = [
     secondaryCta: 'Find Your Skin Protocol',
     secondaryLink: '/quiz',
     accent: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-    glowColor: 'rgba(245, 158, 11, 0.12)',
-    bgGradient: 'radial-gradient(ellipse at 70% 40%, rgba(60, 30, 10, 0.55) 0%, rgba(8, 15, 12, 0.95) 70%)',
+    glowColorDark: 'rgba(245, 158, 11, 0.12)', glowColorLight: 'rgba(251, 113, 133, 0.3)',
+    bgGradientDark: 'radial-gradient(ellipse at 70% 40%, rgba(60, 30, 10, 0.55) 0%, rgba(8, 15, 12, 0.95) 70%)', bgGradientLight: 'radial-gradient(ellipse at 70% 40%, rgba(245, 158, 11, 0.15) 0%, rgba(255, 255, 255, 0.9) 70%)',
     icon: '✨',
     stat1: { num: '34%', label: 'Brighter Skin Tone' },
     stat2: { num: '6 Weeks', label: 'To Visible Results' },
@@ -76,8 +80,8 @@ const heroSlides = [
     secondaryCta: 'Gut Health Assessment',
     secondaryLink: '/quiz',
     accent: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-    glowColor: 'rgba(16, 185, 129, 0.12)',
-    bgGradient: 'radial-gradient(ellipse at 50% 60%, rgba(10, 40, 25, 0.55) 0%, rgba(8, 15, 12, 0.95) 70%)',
+    glowColorDark: 'rgba(16, 185, 129, 0.12)', glowColorLight: 'rgba(52, 211, 153, 0.35)',
+    bgGradientDark: 'radial-gradient(ellipse at 50% 60%, rgba(10, 40, 25, 0.55) 0%, rgba(8, 15, 12, 0.95) 70%)', bgGradientLight: 'radial-gradient(ellipse at 50% 60%, rgba(14, 165, 233, 0.15) 0%, rgba(255, 255, 255, 0.9) 70%)',
     icon: '🌿',
     stat1: { num: '95%', label: 'Serotonin in Your Gut' },
     stat2: { num: '3 Weeks', label: 'Microbiome Shift' },
@@ -377,12 +381,17 @@ const cortisolBiomarkerData = [
 ];
 
 export default function HomePage() {
+  const { isDark } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slideAnimating, setSlideAnimating] = useState(false);
   const [activeTab, setActiveTab] = useState<'all' | 'sleep' | 'neuro' | 'gut'>('all');
   const [flippedProduct, setFlippedProduct] = useState<number | null>(null);
   const [selectedConcern, setSelectedConcern] = useState<'sleep' | 'burnout' | 'hair' | 'skin' | 'gut'>('sleep');
   const { addToCart, setCartOpen } = useCart();
+
+  // ── Theme-aware background helpers ───────────────────────────────────────
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   
   // Circadian Simulator
   const [sunExposure, setSunExposure] = useState(15);
@@ -425,18 +434,18 @@ export default function HomePage() {
   ];
 
   return (
-    <div style={{ background: 'var(--section-void)', color: 'white', minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ background: bg('#030405', '#f4ede4'), color: fg(fg('white', '#0f172a'), '#0f172a'), minHeight: '100vh', overflowX: 'hidden' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "My Zen and Zest - Skin Longevity & Circadian Mastery",
+        "name": "Zen and Zest - Skin Longevity & Circadian Mastery",
         "description": "An authority in skin longevity, circadian rhythm mastery, and holistic wellness. Science-backed insights into HPA axis regulation and preventative beauty."
       }) }} />
 
       {/* ===== ANNOUNCEMENT TICKER ===== */}
       <div style={{
         borderBottom: '1px solid rgba(229, 197, 117, 0.12)',
-        background: 'rgba(10, 26, 15, 0.97)',
+        background: bg('rgba(10, 26, 15, 0.97)', 'linear-gradient(90deg, #1a3d28, #1a5c3a)'),
         padding: '0.65rem 0',
         textAlign: 'center',
         fontSize: '0.72rem',
@@ -457,7 +466,7 @@ export default function HomePage() {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        background: slide.bgGradient,
+        background: bg(slide.bgGradientDark, slide.bgGradientLight),
         transition: 'background 0.8s ease'
       }}>
         {/* Ambient background glow orbs */}
@@ -468,7 +477,7 @@ export default function HomePage() {
             position: 'absolute', top: '20%', left: '10%',
             width: 500, height: 500,
             borderRadius: '50%',
-            background: slide.glowColor,
+            background: bg(slide.glowColorDark, slide.glowColorLight),
             filter: 'blur(80px)',
             animation: 'float 8s ease-in-out infinite',
             transition: 'background 1s ease'
@@ -495,7 +504,7 @@ export default function HomePage() {
         <div style={{
           position: 'absolute', top: '12%', right: '5%',
           width: 220,
-          background: 'rgba(255,255,255,0.04)',
+          background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'),
           backdropFilter: 'blur(20px)',
           border: '1px solid rgba(255,255,255,0.1)',
           borderRadius: 20,
@@ -515,7 +524,7 @@ export default function HomePage() {
             }} onClick={() => goToSlide(i)}>
               <span style={{ fontSize: '1.2rem' }}>{s.icon}</span>
               <div>
-                <div style={{ fontSize: '0.68rem', color: i === currentSlide ? slide.color : 'rgba(255,255,255,0.4)', fontWeight: 700, transition: 'color 0.3s' }}>
+                <div style={{ fontSize: '0.68rem', color: i === currentSlide ? slide.color : fg('rgba(255,255,255,0.4)', '#64748b'), fontWeight: 700, transition: 'color 0.3s' }}>
                   {s.badge}
                 </div>
               </div>
@@ -553,20 +562,18 @@ export default function HomePage() {
               fontSize: 'clamp(2.5rem, 6vw, 4.8rem)',
               lineHeight: 1.1,
               fontWeight: 900,
-              color: 'white',
+              color: fg(fg('white', '#0f172a'), '#0f172a'),
               marginBottom: '0.5rem',
               letterSpacing: '-0.02em'
             }}>
               {slide.headline}
               <br />
-              <span style={{
-                backgroundImage: slide.accent,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                color: 'transparent',
-                display: 'inline-block'
-              }}>
+              <span 
+                className="hero-text-gradient text-gradient-premium"
+                style={{
+                  backgroundImage: slide.accent
+                }}
+              >
                 {slide.headlineAccent}
               </span>
             </h1>
@@ -575,7 +582,7 @@ export default function HomePage() {
               fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
               fontWeight: 400,
               fontStyle: 'italic',
-              color: 'rgba(255,255,255,0.5)',
+              color: fg('rgba(255,255,255,0.5)', '#475569'),
               marginBottom: '2rem'
             }}>
               {slide.subheadline}
@@ -583,7 +590,7 @@ export default function HomePage() {
 
             {/* Body copy */}
             <p style={{
-              color: 'rgba(255,255,255,0.75)',
+              color: fg('rgba(255,255,255,0.75)', '#475569'),
               fontSize: 'clamp(1rem, 2vw, 1.15rem)',
               lineHeight: 1.8,
               maxWidth: 620,
@@ -612,10 +619,10 @@ export default function HomePage() {
                 {slide.cta} →
               </Link>
               <Link href={slide.secondaryLink} style={{
-                background: 'rgba(255,255,255,0.06)',
+                background: bg('rgba(255,255,255,0.06)', 'rgba(26,18,8,0.05)'),
                 backdropFilter: 'blur(12px)',
                 border: '1px solid rgba(255,255,255,0.15)',
-                color: 'white',
+                color: fg(fg('white', '#0f172a'), '#0f172a'),
                 padding: '0.95rem 2.25rem',
                 borderRadius: 100,
                 fontWeight: 700,
@@ -644,7 +651,7 @@ export default function HomePage() {
                   }}>
                     {stat.num}
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <div style={{ fontSize: '0.75rem', color: fg('rgba(255,255,255,0.45)', '#475569'), fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     {stat.label}
                   </div>
                 </div>
@@ -680,7 +687,7 @@ export default function HomePage() {
         {/* Progress bar */}
         <div style={{
           position: 'absolute', bottom: 0, left: 0, right: 0, height: 2,
-          background: 'rgba(255,255,255,0.06)'
+          background: bg('rgba(255,255,255,0.06)', 'rgba(26,18,8,0.05)')
         }}>
           <div style={{
             height: '100%',
@@ -693,7 +700,7 @@ export default function HomePage() {
 
       {/* ===== TRUST & METRICS BAR ===== */}
       <section style={{
-        background: 'linear-gradient(135deg, #06081a 0%, #0a0c1f 50%, #060814 100%)',
+        background: bg('linear-gradient(135deg, #06081a 0%, #0a0c1f 50%, #060814 100%)', 'radial-gradient(ellipse 70% 60% at 20% 50%, rgba(26,92,58,0.2) 0%, transparent 60%), linear-gradient(135deg, #122e1e 0%, #1a5c3a 55%, #235e40 100%)'),
         borderTop: '1px solid rgba(99,102,241,0.18)',
         borderBottom: '1px solid rgba(99,102,241,0.15)',
         padding: '2.5rem 0',
@@ -723,7 +730,7 @@ export default function HomePage() {
                     display: 'block',
                     marginBottom: '0.25rem'
                   }}>{metric.num}</strong>
-                  <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{metric.label}</span>
+                  <span style={{ fontSize: '0.8rem', color: fg('rgba(255,255,255,0.5)', '#475569'), textTransform: 'uppercase', letterSpacing: '0.05em' }}>{metric.label}</span>
                 </div>
               </Reveal>
             ))}
@@ -733,7 +740,7 @@ export default function HomePage() {
 
       {/* ===== CTA STRIP 1 — QUIZ INVITE ===== */}
       <section style={{
-        background: 'linear-gradient(135deg, #0e0a02 0%, #1c1304 60%, #0a0800 100%)',
+        background: bg('linear-gradient(135deg, #0e0a02 0%, #1c1304 60%, #0a0800 100%)', 'radial-gradient(ellipse 80% 50% at 75% 30%, rgba(196,127,23,0.13) 0%, transparent 60%), linear-gradient(150deg, #fef9ee 0%, #faf3df 100%)'),
         borderTop: '1px solid rgba(245,158,11,0.12)',
         borderBottom: '1px solid rgba(245,158,11,0.12)',
         padding: '3.5rem 0'
@@ -742,10 +749,10 @@ export default function HomePage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
             <div>
               <div style={{ fontSize: '0.72rem', color: '#f59e0b', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.5rem' }}>🎯 FREE 2-MINUTE ASSESSMENT</div>
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.2rem, 2.5vw, 1.7rem)', fontWeight: 900, color: 'white', lineHeight: 1.2, marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.2rem, 2.5vw, 1.7rem)', fontWeight: 900, color: fg(fg('white', '#0f172a'), '#0f172a'), lineHeight: 1.2, marginBottom: '0.5rem' }}>
                 Not Sure Where to Start?
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: 480 }}>
+              <p style={{ color: fg('rgba(255,255,255,0.55)', '#334155'), fontSize: '0.9rem', lineHeight: 1.6, maxWidth: 480 }}>
                 Take our personalised wellness quiz. In 2 minutes, you'll know exactly which herbs and protocols your body needs most right now.
               </p>
             </div>
@@ -773,7 +780,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== WELLNESS CONCERN EXPLORER ===== */}
-      <section style={{ background: 'linear-gradient(180deg, #040609 0%, #060814 40%, #080a18 100%)', padding: '6rem 0 4rem 0', borderBottom: '1px solid rgba(99,102,241,0.1)' }}>
+      <section style={{ background: bg('linear-gradient(180deg, #040609 0%, #060814 40%, #080a18 100%)', 'radial-gradient(ellipse 80% 50% at 15% 30%, rgba(26,92,58,0.07) 0%, transparent 60%), linear-gradient(160deg, #fefaf4 0%, #f4ede4 40%, #edf7f1 100%)'), padding: '6rem 0 4rem 0', borderBottom: '1px solid rgba(99,102,241,0.1)' }}>
         <div className="container">
           <Reveal>
             <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -781,7 +788,7 @@ export default function HomePage() {
               <h2 className="section-title">
                 Tell Us What You're <span className="gold-gradient-text">Struggling With</span>
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '580px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
+              <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '580px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
                 <strong>Answer-First:</strong> Chronic symptoms like burnout, dull skin, and poor sleep stem from HPA axis dysfunction and cellular oxidative stress. Choose a concern below, and we'll show you exactly how nature and chronobiology can resolve it at the root.
               </p>
             </div>
@@ -823,7 +830,7 @@ export default function HomePage() {
               display: 'grid',
               gridTemplateColumns: '1.2fr 1fr',
               gap: '3rem',
-              background: 'rgba(255,255,255,0.015)',
+              background: bg('rgba(255,255,255,0.015)', 'rgba(255,255,255,0.8)'),
               border: '1px solid rgba(229,197,117,0.15)',
               borderRadius: 24,
               padding: '2.5rem',
@@ -833,10 +840,10 @@ export default function HomePage() {
                 <span style={{ fontSize: '0.7rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.5rem' }}>
                   WHAT'S REALLY HAPPENING
                 </span>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', fontWeight: 800, marginBottom: '1rem', lineHeight: 1.3 }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg(fg('white', '#0f172a'), '#0f172a'), fontWeight: 800, marginBottom: '1rem', lineHeight: 1.3 }}>
                   {concern.title}
                 </h3>
-                <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.93rem', lineHeight: 1.8, marginBottom: '2rem' }}>
+                <p style={{ color: fg('rgba(255,255,255,0.75)', '#475569'), fontSize: '0.93rem', lineHeight: 1.8, marginBottom: '2rem' }}>
                   {concern.pathway}
                 </p>
                 
@@ -844,12 +851,12 @@ export default function HomePage() {
                   <span style={{ fontSize: '0.7rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.5rem' }}>
                     🔬 WHAT THE RESEARCH SHOWS
                   </span>
-                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.7, fontStyle: 'italic' }}>"{concern.study}"</p>
+                  <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.85rem', lineHeight: 1.7, fontStyle: 'italic' }}>"{concern.study}"</p>
                 </div>
               </div>
 
               <div style={{
-                background: 'rgba(0,0,0,0.3)',
+                background: bg('rgba(0,0,0,0.3)', 'rgba(255,255,255,0.8)'),
                 border: '1px solid rgba(255,255,255,0.06)',
                 borderRadius: 16,
                 padding: '2rem',
@@ -861,13 +868,13 @@ export default function HomePage() {
                 <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>
                   {selectedConcern === 'sleep' ? '🌙' : selectedConcern === 'burnout' ? '⚡' : selectedConcern === 'hair' ? '✨' : selectedConcern === 'skin' ? '🌸' : '🌿'}
                 </div>
-                <h4 style={{ fontFamily: 'var(--font-serif)', color: 'white', fontSize: '1.1rem', fontWeight: 800, marginBottom: '0.5rem' }}>
+                <h4 style={{ fontFamily: 'var(--font-serif)', color: fg(fg('white', '#0f172a'), '#0f172a'), fontSize: '1.1rem', fontWeight: 800, marginBottom: '0.5rem' }}>
                   Our Recommended Remedy
                 </h4>
                 <p style={{ color: 'var(--gold-light)', fontSize: '0.88rem', fontWeight: 600, marginBottom: '0.75rem' }}>
                   {concern.stack}
                 </p>
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.78rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
+                <p style={{ color: fg('rgba(255,255,255,0.45)', '#475569'), fontSize: '0.78rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
                   Crafted from 100% natural plants, doctor-reviewed and clinically tested for real results.
                 </p>
                 <button
@@ -898,7 +905,7 @@ export default function HomePage() {
 
       {/* ===== CTA STRIP 2 — LONGEVITY HUB ===== */}
       <section style={{
-        background: 'linear-gradient(135deg, #050a08 0%, #071510 50%, #030705 100%)',
+        background: bg('linear-gradient(135deg, #050a08 0%, #071510 50%, #030705 100%)', 'radial-gradient(ellipse 75% 50% at 80% 20%, rgba(26,92,58,0.09) 0%, transparent 55%), linear-gradient(180deg, #e8f4ee 0%, #f4ede4 100%)'),
         borderTop: '1px solid rgba(16,185,129,0.1)',
         borderBottom: '1px solid rgba(16,185,129,0.1)',
         padding: '3.5rem 0'
@@ -909,7 +916,7 @@ export default function HomePage() {
               <div style={{ fontSize: '3rem', filter: 'drop-shadow(0 0 20px rgba(16,185,129,0.4))' }}>⏳</div>
               <div>
                 <div style={{ fontSize: '0.72rem', color: '#10b981', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>🌿 LONGEVITY HUB</div>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', fontWeight: 900, color: 'white', lineHeight: 1.2 }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', fontWeight: 900, color: fg(fg('white', '#0f172a'), '#0f172a'), lineHeight: 1.2 }}>
                   Science-Backed Protocols to Live Longer, Better
                 </h3>
               </div>
@@ -949,7 +956,7 @@ export default function HomePage() {
               <h2 className="section-title">
                 Real Science, <span className="gold-gradient-text">Simply Explained</span>
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '600px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
+              <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '600px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
                 No confusing jargon. Just honest, evidence-based wellness writing that helps you understand your body and make better choices every day.
               </p>
             </div>
@@ -962,7 +969,7 @@ export default function HomePage() {
                 display: 'grid',
                 gridTemplateColumns: '1.3fr 1fr',
                 gap: '0',
-                background: 'linear-gradient(135deg, rgba(13,36,24,0.8) 0%, rgba(21,62,42,0.6) 100%)',
+                background: bg('linear-gradient(135deg, rgba(13,36,24,0.8) 0%, rgba(21,62,42,0.6) 100%)', '#ffffff'),
                 border: '1px solid rgba(229,197,117,0.2)',
                 borderRadius: 24,
                 marginBottom: '2.5rem',
@@ -982,22 +989,22 @@ export default function HomePage() {
                     <span style={{ background: 'rgba(229,197,117,0.12)', border: '1px solid rgba(229,197,117,0.25)', borderRadius: 100, padding: '0.3rem 0.9rem', fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                       🌙 Sleep & Hormones
                     </span>
-                    <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)' }}>7 min read</span>
+                    <span style={{ fontSize: '0.75rem', color: fg('rgba(255,255,255,0.35)', '#64748b') }}>7 min read</span>
                   </div>
                   
                   <h3 style={{
                     fontFamily: 'var(--font-serif)',
                     fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)',
                     lineHeight: 1.25,
-                    fontWeight: 900, color: 'white', marginBottom: '0.5rem'
+                    fontWeight: 900, color: fg(fg('white', '#0f172a'), '#0f172a'), marginBottom: '0.5rem'
                   }}>
                     Why You Wake Up at 3 AM
                   </h3>
-                  <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: 'rgba(255,255,255,0.5)', fontStyle: 'italic', marginBottom: '1.25rem' }}>
+                  <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: fg('rgba(255,255,255,0.5)', '#475569'), fontStyle: 'italic', marginBottom: '1.25rem' }}>
                     The hidden cortisol secret most doctors don't mention
                   </p>
 
-                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.93rem', lineHeight: 1.75, marginBottom: '2rem' }}>
+                  <p style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.93rem', lineHeight: 1.75, marginBottom: '2rem' }}>
                     Waking at 2–4 AM is not bad luck — it's your stress hormones spiking at the wrong time. Learn how your body clock works, and the gentle plant-based remedies that help it reset naturally and permanently.
                   </p>
 
@@ -1005,7 +1012,7 @@ export default function HomePage() {
                     <div style={{ fontSize: '0.78rem', color: 'var(--gold-light)', fontWeight: 700, marginBottom: '0.5rem' }}>
                       ✨ What you'll learn in this article:
                     </div>
-                    <ul style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.65)', paddingLeft: '1rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                    <ul style={{ fontSize: '0.8rem', color: fg('rgba(255,255,255,0.65)', '#334155'), paddingLeft: '1rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
                       <li>Why 3 AM waking is almost always a hormone problem, not a sleep problem</li>
                       <li>How Ashwagandha reduces stress hormones by up to 28% in clinical trials</li>
                       <li>The simple evening routine that resets your sleep within 7 days</li>
@@ -1015,14 +1022,14 @@ export default function HomePage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(229,197,117,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(229,197,117,0.3)', fontSize: '1.1rem' }}>👩‍⚕️</div>
                     <div>
-                      <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'white' }}>Dr. Sarah Chen, MD</div>
-                      <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Stanford Integrative Endocrinologist</div>
+                      <div style={{ fontSize: '0.85rem', fontWeight: 700, color: fg(fg('white', '#0f172a'), '#0f172a') }}>Dr. Sarah Chen, MD</div>
+                      <div style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.4)', '#475569') }}>Stanford Integrative Endocrinologist</div>
                     </div>
                   </div>
                 </div>
 
                 <div style={{
-                  background: 'rgba(0,0,0,0.3)',
+                  background: bg('rgba(0,0,0,0.3)', 'rgba(255,255,255,0.8)'),
                   display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
                   padding: '3rem 2rem', gap: '1.5rem', borderLeft: '1px solid rgba(255,255,255,0.05)'
                 }}>
@@ -1031,8 +1038,8 @@ export default function HomePage() {
                     <div style={{ fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
                       Recommended Protocol
                     </div>
-                    <p style={{ fontFamily: 'var(--font-serif)', color: 'white', fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem' }}>Botanical Sleep Drops</p>
-                    <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.78rem', lineHeight: 1.5 }}>Ashwagandha KSM-66 · Brahmi · Passionflower</p>
+                    <p style={{ fontFamily: 'var(--font-serif)', color: fg(fg('white', '#0f172a'), '#0f172a'), fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem' }}>Botanical Sleep Drops</p>
+                    <p style={{ color: fg('rgba(255,255,255,0.45)', '#475569'), fontSize: '0.78rem', lineHeight: 1.5 }}>Ashwagandha KSM-66 · Brahmi · Passionflower</p>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%' }}>
                     <span style={{ display: 'block', textAlign: 'center', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(229,197,117,0.25)', color: 'var(--gold-light)', borderRadius: 100, padding: '0.7rem 1rem', fontSize: '0.82rem', fontWeight: 700 }}>
@@ -1050,7 +1057,7 @@ export default function HomePage() {
               <Reveal key={idx} delay={idx * 0.1}>
                 <Link href={`/blog/${article.id}`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
                   <div style={{
-                    background: article.bgGradient,
+                    background: bg(article.bgGradient, '#ffffff'),
                     border: `1px solid ${article.borderColor}`,
                     borderRadius: 20,
                     padding: '1.75rem',
@@ -1081,22 +1088,22 @@ export default function HomePage() {
                         </span>
                       </div>
                       
-                      <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'white', fontWeight: 800, marginBottom: '0.35rem', lineHeight: 1.3 }}>
+                      <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: fg(fg('white', '#0f172a'), '#0f172a'), fontWeight: 800, marginBottom: '0.35rem', lineHeight: 1.3 }}>
                         {article.title}
                       </h4>
                       <p style={{ fontFamily: 'var(--font-serif)', fontSize: '0.82rem', color: `${article.color}99`, fontStyle: 'italic', marginBottom: '0.85rem' }}>
                         {article.subtitle}
                       </p>
                       
-                      <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>
+                      <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.82rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>
                         {article.excerpt}
                       </p>
                     </div>
 
                     <div style={{ borderTop: `1px solid ${article.color}18`, paddingTop: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>{article.author}</div>
-                        <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.3)' }}>{article.readTime}</div>
+                        <div style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.5)', '#475569'), fontWeight: 600 }}>{article.author}</div>
+                        <div style={{ fontSize: '0.65rem', color: fg('rgba(255,255,255,0.3)', '#94a3b8') }}>{article.readTime}</div>
                       </div>
                       <span style={{ color: article.color, fontSize: '0.8rem', fontWeight: 700 }}>
                         Read →
@@ -1134,7 +1141,7 @@ export default function HomePage() {
 
       {/* ===== CTA STRIP 3 — APOTHECARY TEASER ===== */}
       <section style={{
-        background: 'linear-gradient(135deg, #0c0800 0%, #1a1000 50%, #0e0900 100%)',
+        background: bg('linear-gradient(135deg, #0c0800 0%, #1a1000 50%, #0e0900 100%)', 'radial-gradient(ellipse 80% 50% at 15% 30%, rgba(196,127,23,0.09) 0%, transparent 55%), linear-gradient(180deg, #fdf8ec 0%, #f4ede4 100%)'),
         padding: '4rem 0',
         borderTop: '1px solid rgba(201,168,76,0.15)',
         borderBottom: '1px solid rgba(201,168,76,0.12)',
@@ -1148,10 +1155,10 @@ export default function HomePage() {
         <div className="container" style={{ position: 'relative' }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '0.75rem' }}>🏺 THE APOTHECARY IS OPEN</div>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 900, color: 'white', lineHeight: 1.2, marginBottom: '0.75rem' }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 900, color: fg(fg('white', '#0f172a'), '#0f172a'), lineHeight: 1.2, marginBottom: '0.75rem' }}>
               Every Remedy. Clinically Verified. Naturally Pure.
             </h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.92rem', maxWidth: 520, margin: '0 auto 2rem', lineHeight: 1.7 }}>
+            <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.92rem', maxWidth: 520, margin: '0 auto 2rem', lineHeight: 1.7 }}>
               Doctor-formulated botanical blends made with third-party tested, pharmaceutical-grade herbs. No fillers. No synthetic shortcuts.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -1173,9 +1180,9 @@ export default function HomePage() {
                 🏺 Shop The Apothecary
               </Link>
               <Link href="/case-studies" style={{
-                background: 'rgba(255,255,255,0.04)',
+                background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'),
                 border: '1px solid rgba(255,255,255,0.12)',
-                color: 'rgba(255,255,255,0.75)',
+                color: fg('rgba(255,255,255,0.75)', '#475569'),
                 padding: '0.95rem 2rem',
                 borderRadius: 100,
                 fontWeight: 700,
@@ -1195,7 +1202,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== SHOP THE APOTHECARY — PRODUCT GRID ===== */}
-      <section style={{ background: 'linear-gradient(180deg, #060509 0%, #09060f 40%, #0c0714 100%)', padding: '7rem 0', borderTop: '1px solid rgba(139,92,246,0.1)' }}>
+      <section style={{ background: bg('linear-gradient(180deg, #060509 0%, #09060f 40%, #0c0714 100%)', 'radial-gradient(ellipse 75% 55% at 20% 60%, rgba(124,58,237,0.05) 0%, transparent 55%), linear-gradient(160deg, #fdfaf4 0%, #f4ede4 100%)'), padding: '7rem 0', borderTop: '1px solid rgba(139,92,246,0.1)' }}>
         <div className="container">
           
           <Reveal>
@@ -1204,7 +1211,7 @@ export default function HomePage() {
               <h2 className="section-title">
                 Nature's Best, <span className="gold-gradient-text">Scientifically Verified</span>
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '580px', margin: '0 auto', fontSize: '0.95rem', lineHeight: 1.7 }}>
+              <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '580px', margin: '0 auto', fontSize: '0.95rem', lineHeight: 1.7 }}>
                 Every product in our apothecary is made from 100% natural botanicals, third-party lab tested, and doctor-formulated. Hover over any card to see exactly what's inside.
               </p>
             </div>
@@ -1220,15 +1227,15 @@ export default function HomePage() {
                 >
                   <div style={{ position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d', transition: 'transform 0.6s cubic-bezier(0.4,0,0.2,1)', transform: flippedProduct === i ? 'rotateY(180deg)' : 'rotateY(0)' }}>
                     {/* Front */}
-                    <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', background: p.gradient, borderRadius: 20, padding: '2rem', border: '1px solid rgba(229,197,117,0.12)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', background: bg(p.gradient, '#ffffff'), borderRadius: 20, padding: '2rem', border: '1px solid rgba(229,197,117,0.12)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                       <div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                           <span style={{ fontSize: '2.8rem' }}>{p.icon}</span>
                           <span style={{ background: p.tagColor + '22', color: p.tagColor, border: `1px solid ${p.tagColor}44`, padding: '0.25rem 0.75rem', borderRadius: 100, fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.05em' }}>{p.tag}</span>
                         </div>
-                        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: '#fff', marginBottom: '0.75rem', fontWeight: 800 }}>{p.name}</h3>
-                        <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.84rem', lineHeight: 1.65 }}>{p.desc}</p>
-                        <div style={{ marginTop: '1rem', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '0.4rem 0.7rem', fontSize: '0.7rem', color: 'var(--gold-light)', display: 'inline-block' }}>
+                        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: fg('#fff', '#0f172a'), marginBottom: '0.75rem', fontWeight: 800 }}>{p.name}</h3>
+                        <p style={{ color: fg('rgba(255,255,255,0.65)', '#334155'), fontSize: '0.84rem', lineHeight: 1.65 }}>{p.desc}</p>
+                        <div style={{ marginTop: '1rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '0.4rem 0.7rem', fontSize: '0.7rem', color: 'var(--gold-light)', display: 'inline-block' }}>
                           🌿 {p.extracts}
                         </div>
                       </div>
@@ -1236,14 +1243,14 @@ export default function HomePage() {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
                           <div>
                             <span style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--gold)' }}>{p.price}</span>
-                            <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.3)', textDecoration: 'line-through', marginLeft: '0.5rem' }}>{p.originalPrice}</span>
+                            <span style={{ fontSize: '0.82rem', color: fg('rgba(255,255,255,0.3)', '#94a3b8'), textDecoration: 'line-through', marginLeft: '0.5rem' }}>{p.originalPrice}</span>
                           </div>
-                          <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.35)' }}>★ {p.rating} ({p.reviews})</div>
+                          <div style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.35)', '#64748b') }}>★ {p.rating} ({p.reviews})</div>
                         </div>
                         <button onClick={(e) => { e.stopPropagation(); addToCart(p.name); setCartOpen(true); }} style={{ width: '100%', background: 'var(--gold)', color: '#000', border: 'none', borderRadius: 100, padding: '0.6rem 1.25rem', fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', transition: 'opacity 0.2s' }}>
                           Add to Wellness Plan
                         </button>
-                        <div style={{ textAlign: 'center', fontSize: '0.62rem', color: 'rgba(255,255,255,0.25)', marginTop: '0.5rem' }}>Hover to see what's inside →</div>
+                        <div style={{ textAlign: 'center', fontSize: '0.62rem', color: fg('rgba(255,255,255,0.25)', '#94a3b8'), marginTop: '0.5rem' }}>Hover to see what's inside →</div>
                       </div>
                     </div>
                     
@@ -1251,7 +1258,7 @@ export default function HomePage() {
                     <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'linear-gradient(135deg, #0a1a0f, #1a3d2e)', borderRadius: 20, padding: '2rem', border: '1px solid rgba(229,197,117,0.25)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                       <div>
                         <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>🔬 What's Inside</div>
-                        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: '#fff', marginBottom: '1rem', fontWeight: 800 }}>{p.name}</h3>
+                        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 800 }}>{p.name}</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.8rem' }}>
                           {[
                             { label: 'Purity Tested:', value: '✅ NABL Verified' },
@@ -1261,8 +1268,8 @@ export default function HomePage() {
                             { label: 'No Additives:', value: '✅ Zero Synthetic Fillers' }
                           ].map((row, ri) => (
                             <div key={ri} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: ri < 4 ? '1px solid rgba(255,255,255,0.06)' : 'none', paddingBottom: '0.4rem', gap: '0.5rem' }}>
-                              <span style={{ color: 'rgba(255,255,255,0.5)', flexShrink: 0 }}>{row.label}</span>
-                              <span style={{ color: 'white', fontWeight: 600, textAlign: 'right' }}>{row.value}</span>
+                              <span style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), flexShrink: 0 }}>{row.label}</span>
+                              <span style={{ color: fg(fg('white', '#0f172a'), '#0f172a'), fontWeight: 600, textAlign: 'right' }}>{row.value}</span>
                             </div>
                           ))}
                         </div>
@@ -1291,7 +1298,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== CIRCADIAN HORMONE SIMULATOR ===== */}
-      <section style={{ background: 'linear-gradient(180deg, #020608 0%, #030a0e 50%, #040c0f 100%)', padding: '7rem 0', borderTop: '1px solid rgba(56,189,248,0.1)' }}>
+      <section style={{ background: bg('linear-gradient(180deg, #020608 0%, #030a0e 50%, #040c0f 100%)', 'radial-gradient(ellipse 70% 50% at 20% 60%, rgba(26,92,58,0.08) 0%, transparent 55%), linear-gradient(180deg, #e5f5f3 0%, #f4ede4 100%)'), padding: '7rem 0', borderTop: '1px solid rgba(56,189,248,0.1)' }}>
         <div className="container">
           <Reveal>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '4rem', alignItems: 'center' }} className="editorial-lead-card">
@@ -1300,36 +1307,36 @@ export default function HomePage() {
                 <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '1.25rem' }}>
                   See How Your Daily Habits Affect Your <span className="gold-gradient-text">Sleep & Energy</span>
                 </h2>
-                <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.93rem', lineHeight: 1.8, marginBottom: '2rem' }}>
+                <p style={{ color: fg('rgba(255,255,255,0.65)', '#334155'), fontSize: '0.93rem', lineHeight: 1.8, marginBottom: '2rem' }}>
                   Adjust the sliders below to see exactly how your morning sunlight, screen time, and coffee habits shape your cortisol and melatonin curves throughout the day.
                 </p>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem', marginBottom: '2rem' }}>
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
-                      <span style={{ color: 'rgba(255,255,255,0.7)' }}>☀️ Morning Sunlight</span>
+                      <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>☀️ Morning Sunlight</span>
                       <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{sunExposure} minutes</span>
                     </div>
                     <input type="range" min={5} max={45} step={5} value={sunExposure} onChange={e => setSunExposure(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
-                    <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>More morning sun = better energy all day and deeper sleep at night.</span>
+                    <span style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.4)', '#475569') }}>More morning sun = better energy all day and deeper sleep at night.</span>
                   </div>
 
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
-                      <span style={{ color: 'rgba(255,255,255,0.7)' }}>📱 Screen Time Before Bed</span>
+                      <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>📱 Screen Time Before Bed</span>
                       <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{screenTime} hours</span>
                     </div>
                     <input type="range" min={0} max={4} step={0.5} value={screenTime} onChange={e => setScreenTime(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
-                    <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Blue light delays melatonin and keeps cortisol elevated into the night.</span>
+                    <span style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.4)', '#475569') }}>Blue light delays melatonin and keeps cortisol elevated into the night.</span>
                   </div>
 
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.85rem' }}>
-                      <span style={{ color: 'rgba(255,255,255,0.7)' }}>☕ Last Coffee of the Day</span>
+                      <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>☕ Last Coffee of the Day</span>
                       <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{caffeineCutoff > 12 ? `${caffeineCutoff - 12} PM` : `${caffeineCutoff} AM`}</span>
                     </div>
                     <input type="range" min={8} max={20} step={1} value={caffeineCutoff} onChange={e => setCaffeineCutoff(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
-                    <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>Late caffeine blocks the sleep hormone signal for up to 10 hours after drinking.</span>
+                    <span style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.4)', '#475569') }}>Late caffeine blocks the sleep hormone signal for up to 10 hours after drinking.</span>
                   </div>
                 </div>
 
@@ -1341,7 +1348,7 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(229,197,117,0.2)', borderRadius: 24, padding: '2rem', height: 400 }}>
+              <div style={{ background: bg('rgba(0,0,0,0.3)', 'rgba(255,255,255,0.8)'), border: '1px solid rgba(229,197,117,0.2)', borderRadius: 24, padding: '2rem', height: 400 }}>
                 <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1.25rem', textAlign: 'center' }}>
                   Your 24-Hour Hormone Map
                 </h4>
@@ -1359,12 +1366,12 @@ export default function HomePage() {
                     </defs>
                     <XAxis dataKey="hour" stroke="rgba(255,255,255,0.25)" style={{ fontSize: '10px' }} />
                     <YAxis stroke="rgba(255,255,255,0.25)" style={{ fontSize: '10px' }} />
-                    <RechartsTooltip contentStyle={{ background: '#0d2418', border: '1px solid rgba(229,197,117,0.3)', borderRadius: 8, color: 'white', fontSize: '11px' }} />
+                    <RechartsTooltip contentStyle={{ background: bg('#0d2418', '#ffffff'), border: '1px solid rgba(229,197,117,0.3)', borderRadius: 8, color: fg(fg('white', '#0f172a'), '#0f172a'), fontSize: '11px' }} />
                     <Area type="monotone" dataKey="Cortisol" stroke="#ef4444" fillOpacity={1} fill="url(#cortisolHomeGrad)" strokeWidth={2.5} name="Cortisol (Stress)" />
                     <Area type="monotone" dataKey="Melatonin" stroke="#3b82f6" fillOpacity={1} fill="url(#melatoninHomeGrad)" strokeWidth={2.5} name="Melatonin (Sleep)" />
                   </AreaChart>
                 </ResponsiveContainer>
-                <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', fontSize: '0.72rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.5)' }}>
+                <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', fontSize: '0.72rem', marginTop: '0.5rem', color: fg('rgba(255,255,255,0.5)', '#475569') }}>
                   <span><strong style={{ color: '#ef4444' }}>—</strong> Cortisol</span>
                   <span><strong style={{ color: '#3b82f6' }}>—</strong> Melatonin</span>
                 </div>
@@ -1375,7 +1382,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== OUR WELLNESS EXPERTS ===== */}
-      <section style={{ background: 'linear-gradient(180deg, #070509 0%, #0d0814 50%, #0f091a 100%)', padding: '7rem 0', borderTop: '1px solid rgba(192,132,252,0.1)' }}>
+      <section style={{ background: bg('linear-gradient(180deg, #070509 0%, #0d0814 50%, #0f091a 100%)', 'radial-gradient(ellipse 90% 50% at 82% 18%, rgba(196,127,23,0.1) 0%, transparent 55%), radial-gradient(ellipse 70% 60% at 8% 82%, rgba(26,92,58,0.08) 0%, transparent 60%), linear-gradient(180deg, #f4ede4 0%, #ece4db 100%)'), padding: '7rem 0', borderTop: '1px solid rgba(192,132,252,0.1)' }}>
         <div className="container">
           
           <Reveal>
@@ -1384,8 +1391,8 @@ export default function HomePage() {
               <h2 className="section-title">
                 Guided by Real <span className="gold-gradient-text">Medical Experts</span>
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '600px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                Every article, product, and protocol at My Zen and Zest is reviewed and approved by our board of practising integrative medicine doctors and Ayurvedic physicians.
+              <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '600px', margin: '0.75rem auto 0', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                Every article, product, and protocol at Zen and Zest is reviewed and approved by our board of practising integrative medicine doctors and Ayurvedic physicians.
               </p>
             </div>
           </Reveal>
@@ -1395,7 +1402,7 @@ export default function HomePage() {
               <Reveal key={i} delay={i * 0.15}>
                 <div style={{
                   padding: '2.5rem 2rem',
-                  background: 'rgba(255,255,255,0.02)',
+                  background: bg('rgba(255,255,255,0.02)', 'rgba(255,255,255,0.7)'),
                   border: '1px solid rgba(229,197,117,0.12)',
                   borderRadius: 20,
                   transition: 'border-color 0.25s ease, transform 0.25s ease'
@@ -1407,11 +1414,11 @@ export default function HomePage() {
                     {member.img}
                   </div>
                   
-                  <h4 style={{ fontFamily: 'var(--font-serif)', color: 'white', fontSize: '1.15rem', fontWeight: 800, marginBottom: '0.2rem' }}>{member.name}</h4>
+                  <h4 style={{ fontFamily: 'var(--font-serif)', color: fg(fg('white', '#0f172a'), '#0f172a'), fontSize: '1.15rem', fontWeight: 800, marginBottom: '0.2rem' }}>{member.name}</h4>
                   <div style={{ color: 'var(--gold-light)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.4rem' }}>{member.title}</div>
-                  <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.72rem', fontStyle: 'italic', marginBottom: '1.25rem', lineHeight: 1.4 }}>{member.credentials}</div>
+                  <div style={{ color: fg('rgba(255,255,255,0.35)', '#64748b'), fontSize: '0.72rem', fontStyle: 'italic', marginBottom: '1.25rem', lineHeight: 1.4 }}>{member.credentials}</div>
                   
-                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.85rem', lineHeight: 1.7 }}>
+                  <p style={{ color: fg('rgba(255,255,255,0.65)', '#334155'), fontSize: '0.85rem', lineHeight: 1.7 }}>
                     {member.bio}
                   </p>
                 </div>
@@ -1422,7 +1429,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== GEO-TARGETED WELLNESS ADVISOR ===== */}
-      <section style={{ background: 'linear-gradient(180deg, #050909 0%, #060e0e 50%, #040b0a 100%)', padding: '5rem 0', borderTop: '1px solid rgba(52,211,153,0.1)' }}>
+      <section style={{ background: bg('linear-gradient(180deg, #050909 0%, #060e0e 50%, #040b0a 100%)', 'radial-gradient(ellipse 75% 50% at 80% 20%, rgba(26,92,58,0.09) 0%, transparent 55%), linear-gradient(180deg, #e8f4ee 0%, #f4ede4 100%)'), padding: '5rem 0', borderTop: '1px solid rgba(52,211,153,0.1)' }}>
         <div className="container">
           <Reveal>
             <GeoOptimizer />
@@ -1432,7 +1439,7 @@ export default function HomePage() {
 
       {/* ===== CTA STRIP 4 — CASE STUDIES ===== */}
       <section style={{
-        background: 'linear-gradient(135deg, #070410 0%, #0d0620 50%, #080316 100%)',
+        background: bg('linear-gradient(135deg, #070410 0%, #0d0620 50%, #080316 100%)', 'radial-gradient(ellipse 80% 70% at 15% 35%, rgba(239,85,51,0.3) 0%, transparent 55%), radial-gradient(ellipse 70% 60% at 85% 70%, rgba(196,127,23,0.25) 0%, transparent 55%), linear-gradient(135deg, #c47f17 0%, #1a5c3a 50%, #d97706 100%)'),
         padding: '3.5rem 0',
         borderTop: '1px solid rgba(139,92,246,0.15)',
         borderBottom: '1px solid rgba(139,92,246,0.1)'
@@ -1441,10 +1448,10 @@ export default function HomePage() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
             <div>
               <div style={{ fontSize: '0.72rem', color: '#a78bfa', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.5rem' }}>📋 REAL RESULTS FROM REAL PEOPLE</div>
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)', fontWeight: 900, color: 'white', lineHeight: 1.2, marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)', fontWeight: 900, color: fg(fg('white', '#0f172a'), '#0f172a'), lineHeight: 1.2, marginBottom: '0.5rem' }}>
                 Documented Wellness Transformations
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.6, maxWidth: 440 }}>
+              <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.88rem', lineHeight: 1.6, maxWidth: 440 }}>
                 Read our detailed case studies — real people, real struggles, real outcomes. Tracked over 8–24 weeks with their consent.
               </p>
             </div>
@@ -1473,20 +1480,20 @@ export default function HomePage() {
       {/* ===== NEWSLETTER SIGNUP ===== */}
       <section style={{
         padding: '6rem 0',
-        background: 'linear-gradient(180deg, #06040c 0%, #030208 100%)',
+        background: bg('linear-gradient(180deg, #06040c 0%, #030208 100%)', 'radial-gradient(ellipse 70% 50% at 90% 80%, rgba(196,127,23,0.07) 0%, transparent 55%), linear-gradient(180deg, #ece4db 0%, #e4dcd3 100%)'),
         borderTop: '1px solid rgba(229,197,117,0.1)',
         textAlign: 'center'
       }}>
         <div className="container" style={{ maxWidth: '650px' }}>
           <Reveal>
             <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🌿</div>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.9rem', fontWeight: 800, color: 'white', marginBottom: '0.75rem', lineHeight: 1.2 }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.9rem', fontWeight: 800, color: fg(fg('white', '#0f172a'), '#0f172a'), marginBottom: '0.75rem', lineHeight: 1.2 }}>
               Join 50,000+ Wellness Seekers
             </h3>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.93rem', lineHeight: 1.7, marginBottom: '2rem' }}>
+            <p style={{ color: fg('rgba(255,255,255,0.55)', '#334155'), fontSize: '0.93rem', lineHeight: 1.7, marginBottom: '2rem' }}>
               Get our free weekly wellness letter — simple, science-backed tips on sleep, gut health, skin, and longevity. No jargon, no spam. Just genuinely useful guidance.
             </p>
-            <form onSubmit={e => { e.preventDefault(); alert('Welcome to the My Zen and Zest community! 🌿'); }} style={{
+            <form onSubmit={e => { e.preventDefault(); alert('Welcome to the Zen and Zest community! 🌿'); }} style={{
               display: 'flex',
               gap: '0.5rem',
               maxWidth: '480px',
@@ -1499,10 +1506,10 @@ export default function HomePage() {
                 style={{
                   flex: 1,
                   padding: '0.85rem 1.25rem',
-                  background: 'rgba(0,0,0,0.4)',
+                  background: bg('rgba(0,0,0,0.4)', 'rgba(255,255,255,0.85)'),
                   border: '1px solid rgba(229,197,117,0.22)',
                   borderRadius: 100,
-                  color: 'white',
+                  color: fg(fg('white', '#0f172a'), '#0f172a'),
                   fontSize: '0.88rem',
                   outline: 'none'
                 }}
@@ -1521,7 +1528,7 @@ export default function HomePage() {
                 Join Free →
               </button>
             </form>
-            <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.28)', marginTop: '1rem' }}>
+            <p style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.28)', '#94a3b8'), marginTop: '1rem' }}>
               🔒 Zero spam. Unsubscribe anytime. Your privacy is sacred to us.
             </p>
           </Reveal>

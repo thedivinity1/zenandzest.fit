@@ -1,4 +1,4 @@
-import ScrollAnimator from '../components/ScrollAnimator';
+﻿import ScrollAnimator from '../components/ScrollAnimator';
 import { Leaf, Award, ShieldAlert, Cpu } from 'lucide-react';
 
 const sourcingSchema = {
@@ -39,15 +39,18 @@ const sources = [
 ];
 
 export default function SourcingIndexPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sourcingSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Harvesting & Extraction Standards</div>
           <h1 className="section-title">Standardized <span className="gold-gradient-text">Sourcing Index</span></h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
+          <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
             <strong>Answer-First:</strong> Supercritical CO2 extraction at 31.1°C preserves thermolabile longevity molecules without toxic residues. This zero-waste method delivers 15-20x concentration ratios versus raw powders while ensuring 99.8% heavy metal clearance through NABL-certified HPLC validation.
           </p>
         </ScrollAnimator>
@@ -63,7 +66,7 @@ export default function SourcingIndexPage() {
           }}>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.5rem' }}>
               <Cpu size={32} color="var(--gold)" />
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'white', fontWeight: 900 }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: fg('white', '#0f172a'), fontWeight: 900 }}>
                 Supercritical CO₂ Extraction vs. Chemical Solvents
               </h2>
             </div>
@@ -76,7 +79,7 @@ export default function SourcingIndexPage() {
               {/* CO2 Extraction */}
               <div style={{ background: 'rgba(76,175,80,0.04)', border: '1px solid rgba(76,175,80,0.2)', borderRadius: '16px', padding: '1.5rem' }}>
                 <h4 style={{ color: '#4caf50', fontWeight: 800, fontSize: '0.95rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  🌿 Supercritical CO₂ (My Zen and Zest Standard)
+                  🌿 Supercritical CO₂ (Zen and Zest Standard)
                 </h4>
                 <ul style={{ paddingLeft: '1.25rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <li>Uses recycled carbon dioxide compressed into a fluid state.</li>
@@ -103,7 +106,7 @@ export default function SourcingIndexPage() {
         </ScrollAnimator>
 
         {/* Botanical Sourcing Cards */}
-        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', marginBottom: '1.5rem', fontWeight: 800 }}>
+        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), marginBottom: '1.5rem', fontWeight: 800 }}>
           Botanical Origin Directory
         </h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
@@ -124,7 +127,7 @@ export default function SourcingIndexPage() {
                     <Leaf size={14} /> SOURCED & CERTIFIED
                   </div>
                   
-                  <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: 'white', fontWeight: 700, marginBottom: '0.5rem' }}>
+                  <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: fg('white', '#0f172a'), fontWeight: 700, marginBottom: '0.5rem' }}>
                     {src.herb}
                   </h4>
                   
@@ -132,7 +135,7 @@ export default function SourcingIndexPage() {
                     Origin: {src.origin}
                   </span>
                   
-                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1rem' }}>
+                  <p style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1rem' }}>
                     {src.desc}
                   </p>
                 </div>
@@ -140,7 +143,7 @@ export default function SourcingIndexPage() {
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1rem', marginTop: '1rem', fontSize: '0.8rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.4)' }}>Extraction:</span>
-                    <strong style={{ color: 'white' }}>{src.method}</strong>
+                    <strong style={{ color: fg('white', '#0f172a') }}>{src.method}</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <span style={{ color: 'rgba(255,255,255,0.4)' }}>Standard:</span>
@@ -157,3 +160,5 @@ export default function SourcingIndexPage() {
     </div>
   );
 }
+
+import { useTheme } from '../context/ThemeContext';

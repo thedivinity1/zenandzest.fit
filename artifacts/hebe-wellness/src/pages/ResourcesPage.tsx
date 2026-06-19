@@ -1,3 +1,4 @@
+﻿import { useTheme } from '../context/ThemeContext';
 import { useState } from 'react';
 
 const glossaryTerms = [
@@ -12,7 +13,7 @@ const glossaryTerms = [
   { term: 'DHT (Dihydrotestosterone)', definition: 'A potent androgen derived from testosterone via 5-alpha reductase enzyme. DHT miniaturizes hair follicles causing androgenic alopecia. Plant botanicals like Saw Palmetto and Bhringraj inhibit this enzyme.', category: 'D' },
   { term: 'Endocannabinoid System', definition: 'A complex cell-signaling system throughout the human body involving endogenous cannabinoids, cannabinoid receptors (CB1, CB2), and metabolic enzymes. Regulates mood, sleep, appetite, pain, and immune function.', category: 'E' },
   { term: 'Entourage Effect', definition: 'The synergistic interaction between all compounds in a whole-plant botanical extract, which produces a greater therapeutic effect than isolated single compounds.', category: 'E' },
-  { term: 'FSSAI', definition: 'Food Safety and Standards Authority of India — the regulatory body governing food and food supplement safety and labeling standards in India. All My Zen and Zest products are FSSAI compliant.', category: 'F' },
+  { term: 'FSSAI', definition: 'Food Safety and Standards Authority of India — the regulatory body governing food and food supplement safety and labeling standards in India. All Zen and Zest products are FSSAI compliant.', category: 'F' },
   { term: 'GMP Certification', definition: 'Good Manufacturing Practice — an internationally recognized quality assurance system ensuring products are consistently produced and controlled according to quality standards. Required for pharmaceutical-grade botanical production.', category: 'G' },
   { term: 'HPA Axis', definition: 'Hypothalamic-Pituitary-Adrenal Axis — the body\'s central stress response system. Chronic HPA activation leads to burnout, adrenal fatigue, insomnia, and hormonal dysfunction. Adaptogens directly modulate HPA signaling.', category: 'H' },
   { term: 'Herbal Extract', definition: 'A concentrated preparation made by extracting the active compounds from plant material using solvents (water, alcohol, or supercritical CO2). Standardized extracts guarantee minimum levels of key bioactive compounds.', category: 'H' },
@@ -74,6 +75,9 @@ const resourcesSchema = {
 };
 
 export default function ResourcesPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [activeSection, setActiveSection] = useState<'guides' | 'research' | 'glossary' | 'video'>('guides');
   const [glossarySearch, setGlossarySearch] = useState('');
   const [activeLetter, setActiveLetter] = useState('All');
@@ -126,7 +130,7 @@ export default function ResourcesPage() {
             <div>
               <div style={{ marginBottom: '3rem' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Free Download <span style={{ color: 'var(--gold)' }}>Guides</span></h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>Clinical-grade wellness guides curated by our medical team. No email required.</p>
+                <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>Clinical-grade wellness guides curated by our medical team. No email required.</p>
               </div>
               <div className="res-grid">
                 {downloadGuides.map((guide, i) => (
@@ -140,7 +144,7 @@ export default function ResourcesPage() {
                     <div style={{ padding: '1.5rem' }}>
                       <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: '#fff', marginBottom: '0.25rem' }}>{guide.title}</div>
                       <div style={{ color: 'var(--gold)', fontSize: '0.75rem', marginBottom: '0.75rem' }}>{guide.pages}</div>
-                      <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.83rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>{guide.desc}</p>
+                      <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.83rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>{guide.desc}</p>
                       <button onClick={() => setDownloadedGuides(prev => prev.includes(i) ? prev : [...prev, i])} style={{ width: '100%', padding: '0.625rem', background: downloadedGuides.includes(i) ? 'rgba(74,222,128,0.1)' : 'rgba(201,168,76,0.1)', border: `1px solid ${downloadedGuides.includes(i) ? 'rgba(74,222,128,0.3)' : 'rgba(201,168,76,0.3)'}`, borderRadius: '10px', color: downloadedGuides.includes(i) ? '#4ade80' : 'var(--gold)', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem', transition: 'all 0.2s' }}>
                         {downloadedGuides.includes(i) ? '✓ Downloaded' : 'Download Free →'}
                       </button>
@@ -156,7 +160,7 @@ export default function ResourcesPage() {
             <div>
               <div style={{ marginBottom: '3rem' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Research <span style={{ color: 'var(--gold)' }}>Citations Library</span></h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>Every claim we make is backed by peer-reviewed science. Here are key references.</p>
+                <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>Every claim we make is backed by peer-reviewed science. Here are key references.</p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {researchCitations.map((cite, i) => (
@@ -175,7 +179,7 @@ export default function ResourcesPage() {
                 ))}
               </div>
               <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', textAlign: 'center' }}>
-                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}>This is a partial list. We maintain over 150 research citations. <span style={{ color: 'var(--gold)', cursor: 'pointer', fontWeight: 600 }}>Request full bibliography →</span></div>
+                <div style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.875rem' }}>This is a partial list. We maintain over 150 research citations. <span style={{ color: 'var(--gold)', cursor: 'pointer', fontWeight: 600 }}>Request full bibliography →</span></div>
               </div>
             </div>
           )}
@@ -185,7 +189,7 @@ export default function ResourcesPage() {
             <div>
               <div style={{ marginBottom: '2rem' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Botanical & Wellness <span style={{ color: 'var(--gold)' }}>Glossary</span></h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>A-Z reference guide to botanical, Ayurvedic, and clinical wellness terminology.</p>
+                <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem', marginBottom: '1.5rem' }}>A-Z reference guide to botanical, Ayurvedic, and clinical wellness terminology.</p>
                 <input type="text" value={glossarySearch} onChange={e => setGlossarySearch(e.target.value)} placeholder="Search terms..." style={{ width: '100%', maxWidth: '400px', padding: '0.75rem 1.25rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '100px', color: '#fff', outline: 'none', fontSize: '0.9rem' }} />
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '2rem' }}>
@@ -200,7 +204,7 @@ export default function ResourcesPage() {
                       <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--gold)', fontWeight: 700, flexShrink: 0 }}>{item.term}</span>
                       <span style={{ background: 'rgba(255,255,255,0.06)', padding: '0.15rem 0.5rem', borderRadius: '6px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', flexShrink: 0 }}>{item.category}</span>
                     </div>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', lineHeight: 1.7, marginTop: '0.5rem' }}>{item.definition}</p>
+                    <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.875rem', lineHeight: 1.7, marginTop: '0.5rem' }}>{item.definition}</p>
                   </div>
                 ))}
                 {filteredGlossary.length === 0 && (
@@ -215,7 +219,7 @@ export default function ResourcesPage() {
             <div>
               <div style={{ marginBottom: '3rem' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Video <span style={{ color: 'var(--gold)' }}>Learning Library</span></h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>In-depth video explanations from our clinical team. Science made accessible.</p>
+                <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>In-depth video explanations from our clinical team. Science made accessible.</p>
               </div>
               <div className="res-grid">
                 {videoLibrary.map((video, i) => (
@@ -224,7 +228,7 @@ export default function ResourcesPage() {
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'}>
                     <div style={{ height: '160px', background: 'linear-gradient(135deg, #0a1a0f, #1a3d2e)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', position: 'relative' }}>
                       <span style={{ fontSize: '3rem' }}>{video.thumbnail}</span>
-                      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.3)', opacity: 0, transition: 'opacity 0.2s' }}
+                      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: bg('rgba(0,0,0,0.3)', 'rgba(255,255,255,0.8)'), opacity: 0, transition: 'opacity 0.2s' }}
                         onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = '1'}
                         onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '0'}>
                         <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(201,168,76,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', paddingLeft: '4px' }}>▶</div>

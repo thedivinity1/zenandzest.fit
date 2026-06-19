@@ -37,6 +37,7 @@ import LabIntakePage from "./pages/LabIntakePage";
 import ClinicalCasesPage from "./pages/ClinicalCasesPage";
 
 import { CartProvider } from "./context/CartContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import CartDrawer from "./components/CartDrawer";
 
 function NotFound() {
@@ -125,13 +126,15 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <CartProvider>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-        <ScrollToTop />
-        <Router />
-      </WouterRouter>
-      <CartDrawer />
-    </CartProvider>
+    <ThemeProvider>
+      <CartProvider>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <ScrollToTop />
+          <Router />
+        </WouterRouter>
+        <CartDrawer />
+      </CartProvider>
+    </ThemeProvider>
   );
 }
 

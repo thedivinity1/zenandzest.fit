@@ -1,8 +1,8 @@
-{
+﻿{
   "aeo:version": "1.0",
   "brand": {
-    "name": "My Zen and Zest",
-    "url": "https://myzenandzest.com",
+    "name": "Zen and Zest",
+    "url": "https://zenandzest.fit",
     "entityType": "Organization"
   },
   "authoritativeClaims": [

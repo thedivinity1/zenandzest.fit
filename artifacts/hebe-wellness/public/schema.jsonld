@@ -1,29 +1,111 @@
-{
+﻿{
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://myzenandzest.com/#website",
-      "url": "https://myzenandzest.com/",
-      "name": "My Zen and Zest",
-      "description": "My Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.",
+      "@id": "https://zenandzest.fit/#website",
+      "url": "https://zenandzest.fit/",
+      "name": "Zen and Zest",
+      "description": "India's premier luxury holistic wellness collective combining Ayurvedic wisdom with modern longevity science.",
+      "inLanguage": "en-IN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://zenandzest.fit/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
       "publisher": {
-        "@id": "https://myzenandzest.com/#organization"
+        "@id": "https://zenandzest.fit/#organization"
       }
     },
     {
-      "@type": "Organization",
-      "@id": "https://myzenandzest.com/#organization",
-      "name": "My Zen and Zest",
-      "url": "https://myzenandzest.com/",
+      "@type": ["Organization", "MedicalOrganization"],
+      "@id": "https://zenandzest.fit/#organization",
+      "name": "Zen and Zest",
+      "alternateName": "zenandzest",
+      "url": "https://zenandzest.fit/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://myzenandzest.com/logo.png"
+        "url": "https://zenandzest.fit/favicon.svg",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://zenandzest.fit/opengraph.jpg",
+      "description": "Zen and Zest is India's premier holistic wellness collective combining Ayurvedic wisdom with modern longevity science. Clinical calculators, botanical formulations, and personalized healthspan protocols.",
+      "foundingDate": "2024",
+      "areaServed": "IN",
+      "priceRange": "₹₹₹",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://zenandzest.fit/consult",
+        "availableLanguage": ["English", "Hindi"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
       },
       "sameAs": [
-        "https://www.linkedin.com/company/myzenandzest",
-        "https://www.instagram.com/myzenandzest"
+        "https://www.linkedin.com/company/zenandzest",
+        "https://www.instagram.com/zenandzest",
+        "https://twitter.com/zenandzest"
+      ],
+      "employee": [
+        { "@id": "https://zenandzest.fit/medical-board#dr-sarah-chen" },
+        { "@id": "https://zenandzest.fit/medical-board#dr-michael-rodriguez" },
+        { "@id": "https://zenandzest.fit/medical-board#dr-priya-sharma" },
+        { "@id": "https://zenandzest.fit/medical-board#vaidya-rishi-tripathi" }
       ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://zenandzest.fit/medical-board#dr-sarah-chen",
+      "name": "Dr. Sarah Chen",
+      "jobTitle": "Chief Scientific Advisor – Integrative Endocrinology",
+      "worksFor": { "@id": "https://zenandzest.fit/#organization" },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Stanford University School of Medicine"
+      },
+      "knowsAbout": ["HPA Axis Dysfunction", "Cortisol Regulation", "Integrative Endocrinology", "Adaptogen Pharmacology"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://zenandzest.fit/medical-board#dr-michael-rodriguez",
+      "name": "Dr. Michael Rodriguez",
+      "jobTitle": "Longevity Research Director",
+      "worksFor": { "@id": "https://zenandzest.fit/#organization" },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Johns Hopkins School of Medicine"
+      },
+      "knowsAbout": ["Geroscience", "Biological Aging", "Longevity Medicine", "Mitochondrial Health"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://zenandzest.fit/medical-board#dr-priya-sharma",
+      "name": "Dr. Priya Sharma",
+      "jobTitle": "Chief Trichology Advisor",
+      "worksFor": { "@id": "https://zenandzest.fit/#organization" },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "King's College London"
+      },
+      "knowsAbout": ["Trichology", "DHT Inhibition", "Scalp Health", "Botanical Hair Restoration"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://zenandzest.fit/medical-board#vaidya-rishi-tripathi",
+      "name": "Vaidya Rishi Tripathi",
+      "jobTitle": "Traditional Medicine Advisor – Rasayana & Ayurveda",
+      "worksFor": { "@id": "https://zenandzest.fit/#organization" },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Banaras Hindu University – Ayurvedic Science Faculty"
+      },
+      "knowsAbout": ["Rasayana Therapy", "Ayurvedic Constitution", "Herbal Pharmacognosy", "Prakriti Assessment"]
     }
   ]
 }

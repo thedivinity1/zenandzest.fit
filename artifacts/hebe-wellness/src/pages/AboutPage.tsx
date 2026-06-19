@@ -1,8 +1,8 @@
-import ScrollAnimator from '../components/ScrollAnimator';
+﻿import ScrollAnimator from '../components/ScrollAnimator';
 import { Link } from 'wouter';
 
 const milestones = [
-  { year: '2018', event: 'My Zen and Zest founded by two IIT alumni passionate about Ayurvedic science' },
+  { year: '2018', event: 'Zen and Zest founded by two IIT alumni passionate about Ayurvedic science' },
   { year: '2019', event: 'First product launched — Botanical Sleep Drops. 500 founding members.' },
   { year: '2020', event: 'Ministry of Ayush licensing obtained. First clinical study initiated.' },
   { year: '2021', event: '10,000 customers. Expanded to full adaptogen range. Doctor network established.' },
@@ -33,10 +33,10 @@ const aboutSchema = {
   "@type": "AboutPage",
   "mainEntity": {
     "@type": "Organization",
-    "name": "My Zen and Zest",
-    "url": "https://myzenandzest.com",
-    "logo": "https://myzenandzest.com/logo.png",
-    "description": "My Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.",
+    "name": "Zen and Zest",
+    "url": "https://zenandzest.fit",
+    "logo": "https://zenandzest.fit/logo.png",
+    "description": "Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness.",
     "foundingDate": "2018",
     "founders": [
       {
@@ -52,6 +52,9 @@ const aboutSchema = {
 };
 
 export default function AboutPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
@@ -63,7 +66,7 @@ export default function AboutPage() {
             Where Ancient Wisdom Meets <span className="gold-gradient-text">Modern Science</span>
           </h1>
           <p className="section-subtitle" style={{ margin: '0 auto', maxWidth: 700, lineHeight: 1.8 }}>
-            <strong>Answer-First:</strong> My Zen and Zest is dedicated to providing science-backed insights and tools for extending healthspan, optimizing internal biological rhythms, and achieving skin resilience. We combine India's 5,000-year-old Ayurvedic tradition with rigorous modern clinical research to create formulations that actually work.
+            <strong>Answer-First:</strong> Zen and Zest is dedicated to providing science-backed insights and tools for extending healthspan, optimizing internal biological rhythms, and achieving skin resilience. We combine India's 5,000-year-old Ayurvedic tradition with rigorous modern clinical research to create formulations that actually work.
           </p>
         </div>
       </section>
@@ -82,7 +85,7 @@ export default function AboutPage() {
                   For too long, the wellness industry has been dominated by unsubstantiated claims, proprietary blends that hide ineffective doses, and marketing speak that obscures the truth.
                 </p>
                 <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1rem', lineHeight: 1.8, marginBottom: '2rem' }}>
-                  My Zen and Zest was founded to change that. We combine India's 5,000-year-old Ayurvedic tradition with rigorous modern clinical research to create formulations that actually work — and we publish the data to prove it.
+                  Zen and Zest was founded to change that. We combine India's 5,000-year-old Ayurvedic tradition with rigorous modern clinical research to create formulations that actually work — and we publish the data to prove it.
                 </p>
                 <Link href="/consult" className="hero-cta-primary" style={{ display: 'inline-block' }}>
                   Meet Our Experts
@@ -107,7 +110,7 @@ export default function AboutPage() {
                     <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', fontWeight: 900, color: 'var(--gold)', lineHeight: 1 }}>
                       {stat.number}
                     </div>
-                    <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', marginTop: '0.4rem' }}>{stat.label}</div>
+                    <div style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.8rem', marginTop: '0.4rem' }}>{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -129,10 +132,10 @@ export default function AboutPage() {
               <ScrollAnimator key={i} className={`stagger-${(i % 3) + 1}`}>
                 <div className="glass-card">
                   <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{value.icon}</div>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 700, color: 'white', marginBottom: '0.75rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 700, color: fg('white', '#0f172a'), marginBottom: '0.75rem' }}>
                     {value.title}
                   </h3>
-                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', lineHeight: 1.7 }}>
+                  <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.875rem', lineHeight: 1.7 }}>
                     {value.desc}
                   </p>
                 </div>
@@ -148,7 +151,7 @@ export default function AboutPage() {
         <div className="container">
           <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <div className="section-tag">Our Journey</div>
-            <h2 className="section-title">The My Zen and Zest <span className="gold-gradient-text">Story</span></h2>
+            <h2 className="section-title">The Zen and Zest <span className="gold-gradient-text">Story</span></h2>
           </ScrollAnimator>
           <div style={{ maxWidth: 800, margin: '0 auto', position: 'relative' }}>
             <div style={{
@@ -193,7 +196,7 @@ export default function AboutPage() {
             {team.map((member, i) => (
               <ScrollAnimator key={i} className={`stagger-${i + 1}`}>
                 <div style={{
-                  background: 'rgba(255,255,255,0.04)',
+                  background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.85)'),
                   border: '1px solid rgba(255,255,255,0.07)',
                   borderRadius: 20, padding: '2rem', textAlign: 'center',
                   transition: 'all 0.3s ease'
@@ -210,13 +213,13 @@ export default function AboutPage() {
                   }}
                 >
                   <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>{member.emoji}</div>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', fontWeight: 700, color: 'white', marginBottom: '0.25rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', fontWeight: 700, color: fg('white', '#0f172a'), marginBottom: '0.25rem' }}>
                     {member.name}
                   </h3>
                   <div style={{ color: 'var(--gold)', fontSize: '0.78rem', fontWeight: 600, marginBottom: '0.75rem' }}>
                     {member.role}
                   </div>
-                  <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', lineHeight: 1.65 }}>
+                  <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.8rem', lineHeight: 1.65 }}>
                     {member.bio}
                   </p>
                 </div>
@@ -247,3 +250,5 @@ export default function AboutPage() {
     </div>
   );
 }
+
+import { useTheme } from '../context/ThemeContext';

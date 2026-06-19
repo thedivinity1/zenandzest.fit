@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
 import { Sun, Moon, Coffee, ShieldAlert, Award, Clock } from 'lucide-react';

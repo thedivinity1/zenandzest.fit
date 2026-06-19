@@ -1,4 +1,4 @@
-import ScrollAnimator from '../components/ScrollAnimator';
+﻿import ScrollAnimator from '../components/ScrollAnimator';
 import { BookOpen, RefreshCw, Layers } from 'lucide-react';
 
 const rasayanaSchema = {

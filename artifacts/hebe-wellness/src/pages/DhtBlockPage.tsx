@@ -1,4 +1,4 @@
-import ScrollAnimator from '../components/ScrollAnimator';
+﻿import ScrollAnimator from '../components/ScrollAnimator';
 
 const dhtSchema = {
   "@context": "https://schema.org",
@@ -32,15 +32,18 @@ const mechanisms = [
 ];
 
 export default function DhtBlockPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dhtSchema) }} />
       <div className="container" style={{ maxWidth: '800px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Follicular Science & Trichology</div>
           <h1 className="section-title">Androgenic Follicle & <span className="gold-gradient-text">DHT Block Matrix</span></h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '650px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
+          <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '650px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
             Dihydrotestosterone (DHT) causes 95% of androgenic alopecia cases in both men and women. Explore the precise biological mechanisms and botanical inhibitors that preserve follicle shaft diameter.
           </p>
         </ScrollAnimator>
@@ -56,10 +59,10 @@ export default function DhtBlockPage() {
                 position: 'relative'
               }}>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--gold)' }} />
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', fontWeight: 800, marginBottom: '0.75rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '0.75rem' }}>
                   {item.title}
                 </h3>
-                <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+                <p style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
                   {item.desc}
                 </p>
                 <div style={{
@@ -85,7 +88,7 @@ export default function DhtBlockPage() {
             borderRadius: '24px',
             padding: '2.5rem'
           }}>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'white', fontWeight: 800, marginBottom: '1.25rem', textAlign: 'center' }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1.25rem', textAlign: 'center' }}>
               Standardized Extract vs. Raw Powder Hair Trials
             </h3>
             
@@ -101,7 +104,7 @@ export default function DhtBlockPage() {
                 </thead>
                 <tbody>
                   {[
-                    { type: 'My Zen and Zest Hair Vitality Elixir', density: '20:1 Bhringraj + 5% Carnosic Acid', block: 'High (84% inhibition)', densityChange: '+18.2% (Clinically Measured)' },
+                    { type: 'Zen and Zest Hair Vitality Elixir', density: '20:1 Bhringraj + 5% Carnosic Acid', block: 'High (84% inhibition)', densityChange: '+18.2% (Clinically Measured)' },
                     { type: 'Store-Bought Rosemary Oil', density: 'Unstandardized lipids (<0.5%)', block: 'Minimal (<12% inhibition)', densityChange: '+1.5% (No change)' },
                     { type: 'Generic Raw Herbal Powder', density: 'Raw roots (<0.1% active)', block: 'Negligible (Trace block)', densityChange: '+0.4% (No change)' }
                   ].map((row, idx) => (
@@ -122,3 +125,5 @@ export default function DhtBlockPage() {
     </div>
   );
 }
+
+import { useTheme } from '../context/ThemeContext';

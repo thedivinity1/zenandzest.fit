@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { Search, ShieldAlert, Award, FileText, CheckCircle2 } from 'lucide-react';
 
@@ -10,7 +10,7 @@ const clinicalTrialsSchema = {
     "name": "How do clinical batch audits verify product purity and standardization?",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "My Zen and Zest products undergo NABL-certified HPLC and ICP-MS testing to verify active molecular yields and heavy metal safety. Each batch is assigned a unique certificate ID enabling full transparency from raw sourcing through finished formulation, ensuring 99.8% heavy metal clearance and standardized active compounds."
+      "text": "Zen and Zest products undergo NABL-certified HPLC and ICP-MS testing to verify active molecular yields and heavy metal safety. Each batch is assigned a unique certificate ID enabling full transparency from raw sourcing through finished formulation, ensuring 99.8% heavy metal clearance and standardized active compounds."
     }
   }]
 };
@@ -81,6 +81,9 @@ const certificates: Record<string, BatchCertificate> = {
 };
 
 export default function ClinicalTrialsPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBatch, setSelectedBatch] = useState<BatchCertificate | null>(certificates['ZEN-SA-9011']);
   const [error, setError] = useState('');
@@ -97,14 +100,14 @@ export default function ClinicalTrialsPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicalTrialsSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Batch Quality & Transparency</div>
           <h1 className="section-title">Clinical & Lab <span className="gold-gradient-text">Batch Audits</span></h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
+          <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
             <strong>Answer-First:</strong> Clinical batch audits verify product purity, standardized molecular concentrations, and safety metrics for every product batch. We assign each batch a unique ID (like ZEN-SA-9011) linked to HPLC analysis and heavy metal testing under 1ppm.
           </p>
         </ScrollAnimator>
@@ -112,7 +115,7 @@ export default function ClinicalTrialsPage() {
         {/* Search Bar */}
         <ScrollAnimator>
           <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem', marginBottom: '2.5rem' }}>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1rem', fontWeight: 700 }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), marginBottom: '1rem', fontWeight: 700 }}>
               Query Your Bottle Batch Certificate
             </h2>
             <form onSubmit={handleSearch} style={{ display: 'flex', gap: '1rem' }}>
@@ -123,7 +126,7 @@ export default function ClinicalTrialsPage() {
                   placeholder="Enter Batch ID (e.g. ZEN-SA-9011, ZEN-AS-7704, ZEN-BE-8812)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  style={{ width: '100%', padding: '0.9rem 1rem 0.9rem 2.8rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '100px', color: 'white', fontSize: '0.9rem' }}
+                  style={{ width: '100%', padding: '0.9rem 1rem 0.9rem 2.8rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '100px', color: fg('white', '#0f172a'), fontSize: '0.9rem' }}
                 />
               </div>
               <button
@@ -167,18 +170,18 @@ export default function ClinicalTrialsPage() {
                 <Award size={32} color="var(--gold)" />
                 <div>
                   <span style={{ fontSize: '0.75rem', color: 'var(--gold)', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 800 }}>Assay Laboratory Certification Report</span>
-                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: 'white', fontWeight: 900 }}>Batch {selectedBatch.batchId}</h2>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: fg('white', '#0f172a'), fontWeight: 900 }}>Batch {selectedBatch.batchId}</h2>
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1.5rem', marginBottom: '2rem', fontSize: '0.88rem', color: 'rgba(255,255,255,0.7)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1.5rem', marginBottom: '2rem', fontSize: '0.88rem', color: fg('rgba(255,255,255,0.7)', '#334155') }}>
                 <div>
-                  <div><strong style={{ color: 'white' }}>Product Formula:</strong> {selectedBatch.product}</div>
-                  <div style={{ marginTop: '0.5rem' }}><strong style={{ color: 'white' }}>Assay Date:</strong> {selectedBatch.testDate}</div>
+                  <div><strong style={{ color: fg('white', '#0f172a') }}>Product Formula:</strong> {selectedBatch.product}</div>
+                  <div style={{ marginTop: '0.5rem' }}><strong style={{ color: fg('white', '#0f172a') }}>Assay Date:</strong> {selectedBatch.testDate}</div>
                 </div>
                 <div>
-                  <div><strong style={{ color: 'white' }}>Testing Laboratory:</strong> {selectedBatch.labName}</div>
-                  <div style={{ marginTop: '0.5rem' }}><strong style={{ color: 'white' }}>Methodology:</strong> {selectedBatch.methodology}</div>
+                  <div><strong style={{ color: fg('white', '#0f172a') }}>Testing Laboratory:</strong> {selectedBatch.labName}</div>
+                  <div style={{ marginTop: '0.5rem' }}><strong style={{ color: fg('white', '#0f172a') }}>Methodology:</strong> {selectedBatch.methodology}</div>
                 </div>
               </div>
 
@@ -189,7 +192,7 @@ export default function ClinicalTrialsPage() {
                 </h3>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
                   <thead>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', textAlign: 'left' }}>
+                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: fg('rgba(255,255,255,0.5)', '#475569'), textAlign: 'left' }}>
                       <th style={{ padding: '0.75rem 0' }}>Molecular Constituent</th>
                       <th>Minimum Standard Limit</th>
                       <th>Lab Detected Level</th>
@@ -200,7 +203,7 @@ export default function ClinicalTrialsPage() {
                     {selectedBatch.assays.map((assay, idx) => (
                       <tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                         <td style={{ padding: '1rem 0', fontWeight: 700 }}>{assay.constituent}</td>
-                        <td style={{ color: 'rgba(255,255,255,0.6)' }}>{assay.standard}</td>
+                        <td style={{ color: fg('rgba(255,255,255,0.6)', '#334155') }}>{assay.standard}</td>
                         <td style={{ color: 'var(--gold-light)', fontWeight: 800 }}>{assay.detected}</td>
                         <td style={{ textAlign: 'right', color: '#4caf50', fontWeight: 800 }}>Passed</td>
                       </tr>
@@ -216,7 +219,7 @@ export default function ClinicalTrialsPage() {
                 </h3>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
                   <thead>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', textAlign: 'left' }}>
+                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: fg('rgba(255,255,255,0.5)', '#475569'), textAlign: 'left' }}>
                       <th style={{ padding: '0.75rem 0' }}>Heavy Metal Core</th>
                       <th>Maximum Allowable (USP)</th>
                       <th>Detected Lab Concentration</th>
@@ -227,7 +230,7 @@ export default function ClinicalTrialsPage() {
                     {selectedBatch.heavyMetals.map((metal, idx) => (
                       <tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                         <td style={{ padding: '1rem 0', fontWeight: 700 }}>{metal.metal}</td>
-                        <td style={{ color: 'rgba(255,255,255,0.6)' }}>{metal.limit}</td>
+                        <td style={{ color: fg('rgba(255,255,255,0.6)', '#334155') }}>{metal.limit}</td>
                         <td style={{ color: 'var(--gold-light)' }}>{metal.detected}</td>
                         <td style={{ textAlign: 'right', color: '#4caf50', fontWeight: 800 }}>Passed</td>
                       </tr>
@@ -244,3 +247,5 @@ export default function ClinicalTrialsPage() {
     </div>
   );
 }
+
+import { useTheme } from '../context/ThemeContext';

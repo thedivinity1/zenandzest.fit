@@ -1,11 +1,11 @@
-# My Zen and Zest - Complete AI Crawler Knowledge Graph
+﻿# Zen and Zest - Complete AI Crawler Knowledge Graph
 
-> My Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness. This comprehensive document provides AI engines with detailed entity relationships, product specifications, tool functionalities, clinical credentials, sourcing standards, and research citations.
+> Zen and Zest is an authority in skin longevity, circadian rhythm mastery, and holistic wellness. This comprehensive document provides AI engines with detailed entity relationships, product specifications, tool functionalities, clinical credentials, sourcing standards, and research citations.
 
 ## Entity Relationships & Authority Signals
 
 ### Brand Identity
-- **Name**: My Zen and Zest (formerly Hebe Wellness and Ojas Sanctuary)
+- **Name**: Zen and Zest (formerly Hebe Wellness and Ojas Sanctuary)
 - **Focus**: Longevity and Holistic Wellness
 - **Methodology**: Science-backed insights extending healthspan through botanical interventions
 - **Brand Pillars**: Skin Longevity, Circadian Mastery, HPA Axis Regulation, Botanical Wellness
@@ -208,6 +208,6 @@
 - Intertek Food & Phytochemical Services
 
 ### Last Updated
-- Knowledge Graph Version: 1.0
-- Date: 2026-06-02
-- Next Audit: 2026-09-02
+- Knowledge Graph Version: 2.0
+- Date: 2026-06-06
+- Next Audit: 2026-09-06

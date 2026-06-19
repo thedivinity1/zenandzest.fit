@@ -1,3 +1,4 @@
+﻿import { useTheme } from '../context/ThemeContext';
 import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -11,10 +12,10 @@ const shopSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Are My Zen and Zest products lab certified?",
+      "name": "Are Zen and Zest products lab certified?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Every batch of My Zen and Zest products is tested at NABL accredited laboratories for active phytochemical purity, potency, and safety (clearing all heavy metal testing under 1ppm)."
+        "text": "Yes. Every batch of Zen and Zest products is tested at NABL accredited laboratories for active phytochemical purity, potency, and safety (clearing all heavy metal testing under 1ppm)."
       }
     }
   ]
@@ -120,6 +121,9 @@ const products = [
 ];
 
 export default function ShopPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
   const { cartCount, addToCart, setCartOpen } = useCart();
@@ -161,7 +165,7 @@ export default function ShopPage() {
               { icon: '🛡️', label: '30-Day Guarantee' },
               { icon: '🚀', label: 'Free Shipping ₹999+' },
             ].map((item, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}>
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.85rem' }}>
                 <span>{item.icon}</span>
                 {item.label}
               </div>
@@ -177,7 +181,7 @@ export default function ShopPage() {
           background: 'var(--forest-green)',
           border: '1px solid rgba(201,168,76,0.4)',
           borderRadius: 12, padding: '1rem 1.5rem',
-          color: 'white', fontWeight: 600,
+          color: fg('white', '#0f172a'), fontWeight: 600,
           boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
           animation: 'fade-in-up 0.3s ease'
         }}>
@@ -261,7 +265,7 @@ export default function ShopPage() {
                       {product.certifications.slice(0, 2).map(cert => (
                         <span key={cert} style={{
                           padding: '0.2rem 0.5rem', background: 'rgba(0,0,0,0.4)', borderRadius: 4,
-                          color: 'rgba(255,255,255,0.7)', fontSize: '0.65rem', fontWeight: 600
+                          color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.65rem', fontWeight: 600
                         }}>{cert}</span>
                       ))}
                     </div>
@@ -269,7 +273,7 @@ export default function ShopPage() {
 
                   {/* Body */}
                   <div style={{ padding: '1.5rem' }}>
-                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 800, color: 'white', marginBottom: '0.5rem' }}>
+                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '0.5rem' }}>
                       {product.name}
                     </h2>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
@@ -279,7 +283,7 @@ export default function ShopPage() {
                       <span style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem' }}>{product.rating}</span>
                       <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem' }}>({product.reviews.toLocaleString()} reviews)</span>
                     </div>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.825rem', lineHeight: 1.6, marginBottom: '1rem' }}>
+                    <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.825rem', lineHeight: 1.6, marginBottom: '1rem' }}>
                       {product.desc}
                     </p>
 
@@ -318,7 +322,7 @@ export default function ShopPage() {
                       style={{
                         width: '100%', padding: '0.75rem',
                         background: 'linear-gradient(135deg, var(--forest-green) 0%, #0d2a1c 100%)',
-                        color: 'white', border: '1px solid rgba(201,168,76,0.2)',
+                        color: fg('white', '#0f172a'), border: '1px solid rgba(201,168,76,0.2)',
                         borderRadius: 10, fontWeight: 700, fontSize: '0.9rem',
                         cursor: 'pointer', transition: 'all 0.3s ease'
                       }}
@@ -355,7 +359,7 @@ export default function ShopPage() {
                 <div>
                   <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>{item.icon}</div>
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--gold)', marginBottom: '0.5rem' }}>{item.title}</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.65 }}>{item.desc}</p>
+                  <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.85rem', lineHeight: 1.65 }}>{item.desc}</p>
                 </div>
               </ScrollAnimator>
             ))}

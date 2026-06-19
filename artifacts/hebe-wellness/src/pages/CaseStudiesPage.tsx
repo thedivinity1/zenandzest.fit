@@ -1,3 +1,4 @@
+﻿import { useTheme } from '../context/ThemeContext';
 import { useState } from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, BarChart, Bar, Legend } from 'recharts';
 import { useCart } from '../context/CartContext';
@@ -160,15 +161,18 @@ const caseStudiesSchema = {
   "@type": "FAQPage",
   "mainEntity": [{
     "@type": "Question",
-    "name": "What clinical outcomes are documented in My Zen and Zest case studies?",
+    "name": "What clinical outcomes are documented in Zen and Zest case studies?",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "My Zen and Zest's case studies track salivary cortisol stabilization, deep sleep cycles, hair follicle diameter, HbA1c metabolic markers, and serum BDNF. Key results include cortisol stabilization in 12 weeks, deep sleep restoration to 94 minutes, daily hair shedding reduction by 79%, HbA1c levels dropping from 6.2% to 5.4%, and serum BDNF rising from 18.4 to 34.8 ng/mL."
+      "text": "Zen and Zest's case studies track salivary cortisol stabilization, deep sleep cycles, hair follicle diameter, HbA1c metabolic markers, and serum BDNF. Key results include cortisol stabilization in 12 weeks, deep sleep restoration to 94 minutes, daily hair shedding reduction by 79%, HbA1c levels dropping from 6.2% to 5.4%, and serum BDNF rising from 18.4 to 34.8 ng/mL."
     }
   }]
 };
 
 export default function CaseStudiesPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [selectedCaseId, setSelectedCaseId] = useState('1');
   const { addToCart, setCartOpen, applyDiscountCode } = useCart();
 
@@ -181,7 +185,7 @@ export default function CaseStudiesPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudiesSchema) }} />
       <div className="container">
         
@@ -191,7 +195,7 @@ export default function CaseStudiesPage() {
           <h1 className="section-title">
             Protocol Efficacy & <span className="gold-gradient-text">Patient Case Studies</span>
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '650px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
+          <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '650px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
             <strong>Answer-First:</strong> Our patient case studies track physiological biomarkers under standardized botanical protocols. Documented outcomes demonstrate clinical efficacy, including diurnal salivary cortisol normalization within 12 weeks, 18.2% hair density recovery, 27% sleep efficiency gains, and 15-fold Akkermansia microbiome restoration.
           </p>
         </div>
@@ -249,7 +253,7 @@ export default function CaseStudiesPage() {
               {/* Profile details */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '1rem' }}>
                 <div>
-                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'white', fontWeight: 800 }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: fg('white', '#0f172a'), fontWeight: 800 }}>
                     Patient: {currentCase.name} · Age {currentCase.age}
                   </h2>
                   <span style={{ fontSize: '0.8rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -296,7 +300,7 @@ export default function CaseStudiesPage() {
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                         <XAxis dataKey="hour" stroke="rgba(255,255,255,0.4)" style={{ fontSize: '11px' }} />
                         <YAxis stroke="rgba(255,255,255,0.4)" label={{ value: 'Cortisol (nmol/L)', angle: -90, position: 'insideLeft', fill: 'rgba(255,255,255,0.4)', fontSize: '11px' }} style={{ fontSize: '11px' }} />
-                        <Tooltip contentStyle={{ background: '#0d2418', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '8px', color: 'white' }} />
+                        <Tooltip contentStyle={{ background: '#0d2418', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '8px', color: fg('white', '#0f172a') }} />
                         <Area type="monotone" dataKey="Before" stroke="#ef4444" fillOpacity={1} fill="url(#beforeGrad)" strokeWidth={2.5} name="Before Stacks" />
                         <Area type="monotone" dataKey="After" stroke="#4cc987" fillOpacity={1} fill="url(#afterGrad)" strokeWidth={2.5} name="After Stacks" />
                       </AreaChart>
@@ -309,7 +313,7 @@ export default function CaseStudiesPage() {
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                         <XAxis dataKey="cycle" stroke="rgba(255,255,255,0.4)" style={{ fontSize: '11px' }} />
                         <YAxis stroke="rgba(255,255,255,0.4)" label={{ value: 'Stage Duration (mins)', angle: -90, position: 'insideLeft', fill: 'rgba(255,255,255,0.4)', fontSize: '11px' }} style={{ fontSize: '11px' }} />
-                        <Tooltip contentStyle={{ background: '#16102a', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '8px', color: 'white' }} />
+                        <Tooltip contentStyle={{ background: '#16102a', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '8px', color: fg('white', '#0f172a') }} />
                         <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
                         <Bar dataKey="Before" fill="rgba(239,68,68,0.45)" stroke="#ef4444" radius={[4, 4, 0, 0]} name="Before: Broken Deep Phases" />
                         <Bar dataKey="After" fill="rgba(76,201,135,0.45)" stroke="#4cc987" radius={[4, 4, 0, 0]} name="After: Optimal REM & Deep" />
@@ -329,7 +333,7 @@ export default function CaseStudiesPage() {
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                         <XAxis dataKey="week" stroke="rgba(255,255,255,0.4)" style={{ fontSize: '11px' }} />
                         <YAxis stroke="rgba(255,255,255,0.4)" style={{ fontSize: '11px' }} />
-                        <Tooltip contentStyle={{ background: '#0f1f2e', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '8px', color: 'white' }} />
+                        <Tooltip contentStyle={{ background: '#0f1f2e', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '8px', color: fg('white', '#0f172a') }} />
                         <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
                         <Area type="monotone" dataKey="Shedding" stroke="#ef4444" fill="transparent" strokeWidth={2} name="Daily Hair Shedding Count" />
                         <Area type="monotone" dataKey="Follicles" stroke="var(--gold)" fillOpacity={1} fill="url(#hairGrad)" strokeWidth={2.5} name="Follicle Growth Phase %" />
@@ -389,11 +393,11 @@ export default function CaseStudiesPage() {
                 justifyContent: 'center',
                 margin: '0 auto 1rem auto'
               }}>{currentCase.doctorImg}</div>
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 800, color: 'white', marginBottom: '0.25rem' }}>Verified Trial Review</h3>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '0.25rem' }}>Verified Trial Review</h3>
               <p style={{ fontSize: '0.78rem', color: 'var(--gold-light)', fontWeight: 600, marginBottom: '1rem', textTransform: 'uppercase' }}>
                 {currentCase.reviewedBy}
               </p>
-              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, textAlign: 'justify' }}>
+              <p style={{ fontSize: '0.82rem', color: fg('rgba(255,255,255,0.7)', '#334155'), lineHeight: 1.6, textAlign: 'justify' }}>
                 "The patient trials undergo complete multi-point validation. Salivary assays and actigraphy tracking confirm that standardized active phytochemical extracts normalize autonomic biological cascades."
               </p>
             </div>
@@ -409,7 +413,7 @@ export default function CaseStudiesPage() {
                 ACTIVE BUNDLED STACKS
               </span>
 
-              <h3 style={{ fontFamily: 'var(--font-serif)', color: 'white', fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.25rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', color: fg('white', '#0f172a'), fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.25rem' }}>
                 Shop the Recommended Protocol
               </h3>
 
@@ -425,7 +429,7 @@ export default function CaseStudiesPage() {
                     gap: '0.75rem'
                   }}>
                     <span style={{ color: 'var(--gold)', fontSize: '1.2rem' }}>🌿</span>
-                    <span style={{ color: 'white', fontSize: '0.85rem', fontWeight: 600 }}>{prod}</span>
+                    <span style={{ color: fg('white', '#0f172a'), fontSize: '0.85rem', fontWeight: 600 }}>{prod}</span>
                   </div>
                 ))}
               </div>

@@ -1,3 +1,4 @@
+﻿import { useTheme } from '../context/ThemeContext';
 import { useState } from 'react';
 import { useRoute, Link } from 'wouter';
 import { ArrowRight } from 'lucide-react';
@@ -5,6 +6,9 @@ import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, BarC
 
 /* ===== SLEEP QUALITY CALCULATOR ===== */
 function SleepCalculator() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [hours, setHours] = useState(7);
   const [wakeUps, setWakeUps] = useState(1);
   const [energy, setEnergy] = useState(5);
@@ -50,14 +54,14 @@ function SleepCalculator() {
       </div>
       <button onClick={calculate} style={{ width: '100%', padding: '0.875rem', background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', border: 'none', borderRadius: '12px', color: '#000', fontWeight: 700, fontSize: '1rem', cursor: 'pointer', marginBottom: result ? '1.5rem' : 0 }}>Calculate My Sleep Score</button>
       {result && (
-        <div style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${scoreColor}33`, borderRadius: '16px', padding: '1.5rem' }}>
+        <div style={{ background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), border: `1px solid ${scoreColor}33`, borderRadius: '16px', padding: '1.5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
             <div style={{ fontSize: '3.5rem', fontWeight: 900, color: scoreColor, fontFamily: 'var(--font-serif)' }}>{result.score}</div>
             <div style={{ color: scoreColor, fontWeight: 700, fontSize: '1.1rem' }}>{result.label} Sleep Quality</div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {result.tips.map((tip, i) => (
-              <div key={i} style={{ display: 'flex', gap: '0.75rem', padding: '0.75rem', background: 'rgba(255,255,255,0.04)', borderRadius: '10px', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
+              <div key={i} style={{ display: 'flex', gap: '0.75rem', padding: '0.75rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '10px', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}>
                 <span style={{ color: 'var(--gold)', flexShrink: 0 }}>→</span> {tip}
               </div>
             ))}
@@ -70,6 +74,9 @@ function SleepCalculator() {
 
 /* ===== STRESS TRACKER ===== */
 function StressTracker() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [answers, setAnswers] = useState<number[]>(new Array(10).fill(0));
   const [result, setResult] = useState<null | { level: string; score: number; color: string; recs: string[] }>(null);
   const questions = [
@@ -114,7 +121,7 @@ function StressTracker() {
       <button onClick={calculate} style={{ width: '100%', padding: '0.875rem', background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', border: 'none', borderRadius: '12px', color: '#000', fontWeight: 700, fontSize: '1rem', cursor: 'pointer', marginBottom: result ? '1.5rem' : 0 }}>Analyze My Stress Level</button>
       {result && (
         <div>
-          <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.04)', borderRadius: '16px', border: `1px solid ${result.color}33`, marginBottom: '1.5rem' }}>
+          <div style={{ textAlign: 'center', padding: '1.5rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', border: `1px solid ${result.color}33`, marginBottom: '1.5rem' }}>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: result.color, fontFamily: 'var(--font-serif)' }}>{result.score}%</div>
             <div style={{ color: result.color, fontWeight: 700 }}>{result.level}</div>
           </div>
@@ -122,7 +129,7 @@ function StressTracker() {
             <BarChart data={data}><Bar dataKey="value" fill="var(--gold)" radius={4} /><XAxis dataKey="name" tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }} /><Tooltip contentStyle={{ background: '#0a1a0f', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '8px', color: '#fff' }} /></BarChart>
           </ResponsiveContainer>
           <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {result.recs.map((r, i) => <div key={i} style={{ padding: '0.75rem', background: 'rgba(255,255,255,0.04)', borderRadius: '10px', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)', display: 'flex', gap: '0.75rem' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>✓</span>{r}</div>)}
+            {result.recs.map((r, i) => <div key={i} style={{ padding: '0.75rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '10px', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)', display: 'flex', gap: '0.75rem' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>✓</span>{r}</div>)}
           </div>
         </div>
       )}
@@ -132,6 +139,9 @@ function StressTracker() {
 
 /* ===== HAIR HEALTH ANALYSER ===== */
 function HairAnalyser() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [hairType, setHairType] = useState('');
   const [concern, setConcern] = useState('');
   const [diet, setDiet] = useState('');
@@ -170,7 +180,7 @@ function HairAnalyser() {
       <button onClick={calculate} disabled={!hairType || !concern || !diet || !lifestyle} style={{ width: '100%', padding: '0.875rem', background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', border: 'none', borderRadius: '12px', color: '#000', fontWeight: 700, fontSize: '1rem', cursor: 'pointer', opacity: !hairType || !concern ? 0.6 : 1, marginBottom: result ? '1.5rem' : 0 }}>Analyze My Hair Profile</button>
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '16px', padding: '1.5rem', border: '1px solid rgba(201,168,76,0.2)' }}>
+          <div style={{ background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', padding: '1.5rem', border: '1px solid rgba(201,168,76,0.2)' }}>
             <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.08em', marginBottom: '1rem' }}>YOUR PERSONALIZED ROUTINE</div>
             {result.routine.map((r, i) => <div key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.75rem', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>✓</span>{r}</div>)}
           </div>
@@ -188,6 +198,9 @@ function HairAnalyser() {
 
 /* ===== SKIN TYPE FINDER ===== */
 function SkinFinder() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [result, setResult] = useState<null | { type: string; desc: string; botanicals: string[] }>(null);
@@ -227,19 +240,19 @@ function SkinFinder() {
       <div style={{ textAlign: 'center', padding: '2rem', background: 'rgba(201,168,76,0.08)', borderRadius: '16px', border: '1px solid rgba(201,168,76,0.3)', marginBottom: '1.5rem' }}>
         <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🌸</div>
         <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--gold)', fontWeight: 700 }}>{result.type}</div>
-        <p style={{ color: 'rgba(255,255,255,0.7)', marginTop: '0.75rem', fontSize: '0.9rem', lineHeight: 1.7 }}>{result.desc}</p>
+        <p style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), marginTop: '0.75rem', fontSize: '0.9rem', lineHeight: 1.7 }}>{result.desc}</p>
       </div>
-      <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '16px', padding: '1.5rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+      <div style={{ background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', padding: '1.5rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
         <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.08em', marginBottom: '1rem' }}>YOUR BOTANICAL PROTOCOL</div>
         {result.botanicals.map((b, i) => <div key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.65rem', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>✓</span>{b}</div>)}
       </div>
-      <button onClick={reset} style={{ width: '100%', padding: '0.75rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '12px', color: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: '0.9rem' }}>Retake Quiz →</button>
+      <button onClick={reset} style={{ width: '100%', padding: '0.75rem', background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '12px', color: fg('rgba(255,255,255,0.7)', '#334155'), cursor: 'pointer', fontSize: '0.9rem' }}>Retake Quiz →</button>
     </div>
   );
   return (
     <div>
-      <div style={{ background: 'rgba(255,255,255,0.04)', borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>
+      <div style={{ background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '12px', padding: '1rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.8rem', color: fg('rgba(255,255,255,0.5)', '#475569') }}>
           <span>Question {step + 1} of {questions.length}</span><span>{Math.round(((step) / questions.length) * 100)}% complete</span>
         </div>
         <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '100px', overflow: 'hidden' }}>
@@ -262,6 +275,9 @@ function SkinFinder() {
 
 /* ===== BMI + WELLNESS INDEX ===== */
 function WellnessIndex() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [weight, setWeight] = useState(70);
   const [height, setHeight] = useState(170);
   const [sleep, setSleep] = useState(6);
@@ -296,7 +312,7 @@ function WellnessIndex() {
         ].map((input, i) => (
           <div key={i}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.82rem' }}>
-              <span style={{ color: 'rgba(255,255,255,0.7)' }}>{input.label}</span>
+              <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>{input.label}</span>
               <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{input.format(input.value)}</span>
             </div>
             <input type="range" min={input.min} max={input.max} step={input.step} value={input.value} onChange={e => input.set(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
@@ -307,13 +323,13 @@ function WellnessIndex() {
       {result && (
         <div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ textAlign: 'center', padding: '1.25rem', background: 'rgba(255,255,255,0.04)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ textAlign: 'center', padding: '1.25rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
               <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.bmi}</div>
-              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>BMI · {result.bmiLabel}</div>
+              <div style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.85rem' }}>BMI · {result.bmiLabel}</div>
             </div>
             <div style={{ textAlign: 'center', padding: '1.25rem', background: 'rgba(201,168,76,0.08)', borderRadius: '16px', border: '1px solid rgba(201,168,76,0.25)' }}>
               <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.wellnessScore}</div>
-              <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>Wellness Score / 100</div>
+              <div style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.85rem' }}>Wellness Score / 100</div>
             </div>
           </div>
           <ResponsiveContainer width="100%" height={220}>
@@ -331,6 +347,9 @@ function WellnessIndex() {
 
 /* ===== ADAPTOGEN MATCHMAKER ===== */
 function AdaptogenMatchmaker() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [selections, setSelections] = useState<string[]>([]);
   const [result, setResult] = useState<null | { adaptogens: { name: string; desc: string; dose: string }[] }>(null);
   const goals = ['Reduce stress & anxiety', 'Improve sleep quality', 'Boost energy & stamina', 'Enhance focus & memory', 'Balance hormones', 'Improve gut health', 'Strengthen immunity', 'Support hair & skin'];
@@ -351,7 +370,7 @@ function AdaptogenMatchmaker() {
   };
   return (
     <div>
-      <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.875rem', marginBottom: '1rem' }}>Select your wellness goals (choose all that apply):</div>
+      <div style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.875rem', marginBottom: '1rem' }}>Select your wellness goals (choose all that apply):</div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
         {goals.map(g => (
           <button key={g} onClick={() => toggle(g)} style={{ padding: '0.5rem 1rem', borderRadius: '100px', border: `1px solid ${selections.includes(g) ? 'var(--gold)' : 'rgba(255,255,255,0.12)'}`, background: selections.includes(g) ? 'rgba(201,168,76,0.15)' : 'transparent', color: selections.includes(g) ? 'var(--gold)' : 'rgba(255,255,255,0.55)', fontSize: '0.8rem', cursor: 'pointer', transition: 'all 0.2s' }}>{g}</button>
@@ -361,9 +380,9 @@ function AdaptogenMatchmaker() {
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {result.adaptogens.map((a, i) => (
-            <div key={i} style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.04)', borderRadius: '14px', border: '1px solid rgba(201,168,76,0.2)' }}>
+            <div key={i} style={{ padding: '1.25rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '14px', border: '1px solid rgba(201,168,76,0.2)' }}>
               <div style={{ fontFamily: 'var(--font-serif)', color: 'var(--gold)', fontWeight: 700, marginBottom: '0.5rem' }}>{a.name}</div>
-              <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '0.5rem' }}>{a.desc}</div>
+              <div style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '0.5rem' }}>{a.desc}</div>
               <div style={{ display: 'inline-flex', background: 'rgba(201,168,76,0.12)', padding: '0.2rem 0.65rem', borderRadius: '100px', fontSize: '0.75rem', color: 'var(--gold-light)', fontWeight: 600 }}>Dose: {a.dose}</div>
             </div>
           ))}
@@ -375,6 +394,9 @@ function AdaptogenMatchmaker() {
 
 /* ===== SLEEP DEBT CALCULATOR ===== */
 function SleepDebtCalc() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [days, setDays] = useState([6.5, 5.5, 7, 6, 5, 7.5, 6]);
   const [result, setResult] = useState<null | { debt: number; recs: string[] }>(null);
   const needed = 8;
@@ -388,7 +410,7 @@ function SleepDebtCalc() {
   const data = days.map((d, i) => ({ day: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i], hours: d, target: needed }));
   return (
     <div>
-      <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.875rem', marginBottom: '1rem' }}>Log your sleep hours for the last 7 days:</div>
+      <div style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), fontSize: '0.875rem', marginBottom: '1rem' }}>Log your sleep hours for the last 7 days:</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
         {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -403,7 +425,7 @@ function SleepDebtCalc() {
         <div>
           <div style={{ textAlign: 'center', padding: '1.5rem', background: result.debt > 5 ? 'rgba(239,68,68,0.08)' : result.debt > 2 ? 'rgba(251,191,36,0.08)' : 'rgba(74,222,128,0.08)', borderRadius: '16px', border: `1px solid ${result.debt > 5 ? 'rgba(239,68,68,0.3)' : result.debt > 2 ? 'rgba(251,191,36,0.3)' : 'rgba(74,222,128,0.3)'}`, marginBottom: '1.5rem' }}>
             <div style={{ fontSize: '3rem', fontWeight: 900, fontFamily: 'var(--font-serif)', color: result.debt > 5 ? '#ef4444' : result.debt > 2 ? '#fbbf24' : '#4ade80' }}>{result.debt}h</div>
-            <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem' }}>Weekly Sleep Debt (vs. optimal 8 hrs)</div>
+            <div style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.875rem' }}>Weekly Sleep Debt (vs. optimal 8 hrs)</div>
           </div>
           <ResponsiveContainer width="100%" height={160}>
             <BarChart data={data}>
@@ -414,7 +436,7 @@ function SleepDebtCalc() {
             </BarChart>
           </ResponsiveContainer>
           <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {result.recs.map((r, i) => <div key={i} style={{ padding: '0.75rem', background: 'rgba(255,255,255,0.04)', borderRadius: '10px', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)', display: 'flex', gap: '0.75rem' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>→</span>{r}</div>)}
+            {result.recs.map((r, i) => <div key={i} style={{ padding: '0.75rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '10px', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)', display: 'flex', gap: '0.75rem' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>→</span>{r}</div>)}
           </div>
         </div>
       )}
@@ -424,6 +446,9 @@ function SleepDebtCalc() {
 
 /* ===== WELLNESS RITUAL BUILDER ===== */
 function RitualBuilder() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [timeOfDay, setTimeOfDay] = useState<'morning' | 'evening'>('morning');
   const [selected, setSelected] = useState<string[]>([]);
   const morningOptions = ['5-min sunlight exposure (regulate cortisol awakening response)', 'Warm water with Triphala (gut activation)', 'Ashwagandha 300mg (cortisol modulation)', 'Lion\'s Mane 500mg (cognitive priming)', '10-min breathwork or pranayama', 'Cold shower (norepinephrine +300%)', 'Protein-rich breakfast (neurotransmitter precursors)', '20-min walk (zone 2 cardio, mitochondrial health)'];
@@ -437,7 +462,7 @@ function RitualBuilder() {
           <button key={t} onClick={() => { setTimeOfDay(t); setSelected([]); }} style={{ flex: 1, padding: '0.625rem', borderRadius: '10px', border: `1px solid ${timeOfDay === t ? 'var(--gold)' : 'rgba(255,255,255,0.12)'}`, background: timeOfDay === t ? 'rgba(201,168,76,0.15)' : 'transparent', color: timeOfDay === t ? 'var(--gold)' : 'rgba(255,255,255,0.55)', cursor: 'pointer', fontWeight: timeOfDay === t ? 700 : 400, fontSize: '0.875rem', textTransform: 'capitalize' }}>{timeOfDay === t ? (t === 'morning' ? '☀️' : '🌙') : ''} {t} Ritual</button>
         ))}
       </div>
-      <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.82rem', marginBottom: '1rem' }}>Select the practices you want to build into your {timeOfDay} ritual:</div>
+      <div style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.82rem', marginBottom: '1rem' }}>Select the practices you want to build into your {timeOfDay} ritual:</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem', marginBottom: '1.5rem' }}>
         {options.map((opt, i) => (
           <button key={i} onClick={() => toggle(opt)} style={{ padding: '0.75rem 1rem', borderRadius: '12px', border: `1px solid ${selected.includes(opt) ? 'rgba(201,168,76,0.4)' : 'rgba(255,255,255,0.08)'}`, background: selected.includes(opt) ? 'rgba(201,168,76,0.1)' : 'rgba(255,255,255,0.03)', color: selected.includes(opt) ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.6)', textAlign: 'left', cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.75rem', transition: 'all 0.2s' }}>
@@ -462,6 +487,9 @@ function RitualBuilder() {
 
 /* ===== CIRCADIAN CHRONOTYPE PLANNER ===== */
 function ChronotypePlanner() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [focus, setFocus] = useState('09:00 - 12:00');
   const [waking, setWaking] = useState('Gradual rise');
   const [screens, setScreens] = useState('Under 30m');
@@ -554,7 +582,7 @@ function ChronotypePlanner() {
               <span style={{ fontSize: '3rem' }}>{result.icon}</span>
               <div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.08em' }}>YOUR CIRCADIAN CHRONOTYPE</div>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', fontWeight: 800 }}>{result.type} Chronotype</h3>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), fontWeight: 800 }}>{result.type} Chronotype</h3>
               </div>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.875rem', lineHeight: 1.6 }}>{result.desc}</p>
@@ -579,6 +607,9 @@ function ChronotypePlanner() {
 
 /* ===== BIOLOGICAL CELL AGE & LONGEVITY INDEX ===== */
 function BiologicalAgeCalc() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [chronoAge, setChronoAge] = useState(35);
   const [exercise, setExercise] = useState('1-2 days (Standard)');
   const [nutrition, setNutrition] = useState('Occasional');
@@ -633,7 +664,7 @@ function BiologicalAgeCalc() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '2rem' }} className="two-col-grid">
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.82rem' }}>
-            <span style={{ color: 'rgba(255,255,255,0.7)' }}>Chronological Age</span>
+            <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>Chronological Age</span>
             <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{chronoAge} yrs</span>
           </div>
           <input type="range" min={18} max={90} value={chronoAge} onChange={e => setChronoAge(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
@@ -641,7 +672,7 @@ function BiologicalAgeCalc() {
 
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.82rem' }}>
-            <span style={{ color: 'rgba(255,255,255,0.7)' }}>Resting Heart Rate (BPM)</span>
+            <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>Resting Heart Rate (BPM)</span>
             <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{heartRate} bpm</span>
           </div>
           <input type="range" min={45} max={100} value={heartRate} onChange={e => setHeartRate(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
@@ -669,7 +700,7 @@ function BiologicalAgeCalc() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.5rem' }} className="two-col-grid">
           <div style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${result.color}33`, borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.bioAge}</div>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>BIOLOGICAL CELL AGE</div>
+            <div style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>BIOLOGICAL CELL AGE</div>
             <div style={{
               fontSize: '0.8rem',
               fontWeight: 700,
@@ -706,6 +737,9 @@ function BiologicalAgeCalc() {
 
 /* ===== VO2 MAX & HEALTHSPAN ESTIMATOR ===== */
 function VO2MaxEstimator() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [age, setAge] = useState(30);
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [restingHR, setRestingHR] = useState(65);
@@ -739,7 +773,7 @@ function VO2MaxEstimator() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '2rem' }} className="two-col-grid">
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.82rem' }}>
-            <span style={{ color: 'rgba(255,255,255,0.7)' }}>Age</span>
+            <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>Age</span>
             <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{age} yrs</span>
           </div>
           <input type="range" min={18} max={80} value={age} onChange={e => setAge(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
@@ -747,7 +781,7 @@ function VO2MaxEstimator() {
 
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.82rem' }}>
-            <span style={{ color: 'rgba(255,255,255,0.7)' }}>Resting Heart Rate (BPM)</span>
+            <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>Resting Heart Rate (BPM)</span>
             <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{restingHR} bpm</span>
           </div>
           <input type="range" min={40} max={100} value={restingHR} onChange={e => setRestingHR(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
@@ -755,7 +789,7 @@ function VO2MaxEstimator() {
 
         <div style={{ gridColumn: 'span 2' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.82rem' }}>
-            <span style={{ color: 'rgba(255,255,255,0.7)' }}>1.5-Mile Running Time (Minutes)</span>
+            <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>1.5-Mile Running Time (Minutes)</span>
             <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{runTime} mins</span>
           </div>
           <input type="range" min={5} max={25} step={0.5} value={runTime} onChange={e => setRunTime(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
@@ -777,7 +811,7 @@ function VO2MaxEstimator() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.5rem', marginTop: '1.5rem' }} className="two-col-grid">
           <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.vo2Max}</div>
-            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>ml/kg/min</div>
+            <div style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>ml/kg/min</div>
             <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--gold)', background: 'rgba(201,168,76,0.1)', padding: '0.3rem 0.65rem', borderRadius: '100px', display: 'inline-block', marginBottom: '1.25rem' }}>
               {result.percentile}
             </div>
@@ -806,6 +840,9 @@ function VO2MaxEstimator() {
 
 /* ===== BDNF NEUROPLASTICITY INDEX ===== */
 function BDNFIndexCalc() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [exercise, setExercise] = useState('1-2 days (Light)');
   const [sleep, setSleep] = useState('Occasional disruptions');
   const [diet, setDiet] = useState('Clean foods & fats');
@@ -884,6 +921,9 @@ function BDNFIndexCalc() {
 
 /* ===== BOTANICAL POTENCY AUDIT MATRIX ===== */
 function DosageAuditMatrix() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [genericDose, setGenericDose] = useState(500);
   const [activePercentage, setActivePercentage] = useState(1);
   const [result, setResult] = useState<null | { activeGeneric: number; activeZen: number; ratio: number; explanation: string }>(null);
@@ -892,7 +932,7 @@ function DosageAuditMatrix() {
     const activeGeneric = (genericDose * activePercentage) / 100;
     const activeZen = (genericDose * 5) / 100;
     const ratio = 5 / activePercentage;
-    const explanation = `At ${genericDose}mg, your generic raw herbal powder supplement yields only ${activeGeneric}mg of active biomarkers. My Zen and Zest's clinical standardized extract yields a certified ${activeZen}mg of pure active compounds — ${Math.round(ratio)}x more. This is why standardized extracts produce real clinical results, while raw powders fall short.`;
+    const explanation = `At ${genericDose}mg, your generic raw herbal powder supplement yields only ${activeGeneric}mg of active biomarkers. Zen and Zest's clinical standardized extract yields a certified ${activeZen}mg of pure active compounds — ${Math.round(ratio)}x more. This is why standardized extracts produce real clinical results, while raw powders fall short.`;
 
     setResult({ activeGeneric, activeZen, ratio, explanation });
   };
@@ -902,7 +942,7 @@ function DosageAuditMatrix() {
       <div style={{ display: 'grid', gap: '1.25rem', marginBottom: '2rem' }}>
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.82rem' }}>
-            <span style={{ color: 'rgba(255,255,255,0.7)' }}>Generic Supplement Capsule Dose</span>
+            <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>Generic Supplement Capsule Dose</span>
             <span style={{ color: 'var(--gold)', fontWeight: 700 }}>{genericDose} mg</span>
           </div>
           <input type="range" min={100} max={1500} step={50} value={genericDose} onChange={e => setGenericDose(Number(e.target.value))} style={{ width: '100%', accentColor: 'var(--gold)' }} />
@@ -931,9 +971,9 @@ function DosageAuditMatrix() {
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ef4444' }}>{result.activeGeneric} mg</div>
               <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase' }}>Generic Active Payload</div>
             </div>
-            <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.04)', borderRadius: '12px', border: '1px solid var(--gold)' }}>
+            <div style={{ padding: '1rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '12px', border: '1px solid var(--gold)' }}>
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#4cc987' }}>{result.activeZen} mg</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--gold-light)', textTransform: 'uppercase' }}>My Zen and Zest Active Payload</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--gold-light)', textTransform: 'uppercase' }}>Zen and Zest Active Payload</div>
             </div>
           </div>
           <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.83rem', lineHeight: 1.6, fontStyle: 'italic' }}>
@@ -962,13 +1002,16 @@ const tools = [
 ];
 
 export default function ToolsPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [match, params] = useRoute("/tools/:id");
   const activeToolId = match ? params.id : null;
   const active = tools.find(t => t.id === activeToolId);
 
   if (active) {
     return (
-      <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+      <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
         <div className="container" style={{ maxWidth: '800px' }}>
           <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--gold-light)', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', fontSize: '0.9rem', transition: 'color 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
@@ -981,7 +1024,7 @@ export default function ToolsPage() {
               <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `${active.color}ee`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem', border: '1px solid rgba(201,168,76,0.2)' }}>{active.icon}</div>
               <div>
                 <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.25rem', fontWeight: 800 }}>{active.name}</h1>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>{active.desc}</p>
+                <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>{active.desc}</p>
               </div>
             </div>
             <div style={{ maxWidth: '680px' }}>{active.component}</div>
@@ -993,6 +1036,64 @@ export default function ToolsPage() {
 
   return (
     <div style={{ background: 'var(--darkest)', minHeight: '100vh' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://zenandzest.fit/tools#webpage",
+            "url": "https://zenandzest.fit/tools",
+            "name": "Wellness Tools & Calculators | Zen and Zest",
+            "description": "Free science-backed wellness assessment tools: sleep quality calculator, biological age index, VO2 Max estimator, BDNF neuroplasticity index, circadian chronotype planner, and adaptogen matchmaker.",
+            "isPartOf": { "@id": "https://zenandzest.fit/#website" }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the Biological Cell Age Index calculator?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Biological Cell Age Index is a free epigenetic assessment tool by Zen and Zest that estimates your biological age based on sleep quality, oxidative stress markers, exercise habits, diet, and environmental exposures. It outputs your epigenetic health rate and cell age deviation from chronological age."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does the VO2 Max Healthspan Estimator work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The VO2 Max Healthspan Estimator calculates your cardiorespiratory fitness using age, resting heart rate, exercise frequency, and self-reported exertion capacity. It outputs your estimated VO2 Max score, cardiovascular healthspan age, and recovery heart rate zones using the Karvonen formula."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What does the Sleep Quality Calculator measure?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Sleep Quality Calculator by Zen and Zest takes inputs including nightly sleep duration, number of wake-ups, morning energy level, and screen exposure before sleep. It produces a personalized sleep efficiency score (0–100) with category ratings (Excellent, Good, Moderate, Poor) and botanical protocol recommendations."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the Adaptogen Matchmaker tool?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Adaptogen Matchmaker is a free quiz-based tool that identifies the most suitable botanical adaptogens for your unique health profile. Based on your primary wellness goal (stress, sleep, cognition, immunity, metabolism), it recommends standardized extracts such as KSM-66 Ashwagandha, Wayanad Brahmi, Rhodiola Rosea, or Kashmiri Saffron."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does the BDNF Neuroplasticity Index work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The BDNF Neuroplasticity Index assesses your brain's neurotrophic factor activity by analyzing exercise frequency, cold exposure habits, cognitive challenge levels, sleep quality, and cortisol stress load. It outputs a BDNF expression score, cognitive brain aging rate, and neuroplasticity optimization protocol."
+                }
+              }
+            ]
+          }
+        ]
+      }) }} />
       {/* Hero */}
       <section style={{ background: 'linear-gradient(135deg, #0a1a0f 0%, #1a3d2e 50%, #0a1a0f 100%)', padding: '5rem 0 3rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />
@@ -1042,7 +1143,7 @@ export default function ToolsPage() {
                   }}
                 >
                   <div>
-                    <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>{tool.icon}</div>
+                    <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: bg('rgba(0,0,0,0.3)', 'rgba(255,255,255,0.8)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>{tool.icon}</div>
                     <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: '#fff', marginBottom: '0.5rem', textAlign: 'left', fontWeight: 700 }}>{tool.name}</h2>
                     <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem', lineHeight: 1.6, textAlign: 'left' }}>{tool.desc}</p>
                   </div>

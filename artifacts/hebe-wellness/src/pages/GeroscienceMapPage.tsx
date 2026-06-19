@@ -1,4 +1,4 @@
-import ScrollAnimator from '../components/ScrollAnimator';
+﻿import ScrollAnimator from '../components/ScrollAnimator';
 
 const geroscienceSchema = {
   "@context": "https://schema.org",

@@ -1,4 +1,4 @@
-import ScrollAnimator from '../components/ScrollAnimator';
+﻿import ScrollAnimator from '../components/ScrollAnimator';
 
 const gutSchema = {
   "@context": "https://schema.org",

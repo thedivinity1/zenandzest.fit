@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Award, UserCheck, TrendingDown, TrendingUp } from 'lucide-react';
@@ -8,10 +8,10 @@ const clinicalCasesSchema = {
   "@type": "FAQPage",
   "mainEntity": [{
     "@type": "Question",
-    "name": "What clinical evidence supports My Zen and Zest botanical interventions?",
+    "name": "What clinical evidence supports Zen and Zest botanical interventions?",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "My Zen and Zest tracks real patient biomarkers across HPA axis modulation, DHT block protocols, sleep efficiency improvements, and Akkermansia restoration. Case studies demonstrate measurable outcomes: cortisol normalization in 12 weeks, 18.2% hair density increase, 27% sleep efficiency improvement, and 15-fold Akkermansia recovery with standardized botanical stacks."
+      "text": "Zen and Zest tracks real patient biomarkers across HPA axis modulation, DHT block protocols, sleep efficiency improvements, and Akkermansia restoration. Case studies demonstrate measurable outcomes: cortisol normalization in 12 weeks, 18.2% hair density increase, 27% sleep efficiency improvement, and 15-fold Akkermansia recovery with standardized botanical stacks."
     }
   }]
 };
@@ -108,19 +108,22 @@ const cases: Record<string, CaseStudy> = {
 };
 
 export default function ClinicalCasesPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   const [selectedCaseId, setSelectedCaseId] = useState<string>('cortisol');
 
   const activeCase = cases[selectedCaseId];
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicalCasesSchema) }} />
       <div className="container" style={{ maxWidth: '1100px' }}>
         
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div className="section-tag">Clinical Evidence & Biomarkers</div>
           <h1 className="section-title">Patient Biomarker <span className="gold-gradient-text">Case Studies</span></h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
+          <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), maxWidth: '680px', margin: '0.75rem auto 0', fontSize: '0.98rem', lineHeight: 1.7 }}>
             <strong>Answer-First:</strong> Our clinical cases track real patient biomarkers before and after standardized botanical interventions. Quantifiable outcomes validate our methodologies, showing cortisol stabilization within 12 weeks, 18.2% hair density increase, 27% delta sleep efficiency gains, and 15-fold Akkermansia restoration.
           </p>
         </ScrollAnimator>
@@ -160,21 +163,21 @@ export default function ClinicalCasesPage() {
                   <Award size={16} /> CASE STUDY #10{Object.keys(cases).indexOf(activeCase.id) + 1}
                 </div>
 
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'white', fontWeight: 900, marginBottom: '1rem' }}>
+                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: fg('white', '#0f172a'), fontWeight: 900, marginBottom: '1rem' }}>
                   {activeCase.title}
                 </h2>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem', marginBottom: '1.5rem', fontSize: '0.88rem' }}>
                   <div>
-                    <strong style={{ color: 'white', display: 'block' }}>Patient Cohort:</strong>
-                    <span style={{ color: 'rgba(255,255,255,0.7)' }}>{activeCase.patient}</span>
+                    <strong style={{ color: fg('white', '#0f172a'), display: 'block' }}>Patient Cohort:</strong>
+                    <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>{activeCase.patient}</span>
                   </div>
                   <div>
-                    <strong style={{ color: 'white', display: 'block' }}>Primary Diagnosis:</strong>
-                    <span style={{ color: 'rgba(255,255,255,0.7)' }}>{activeCase.diagnosis}</span>
+                    <strong style={{ color: fg('white', '#0f172a'), display: 'block' }}>Primary Diagnosis:</strong>
+                    <span style={{ color: fg('rgba(255,255,255,0.7)', '#334155') }}>{activeCase.diagnosis}</span>
                   </div>
                   <div>
-                    <strong style={{ color: 'white', display: 'block' }}>Standardized Protocol:</strong>
+                    <strong style={{ color: fg('white', '#0f172a'), display: 'block' }}>Standardized Protocol:</strong>
                     <span style={{ color: 'var(--gold-light)' }}>{activeCase.protocol}</span>
                   </div>
                 </div>
@@ -188,7 +191,7 @@ export default function ClinicalCasesPage() {
             {/* Right Column: Recharts Visualization */}
             <ScrollAnimator>
               <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2rem' }}>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'white', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <UserCheck size={20} color="var(--gold)" /> Biomarker Trend Chart
                 </h3>
 
@@ -198,15 +201,15 @@ export default function ClinicalCasesPage() {
                       <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                       <XAxis dataKey="week" stroke="rgba(255,255,255,0.4)" fontSize={11} />
                       <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-                      <Tooltip contentStyle={{ background: 'var(--mid-dark)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }} />
+                      <Tooltip contentStyle={{ background: 'var(--mid-dark)', border: '1px solid rgba(255,255,255,0.1)', color: fg('white', '#0f172a') }} />
                       <Legend wrapperStyle={{ fontSize: 11 }} />
                       <Line type="monotone" dataKey="baseline" name="Control (No Treatment)" stroke="#ff6b6b" strokeWidth={2} dot={{ r: 4 }} />
-                      <Line type="monotone" dataKey="treatment" name="My Zen and Zest Protocol" stroke="var(--gold)" strokeWidth={3} dot={{ r: 5 }} />
+                      <Line type="monotone" dataKey="treatment" name="Zen and Zest Protocol" stroke="var(--gold)" strokeWidth={3} dot={{ r: 5 }} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'center', fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'center', fontSize: '0.8rem', color: fg('rgba(255,255,255,0.6)', '#334155') }}>
                   <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
                     <TrendingDown size={14} color="#ff6b6b" /> Control baseline remains aberrant.
                   </div>
@@ -225,3 +228,5 @@ export default function ClinicalCasesPage() {
     </div>
   );
 }
+
+import { useTheme } from '../context/ThemeContext';

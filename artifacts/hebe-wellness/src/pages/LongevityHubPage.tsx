@@ -1,4 +1,5 @@
-import { Link } from 'wouter';
+﻿import { Link } from 'wouter';
+import { useTheme } from '../context/ThemeContext';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { Sparkles, ArrowRight, ShieldCheck, Heart, Activity, Compass } from 'lucide-react';
 
@@ -7,21 +8,21 @@ const longevityHubSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://myzenandzest.com/longevity-hub#webpage",
-      "url": "https://myzenandzest.com/longevity-hub",
+      "@id": "https://zenandzest.fit/longevity-hub#webpage",
+      "url": "https://zenandzest.fit/longevity-hub",
       "name": "Longevity Hub | Science-Backed Cellular Protocols",
-      "description": "Access the My Zen and Zest Longevity Hub. Explore 20+ clinical calculators, assessment tests, and diagnostic planners to optimize healthspan and biological age."
+      "description": "Access the Zen and Zest Longevity Hub. Explore 20+ clinical calculators, assessment tests, and diagnostic planners to optimize healthspan and biological age."
     },
     {
       "@type": "FAQPage",
-      "@id": "https://myzenandzest.com/longevity-hub#faq",
+      "@id": "https://zenandzest.fit/longevity-hub#faq",
       "mainEntity": [
         {
           "@type": "Question",
           "name": "What is the Longevity Hub?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The Longevity Hub is a digital clinic containing 20+ assessment tools and diagnostic trackers developed by My Zen and Zest to help measure and optimize sleep debt, biological cell age, circadian alignment, and botanical dosage efficacy."
+            "text": "The Longevity Hub is a digital clinic containing 20+ assessment tools and diagnostic trackers developed by Zen and Zest to help measure and optimize sleep debt, biological cell age, circadian alignment, and botanical dosage efficacy."
           }
         }
       ]
@@ -86,8 +87,11 @@ const categories = [
 ];
 
 export default function LongevityHubPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '5rem 0', color: 'white' }}>
+    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '5rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(longevityHubSchema) }} />
       
       {/* Hero */}
@@ -117,7 +121,7 @@ export default function LongevityHubPage() {
                     {cat.icon}
                     <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', fontWeight: 800 }}>{cat.title}</h2>
                   </div>
-                  <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>{cat.desc}</p>
+                  <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>{cat.desc}</p>
                 </div>
                 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>

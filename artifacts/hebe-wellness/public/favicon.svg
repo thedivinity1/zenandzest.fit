@@ -1,3 +1,53 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer enso circle — open gap at top-right (zen incomplete circle) -->
+  <circle cx="256" cy="256" r="210" stroke="#c9a84c" stroke-width="20" fill="none"
+    stroke-linecap="round" stroke-dasharray="1200 120" stroke-dashoffset="40"/>
+  
+  <!-- Inner soft glow ring -->
+  <circle cx="256" cy="256" r="210" stroke="#e8c97a" stroke-width="3" fill="none"
+    stroke-linecap="round" stroke-dasharray="1200 120" stroke-dashoffset="40" opacity="0.4"/>
+
+  <!-- Lotus petals — 8 petals in two layers -->
+  <!-- Layer 1: main petals -->
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.95"/>
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.9" transform="rotate(45 256 300)"/>
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.9" transform="rotate(-45 256 300)"/>
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.75" transform="rotate(90 256 300)"/>
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.75" transform="rotate(-90 256 300)"/>
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.55" transform="rotate(135 256 300)"/>
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.55" transform="rotate(-135 256 300)"/>
+  <ellipse cx="256" cy="300" rx="26" ry="65" fill="#c9a84c" opacity="0.45" transform="rotate(180 256 300)"/>
+
+  <!-- Layer 2: inner accent petals (smaller, lighter) -->
+  <ellipse cx="256" cy="280" rx="14" ry="42" fill="#e8c97a" opacity="0.6"/>
+  <ellipse cx="256" cy="280" rx="14" ry="42" fill="#e8c97a" opacity="0.5" transform="rotate(60 256 280)"/>
+  <ellipse cx="256" cy="280" rx="14" ry="42" fill="#e8c97a" opacity="0.5" transform="rotate(-60 256 280)"/>
+  <ellipse cx="256" cy="280" rx="14" ry="42" fill="#e8c97a" opacity="0.4" transform="rotate(120 256 280)"/>
+  <ellipse cx="256" cy="280" rx="14" ry="42" fill="#e8c97a" opacity="0.4" transform="rotate(-120 256 280)"/>
+  <ellipse cx="256" cy="280" rx="14" ry="42" fill="#e8c97a" opacity="0.35" transform="rotate(180 256 280)"/>
+
+  <!-- Lotus center: dark circle then gold circle -->
+  <circle cx="256" cy="256" r="48" fill="#0d1f18"/>
+  <circle cx="256" cy="256" r="34" fill="url(#goldGrad)"/>
+  <circle cx="256" cy="256" r="20" fill="#0d1f18"/>
+  <circle cx="256" cy="256" r="12" fill="#c9a84c"/>
+
+  <!-- Spark/flame (Zest) — elegant flame top-right -->
+  <path d="M 340 155 
+    C 348 140, 354 122, 345 108
+    C 360 124, 366 145, 354 162
+    C 366 148, 370 128, 358 112
+    C 376 132, 378 156, 362 174
+    C 373 160, 376 140, 362 126
+    C 382 148, 382 174, 364 192
+    C 360 196, 350 200, 340 196
+    C 352 185, 356 168, 340 155 Z"
+    fill="#e8c97a" opacity="0.97"/>
+
+  <defs>
+    <radialGradient id="goldGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#f0d887"/>
+      <stop offset="100%" stop-color="#a87e30"/>
+    </radialGradient>
+  </defs>
 </svg>
