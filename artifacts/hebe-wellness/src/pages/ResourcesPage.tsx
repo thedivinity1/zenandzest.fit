@@ -91,14 +91,14 @@ export default function ResourcesPage() {
   });
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(resourcesSchema) }} />
       {/* Hero */}
       <section style={{ background: 'linear-gradient(135deg, #0a1a0f 0%, #1a3d2e 50%, #0a1a0f 100%)', padding: '5rem 0 3rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1rem', borderRadius: '100px', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '1.5rem', background: 'rgba(201,168,76,0.08)' }}>KNOWLEDGE LIBRARY</div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#fff', marginBottom: '1rem', fontWeight: 900 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 900 }}>
             Free Wellness <span style={{ color: 'var(--gold)' }}>Knowledge Library</span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '700px', margin: '0 auto', lineHeight: 1.75 }}>
@@ -129,12 +129,12 @@ export default function ResourcesPage() {
           {activeSection === 'guides' && (
             <div>
               <div style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Free Download <span style={{ color: 'var(--gold)' }}>Guides</span></h2>
+                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: fg('#fff', '#0f172a'), marginBottom: '0.5rem' }}>Free Download <span style={{ color: 'var(--gold)' }}>Guides</span></h2>
                 <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>Clinical-grade wellness guides curated by our medical team. No email required.</p>
               </div>
               <div className="res-grid">
                 {downloadGuides.map((guide, i) => (
-                  <div key={i} style={{ borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)', transition: 'transform 0.3s ease' }}
+                  <div key={i} style={{ borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), transition: 'transform 0.3s ease' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'}>
                     <div style={{ height: '120px', background: guide.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem', position: 'relative' }}>
@@ -142,7 +142,7 @@ export default function ResourcesPage() {
                       <span style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(0,0,0,0.4)', padding: '0.2rem 0.6rem', borderRadius: '100px', fontSize: '0.7rem', color: 'var(--gold-light)', fontWeight: 600 }}>{guide.tag}</span>
                     </div>
                     <div style={{ padding: '1.5rem' }}>
-                      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: '#fff', marginBottom: '0.25rem' }}>{guide.title}</div>
+                      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: fg('#fff', '#0f172a'), marginBottom: '0.25rem' }}>{guide.title}</div>
                       <div style={{ color: 'var(--gold)', fontSize: '0.75rem', marginBottom: '0.75rem' }}>{guide.pages}</div>
                       <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.83rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>{guide.desc}</p>
                       <button onClick={() => setDownloadedGuides(prev => prev.includes(i) ? prev : [...prev, i])} style={{ width: '100%', padding: '0.625rem', background: downloadedGuides.includes(i) ? 'rgba(74,222,128,0.1)' : 'rgba(201,168,76,0.1)', border: `1px solid ${downloadedGuides.includes(i) ? 'rgba(74,222,128,0.3)' : 'rgba(201,168,76,0.3)'}`, borderRadius: '10px', color: downloadedGuides.includes(i) ? '#4ade80' : 'var(--gold)', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem', transition: 'all 0.2s' }}>
@@ -159,17 +159,17 @@ export default function ResourcesPage() {
           {activeSection === 'research' && (
             <div>
               <div style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Research <span style={{ color: 'var(--gold)' }}>Citations Library</span></h2>
+                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: fg('#fff', '#0f172a'), marginBottom: '0.5rem' }}>Research <span style={{ color: 'var(--gold)' }}>Citations Library</span></h2>
                 <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>Every claim we make is backed by peer-reviewed science. Here are key references.</p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {researchCitations.map((cite, i) => (
-                  <div key={i} style={{ padding: '1.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', transition: 'border-color 0.2s' }}
+                  <div key={i} style={{ padding: '1.5rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(255,255,255,0.07)', borderRadius: '16px', transition: 'border-color 0.2s' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.2)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
                       <div style={{ flex: 1 }}>
-                        <div style={{ fontFamily: 'var(--font-serif)', color: '#fff', fontSize: '0.975rem', lineHeight: 1.5, marginBottom: '0.5rem' }}>{cite.title}</div>
+                        <div style={{ fontFamily: 'var(--font-serif)', color: fg('#fff', '#0f172a'), fontSize: '0.975rem', lineHeight: 1.5, marginBottom: '0.5rem' }}>{cite.title}</div>
                         <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.8rem' }}>{cite.author} ({cite.year}) · <span style={{ fontStyle: 'italic' }}>{cite.journal}</span></div>
                         <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.25rem' }}>DOI: {cite.doi}</div>
                       </div>
@@ -188,9 +188,9 @@ export default function ResourcesPage() {
           {activeSection === 'glossary' && (
             <div>
               <div style={{ marginBottom: '2rem' }}>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Botanical & Wellness <span style={{ color: 'var(--gold)' }}>Glossary</span></h2>
+                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: fg('#fff', '#0f172a'), marginBottom: '0.5rem' }}>Botanical & Wellness <span style={{ color: 'var(--gold)' }}>Glossary</span></h2>
                 <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem', marginBottom: '1.5rem' }}>A-Z reference guide to botanical, Ayurvedic, and clinical wellness terminology.</p>
-                <input type="text" value={glossarySearch} onChange={e => setGlossarySearch(e.target.value)} placeholder="Search terms..." style={{ width: '100%', maxWidth: '400px', padding: '0.75rem 1.25rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '100px', color: '#fff', outline: 'none', fontSize: '0.9rem' }} />
+                <input type="text" value={glossarySearch} onChange={e => setGlossarySearch(e.target.value)} placeholder="Search terms..." style={{ width: '100%', maxWidth: '400px', padding: '0.75rem 1.25rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '100px', color: fg('#fff', '#0f172a'), outline: 'none', fontSize: '0.9rem' }} />
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '2rem' }}>
                 {alphabet.map(l => (
@@ -199,7 +199,7 @@ export default function ResourcesPage() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
                 {filteredGlossary.map((item, i) => (
-                  <div key={i} style={{ padding: '1.25rem 1.5rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px' }}>
+                  <div key={i} style={{ padding: '1.25rem 1.5rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px' }}>
                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                       <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--gold)', fontWeight: 700, flexShrink: 0 }}>{item.term}</span>
                       <span style={{ background: 'rgba(255,255,255,0.06)', padding: '0.15rem 0.5rem', borderRadius: '6px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', flexShrink: 0 }}>{item.category}</span>
@@ -218,12 +218,12 @@ export default function ResourcesPage() {
           {activeSection === 'video' && (
             <div>
               <div style={{ marginBottom: '3rem' }}>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.5rem' }}>Video <span style={{ color: 'var(--gold)' }}>Learning Library</span></h2>
+                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: fg('#fff', '#0f172a'), marginBottom: '0.5rem' }}>Video <span style={{ color: 'var(--gold)' }}>Learning Library</span></h2>
                 <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>In-depth video explanations from our clinical team. Science made accessible.</p>
               </div>
               <div className="res-grid">
                 {videoLibrary.map((video, i) => (
-                  <div key={i} style={{ borderRadius: '18px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)', cursor: 'pointer', transition: 'transform 0.3s ease' }}
+                  <div key={i} style={{ borderRadius: '18px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), cursor: 'pointer', transition: 'transform 0.3s ease' }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)'}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'}>
                     <div style={{ height: '160px', background: 'linear-gradient(135deg, #0a1a0f, #1a3d2e)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', position: 'relative' }}>
@@ -233,11 +233,11 @@ export default function ResourcesPage() {
                         onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '0'}>
                         <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(201,168,76,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', paddingLeft: '4px' }}>▶</div>
                       </div>
-                      <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', background: 'rgba(0,0,0,0.6)', padding: '0.2rem 0.5rem', borderRadius: '6px', fontSize: '0.72rem', color: '#fff' }}>{video.duration}</div>
+                      <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', background: 'rgba(0,0,0,0.6)', padding: '0.2rem 0.5rem', borderRadius: '6px', fontSize: '0.72rem', color: fg('#fff', '#0f172a') }}>{video.duration}</div>
                     </div>
                     <div style={{ padding: '1.25rem' }}>
                       <span style={{ background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', padding: '0.2rem 0.6rem', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 700 }}>{video.category}</span>
-                      <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '0.975rem', color: '#fff', marginTop: '0.75rem', lineHeight: 1.4 }}>{video.title}</h3>
+                      <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '0.975rem', color: fg('#fff', '#0f172a'), marginTop: '0.75rem', lineHeight: 1.4 }}>{video.title}</h3>
                       <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.5rem' }}>{video.views} views</div>
                     </div>
                   </div>

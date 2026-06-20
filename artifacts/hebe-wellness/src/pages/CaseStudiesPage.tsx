@@ -185,7 +185,7 @@ export default function CaseStudiesPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudiesSchema) }} />
       <div className="container">
         
@@ -243,7 +243,7 @@ export default function CaseStudiesPage() {
           {/* Left Pane: Summary and Charts */}
           <div>
             <div style={{
-              background: 'rgba(255,255,255,0.02)',
+              background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'),
               border: '1px solid rgba(255,255,255,0.05)',
               borderRadius: '24px',
               padding: '2.5rem',
@@ -352,7 +352,7 @@ export default function CaseStudiesPage() {
                   {currentCase.biomarkers.map((bio, index) => (
                     <div key={index} style={{
                       padding: '1rem',
-                      background: 'rgba(255,255,255,0.03)',
+                      background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'),
                       border: '1px solid rgba(255,255,255,0.05)',
                       borderRadius: '12px'
                     }}>
@@ -421,7 +421,7 @@ export default function CaseStudiesPage() {
                 {currentCase.protocol.map((prod, index) => (
                   <div key={index} style={{
                     padding: '0.85rem',
-                    background: 'rgba(255,255,255,0.03)',
+                    background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'),
                     border: '1px solid rgba(255,255,255,0.06)',
                     borderRadius: '10px',
                     display: 'flex',

@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import { Link } from 'wouter';
 import { useCart } from '../context/CartContext';
@@ -89,6 +90,10 @@ const quizSchema = {
 };
 
 export default function QuizPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<{ q: number; a: number }[]>([]);
   const [done, setDone] = useState(false);
@@ -155,7 +160,7 @@ export default function QuizPage() {
 
             <h2 style={{
               fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
-              fontWeight: 800, color: 'white', marginBottom: '2rem', lineHeight: 1.35
+              fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '2rem', lineHeight: 1.35
             }}>
               {questions[currentQ].q}
             </h2>
@@ -171,11 +176,11 @@ export default function QuizPage() {
                   onClick={() => selectAnswer(i)}
                   style={{
                     padding: '1.25rem', textAlign: 'left',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    background: bg('rgba(255,255,255,0.04)', 'rgba(0,0,0,0.04)'),
+                    border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'),
                     borderRadius: 14, cursor: 'pointer',
                     transition: 'all 0.2s ease',
-                    color: 'white'
+                    color: fg('white', '#0f172a')
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget;
@@ -191,7 +196,7 @@ export default function QuizPage() {
                   }}
                 >
                   <span style={{ fontSize: '1.5rem', display: 'block', marginBottom: '0.5rem' }}>{opt.icon}</span>
-                  <span style={{ fontWeight: 700, fontSize: '0.95rem', display: 'block', marginBottom: '0.25rem', color: 'white' }}>
+                  <span style={{ fontWeight: 700, fontSize: '0.95rem', display: 'block', marginBottom: '0.25rem', color: fg('white', '#0f172a') }}>
                     {opt.label}
                   </span>
                   <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>
@@ -219,7 +224,7 @@ export default function QuizPage() {
           <div className="quiz-question-card" style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎯</div>
             <div className="section-tag" style={{ marginBottom: '1rem' }}>Your Personalized Recommendation</div>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 800, color: 'white', marginBottom: '0.75rem', lineHeight: 1.35 }}>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '0.75rem', lineHeight: 1.35 }}>
               {result.headline}
             </h2>
             <div style={{
@@ -241,13 +246,13 @@ export default function QuizPage() {
                 <div key={i} style={{
                   display: 'flex', alignItems: 'center', gap: '1rem',
                   padding: '1rem 1.25rem',
-                  background: 'rgba(255,255,255,0.04)',
+                  background: bg('rgba(255,255,255,0.04)', 'rgba(0,0,0,0.04)'),
                   border: '1px solid rgba(201,168,76,0.15)',
                   borderRadius: 12
                 }}>
                   <span style={{ color: 'var(--gold)', fontWeight: 900, fontSize: '1.1rem' }}>{i + 1}</span>
                   <div>
-                    <div style={{ fontWeight: 700, color: 'white', fontSize: '0.95rem' }}>{product}</div>
+                    <div style={{ fontWeight: 700, color: fg('white', '#0f172a'), fontSize: '0.95rem' }}>{product}</div>
                     <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.78rem' }}>Clinically formulated · Lab tested</div>
                   </div>
                   <span style={{ marginLeft: 'auto', color: 'var(--gold)', fontSize: '0.75rem', fontWeight: 600 }}>◆</span>
@@ -292,8 +297,8 @@ export default function QuizPage() {
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem' }}>
                 <Link href="/shop" style={{
                   flex: 1, padding: '0.85rem', textAlign: 'center',
-                  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: 12, color: 'white',
+                  background: bg('rgba(255,255,255,0.04)', 'rgba(0,0,0,0.04)'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'),
+                  borderRadius: 12, color: fg('white', '#0f172a'),
                   textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem'
                 }}>
                   Browse Shop
@@ -301,7 +306,7 @@ export default function QuizPage() {
                 <Link href="/consult" style={{
                   flex: 1, padding: '0.85rem', textAlign: 'center',
                   background: 'transparent', border: '1px solid rgba(255,255,255,0.15)',
-                  borderRadius: 12, color: 'white',
+                  borderRadius: 12, color: fg('white', '#0f172a'),
                   textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem'
                 }}>
                   Talk to an Expert

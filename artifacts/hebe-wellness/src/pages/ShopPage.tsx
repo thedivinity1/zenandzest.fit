@@ -190,7 +190,7 @@ export default function ShopPage() {
       )}
 
       {/* Filter + Cart */}
-      <div style={{ background: 'var(--darkest)', borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '1.5rem 0', position: 'sticky', top: 70, zIndex: 100 }}>
+      <div style={{ background: bg('var(--darkest)', '#f8fafc'), borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '1.5rem 0', position: 'sticky', top: 70, zIndex: 100 }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             {categories.map(cat => (
@@ -219,7 +219,7 @@ export default function ShopPage() {
       </div>
 
       {/* Products */}
-      <section style={{ background: 'var(--darkest)', padding: '4rem 0 6rem' }}>
+      <section style={{ background: bg('var(--darkest)', '#f8fafc'), padding: '4rem 0 6rem' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
             {filtered.map((product, i) => (
@@ -227,8 +227,8 @@ export default function ShopPage() {
                 <div 
                   onClick={() => setSelectedProduct(product.name)}
                   style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'),
+                    border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'),
                     borderRadius: 20, overflow: 'hidden',
                     transition: 'all 0.3s ease',
                     cursor: 'pointer'

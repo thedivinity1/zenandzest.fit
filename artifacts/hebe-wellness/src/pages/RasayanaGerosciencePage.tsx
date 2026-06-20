@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import ScrollAnimator from '../components/ScrollAnimator';
 import { BookOpen, RefreshCw, Layers } from 'lucide-react';
 
@@ -39,8 +40,12 @@ const pathways = [
 ];
 
 export default function RasayanaGerosciencePage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rasayanaSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -55,8 +60,8 @@ export default function RasayanaGerosciencePage() {
         {/* Conceptual introduction */}
         <ScrollAnimator>
           <div style={{
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'),
+            border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'),
             borderRadius: '24px',
             padding: '2.5rem',
             marginBottom: '3rem'
@@ -75,8 +80,8 @@ export default function RasayanaGerosciencePage() {
 
         {/* Cellular Pathways Table */}
         <ScrollAnimator>
-          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '24px', padding: '2rem' }}>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'white', fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: '1px solid rgba(201,168,76,0.2)', borderRadius: '24px', padding: '2rem' }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Layers size={20} color="var(--gold)" /> Molecular Pathway Mapping
             </h3>
 
@@ -96,7 +101,7 @@ export default function RasayanaGerosciencePage() {
                     <span style={{ fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 800, textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>
                       {p.status}
                     </span>
-                    <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', color: 'white', fontWeight: 700, marginBottom: '0.75rem' }}>
+                    <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', color: fg('white', '#0f172a'), fontWeight: 700, marginBottom: '0.75rem' }}>
                       {p.pathway}
                     </h4>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)', padding: '0.4rem 0.75rem', borderRadius: '8px', fontSize: '0.8rem', color: 'var(--gold-light)' }}>

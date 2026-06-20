@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { Calculator, Award, Info, AlertTriangle } from 'lucide-react';
@@ -52,6 +53,10 @@ const herbDb: Record<string, HerbDosageDetail> = {
 };
 
 export default function BotanicalDosagePage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [selectedHerb, setSelectedHerb] = useState<string>('ashwagandha');
   const [rawGrams, setRawGrams] = useState<number>(3); // 3 grams of raw powder
 
@@ -66,7 +71,7 @@ export default function BotanicalDosagePage() {
   const isDangerDose = equivalentExtractMg > herb.dangerDoseMg;
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dosageSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -82,8 +87,8 @@ export default function BotanicalDosagePage() {
           
           {/* Interactive Calculator */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'white', marginBottom: '1.5rem', fontWeight: 900, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: fg('white', '#0f172a'), marginBottom: '1.5rem', fontWeight: 900, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Calculator size={22} color="var(--gold)" /> Potency Calculator
               </h2>
 
@@ -93,7 +98,7 @@ export default function BotanicalDosagePage() {
                   <select
                     value={selectedHerb}
                     onChange={(e) => setSelectedHerb(e.target.value)}
-                    style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                    style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                   >
                     <option value="ashwagandha">KSM-66 Ashwagandha</option>
                     <option value="saffron">Kashmiri Saffron</option>
@@ -110,7 +115,7 @@ export default function BotanicalDosagePage() {
                     max="20"
                     value={rawGrams}
                     onChange={(e) => setRawGrams(Math.max(0.1, parseFloat(e.target.value) || 0))}
-                    style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                    style={{ width: '100%', padding: '0.75rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                   />
                 </div>
               </div>
@@ -124,11 +129,11 @@ export default function BotanicalDosagePage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.9rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.6)' }}>Bioactive Molecular Compound:</span>
-                    <strong style={{ color: 'white' }}>{herb.activeBioactive}</strong>
+                    <strong style={{ color: fg('white', '#0f172a') }}>{herb.activeBioactive}</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.6)' }}>Active Compound Yield in Raw Powder:</span>
-                    <strong style={{ color: 'white' }}>{rawActiveYieldMg} mg</strong>
+                    <strong style={{ color: fg('white', '#0f172a') }}>{rawActiveYieldMg} mg</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.6)' }}>Concentration Potency Ratio:</span>
@@ -170,7 +175,7 @@ export default function BotanicalDosagePage() {
 
           {/* Scientific Educational Table */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--gold)', marginBottom: '1.25rem', fontWeight: 900 }}>
                 Why Standardized Extracts Matter
               </h2>
@@ -182,7 +187,7 @@ export default function BotanicalDosagePage() {
                 **Standardized extracts** guarantee an exact, repeatable, biochemical dose in every capsule, backed by HPLC validation, ensuring that you achieve physiological results without toxic variations.
               </p>
 
-              <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '16px', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), borderRadius: '16px', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.05)' }}>
                 <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--gold)', letterSpacing: '0.05em', textTransform: 'uppercase', display: 'block', marginBottom: '0.75rem' }}>
                   Active Purity Comparison
                 </span>

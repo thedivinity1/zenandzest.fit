@@ -36,7 +36,7 @@ export default function DhtBlockPage() {
   const bg = (dark: string, light: string) => isDark ? dark : light;
   const fg = (dark: string, light: string) => isDark ? dark : light;
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dhtSchema) }} />
       <div className="container" style={{ maxWidth: '800px' }}>
         
@@ -52,7 +52,7 @@ export default function DhtBlockPage() {
           {mechanisms.map((item, idx) => (
             <ScrollAnimator key={idx}>
               <div style={{
-                background: 'rgba(255,255,255,0.02)',
+                background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'),
                 border: '1px solid rgba(201,168,76,0.15)',
                 borderRadius: '20px',
                 padding: '2rem',
@@ -83,8 +83,8 @@ export default function DhtBlockPage() {
         {/* Clinical Potency Table */}
         <ScrollAnimator>
           <div style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'),
+            border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'),
             borderRadius: '24px',
             padding: '2.5rem'
           }}>

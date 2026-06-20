@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -17,6 +18,10 @@ const labIntakeSchema = {
 };
 
 export default function LabIntakePage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
@@ -53,7 +58,7 @@ export default function LabIntakePage() {
   const akkermansiaStatus = akkermansia < 1.0 ? 'Deficient Mucosal Barrier' : 'Optimal Microbiome';
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(labIntakeSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -69,8 +74,8 @@ export default function LabIntakePage() {
           
           {/* Uploader Panel */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', marginBottom: '1.25rem', fontWeight: 800 }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), marginBottom: '1.25rem', fontWeight: 800 }}>
                 NABL Report OCR Uploader
               </h2>
 
@@ -82,7 +87,7 @@ export default function LabIntakePage() {
                   style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }}
                 />
                 <UploadCloud size={48} color="var(--gold)" style={{ margin: '0 auto 1rem auto' }} />
-                <span style={{ fontSize: '0.9rem', color: 'white', display: 'block', fontWeight: 700 }}>
+                <span style={{ fontSize: '0.9rem', color: fg('white', '#0f172a'), display: 'block', fontWeight: 700 }}>
                   {file ? file.name : 'Drag & Drop PDF or Image Report'}
                 </span>
                 <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', marginTop: '0.25rem', display: 'block' }}>
@@ -118,7 +123,7 @@ export default function LabIntakePage() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.6)' }}>Salivary Cortisol (ng/mL)</span>
-                    <strong style={{ color: 'white' }}>{cortisol} ng/mL</strong>
+                    <strong style={{ color: fg('white', '#0f172a') }}>{cortisol} ng/mL</strong>
                   </div>
                   <input
                     type="range"
@@ -134,7 +139,7 @@ export default function LabIntakePage() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.6)' }}>Serum DHT (pg/mL)</span>
-                    <strong style={{ color: 'white' }}>{dht} pg/mL</strong>
+                    <strong style={{ color: fg('white', '#0f172a') }}>{dht} pg/mL</strong>
                   </div>
                   <input
                     type="range"
@@ -150,7 +155,7 @@ export default function LabIntakePage() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.6)' }}>Akkermansia Count (% relative abundance)</span>
-                    <strong style={{ color: 'white' }}>{akkermansia}%</strong>
+                    <strong style={{ color: fg('white', '#0f172a') }}>{akkermansia}%</strong>
                   </div>
                   <input
                     type="range"
@@ -169,7 +174,7 @@ export default function LabIntakePage() {
 
           {/* Diagnostics Panel */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2.5rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2.5rem' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--gold)', fontWeight: 900, marginBottom: '1.5rem' }}>
                 Endocrine & Gut Diagnostics
               </h2>
@@ -215,21 +220,21 @@ export default function LabIntakePage() {
                 
                 {cortisol > 8.0 ? (
                   <>
-                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'white', fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>Botanical Adrenal Recovery</h3>
+                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>Botanical Adrenal Recovery</h3>
                     <button onClick={() => { addToCart('Botanical Adrenal Recovery'); setCartOpen(true); }} style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%)', border: 'none', borderRadius: '100px', color: 'var(--darkest)', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer' }}>
                       🛒 Shop Adrenal Recovery Stack
                     </button>
                   </>
                 ) : dht > 600 ? (
                   <>
-                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'white', fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>Hair Vitality Elixir</h3>
+                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>Hair Vitality Elixir</h3>
                     <button onClick={() => { addToCart('Hair Vitality Elixir'); setCartOpen(true); }} style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%)', border: 'none', borderRadius: '100px', color: 'var(--darkest)', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer' }}>
                       🛒 Shop Hair Vitality Elixir
                     </button>
                   </>
                 ) : (
                   <>
-                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'white', fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>Gut Restoration Capsule</h3>
+                    <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>Gut Restoration Capsule</h3>
                     <button onClick={() => { addToCart('Gut Restoration Capsule'); setCartOpen(true); }} style={{ width: '100%', padding: '0.9rem', background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%)', border: 'none', borderRadius: '100px', color: 'var(--darkest)', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer' }}>
                       🛒 Shop Gut Restoration Capsule
                     </button>

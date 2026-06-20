@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -17,6 +18,10 @@ const dermalCrocinSchema = {
 };
 
 export default function DermalCrocinPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [uvIndex, setUvIndex] = useState(3);
   const [stress, setStress] = useState(4);
   const [crocinDose, setCrocinDose] = useState(1.5);
@@ -29,7 +34,7 @@ export default function DermalCrocinPage() {
   const rednessReduction = Math.min(100, Math.round((crocinDose / 3.0) * 90 + (10 - stress) * 1.5));
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dermalCrocinSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -44,7 +49,7 @@ export default function DermalCrocinPage() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem', alignItems: 'start' }}>
           {/* Scientific Context */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'var(--gold)', marginBottom: '1.25rem', fontWeight: 900 }}>
                 The Tyrosinase-MITF Pathway
               </h2>
@@ -58,7 +63,7 @@ export default function DermalCrocinPage() {
                     <Shield size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h4 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Tyrosinase Inhibition</h4>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Tyrosinase Inhibition</h4>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Crocin downregulates the rate-limiting enzyme <strong>Tyrosinase</strong>, suppressing hyperpigmentation at its source.
                     </p>
@@ -70,7 +75,7 @@ export default function DermalCrocinPage() {
                     <Sparkles size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h4 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>MITF Downregulation</h4>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>MITF Downregulation</h4>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Blocks the transcriptional activator <strong>MITF</strong>, preventing stress-induced melanin overproduction.
                     </p>
@@ -82,7 +87,7 @@ export default function DermalCrocinPage() {
                     <Droplet size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h4 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Clinical 3% Assay Standard</h4>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Clinical 3% Assay Standard</h4>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Double-blind clinical trials validate that topical applications containing a <strong>3% Saffron Extract concentration</strong> yield significant depigmentation and anti-redness (anti-erythematous) barrier repair benefits.
                     </p>
@@ -101,8 +106,8 @@ export default function DermalCrocinPage() {
 
           {/* Interactive Simulator */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'white', marginBottom: '1.5rem', fontWeight: 900 }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: fg('white', '#0f172a'), marginBottom: '1.5rem', fontWeight: 900 }}>
                 Dermal Response Simulator
               </h2>
 
@@ -127,7 +132,7 @@ export default function DermalCrocinPage() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.7)' }}>UV Exposure Index</span>
-                    <span style={{ color: 'white', fontWeight: 700 }}>UV {uvIndex}</span>
+                    <span style={{ color: fg('white', '#0f172a'), fontWeight: 700 }}>UV {uvIndex}</span>
                   </div>
                   <input
                     type="range"
@@ -143,7 +148,7 @@ export default function DermalCrocinPage() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.7)' }}>Lifestyle & Cortisol Stress</span>
-                    <span style={{ color: 'white', fontWeight: 700 }}>Level {stress}/10</span>
+                    <span style={{ color: fg('white', '#0f172a'), fontWeight: 700 }}>Level {stress}/10</span>
                   </div>
                   <input
                     type="range"
@@ -158,7 +163,7 @@ export default function DermalCrocinPage() {
               </div>
 
               {/* Outputs */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.05)', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), borderRadius: '16px', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.05)', marginBottom: '1.5rem' }}>
                 <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                   Projected Dermal Outcomes
                 </h4>

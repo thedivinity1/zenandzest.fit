@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -17,6 +18,10 @@ const sleepDebtSchema = {
 };
 
 export default function SleepDebtPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [targetHours, setTargetHours] = useState<number>(8);
   const [sleepLogs, setSleepLogs] = useState<number[]>([6, 5.5, 7, 6.5, 5, 6, 7]); // Last 7 days
   const { addToCart, setCartOpen } = useCart();
@@ -51,7 +56,7 @@ export default function SleepDebtPage() {
   }
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sleepDebtSchema) }} />
       <div className="container" style={{ maxWidth: '900px' }}>
         
@@ -67,8 +72,8 @@ export default function SleepDebtPage() {
           
           {/* Logs Inputs */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', marginBottom: '1.25rem', fontWeight: 800 }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), marginBottom: '1.25rem', fontWeight: 800 }}>
                 Weekly Sleep Logs
               </h2>
 
@@ -80,7 +85,7 @@ export default function SleepDebtPage() {
                   max="10"
                   value={targetHours}
                   onChange={(e) => setTargetHours(Math.max(1, parseInt(e.target.value) || 0))}
-                  style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                  style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                 />
               </div>
 
@@ -96,7 +101,7 @@ export default function SleepDebtPage() {
                       max="24"
                       value={hours}
                       onChange={(e) => handleLogChange(idx, parseFloat(e.target.value) || 0)}
-                      style={{ width: '80px', padding: '0.4rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: 'white', textAlign: 'center', fontSize: '0.85rem' }}
+                      style={{ width: '80px', padding: '0.4rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '8px', color: fg('white', '#0f172a'), textAlign: 'center', fontSize: '0.85rem' }}
                     />
                   </div>
                 ))}
@@ -106,31 +111,31 @@ export default function SleepDebtPage() {
 
           {/* Calculations & Advice */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--gold)', fontWeight: 900, marginBottom: '1.5rem' }}>
                 Biological Sleep Debt Report
               </h2>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Logged Sleep</span>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', marginTop: '0.25rem' }}>{totalActual} <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', fontWeight: 400 }}>hrs</span></div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: fg('white', '#0f172a'), marginTop: '0.25rem' }}>{totalActual} <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', fontWeight: 400 }}>hrs</span></div>
                 </div>
                 
-                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Sleep Deficit</span>
                   <div style={{ fontSize: '1.5rem', fontWeight: 800, color: color, marginTop: '0.25rem' }}>{sleepDebt} <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', fontWeight: 400 }}>hrs</span></div>
                 </div>
               </div>
 
-              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '1.25rem', marginBottom: '1.5rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '1.25rem', marginBottom: '1.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', marginBottom: '0.5rem' }}>
                   <span style={{ color: 'rgba(255,255,255,0.5)' }}>Deficit Level:</span>
                   <strong style={{ color: color }}>{severity}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem' }}>
                   <span style={{ color: 'rgba(255,255,255,0.5)' }}>Est. Repayment Window:</span>
-                  <strong style={{ color: 'white' }}>{repaymentWeeks} Weeks</strong>
+                  <strong style={{ color: fg('white', '#0f172a') }}>{repaymentWeeks} Weeks</strong>
                 </div>
               </div>
 

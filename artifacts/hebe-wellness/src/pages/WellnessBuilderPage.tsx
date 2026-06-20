@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -43,6 +44,10 @@ const eveningRituals: RitualItem[] = [
 ];
 
 export default function WellnessBuilderPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [selectedIds, setSelectedIds] = useState<string[]>(['car', 'caff_cutoff', 'sleep_drops']);
   const { addToCart, setCartOpen } = useCart();
 
@@ -64,7 +69,7 @@ export default function WellnessBuilderPage() {
   const hasSunAndCaff = selectedIds.includes('car') && selectedIds.includes('caff_cutoff');
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(wellnessSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -83,8 +88,8 @@ export default function WellnessBuilderPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
               
               {/* Morning */}
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '1.5rem' }}>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '20px', padding: '1.5rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Sunrise size={20} color="var(--gold-light)" /> Morning Activation Protocols
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -107,7 +112,7 @@ export default function WellnessBuilderPage() {
                     >
                       <input type="checkbox" checked={selectedIds.includes(item.id)} readOnly style={{ accentColor: 'var(--gold)', marginTop: '0.15rem' }} />
                       <div>
-                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'white' }}>{item.name} <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>({item.duration}m)</span></div>
+                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: fg('white', '#0f172a') }}>{item.name} <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>({item.duration}m)</span></div>
                         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', marginTop: '0.25rem' }}>{item.biochemicalTarget}</p>
                       </div>
                     </div>
@@ -116,8 +121,8 @@ export default function WellnessBuilderPage() {
               </div>
 
               {/* Afternoon */}
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '1.5rem' }}>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '20px', padding: '1.5rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Coffee size={20} color="var(--gold)" /> Afternoon Pacing Boundary
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -140,7 +145,7 @@ export default function WellnessBuilderPage() {
                     >
                       <input type="checkbox" checked={selectedIds.includes(item.id)} readOnly style={{ accentColor: 'var(--gold)', marginTop: '0.15rem' }} />
                       <div>
-                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'white' }}>{item.name} <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>({item.duration}m)</span></div>
+                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: fg('white', '#0f172a') }}>{item.name} <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>({item.duration}m)</span></div>
                         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', marginTop: '0.25rem' }}>{item.biochemicalTarget}</p>
                       </div>
                     </div>
@@ -149,8 +154,8 @@ export default function WellnessBuilderPage() {
               </div>
 
               {/* Evening */}
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '1.5rem' }}>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '20px', padding: '1.5rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Moon size={20} color="var(--gold-dark)" /> Evening Restorative Sleep Prep
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -173,7 +178,7 @@ export default function WellnessBuilderPage() {
                     >
                       <input type="checkbox" checked={selectedIds.includes(item.id)} readOnly style={{ accentColor: 'var(--gold)', marginTop: '0.15rem' }} />
                       <div>
-                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'white' }}>{item.name} <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>({item.duration}m)</span></div>
+                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: fg('white', '#0f172a') }}>{item.name} <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>({item.duration}m)</span></div>
                         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', marginTop: '0.25rem' }}>{item.biochemicalTarget}</p>
                       </div>
                     </div>
@@ -186,12 +191,12 @@ export default function WellnessBuilderPage() {
 
           {/* Routine Summary */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2rem', position: 'sticky', top: '100px' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'white', fontWeight: 900, marginBottom: '1.25rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2rem', position: 'sticky', top: '100px' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: fg('white', '#0f172a'), fontWeight: 900, marginBottom: '1.25rem' }}>
                 Your Compiled Protocol
               </h2>
 
-              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '1.25rem', marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '1.25rem', marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem' }}>
                 <span>Scheduled Routine Time:</span>
                 <strong style={{ color: 'var(--gold-light)' }}>{totalMins} Mins / Day</strong>
               </div>

@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -17,6 +18,10 @@ const epigeneticSchema = {
 };
 
 export default function EpigeneticClockPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [chronoAge, setChronoAge] = useState<number>(35);
   const [sleep, setSleep] = useState<number>(7); // hours
   const [exercise, setExercise] = useState<number>(3); // hours/week
@@ -71,7 +76,7 @@ export default function EpigeneticClockPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(epigeneticSchema) }} />
       <div className="container" style={{ maxWidth: '780px' }}>
         
@@ -85,7 +90,7 @@ export default function EpigeneticClockPage() {
 
         {result ? (
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '24px', padding: '2.5rem', textAlign: 'center', marginBottom: '2.5rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: '1px solid rgba(201,168,76,0.3)', borderRadius: '24px', padding: '2.5rem', textAlign: 'center', marginBottom: '2.5rem' }}>
               <span style={{ fontSize: '3rem' }}>🔬</span>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: 'var(--gold)', fontWeight: 900, marginTop: '1rem', marginBottom: '0.5rem' }}>
                 Biological Cell Age: {result.bioAge} Years
@@ -93,7 +98,7 @@ export default function EpigeneticClockPage() {
               <div style={{ fontSize: '1.1rem', color: result.difference < 0 ? '#4caf50' : '#f44336', fontWeight: 800, marginBottom: '1rem' }}>
                 {result.difference < 0 ? `Decelerating Aging by ${Math.abs(result.difference)} Years` : `Accelerated Aging by ${result.difference} Years`}
               </div>
-              <span style={{ display: 'inline-block', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.4rem 1.25rem', borderRadius: '100px', fontSize: '0.82rem', fontWeight: 700, color: 'white', marginBottom: '1.5rem' }}>
+              <span style={{ display: 'inline-block', background: bg('rgba(255,255,255,0.05)', 'rgba(0,0,0,0.05)'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), padding: '0.4rem 1.25rem', borderRadius: '100px', fontSize: '0.82rem', fontWeight: 700, color: fg('white', '#0f172a'), marginBottom: '1.5rem' }}>
                 Status: {result.status}
               </span>
               <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, fontSize: '0.95rem', maxWidth: '600px', margin: '0 auto 2rem auto' }}>
@@ -118,8 +123,8 @@ export default function EpigeneticClockPage() {
           </ScrollAnimator>
         ) : (
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2.5rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', fontWeight: 800, marginBottom: '1.5rem', textAlign: 'center' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2.5rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1.5rem', textAlign: 'center' }}>
                 DNA Methylation Lifestyle Intake
               </h2>
 
@@ -131,7 +136,7 @@ export default function EpigeneticClockPage() {
                       type="number"
                       value={chronoAge}
                       onChange={(e) => setChronoAge(Math.max(1, parseInt(e.target.value) || 0))}
-                      style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                      style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                     />
                   </div>
                   <div>
@@ -141,7 +146,7 @@ export default function EpigeneticClockPage() {
                       step="0.5"
                       value={sleep}
                       onChange={(e) => setSleep(Math.max(1, parseFloat(e.target.value) || 0))}
-                      style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                      style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                     />
                   </div>
                 </div>
@@ -153,7 +158,7 @@ export default function EpigeneticClockPage() {
                       type="number"
                       value={exercise}
                       onChange={(e) => setExercise(Math.max(0, parseFloat(e.target.value) || 0))}
-                      style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                      style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                     />
                   </div>
                   <div>
@@ -161,7 +166,7 @@ export default function EpigeneticClockPage() {
                     <select
                       value={stress}
                       onChange={(e) => setStress(parseInt(e.target.value))}
-                      style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                      style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                     >
                       <option value="2">Low (Relaxed, stable circadian cycles)</option>
                       <option value="5">Moderate (Standard office job workload)</option>
@@ -175,7 +180,7 @@ export default function EpigeneticClockPage() {
                   <select
                     value={diet}
                     onChange={(e) => setDiet(e.target.value)}
-                    style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                    style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                   >
                     <option value="balanced">Standard Balanced (Whole foods, moderate carbs)</option>
                     <option value="keto-anti-inflammatory">Anti-Inflammatory Keto (Low glycemic index, rich phytonutrients)</option>
@@ -188,7 +193,7 @@ export default function EpigeneticClockPage() {
                   <select
                     value={pollutants}
                     onChange={(e) => setPollutants(e.target.value)}
-                    style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                    style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                   >
                     <option value="minimal">Minimal (Fresh air region, zero smoking)</option>
                     <option value="heavy">Heavy (Dense metropolitan city pollution, smoking)</option>

@@ -506,7 +506,7 @@ export default function HomePage() {
           width: 220,
           background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'),
           backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.1)',
+          border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'),
           borderRadius: 20,
           padding: '1.25rem',
           display: 'flex', flexDirection: 'column', gap: '0.75rem',
@@ -947,7 +947,7 @@ export default function HomePage() {
       {/* ========================================================== */}
       {/* ===== EDITORIAL BLOG JOURNAL — 9-ARTICLE EXPANDED GRID ===== */}
       {/* ========================================================== */}
-      <section id="featured-articles" style={{ padding: '7rem 0', background: 'linear-gradient(180deg, #04060d 0%, #060912 50%, #080b18 100%)' }}>
+      <section id="featured-articles" style={{ padding: '7rem 0', background: bg('linear-gradient(180deg, #04060d 0%, #060912 50%, #080b18 100%)', 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)') }}>
         <div className="container">
           
           <Reveal>
@@ -1042,7 +1042,7 @@ export default function HomePage() {
                     <p style={{ color: fg('rgba(255,255,255,0.45)', '#475569'), fontSize: '0.78rem', lineHeight: 1.5 }}>Ashwagandha KSM-66 · Brahmi · Passionflower</p>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%' }}>
-                    <span style={{ display: 'block', textAlign: 'center', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(229,197,117,0.25)', color: 'var(--gold-light)', borderRadius: 100, padding: '0.7rem 1rem', fontSize: '0.82rem', fontWeight: 700 }}>
+                    <span style={{ display: 'block', textAlign: 'center', background: bg('rgba(255,255,255,0.05)', 'rgba(0,0,0,0.05)'), border: '1px solid rgba(229,197,117,0.25)', color: 'var(--gold-light)', borderRadius: 100, padding: '0.7rem 1rem', fontSize: '0.82rem', fontWeight: 700 }}>
                       📖 Read Full Article →
                     </span>
                   </div>
@@ -1255,7 +1255,7 @@ export default function HomePage() {
                     </div>
                     
                     {/* Back */}
-                    <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: 'linear-gradient(135deg, #0a1a0f, #1a3d2e)', borderRadius: 20, padding: '2rem', border: '1px solid rgba(229,197,117,0.25)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: bg('linear-gradient(135deg, #0a1a0f, #1a3d2e)', '#ffffff'), borderRadius: 20, padding: '2rem', border: bg('1px solid rgba(229,197,117,0.25)', '1px solid rgba(203,213,225,0.8)'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                       <div>
                         <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>🔬 What's Inside</div>
                         <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 800 }}>{p.name}</h3>
@@ -1267,9 +1267,9 @@ export default function HomePage() {
                             { label: 'Manufacturing:', value: '✅ GMP & ISO 22000' },
                             { label: 'No Additives:', value: '✅ Zero Synthetic Fillers' }
                           ].map((row, ri) => (
-                            <div key={ri} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: ri < 4 ? '1px solid rgba(255,255,255,0.06)' : 'none', paddingBottom: '0.4rem', gap: '0.5rem' }}>
+                            <div key={ri} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: ri < 4 ? bg('1px solid rgba(255,255,255,0.06)', '1px solid rgba(0,0,0,0.06)') : 'none', paddingBottom: '0.4rem', gap: '0.5rem' }}>
                               <span style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), flexShrink: 0 }}>{row.label}</span>
-                              <span style={{ color: fg(fg('white', '#0f172a'), '#0f172a'), fontWeight: 600, textAlign: 'right' }}>{row.value}</span>
+                              <span style={{ color: fg('white', '#0f172a'), fontWeight: 600, textAlign: 'right' }}>{row.value}</span>
                             </div>
                           ))}
                         </div>

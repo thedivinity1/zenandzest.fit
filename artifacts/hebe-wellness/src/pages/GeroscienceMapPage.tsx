@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import ScrollAnimator from '../components/ScrollAnimator';
 
 const geroscienceSchema = {
@@ -47,8 +48,12 @@ const hallmarks = [
 ];
 
 export default function GeroscienceMapPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(geroscienceSchema) }} />
       <div className="container" style={{ maxWidth: '800px' }}>
         
@@ -64,7 +69,7 @@ export default function GeroscienceMapPage() {
           {hallmarks.map((item, idx) => (
             <ScrollAnimator key={idx}>
               <div style={{
-                background: 'rgba(255,255,255,0.02)',
+                background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'),
                 border: '1px solid rgba(201,168,76,0.15)',
                 borderRadius: '20px',
                 padding: '2rem',
@@ -72,7 +77,7 @@ export default function GeroscienceMapPage() {
               }}>
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', background: 'var(--gold)' }} />
                 
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', fontWeight: 800, marginBottom: '0.75rem' }}>
+                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '0.75rem' }}>
                   {item.title}
                 </h2>
                 

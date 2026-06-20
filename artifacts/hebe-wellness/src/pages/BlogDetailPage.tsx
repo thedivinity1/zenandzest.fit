@@ -292,6 +292,10 @@ interface BlogDetailPageProps {
 }
 
 export default function BlogDetailPage({ id }: BlogDetailPageProps) {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [, setLocation] = useLocation();
   const { addToCart, setCartOpen } = useCart();
   const [activeCitation, setActiveCitation] = useState<string | null>(null);
@@ -432,7 +436,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', paddingBottom: '6rem', color: fg('white', '#0f172a') }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', paddingBottom: '6rem', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       {/* Article Header */}
       <section style={{ 
@@ -446,7 +450,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '100px', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', marginBottom: '1.5rem', background: 'rgba(201,168,76,0.08)' }}>
             🌿 CLINICAL LONGEVITY PROTOCOL
           </div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: '#fff', marginBottom: '1.5rem', fontWeight: 900, lineHeight: 1.25, maxWidth: '900px' }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: fg('#fff', '#0f172a'), marginBottom: '1.5rem', fontWeight: 900, lineHeight: 1.25, maxWidth: '900px' }}>
             {article.title}
           </h1>
 
@@ -492,7 +496,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
             {/* SGE HIGHLIGHTS BOX */}
             <div style={{ 
               padding: '2rem', 
-              background: 'rgba(255,255,255,0.02)', 
+              background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), 
               border: '1px solid rgba(201,168,76,0.25)', 
               borderRadius: '20px', 
               marginBottom: '3rem',
@@ -541,7 +545,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
               <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), marginBottom: '1.25rem' }}>
                 Standardized Potency Comparison Matrix
               </h3>
-              <div style={{ overflowX: 'auto', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12 }}>
+              <div style={{ overflowX: 'auto', border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: 12 }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
                   <thead>
                     <tr style={{ background: 'rgba(201,168,76,0.08)', borderBottom: '1px solid rgba(201,168,76,0.2)' }}>
@@ -581,7 +585,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
             {/* Sticky contents menu */}
             <div style={{ 
               padding: '1.5rem', 
-              background: 'rgba(255,255,255,0.02)', 
+              background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), 
               border: '1px solid rgba(255,255,255,0.06)', 
               borderRadius: '16px',
               position: 'sticky',
@@ -671,7 +675,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
       {activeCitation && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', zIndex: 3000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', backdropFilter: 'blur(6px)' }} onClick={() => setActiveCitation(null)}>
           <div style={{ background: 'linear-gradient(135deg, #0d2418, #050f0a)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '20px', padding: '2rem', maxWidth: '480px', width: '100%', position: 'relative' }} onClick={e => e.stopPropagation()}>
-            <button onClick={() => setActiveCitation(null)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.06)', border: 'none', color: '#fff', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+            <button onClick={() => setActiveCitation(null)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.06)', border: 'none', color: fg('#fff', '#0f172a'), width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
             <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🔬</div>
             <div className="section-tag" style={{ marginBottom: '1rem' }}>PubMed Medical Citation</div>
             {article.citations.find(c => c.id === activeCitation) ? (

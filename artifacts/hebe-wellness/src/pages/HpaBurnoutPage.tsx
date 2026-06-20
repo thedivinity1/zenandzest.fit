@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 
@@ -15,6 +16,10 @@ const hpaSchema = {
 };
 
 export default function HpaBurnoutPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [morningEnergy, setMorningEnergy] = useState(5);
   const [caffeineDep, setCaffeineDep] = useState(5);
   const [eveningWired, setEveningWired] = useState(5);
@@ -57,7 +62,7 @@ export default function HpaBurnoutPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(hpaSchema) }} />
       <div className="container" style={{ maxWidth: '700px' }}>
         
@@ -69,8 +74,8 @@ export default function HpaBurnoutPage() {
           </p>
         </ScrollAnimator>
 
-        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '2.5rem', marginBottom: '2.5rem' }}>
-          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1.5rem', textAlign: 'center' }}>
+        <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '20px', padding: '2.5rem', marginBottom: '2.5rem' }}>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), marginBottom: '1.5rem', textAlign: 'center' }}>
             HPA Stressor Parameters
           </h3>
 
@@ -98,10 +103,10 @@ export default function HpaBurnoutPage() {
 
         {result && (
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2rem' }}>
               <div style={{ textAlign: 'center', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '1rem' }}>
                 <span style={{ fontSize: '0.78rem', color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>HPA STAGE ANALYSIS REPORT</span>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'white', fontWeight: 800, marginTop: '0.5rem', marginBottom: '0.25rem' }}>{result.stage}</h3>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: fg('white', '#0f172a'), fontWeight: 800, marginTop: '0.5rem', marginBottom: '0.25rem' }}>{result.stage}</h3>
                 <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>Cortisol Curve: <strong>{result.cortisolCurve}</strong></div>
               </div>
               <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.92rem', lineHeight: 1.7, marginBottom: '2rem', textAlign: 'justify' }}>{result.desc}</p>

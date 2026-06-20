@@ -116,7 +116,7 @@ export default function ClinicalCasesPage() {
   const activeCase = cases[selectedCaseId];
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicalCasesSchema) }} />
       <div className="container" style={{ maxWidth: '1100px' }}>
         
@@ -158,7 +158,7 @@ export default function ClinicalCasesPage() {
             
             {/* Left Column: Metadata & Clinical Summary */}
             <ScrollAnimator>
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
                 <div style={{ display: 'flex', gap: '0.5rem', color: 'var(--gold)', alignItems: 'center', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                   <Award size={16} /> CASE STUDY #10{Object.keys(cases).indexOf(activeCase.id) + 1}
                 </div>
@@ -190,18 +190,18 @@ export default function ClinicalCasesPage() {
 
             {/* Right Column: Recharts Visualization */}
             <ScrollAnimator>
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2rem' }}>
                 <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <UserCheck size={20} color="var(--gold)" /> Biomarker Trend Chart
                 </h3>
 
-                <div style={{ height: '350px', width: '100%', background: 'var(--darkest)', padding: '1rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ height: '350px', width: '100%', background: bg('var(--darkest)', '#f8fafc'), padding: '1rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={activeCase.data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                       <XAxis dataKey="week" stroke="rgba(255,255,255,0.4)" fontSize={11} />
                       <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-                      <Tooltip contentStyle={{ background: 'var(--mid-dark)', border: '1px solid rgba(255,255,255,0.1)', color: fg('white', '#0f172a') }} />
+                      <Tooltip contentStyle={{ background: 'var(--mid-dark)', border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), color: fg('white', '#0f172a') }} />
                       <Legend wrapperStyle={{ fontSize: 11 }} />
                       <Line type="monotone" dataKey="baseline" name="Control (No Treatment)" stroke="#ff6b6b" strokeWidth={2} dot={{ r: 4 }} />
                       <Line type="monotone" dataKey="treatment" name="Zen and Zest Protocol" stroke="var(--gold)" strokeWidth={3} dot={{ r: 5 }} />

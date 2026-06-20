@@ -100,7 +100,7 @@ export default function ClinicalTrialsPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicalTrialsSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -114,7 +114,7 @@ export default function ClinicalTrialsPage() {
 
         {/* Search Bar */}
         <ScrollAnimator>
-          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem', marginBottom: '2.5rem' }}>
+          <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem', marginBottom: '2.5rem' }}>
             <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), marginBottom: '1rem', fontWeight: 700 }}>
               Query Your Bottle Batch Certificate
             </h2>
@@ -126,7 +126,7 @@ export default function ClinicalTrialsPage() {
                   placeholder="Enter Batch ID (e.g. ZEN-SA-9011, ZEN-AS-7704, ZEN-BE-8812)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  style={{ width: '100%', padding: '0.9rem 1rem 0.9rem 2.8rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '100px', color: fg('white', '#0f172a'), fontSize: '0.9rem' }}
+                  style={{ width: '100%', padding: '0.9rem 1rem 0.9rem 2.8rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '100px', color: fg('white', '#0f172a'), fontSize: '0.9rem' }}
                 />
               </div>
               <button
@@ -161,7 +161,7 @@ export default function ClinicalTrialsPage() {
         {/* Certificate Display */}
         {selectedBatch && (
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2.5rem', position: 'relative' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2.5rem', position: 'relative' }}>
               <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#4caf50', background: 'rgba(76,175,80,0.1)', padding: '0.5rem 1rem', borderRadius: '100px', fontSize: '0.8rem', fontWeight: 800 }}>
                 <CheckCircle2 size={16} /> CERTIFIED PURITY
               </div>

@@ -43,7 +43,7 @@ export default function SourcingIndexPage() {
   const bg = (dark: string, light: string) => isDark ? dark : light;
   const fg = (dark: string, light: string) => isDark ? dark : light;
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(sourcingSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -58,8 +58,8 @@ export default function SourcingIndexPage() {
         {/* Supercritical CO2 vs Standard Solvents */}
         <ScrollAnimator>
           <div style={{
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'),
+            border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'),
             borderRadius: '24px',
             padding: '2.5rem',
             marginBottom: '3rem'
@@ -113,8 +113,8 @@ export default function SourcingIndexPage() {
           {sources.map((src, idx) => (
             <ScrollAnimator key={idx}>
               <div style={{
-                background: 'rgba(255,255,255,0.02)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'),
+                border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'),
                 borderRadius: '20px',
                 padding: '1.5rem',
                 height: '100%',

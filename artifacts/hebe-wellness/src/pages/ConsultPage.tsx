@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 
@@ -34,6 +35,10 @@ const consultSchema = {
 };
 
 export default function ConsultPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [selectedExpert, setSelectedExpert] = useState<number | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [selectedConcerns, setSelectedConcerns] = useState<string[]>([]);
@@ -111,7 +116,7 @@ export default function ConsultPage() {
       </section>
 
       {/* Main Form */}
-      <section style={{ background: 'var(--darkest)', padding: '6rem 0' }}>
+      <section style={{ background: bg('var(--darkest)', '#f8fafc'), padding: '6rem 0' }}>
         <div className="container">
           {!submitted ? (
             <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.3fr', gap: '4rem', alignItems: 'start' }}>
@@ -121,7 +126,7 @@ export default function ConsultPage() {
                 <ScrollAnimator>
                   
                   {/* Calendar Widget */}
-                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '1rem' }}>
                     1. Select Consultation Date
                   </h2>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', marginBottom: '2rem' }}>
@@ -147,7 +152,7 @@ export default function ConsultPage() {
                     ))}
                   </div>
 
-                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: 'white', marginBottom: '1.25rem' }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '1.25rem' }}>
                     2. Select Your Longevity Expert
                   </h2>
 
@@ -176,7 +181,7 @@ export default function ConsultPage() {
                         <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                           <span style={{ fontSize: '2.5rem' }}>{expert.emoji}</span>
                           <div style={{ flex: 1 }}>
-                            <div style={{ fontWeight: 700, color: 'white', fontSize: '0.95rem', marginBottom: '0.25rem' }}>{expert.name}</div>
+                            <div style={{ fontWeight: 700, color: fg('white', '#0f172a'), fontSize: '0.95rem', marginBottom: '0.25rem' }}>{expert.name}</div>
                             <div style={{ color: 'var(--gold)', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.5rem' }}>{expert.specialty}</div>
                             <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem' }}>{expert.available}</div>
                           </div>
@@ -215,8 +220,8 @@ export default function ConsultPage() {
 
               {/* Form & Uploaders */}
               <ScrollAnimator>
-                <form onSubmit={handleSubmit} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20, padding: '2.5rem' }}>
-                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 800, color: 'white', marginBottom: '1.5rem' }}>
+                <form onSubmit={handleSubmit} style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: 20, padding: '2.5rem' }}>
+                  <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '1.5rem' }}>
                     Assessment Profile Details
                   </h2>
 
@@ -367,7 +372,7 @@ export default function ConsultPage() {
             /* Success */
             <div style={{ textAlign: 'center', maxWidth: 500, margin: '0 auto' }}>
               <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>🎉</div>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', fontWeight: 800, color: fg('white', '#0f172a'), marginBottom: '1rem' }}>
                 Consultation <span className="gold-gradient-text">Booked!</span>
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '2rem' }}>
@@ -418,8 +423,8 @@ export default function ConsultPage() {
             ].map((faq, i) => (
               <ScrollAnimator key={i} className={`stagger-${i + 1}`}>
                 <div style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: bg('rgba(255,255,255,0.05)', 'rgba(0,0,0,0.05)'),
+                  border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'),
                   borderRadius: 12, padding: '1.5rem'
                 }}>
                   <h3 style={{ fontWeight: 700, color: 'var(--gold)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>

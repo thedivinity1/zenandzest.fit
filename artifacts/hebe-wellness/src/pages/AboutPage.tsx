@@ -72,7 +72,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section style={{ background: 'var(--darkest)', padding: '6rem 0' }}>
+      <section style={{ background: bg('var(--darkest)', '#f8fafc'), padding: '6rem 0' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
             <ScrollAnimator>
@@ -147,7 +147,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section style={{ background: 'var(--darkest)', padding: '6rem 0' }}>
+      <section style={{ background: bg('var(--darkest)', '#f8fafc'), padding: '6rem 0' }}>
         <div className="container">
           <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <div className="section-tag">Our Journey</div>

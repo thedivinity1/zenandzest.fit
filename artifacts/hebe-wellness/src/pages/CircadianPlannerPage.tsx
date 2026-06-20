@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -17,6 +18,10 @@ const circadianSchema = {
 };
 
 export default function CircadianPlannerPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [wakingTime, setWakingTime] = useState<string>('06:00');
   const { addToCart, setCartOpen } = useCart();
 
@@ -38,7 +43,7 @@ export default function CircadianPlannerPage() {
   const bedTime = getCircadianHour(wakingTime, 16.5);
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(circadianSchema) }} />
       <div className="container" style={{ maxWidth: '900px' }}>
         
@@ -54,8 +59,8 @@ export default function CircadianPlannerPage() {
           
           {/* Inputs Panel */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', marginBottom: '1.25rem', fontWeight: 800 }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), marginBottom: '1.25rem', fontWeight: 800 }}>
                 Set Sleep Parameters
               </h2>
               
@@ -65,7 +70,7 @@ export default function CircadianPlannerPage() {
                   type="time"
                   value={wakingTime}
                   onChange={(e) => setWakingTime(e.target.value)}
-                  style={{ width: '100%', padding: '0.75rem', background: 'var(--darkest)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white', fontSize: '1.1rem', textAlign: 'center' }}
+                  style={{ width: '100%', padding: '0.75rem', background: bg('var(--darkest)', '#f8fafc'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a'), fontSize: '1.1rem', textAlign: 'center' }}
                 />
               </div>
 
@@ -89,7 +94,7 @@ export default function CircadianPlannerPage() {
 
           {/* Timeline Planner */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2.5rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2.5rem' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--gold)', fontWeight: 900, marginBottom: '1.5rem' }}>
                 Your Personalized Biological Day
               </h2>
@@ -102,7 +107,7 @@ export default function CircadianPlannerPage() {
                 <div style={{ position: 'relative' }}>
                   <div style={{ position: 'absolute', left: '-29px', top: '2px', background: 'var(--gold-dark)', border: '2px solid var(--darkest)', borderRadius: '100px', width: '14px', height: '14px' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                    <h4 style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <Sun size={16} color="var(--gold-light)" /> Cortisol CAR Pulse Window
                     </h4>
                     <span style={{ fontSize: '0.8rem', color: 'var(--gold-light)', fontWeight: 700 }}>{carPulseWindow}</span>
@@ -116,7 +121,7 @@ export default function CircadianPlannerPage() {
                 <div style={{ position: 'relative' }}>
                   <div style={{ position: 'absolute', left: '-29px', top: '2px', background: 'rgba(255,255,255,0.3)', border: '2px solid var(--darkest)', borderRadius: '100px', width: '14px', height: '14px' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                    <h4 style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <Coffee size={16} color="rgba(255,255,255,0.5)" /> Caffeine Clearance Boundary
                     </h4>
                     <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>Before {caffeineCutoff}</span>
@@ -130,7 +135,7 @@ export default function CircadianPlannerPage() {
                 <div>
                   <div style={{ position: 'absolute', left: '-29px', top: '2px', background: 'rgba(255,255,255,0.3)', border: '2px solid var(--darkest)', borderRadius: '100px', width: '14px', height: '14px' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                    <h4 style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <Clock size={16} color="rgba(255,255,255,0.5)" /> Dim Lighting / Blue Screens Off
                     </h4>
                     <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>{eveningDimWindow}</span>
@@ -144,7 +149,7 @@ export default function CircadianPlannerPage() {
                 <div>
                   <div style={{ position: 'absolute', left: '-29px', top: '2px', background: 'var(--gold-dark)', border: '2px solid var(--darkest)', borderRadius: '100px', width: '14px', height: '14px' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                    <h4 style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 800, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <Moon size={16} color="var(--gold)" /> Melatonin & Sleep Drops Dose
                     </h4>
                     <span style={{ fontSize: '0.8rem', color: 'var(--gold-light)', fontWeight: 700 }}>{melatoninPriming}</span>
@@ -158,7 +163,7 @@ export default function CircadianPlannerPage() {
                 <div>
                   <div style={{ position: 'absolute', left: '-29px', top: '2px', background: 'var(--gold)', border: '2px solid var(--darkest)', borderRadius: '100px', width: '14px', height: '14px' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                    <h4 style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem' }}>💤 Target Sleep Window</h4>
+                    <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 800, fontSize: '0.95rem' }}>💤 Target Sleep Window</h4>
                     <span style={{ fontSize: '0.8rem', color: 'var(--gold)', fontWeight: 800 }}>{bedTime}</span>
                   </div>
                   <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>

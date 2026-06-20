@@ -108,7 +108,7 @@ function StressTracker() {
     <div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
         {questions.map((q, i) => (
-          <div key={i} style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '12px', padding: '1rem' }}>
+          <div key={i} style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), borderRadius: '12px', padding: '1rem' }}>
             <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.875rem', marginBottom: '0.75rem' }}><span style={{ color: 'var(--gold)', fontWeight: 700 }}>Q{i + 1}.</span> {q}</div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               {['Never', 'Rarely', 'Sometimes'].map((opt, j) => (
@@ -126,7 +126,7 @@ function StressTracker() {
             <div style={{ color: result.color, fontWeight: 700 }}>{result.level}</div>
           </div>
           <ResponsiveContainer width="100%" height={120}>
-            <BarChart data={data}><Bar dataKey="value" fill="var(--gold)" radius={4} /><XAxis dataKey="name" tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }} /><Tooltip contentStyle={{ background: '#0a1a0f', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '8px', color: '#fff' }} /></BarChart>
+            <BarChart data={data}><Bar dataKey="value" fill="var(--gold)" radius={4} /><XAxis dataKey="name" tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }} /><Tooltip contentStyle={{ background: '#0a1a0f', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '8px', color: fg('#fff', '#0f172a') }} /></BarChart>
           </ResponsiveContainer>
           <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {result.recs.map((r, i) => <div key={i} style={{ padding: '0.75rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '10px', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)', display: 'flex', gap: '0.75rem' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>✓</span>{r}</div>)}
@@ -242,7 +242,7 @@ function SkinFinder() {
         <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--gold)', fontWeight: 700 }}>{result.type}</div>
         <p style={{ color: fg('rgba(255,255,255,0.7)', '#334155'), marginTop: '0.75rem', fontSize: '0.9rem', lineHeight: 1.7 }}>{result.desc}</p>
       </div>
-      <div style={{ background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', padding: '1.5rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.08)' }}>
+      <div style={{ background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', padding: '1.5rem', marginBottom: '1rem', border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)') }}>
         <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.08em', marginBottom: '1rem' }}>YOUR BOTANICAL PROTOCOL</div>
         {result.botanicals.map((b, i) => <div key={i} style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.65rem', fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)' }}><span style={{ color: 'var(--gold)', flexShrink: 0 }}>✓</span>{b}</div>)}
       </div>
@@ -259,10 +259,10 @@ function SkinFinder() {
           <div style={{ height: '100%', width: `${(step / questions.length) * 100}%`, background: 'linear-gradient(90deg, var(--gold), var(--gold-light))', transition: 'width 0.4s ease' }} />
         </div>
       </div>
-      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: '#fff', marginBottom: '1.5rem', lineHeight: 1.5 }}>{questions[step].q}</div>
+      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: fg('#fff', '#0f172a'), marginBottom: '1.5rem', lineHeight: 1.5 }}>{questions[step].q}</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         {questions[step].opts.map((opt, i) => (
-          <button key={i} onClick={() => handleAnswer(opt)} style={{ padding: '0.875rem 1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)', color: 'rgba(255,255,255,0.8)', textAlign: 'left', cursor: 'pointer', fontSize: '0.9rem', transition: 'all 0.2s' }}
+          <button key={i} onClick={() => handleAnswer(opt)} style={{ padding: '0.875rem 1rem', borderRadius: '12px', border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), color: 'rgba(255,255,255,0.8)', textAlign: 'left', cursor: 'pointer', fontSize: '0.9rem', transition: 'all 0.2s' }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.4)'; (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.08)'; }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.03)'; }}>
             {opt}
@@ -323,7 +323,7 @@ function WellnessIndex() {
       {result && (
         <div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div style={{ textAlign: 'center', padding: '1.25rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ textAlign: 'center', padding: '1.25rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), borderRadius: '16px', border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)') }}>
               <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.bmi}</div>
               <div style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.85rem' }}>BMI · {result.bmiLabel}</div>
             </div>
@@ -432,7 +432,7 @@ function SleepDebtCalc() {
               <Bar dataKey="hours" fill="var(--gold)" radius={4} />
               <Bar dataKey="target" fill="rgba(255,255,255,0.08)" radius={4} />
               <XAxis dataKey="day" tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 11 }} />
-              <Tooltip contentStyle={{ background: '#0a1a0f', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '8px', color: '#fff' }} />
+              <Tooltip contentStyle={{ background: '#0a1a0f', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '8px', color: fg('#fff', '#0f172a') }} />
             </BarChart>
           </ResponsiveContainer>
           <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -588,7 +588,7 @@ function ChronotypePlanner() {
             <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.875rem', lineHeight: 1.6 }}>{result.desc}</p>
           </div>
 
-          <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '16px', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), borderRadius: '16px', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.06)' }}>
             <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '0.08em', marginBottom: '1.25rem' }}>OPTIMAL 24-HOUR CIRCADIAN SCHEDULE</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {result.schedule.map((item, idx) => (
@@ -698,7 +698,7 @@ function BiologicalAgeCalc() {
 
       {result && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.5rem' }} className="two-col-grid">
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${result.color}33`, borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
+          <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: `1px solid ${result.color}33`, borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.bioAge}</div>
             <div style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>BIOLOGICAL CELL AGE</div>
             <div style={{
@@ -809,7 +809,7 @@ function VO2MaxEstimator() {
 
       {result && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.5rem', marginTop: '1.5rem' }} className="two-col-grid">
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
+          <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.vo2Max}</div>
             <div style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>ml/kg/min</div>
             <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--gold)', background: 'rgba(201,168,76,0.1)', padding: '0.3rem 0.65rem', borderRadius: '100px', display: 'inline-block', marginBottom: '1.25rem' }}>
@@ -899,7 +899,7 @@ function BDNFIndexCalc() {
       <button onClick={calculate} style={{ width: '100%', padding: '0.875rem', background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', border: 'none', borderRadius: '12px', color: '#000', fontWeight: 700, fontSize: '1rem', cursor: 'pointer', marginBottom: result ? '1.5rem' : 0 }}>Calculate BDNF Priming Index</button>
 
       {result && (
-        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', marginTop: '1.5rem' }}>
+        <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', marginTop: '1.5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
             <div style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.score}/100</div>
             <div style={{ color: 'var(--gold-light)', fontWeight: 700, fontSize: '1.05rem' }}>{result.label}</div>
@@ -967,7 +967,7 @@ function DosageAuditMatrix() {
       {result && (
         <div style={{ background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '16px', padding: '1.5rem', marginTop: '1.5rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.25rem', textAlign: 'center' }}>
-            <div style={{ padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '12px' }}>
+            <div style={{ padding: '1rem', background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), borderRadius: '12px' }}>
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ef4444' }}>{result.activeGeneric} mg</div>
               <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase' }}>Generic Active Payload</div>
             </div>
@@ -1011,7 +1011,7 @@ export default function ToolsPage() {
 
   if (active) {
     return (
-      <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
+      <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
         <div className="container" style={{ maxWidth: '800px' }}>
           <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--gold-light)', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', fontSize: '0.9rem', transition: 'color 0.2s' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
@@ -1019,11 +1019,11 @@ export default function ToolsPage() {
             ← Back to All Tools
           </Link>
           
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '24px', padding: '2.5rem', backdropFilter: 'blur(10px)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+          <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(201,168,76,0.2)', borderRadius: '24px', padding: '2.5rem', backdropFilter: 'blur(10px)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
               <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `${active.color}ee`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem', border: '1px solid rgba(201,168,76,0.2)' }}>{active.icon}</div>
               <div>
-                <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.25rem', fontWeight: 800 }}>{active.name}</h1>
+                <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: fg('#fff', '#0f172a'), marginBottom: '0.25rem', fontWeight: 800 }}>{active.name}</h1>
                 <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>{active.desc}</p>
               </div>
             </div>
@@ -1035,7 +1035,7 @@ export default function ToolsPage() {
   }
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
         "@graph": [
@@ -1099,7 +1099,7 @@ export default function ToolsPage() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1rem', borderRadius: '100px', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '1.5rem', background: 'rgba(201,168,76,0.08)' }}>FREE WELLNESS TOOLS</div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#fff', marginBottom: '1rem', fontWeight: 900 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 900 }}>
             Know Your Body. <span style={{ color: 'var(--gold)' }}>Optimize Your Life.</span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '680px', margin: '0 auto', lineHeight: 1.75 }}>
@@ -1109,7 +1109,7 @@ export default function ToolsPage() {
       </section>
 
       {/* Tool Selector Grid */}
-      <section style={{ padding: '4rem 0', background: 'var(--darkest)' }}>
+      <section style={{ padding: '4rem 0', background: bg('var(--darkest)', '#f8fafc') }}>
         <div className="container">
           <div className="tools-grid">
             {tools.map(tool => (
@@ -1144,7 +1144,7 @@ export default function ToolsPage() {
                 >
                   <div>
                     <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: bg('rgba(0,0,0,0.3)', 'rgba(255,255,255,0.8)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>{tool.icon}</div>
-                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: '#fff', marginBottom: '0.5rem', textAlign: 'left', fontWeight: 700 }}>{tool.name}</h2>
+                    <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: fg('#fff', '#0f172a'), marginBottom: '0.5rem', textAlign: 'left', fontWeight: 700 }}>{tool.name}</h2>
                     <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem', lineHeight: 1.6, textAlign: 'left' }}>{tool.desc}</p>
                   </div>
                   <div style={{ color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, marginTop: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
@@ -1160,7 +1160,7 @@ export default function ToolsPage() {
       {/* CTA */}
       <section style={{ background: 'linear-gradient(135deg, #0a1f12, #1a3d2e)', padding: '5rem 0', textAlign: 'center', borderTop: '1px solid rgba(229, 197, 117, 0.15)' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: '#fff', marginBottom: '1rem' }}>Want a Deeper <span style={{ color: 'var(--gold)' }}>Clinical Analysis?</span></h2>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: fg('#fff', '#0f172a'), marginBottom: '1rem' }}>Want a Deeper <span style={{ color: 'var(--gold)' }}>Clinical Analysis?</span></h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, marginBottom: '2rem' }}>Book a free 45-minute expert consultation. Our integrative medicine physicians will create a comprehensive botanical protocol tailored to your biology.</p>
           <a href="/consult" style={{ display: 'inline-block', padding: '0.875rem 2rem', background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', borderRadius: '100px', color: '#000', fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem' }}>Book Free Consultation →</a>
         </div>

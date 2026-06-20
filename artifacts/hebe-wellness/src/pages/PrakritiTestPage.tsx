@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -64,6 +65,10 @@ const prakritiSchema = {
 };
 
 export default function PrakritiTestPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [step, setStep] = useState(0);
   const [scores, setScores] = useState<string[]>([]);
   const [result, setResult] = useState<null | { dominant: string; percentage: Record<string, number>; desc: string; protocols: string[]; stack: string }>(null);
@@ -116,7 +121,7 @@ export default function PrakritiTestPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(prakritiSchema) }} />
       <div className="container" style={{ maxWidth: '680px' }}>
         <ScrollAnimator style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -143,7 +148,7 @@ export default function PrakritiTestPage() {
                 <p style={{ color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, fontSize: '0.98rem' }}>{result.desc}</p>
               </div>
 
-              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '20px', padding: '2rem', marginBottom: '2rem' }}>
                 <h4 style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem' }}>
                   YOUR CUSTOM BOTANICAL PROTOCOL
                 </h4>
@@ -176,7 +181,7 @@ export default function PrakritiTestPage() {
               </p>
             </div>
 
-            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '2rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '20px', padding: '2rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', marginBottom: '0.75rem' }}>
                 <span>Question {step + 1} of {questions.length}</span>
                 <span>{Math.round((step / questions.length) * 100)}% complete</span>
@@ -185,7 +190,7 @@ export default function PrakritiTestPage() {
                 <div style={{ height: '100%', width: `${((step) / questions.length) * 100}%`, background: 'var(--gold)', transition: 'width 0.3s ease' }} />
               </div>
 
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1.5rem', lineHeight: 1.4 }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), marginBottom: '1.5rem', lineHeight: 1.4 }}>
                 {questions[step].q}
               </h3>
 
@@ -197,8 +202,8 @@ export default function PrakritiTestPage() {
                     style={{
                       width: '100%',
                       padding: '1rem 1.25rem',
-                      background: 'rgba(255,255,255,0.02)',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                      background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'),
+                      border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'),
                       borderRadius: '12px',
                       color: 'rgba(255,255,255,0.85)',
                       fontSize: '0.88rem',

@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -87,13 +88,17 @@ const protocols: Record<string, StackingProtocol> = {
 };
 
 export default function StackingProtocolsPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [goal, setGoal] = useState<string>('sleep');
   const { addToCart, setCartOpen } = useCart();
 
   const selected = protocols[goal];
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(stackingSchema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -135,7 +140,7 @@ export default function StackingProtocolsPage() {
             
             {/* Hour by Hour Schedule */}
             <ScrollAnimator>
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2.5rem' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2.5rem' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'var(--gold)', fontWeight: 900, marginBottom: '0.5rem' }}>
                   {selected.name}
                 </h2>
@@ -145,7 +150,7 @@ export default function StackingProtocolsPage() {
                   <strong>Scientific Objective:</strong> {selected.scientificTarget}
                 </div>
 
-                <h4 style={{ color: 'white', fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.5rem' }}>
+                <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 800, fontSize: '0.85rem', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.5rem' }}>
                   🕒 Hour-by-Hour Stacking Schedule
                 </h4>
 
@@ -153,7 +158,7 @@ export default function StackingProtocolsPage() {
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <div style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '12px', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '64px', width: '80px', flexShrink: 0 }}>
                       <Clock size={16} color="var(--gold)" />
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white', marginTop: '0.25rem' }}>MORNING</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: fg('white', '#0f172a'), marginTop: '0.25rem' }}>MORNING</span>
                     </div>
                     <div>
                       <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', lineHeight: 1.6 }}>
@@ -165,7 +170,7 @@ export default function StackingProtocolsPage() {
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <div style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '12px', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '64px', width: '80px', flexShrink: 0 }}>
                       <Clock size={16} color="var(--gold)" />
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white', marginTop: '0.25rem' }}>AFTERNOON</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: fg('white', '#0f172a'), marginTop: '0.25rem' }}>AFTERNOON</span>
                     </div>
                     <div>
                       <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', lineHeight: 1.6 }}>
@@ -177,7 +182,7 @@ export default function StackingProtocolsPage() {
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <div style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '12px', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '64px', width: '80px', flexShrink: 0 }}>
                       <Clock size={16} color="var(--gold)" />
-                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'white', marginTop: '0.25rem' }}>EVENING</span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: fg('white', '#0f172a'), marginTop: '0.25rem' }}>EVENING</span>
                     </div>
                     <div>
                       <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', lineHeight: 1.6 }}>
@@ -203,8 +208,8 @@ export default function StackingProtocolsPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                 
                 {/* Clinical Lifestyle Guidance */}
-                <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: 'white', fontWeight: 800, marginBottom: '1.25rem' }}>
+                <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: fg('white', '#0f172a'), fontWeight: 800, marginBottom: '1.25rem' }}>
                     Clinical Lifestyle Habits
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -220,7 +225,7 @@ export default function StackingProtocolsPage() {
                 {/* Instant Stack Buy */}
                 <div style={{ background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: '24px', padding: '2rem', textAlign: 'center' }}>
                   <span style={{ fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Recommended Formulation</span>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), fontWeight: 800, margin: '0.5rem 0 1rem 0' }}>
                     {selected.productStack}
                   </h3>
                   <button

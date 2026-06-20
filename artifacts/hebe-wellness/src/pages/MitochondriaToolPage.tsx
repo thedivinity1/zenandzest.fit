@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 
@@ -15,6 +16,10 @@ const mitochondriaSchema = {
 };
 
 export default function MitochondriaToolPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [fatigue, setFatigue] = useState(5);
   const [brainFog, setBrainFog] = useState(5);
   const [exerciseRecovery, setExerciseRecovery] = useState(5);
@@ -42,7 +47,7 @@ export default function MitochondriaToolPage() {
   };
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(mitochondriaSchema) }} />
       <div className="container" style={{ maxWidth: '700px' }}>
         
@@ -54,8 +59,8 @@ export default function MitochondriaToolPage() {
           </p>
         </ScrollAnimator>
 
-        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '2.5rem', marginBottom: '2.5rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'white', marginBottom: '1.5rem', textAlign: 'center' }}>
+        <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '20px', padding: '2.5rem', marginBottom: '2.5rem' }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: fg('white', '#0f172a'), marginBottom: '1.5rem', textAlign: 'center' }}>
             Bioenergetic Metric Inputs
           </h2>
 
@@ -84,7 +89,7 @@ export default function MitochondriaToolPage() {
         {result && (
           <ScrollAnimator>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '1.5rem' }} className="two-col-grid">
-              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: '20px', padding: '1.5rem', textAlign: 'center' }}>
+              <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(201,168,76,0.2)', borderRadius: '20px', padding: '1.5rem', textAlign: 'center' }}>
                 <div style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--gold)', fontFamily: 'var(--font-serif)' }}>{result.atpScore}%</div>
                 <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>ATP Efficiency Index</div>
                 <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#ef4444', background: 'rgba(239,68,68,0.1)', padding: '0.3rem 0.65rem', borderRadius: '100px', display: 'inline-block', marginBottom: '1rem' }}>

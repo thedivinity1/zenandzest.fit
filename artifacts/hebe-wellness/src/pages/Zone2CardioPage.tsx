@@ -1,3 +1,4 @@
+import { useTheme } from '../context/ThemeContext';
 ﻿import { useState } from 'react';
 import ScrollAnimator from '../components/ScrollAnimator';
 import { useCart } from '../context/CartContext';
@@ -17,6 +18,10 @@ const zone2Schema = {
 };
 
 export default function Zone2CardioPage() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [age, setAge] = useState<number>(35);
   const [rhr, setRhr] = useState<number>(65);
   const [vo2Goal, setVo2Goal] = useState<number>(45);
@@ -34,7 +39,7 @@ export default function Zone2CardioPage() {
   const estimatedHealthspanBonus = ((vo2Goal - 30) * 0.4).toFixed(1);
 
   return (
-    <div style={{ background: 'var(--darkest)', minHeight: '100vh', padding: '8rem 0 6rem 0', color: 'white' }}>
+    <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(zone2Schema) }} />
       <div className="container" style={{ maxWidth: '1000px' }}>
         
@@ -50,7 +55,7 @@ export default function Zone2CardioPage() {
           
           {/* Scientific Foundation */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'var(--gold)', marginBottom: '1.25rem', fontWeight: 900 }}>
                 Mitochondriogenesis & VO2 Max
               </h2>
@@ -64,7 +69,7 @@ export default function Zone2CardioPage() {
                     <Activity size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h3 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Mitochondrial Volume Density</h3>
+                    <h3 style={{ color: fg('white', '#0f172a'), fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Mitochondrial Volume Density</h3>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Zone 2 training specifically forces Type I (slow-twitch) muscle fibers to generate ATP exclusively from fat oxidation, maximizing mitochondrial efficiency.
                     </p>
@@ -76,7 +81,7 @@ export default function Zone2CardioPage() {
                     <Heart size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h3 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>VO2 Max Healthspan Multiplier</h3>
+                    <h3 style={{ color: fg('white', '#0f172a'), fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>VO2 Max Healthspan Multiplier</h3>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Moving from the lowest quartile of cardiorespiratory fitness to the highest reduces all-cause mortality risk by up to **5-fold (500%)**.
                     </p>
@@ -88,7 +93,7 @@ export default function Zone2CardioPage() {
                     <Shield size={24} color="var(--gold)" />
                   </div>
                   <div>
-                    <h3 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Lactate Clearance Pathways</h3>
+                    <h3 style={{ color: fg('white', '#0f172a'), fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>Lactate Clearance Pathways</h3>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', lineHeight: 1.5 }}>
                       Upregulates **MCT-1 transporters**, allowing skeletal muscle to recycle lactic acid into fuel and preserving muscle glycogen reserves.
                     </p>
@@ -107,8 +112,8 @@ export default function Zone2CardioPage() {
 
           {/* HR & Training Calculator */}
           <ScrollAnimator>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '2rem' }}>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'white', marginBottom: '1.5rem', fontWeight: 900 }}>
+            <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), border: bg('1px solid rgba(255,255,255,0.08)', '1px solid rgba(0,0,0,0.08)'), borderRadius: '24px', padding: '2rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: fg('white', '#0f172a'), marginBottom: '1.5rem', fontWeight: 900 }}>
                 Metabolic Zone Calculator
               </h2>
 
@@ -119,7 +124,7 @@ export default function Zone2CardioPage() {
                     type="number"
                     value={age}
                     onChange={(e) => setAge(Math.max(1, parseInt(e.target.value) || 0))}
-                    style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                    style={{ width: '100%', padding: '0.75rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                   />
                 </div>
 
@@ -129,7 +134,7 @@ export default function Zone2CardioPage() {
                     type="number"
                     value={rhr}
                     onChange={(e) => setRhr(Math.max(30, parseInt(e.target.value) || 0))}
-                    style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                    style={{ width: '100%', padding: '0.75rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                   />
                 </div>
 
@@ -139,7 +144,7 @@ export default function Zone2CardioPage() {
                     type="number"
                     value={vo2Goal}
                     onChange={(e) => setVo2Goal(Math.max(10, parseInt(e.target.value) || 0))}
-                    style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white' }}
+                    style={{ width: '100%', padding: '0.75rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: bg('1px solid rgba(255,255,255,0.1)', '1px solid rgba(0,0,0,0.1)'), borderRadius: '10px', color: fg('white', '#0f172a') }}
                   />
                 </div>
               </div>
@@ -151,18 +156,18 @@ export default function Zone2CardioPage() {
                 </h4>
                 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
-                  <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Calculated MHR</span>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', marginTop: '0.25rem' }}>{mhr} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'rgba(255,255,255,0.4)' }}>bpm</span></div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 800, color: fg('white', '#0f172a'), marginTop: '0.25rem' }}>{mhr} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'rgba(255,255,255,0.4)' }}>bpm</span></div>
                   </div>
 
-                  <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
                     <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Est. Healthspan Gain</span>
                     <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--gold)', marginTop: '0.25rem' }}>+{estimatedHealthspanBonus} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}>yrs</span></div>
                   </div>
                 </div>
 
-                <div style={{ background: 'var(--darkest)', padding: '1.25rem', borderRadius: '12px', textAlign: 'center', border: '1px solid rgba(201,168,76,0.3)' }}>
+                <div style={{ background: bg('var(--darkest)', '#f8fafc'), padding: '1.25rem', borderRadius: '12px', textAlign: 'center', border: '1px solid rgba(201,168,76,0.3)' }}>
                   <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Target Zone 2 Heart Rate Range</span>
                   <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--gold)', margin: '0.25rem 0' }}>
                     {zone2Low} - {zone2High}
