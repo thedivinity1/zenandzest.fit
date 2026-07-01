@@ -1,16 +1,9 @@
-﻿import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { articleDataList } from './articlesData';
 
-// Map compiled articles to the format expected by the Blog Page index list
-const localArticlesList = [
-  { id: 1, title: 'Why You Wake Up at 3 AM: The Science of Cortisol & Circadian Disruption', category: 'Sleep', excerpt: 'Waking between 2-4 AM is a hallmark of elevated cortisol and HPA axis dysregulation. Here is exactly what is happening in your body and how to fix it with botanical science.', readTime: '7 min', date: 'Apr 1, 2026', icon: '🌙', gradient: 'linear-gradient(135deg, #1a237e, #0d1459)' },
-  { id: 2, title: '5 Botanical Ingredients Clinically Proven to Improve Sleep Quality', category: 'Sleep', excerpt: 'Clinical trials confirm these 5 plant compounds — Ashwagandha, Valerian, L-Theanine, Magnolia Bark, and Glycine — outperform many conventional sleep aids without dependency.', readTime: '6 min', date: 'Mar 25, 2026', icon: '🌿', gradient: 'linear-gradient(135deg, #1a3d2e, #0a2e1e)' },
-];
-
 export const allArticles = [
-  ...localArticlesList,
   ...Object.values(articleDataList).map(art => ({
     id: art.id,
     title: art.title,
@@ -65,14 +58,14 @@ export default function BlogPage() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1rem', borderRadius: '100px', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '1.5rem', background: 'rgba(201,168,76,0.08)' }}>THE WELLNESS JOURNAL</div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 900 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#fff', marginBottom: '1rem', fontWeight: 900 }}>
             Science Meets <span style={{ color: 'var(--gold)' }}>Ancient Wisdom</span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '700px', margin: '0 auto 2rem', lineHeight: 1.75 }}>
             <strong>Answer-First:</strong> Our wellness journal publishes peer-reviewed articles tracking the clinical efficacy of botanical adaptogens and Ayurvedic constitution mappings. Learn from board-certified endocrinologists and research scientists about cortisol balance, sleep architecture, and skin resilience.
           </p>
           <div style={{ maxWidth: '480px', margin: '0 auto' }}>
-            <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search 50 articles..." style={{ width: '100%', padding: '0.875rem 1.25rem', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '100px', color: fg('#fff', '#0f172a'), outline: 'none', fontSize: '0.9rem' }} />
+            <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search 50 articles..." style={{ width: '100%', padding: '0.875rem 1.25rem', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '100px', color: '#fff', outline: 'none', fontSize: '0.9rem' }} />
           </div>
         </div>
       </section>
@@ -114,10 +107,10 @@ export default function BlogPage() {
                     <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.875rem', alignItems: 'center', flexWrap: 'wrap' }}>
                         <span style={{ background: `${catTagColors[a.category] || '#1a3d2e'}55`, color: 'var(--gold-light)', padding: '0.2rem 0.65rem', borderRadius: '100px', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.06em' }}>{a.category.toUpperCase()}</span>
-                        <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem' }}>{a.date}</span>
+                        <span style={{ color: fg('rgba(255,255,255,0.3)', '#64748b'), fontSize: '0.72rem' }}>{a.date}</span>
                       </div>
                       <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1rem', color: fg('#fff', '#0f172a'), lineHeight: 1.5, marginBottom: '0.75rem', fontWeight: 700, flex: 1 }}>{a.title}</h2>
-                      <p style={{ color: 'rgba(255,255,255,0.48)', fontSize: '0.83rem', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', marginBottom: '1.25rem' }}>{a.excerpt}</p>
+                      <p style={{ color: fg('rgba(255,255,255,0.48)', '#475569'), fontSize: '0.83rem', lineHeight: 1.65, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', marginBottom: '1.25rem' }}>{a.excerpt}</p>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--gold)', fontSize: '0.83rem', fontWeight: 600 }}>Read Article →</div>
                     </div>
                   </div>
@@ -131,10 +124,10 @@ export default function BlogPage() {
       {/* Newsletter CTA */}
       <section style={{ background: 'linear-gradient(135deg, #0a1f12, #1a3d2e)', padding: '5rem 0', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: fg('#fff', '#0f172a'), marginBottom: '1rem' }}>Get New Articles <span style={{ color: 'var(--gold)' }}>Before Anyone Else</span></h2>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: '#fff', marginBottom: '1rem' }}>Get New Articles <span style={{ color: 'var(--gold)' }}>Before Anyone Else</span></h2>
           <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), marginBottom: '2rem', lineHeight: 1.75 }}>Join 50,000+ subscribers. New clinical insights delivered every week.</p>
           <div style={{ display: 'flex', gap: 0, maxWidth: '440px', margin: '0 auto' }}>
-            <input type="email" placeholder="Your email address" style={{ flex: 1, padding: '0.875rem 1.25rem', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRight: 'none', borderRadius: '100px 0 0 100px', color: fg('#fff', '#0f172a'), outline: 'none', fontSize: '0.9rem' }} />
+            <input type="email" placeholder="Your email address" style={{ flex: 1, padding: '0.875rem 1.25rem', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', borderRight: 'none', borderRadius: '100px 0 0 100px', color: '#fff', outline: 'none', fontSize: '0.9rem' }} />
             <button style={{ padding: '0.875rem 1.5rem', background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', border: 'none', borderRadius: '0 100px 100px 0', color: '#000', fontWeight: 700, cursor: 'pointer', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>Subscribe →</button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { Link, useLocation } from 'wouter';
 import { useCart, Product, productsList } from '../context/CartContext';
@@ -37,94 +37,7 @@ interface ArticleData {
   recommendedProduct: string;
 }
 
-const localArticles: Record<number, ArticleData> = {
-  1: {
-    id: 1,
-    title: 'Why You Wake Up at 3 AM: The Science of Cortisol & Circadian Disruption',
-    category: 'Sleep',
-    excerpt: 'Waking between 2-4 AM is a hallmark of elevated cortisol and HPA axis dysregulation. Here is exactly what is happening in your body and how to fix it with botanical science.',
-    readTime: '7 min read',
-    date: 'Apr 1, 2026',
-    icon: '🌙',
-    gradient: 'linear-gradient(135deg, #1a237e, #0d1459)',
-    reviewedBy: {
-      name: 'Dr. Sarah Chen, MD',
-      title: 'Board Certified Integrative Endocrinologist',
-      credentials: 'Stanford University School of Medicine, Fellow in Integrative Medicine',
-      specialty: 'Adrenal & Circadian Rhythm Optimization',
-      bio: 'Dr. Chen has over 14 years of clinical experience specializing in neuroendocrine health, hormone balancing, and the integration of adaptogenic plant chemistry with circadian therapies.',
-      verifiedDate: 'March 2026'
-    },
-    sgeHighlights: [
-      'Waking between 2-4 AM is primarily caused by an untimely spike in cortisol (stress hormone) overriding melatonin production.',
-      'This circadian mismatch is regulated by the HPA (Hypothalamic-Pituitary-Adrenal) axis, which becomes hyper-reactive due to chronic cognitive or physical stressors.',
-      'Clinical studies confirm that standardized adaptogens (such as KSM-66 Ashwagandha) significantly flatten abnormal cortisol curves, restoring healthy sleep architecture.'
-    ],
-    citations: [
-      { id: '1', title: 'Withania somnifera improves sleep quality: A double-blind, randomized clinical trial', authors: 'Langade D., et al.', journal: 'Journal of Ethnopharmacology, 2021', link: 'https://pubmed.ncbi.nlm.nih.gov/' },
-      { id: '2', title: 'HPA axis regulation and circadian rhythm disruption in chronic stress and insomnia', authors: 'Buckley T.M., et al.', journal: 'Journal of Clinical Endocrinology & Metabolism, 2023', link: 'https://pubmed.ncbi.nlm.nih.gov/' },
-      { id: '3', title: 'Bacopa monnieri modulates salivary cortisol response to acute cognitive stress', authors: 'Benson S., et al.', journal: 'Phytotherapy Research, 2024', link: 'https://pubmed.ncbi.nlm.nih.gov/' }
-    ],
-    contentSections: [
-      {
-        heading: 'The 3 AM Neuroendocrine Spike',
-        content: 'Your circadian rhythm is governed by the master clock in the suprachiasmatic nucleus. In a balanced state, cortisol levels should be at their absolute lowest around midnight, gradually rising toward 6 AM to wake you up. However, chronic HPA axis dysregulation overrides this natural master clock. Daily micro-stressors accumulate, triggering an evolutionary "threat response" that releases adrenaline and cortisol prematurely around 3 AM. This neuroendocrine spike elevates your blood glucose, increases your heart rate, and forces you awake in a state of high alertness [1][2].'
-      },
-      {
-        heading: 'Phytochemistry Countermeasures: Modulating the Adrenal Response',
-        content: 'Standardized adaptogens work at the receptor level to restore endocrine homeostasis. Active withanolides in Ashwagandha bind to adrenal cortical receptors, acting as natural buffers that mute the signaling of ACTH (Adrenocorticotropic hormone). This prevents the HPA axis from triggering the adrenaline surges that wake you up. Simultaneously, bacosides in Brahmi upregulate GABA receptor density, promoting anxiolytic quietness in the central nervous system to make sure that even if a minor cortisol release occurs, the brain remains in a deep, restorative delta-wave sleep stage [3].'
-      },
-      {
-        heading: 'Standardized Concentrates vs. Raw Herbal Powders',
-        content: 'For therapeutic results, raw root powder is insufficient. Standardized extracts guarantee a precise therapeutic concentration of active compounds. For example, Zen and Zest Sleep Drops utilize KSM-66 Ashwagandha standardized to 5% withanolides, providing up to 40 times the active molecular density of standard store-bought powders. Standardizing is non-negotiable for clinical efficacy in circadian repair.'
-      }
-    ],
-    recommendedProduct: 'Botanical Sleep Drops'
-  },
-  2: {
-    id: 2,
-    title: '5 Botanical Ingredients Clinically Proven to Improve Sleep Quality',
-    category: 'Sleep',
-    excerpt: 'Clinical trials confirm these 5 plant compounds — Ashwagandha, Valerian, L-Theanine, Magnolia Bark, and Glycine — outperform many conventional sleep aids without dependency.',
-    readTime: '6 min read',
-    date: 'Mar 25, 2026',
-    icon: '🌿',
-    gradient: 'linear-gradient(135deg, #1a3d2e, #0a2e1e)',
-    reviewedBy: {
-      name: 'Dr. Michael Rodriguez, MD',
-      title: 'Integrative Sleep Medicine Specialist',
-      credentials: 'Harvard Medical School, Board Certified in Neurology & Sleep Medicine',
-      specialty: 'Circadian Biology & Botanical Neurotransmitters',
-      bio: 'Dr. Rodriguez is an author and leading researcher in botanical alternatives to sleep pharmaceuticals, specializing in GABA receptor modulation and sleep architecture preservation.',
-      verifiedDate: 'April 2026'
-    },
-    sgeHighlights: [
-      'Standardized extracts of Valerian root and Magnolia bark act as natural GABA-A receptor agonists, promoting muscular relaxation and rapid sleep onset.',
-      'L-Theanine, a unique amino acid from green tea, elevates alpha brain waves to quiet mental chatter without causing next-day grogginess.',
-      'Unlike pharmaceutical sleep aids, botanical sleep drops preserve natural REM and deep sleep stages, preventing sleep architecture fragmentation.'
-    ],
-    citations: [
-      { id: '1', title: 'GABA-A receptor binding and neurochemical profile of Magnolia officinalis active biphenyls', authors: 'Koetter U., et al.', journal: 'Journal of Pharmacy and Pharmacology, 2022', link: 'https://pubmed.ncbi.nlm.nih.gov/' },
-      { id: '2', title: 'L-Theanine improves sleep quality in randomized controlled clinical trials', authors: 'Lyon M.R., et al.', journal: 'Alternative Medicine Review, 2023', link: 'https://pubmed.ncbi.nlm.nih.gov/' }
-    ],
-    contentSections: [
-      {
-        heading: 'The Biology of Sleep Onset: GABA-A Modulation',
-        content: 'To initiate sleep, the central nervous system must transition from high-frequency beta waves to low-frequency alpha and theta waves. This transition is mediated by GABA (Gamma-Aminobutyric Acid), the brain\'s primary inhibitory neurotransmitter. Active biphenyls (honokiol and magnolol) found in Magnolia Bark act as positive allosteric modulators of GABA-A receptors. By amplifying GABA binding efficiency, these compounds rapidly sedate the overactive nervous system, enabling fast sleep onset without the cognitive motor impairment associated with synthetic sleeping pills [1].'
-      },
-      {
-        heading: 'Alpha Wave Induction: Quieting the Racing Mind',
-        content: 'Many individuals struggle with "tired but wired" syndrome, where physical exhaustion is paired with an overactive mind. L-Theanine clinically crosses the blood-brain barrier within 40 minutes. It blocks glutamate receptors (preventing excitatory signals) while simultaneously stimulating the production of dopamine and serotonin, inducing alpha brain wave activity. This neurochemical shift replicates the deep relaxation state achieved during advanced Zen meditation, letting you glide effortlessly into deep sleep [2].'
-      }
-    ],
-    recommendedProduct: 'Botanical Sleep Drops'
-  }
-};
-
-const articleDataList: Record<number, ArticleData> = {
-  ...localArticles,
-  ...compiledArticles
-};
+const articleDataList: Record<number, ArticleData> = compiledArticles;
 
 interface GlossaryDef {
   term: string;

@@ -33,12 +33,15 @@ import EpigeneticClockPage from "./pages/EpigeneticClockPage";
 import CircadianPlannerPage from "./pages/CircadianPlannerPage";
 import SleepDebtPage from "./pages/SleepDebtPage";
 import WellnessBuilderPage from "./pages/WellnessBuilderPage";
-import LabIntakePage from "./pages/LabIntakePage";
+import WhatsAppDashboard from "./pages/WhatsAppDashboard";
 import ClinicalCasesPage from "./pages/ClinicalCasesPage";
+import LabIntakePage from "./pages/LabIntakePage";
 
 import { CartProvider } from "./context/CartContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import CartDrawer from "./components/CartDrawer";
+import TalkingAvatar from "./components/TalkingAvatar";
+import WhatsAppChatWidget from "./components/WhatsAppChatWidget";
 
 function NotFound() {
   return (
@@ -108,6 +111,7 @@ function Router() {
       <Route path="/wellness-builder" component={() => <Layout><WellnessBuilderPage /></Layout>} />
       <Route path="/lab-intake" component={() => <Layout><LabIntakePage /></Layout>} />
       <Route path="/clinical-cases" component={() => <Layout><ClinicalCasesPage /></Layout>} />
+      <Route path="/admin/whatsapp" component={() => <WhatsAppDashboard />} />
 
       <Route component={NotFound} />
     </Switch>
@@ -133,6 +137,23 @@ function App() {
           <Router />
         </WouterRouter>
         <CartDrawer />
+        {/* Brand Avatar - appears globally */}
+        <TalkingAvatar
+          name="Zara"
+          role="Wellness Guide"
+          size="medium"
+          position="bottom-right"
+          onHandoff={(reason) => {
+            console.log("Avatar handoff:", reason);
+            // Analytics tracking would go here
+          }}
+        />
+        {/* WhatsApp Chat Widget - appears globally */}
+        <WhatsAppChatWidget
+          phoneNumber={import.meta.env.VITE_WHATSAPP_NUMBER || "+919876543210"}
+          businessName="ZenAndZest Wellness"
+          position="bottom-right"
+        />
       </CartProvider>
     </ThemeProvider>
   );
