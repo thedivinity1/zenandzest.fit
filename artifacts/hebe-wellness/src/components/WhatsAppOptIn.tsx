@@ -67,45 +67,47 @@ export default function WhatsAppOptIn({
       position: "fixed",
       bottom: 24,
       left: 24,
-      maxWidth: 480,
+      maxWidth: 320,
       background: "linear-gradient(135deg, #0d2418 0%, #060f0a 100%)",
       border: "1px solid rgba(201, 168, 76, 0.3)",
-      borderRadius: 20,
-      padding: "1.5rem",
-      boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.1)",
+      borderRadius: 16,
+      padding: "1rem",
+      boxShadow: "0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(201,168,76,0.1)",
       zIndex: 99998,
-      animation: "fade-in-up 0.3s ease",
+      animation: "fade-in-up 0.4s ease",
       fontFamily: "var(--font-sans)",
     }}>
-      <div style={{ fontSize: "2.5rem", marginBottom: "0.75rem" }}>🌿</div>
-      <h3 style={{
-        fontSize: "1.1rem",
-        fontWeight: 700,
-        color: "#c9a84c",
-        marginBottom: "0.5rem",
-        fontFamily: "var(--font-serif)",
-      }}>
-        Stay Connected on WhatsApp
-      </h3>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
+        <div style={{ fontSize: "1.5rem" }}>🌿</div>
+        <h3 style={{
+          fontSize: "0.95rem",
+          fontWeight: 700,
+          color: "#c9a84c",
+          fontFamily: "var(--font-serif)",
+          margin: 0
+        }}>
+          Stay Connected on WhatsApp
+        </h3>
+      </div>
       <p style={{
-        fontSize: "0.875rem",
+        fontSize: "0.75rem",
         color: "rgba(255,255,255,0.7)",
-        lineHeight: 1.6,
-        marginBottom: "1rem",
+        lineHeight: 1.5,
+        marginBottom: "0.75rem",
       }}>
         Get exclusive wellness tips, personalized product recommendations, and order updates directly on WhatsApp. We respect your privacy — you can opt out anytime.
       </p>
       <div style={{
         background: "rgba(255,255,255,0.04)",
-        borderRadius: 12,
-        padding: "0.75rem",
-        marginBottom: "1rem",
+        borderRadius: 8,
+        padding: "0.5rem",
+        marginBottom: "0.75rem",
       }}>
         {["✨ Exclusive wellness content & tips", "📦 Real-time order tracking", "🎁 Member-only discounts & offers", "💬 Direct chat with our wellness guides"].map((benefit, idx) => (
           <div key={idx} style={{
-            fontSize: "0.8rem",
+            fontSize: "0.7rem",
             color: "rgba(255,255,255,0.8)",
-            marginBottom: idx < 3 ? "0.4rem" : 0,
+            marginBottom: idx < 3 ? "0.2rem" : 0,
           }}>
             {benefit}
           </div>

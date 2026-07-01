@@ -100,7 +100,7 @@ export default function TalkingAvatar({
     ? { display: "inline-flex", position: "relative" as const }
     : { 
         position: "fixed" as const,
-        bottom: "24px",
+        bottom: "100px",
         right: "24px",
         zIndex: 9999,
       };

@@ -4,6 +4,7 @@ import { Link, useLocation } from 'wouter';
 import { useCart, Product, productsList } from '../context/CartContext';
 import { allArticles } from './BlogPage';
 import { articleDataList as compiledArticles } from './articlesData';
+import SEOHead from '../components/SEOHead';
 
 interface ArticleData {
   id: number;
@@ -352,7 +353,13 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
 
   return (
     <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', paddingBottom: '6rem', color: fg('white', '#0f172a') }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <SEOHead 
+        title={`${article.title} - Zen and Zest Wellness`}
+        description={article.excerpt}
+        url={`https://zenandzest.fit/blog/${article.slug}`}
+        type="article"
+        schemaJson={articleSchema}
+      />
       {/* Article Header */}
       <section style={{ 
         background: article.gradient, 
