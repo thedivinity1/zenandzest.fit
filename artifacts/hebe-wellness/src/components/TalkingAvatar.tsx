@@ -156,9 +156,20 @@ export default function TalkingAvatar({
                 style={{
                   fontSize: size === "small" ? "1.5rem" : "2rem",
                   animation: isSpeaking ? "pulse 0.5s ease infinite" : "none",
+                  width: avatarImage ? '100%' : 'auto',
+                  height: avatarImage ? '100%' : 'auto',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}
               >
-                🌿
+                {avatarImage ? (
+                  <img src={avatarImage} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  "👩‍⚕️"
+                )}
               </div>
               
               {/* Speaking indicator */}
@@ -389,9 +400,20 @@ export default function TalkingAvatar({
             fontSize: size === "small" ? "1.5rem" : size === "medium" ? "2.5rem" : "3.5rem",
             animation: isSpeaking && isOpen ? "bounce 1s ease infinite" : "none",
             filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))",
+            width: avatarImage ? '100%' : 'auto',
+            height: avatarImage ? '100%' : 'auto',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}
         >
-          🌿
+          {avatarImage ? (
+            <img src={avatarImage} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          ) : (
+            "👩‍⚕️"
+          )}
         </div>
         
         {/* Label */}

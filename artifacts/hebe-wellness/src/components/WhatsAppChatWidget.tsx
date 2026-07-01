@@ -356,7 +356,7 @@ export default function WhatsAppChatWidget({
       {/* Main toggle button */}
       {!isOpen && (
         <button
-          onClick={openWhatsApp}
+          onClick={() => setIsOpen(true)}
           style={{
             width: 64,
             height: 64,

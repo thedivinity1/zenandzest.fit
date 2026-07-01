@@ -404,8 +404,8 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
               </div>
             </div>
 
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>Published: {article.date}</div>
-            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>⏱ {article.readTime}</div>
+            <div style={{ color: fg('rgba(255,255,255,0.4)', '#64748b'), fontSize: '0.85rem' }}>Published: {article.date}</div>
+            <div style={{ color: fg('rgba(255,255,255,0.4)', '#64748b'), fontSize: '0.85rem' }}>⏱ {article.readTime}</div>
           </div>
         </div>
       </section>
@@ -429,7 +429,7 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem', color: 'var(--gold-light)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 ✨ Search Generative Insights (Answer-First SGE Takeaways)
               </h2>
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', paddingLeft: '1.25rem', color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', paddingLeft: '1.25rem', color: fg('rgba(255,255,255,0.85)', '#334155'), fontSize: '0.9rem', lineHeight: 1.6 }}>
                 {article.sgeHighlights.map((highlight, idx) => (
                   <li key={idx}>{highlight}</li>
                 ))}
@@ -451,7 +451,7 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
                     {sec.heading}
                   </h2>
                   <p style={{ 
-                    color: 'rgba(255,255,255,0.8)', 
+                    color: fg('rgba(255,255,255,0.8)', '#334155'), 
                     fontSize: '1.025rem', 
                     lineHeight: 1.85, 
                     textAlign: 'justify' 
@@ -481,19 +481,19 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                       <td style={{ padding: '1rem', fontWeight: 600 }}>Active Molecule Density</td>
                       <td style={{ padding: '1rem', color: '#4cc987' }}>5.0% - 20.0% Standardized</td>
-                      <td style={{ padding: '1rem', color: 'rgba(255,255,255,0.4)' }}>0.1% - 0.3% Raw</td>
+                      <td style={{ padding: '1rem', color: fg('rgba(255,255,255,0.4)', '#94a3b8') }}>0.1% - 0.3% Raw</td>
                       <td style={{ padding: '1rem', color: 'var(--gold)' }}>40x Molecular Concentration</td>
                     </tr>
                     <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                       <td style={{ padding: '1rem', fontWeight: 600 }}>Bioavailability Index</td>
                       <td style={{ padding: '1rem', color: '#4cc987' }}>High (Micronized Lipid soluble)</td>
-                      <td style={{ padding: '1rem', color: 'rgba(255,255,255,0.4)' }}>Low (Destroyed in digestion)</td>
+                      <td style={{ padding: '1rem', color: fg('rgba(255,255,255,0.4)', '#94a3b8') }}>Low (Destroyed in digestion)</td>
                       <td style={{ padding: '1rem', color: 'var(--gold)' }}>3.8x Absorption Rate</td>
                     </tr>
                     <tr>
                       <td style={{ padding: '1rem', fontWeight: 600 }}>Lab Verified Purity</td>
                       <td style={{ padding: '1rem', color: '#4cc987' }}>100% (Third-party certified)</td>
-                      <td style={{ padding: '1rem', color: 'rgba(255,255,255,0.4)' }}>Unverified (Heavy metal risk)</td>
+                      <td style={{ padding: '1rem', color: fg('rgba(255,255,255,0.4)', '#94a3b8') }}>Unverified (Heavy metal risk)</td>
                       <td style={{ padding: '1rem', color: 'var(--gold)' }}>NABL Certified Safety</td>
                     </tr>
                   </tbody>
