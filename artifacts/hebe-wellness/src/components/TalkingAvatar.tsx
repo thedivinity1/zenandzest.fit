@@ -100,8 +100,9 @@ export default function TalkingAvatar({
     ? { display: "inline-flex", position: "relative" as const }
     : { 
         position: "fixed" as const,
-        bottom: "100px",
-        right: "24px",
+        bottom: "24px",
+        left: position === "bottom-left" ? "24px" : "auto",
+        right: position === "bottom-right" ? "24px" : "auto",
         zIndex: 9999,
       };
 
@@ -112,7 +113,8 @@ export default function TalkingAvatar({
           style={{
             position: "absolute",
             bottom: size === "small" ? 70 : 140,
-            right: 0,
+            left: position === "bottom-left" ? 0 : "auto",
+            right: position === "bottom-right" ? 0 : "auto",
             width: size === "small" ? 300 : 380,
             background: "linear-gradient(135deg, #0d2418 0%, #060f0a 100%)",
             border: `1px solid ${accentColor}33`,

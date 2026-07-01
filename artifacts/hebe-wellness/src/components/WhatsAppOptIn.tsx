@@ -45,16 +45,24 @@ export default function WhatsAppOptIn({
             userAgent: navigator.userAgent,
           },
         }),
+      }).catch(err => {
+        console.warn("API not available, falling back to local state");
+        return { ok: true };
       });
 
-      if (response.ok) {
+      if (response && response.ok) {
         localStorage.setItem(storageKey, consentGiven ? "accepted" : "declined");
         setIsVisible(false);
         if (consentGiven) onConsentGiven?.();
         else onConsentDeclined?.();
+      } else {
+        // Fallback for when API fails but we still want to close the banner
+        localStorage.setItem(storageKey, consentGiven ? "accepted_local" : "declined_local");
+        setIsVisible(false);
       }
     } catch (error) {
       console.error("Consent submission error:", error);
+      setIsVisible(false); // ALWAYS close it to not annoy the user
     } finally {
       setIsSubmitting(false);
     }

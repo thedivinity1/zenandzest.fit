@@ -147,8 +147,8 @@ function App() {
         <TalkingAvatar
           name="Zara"
           role="Wellness Guide"
-          size="medium"
-          position="bottom-right"
+          size="small"
+          position="bottom-left"
           onHandoff={(reason) => {
             console.log("Avatar handoff:", reason);
           }}
