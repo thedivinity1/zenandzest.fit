@@ -372,7 +372,7 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '100px', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', marginBottom: '1.5rem', background: 'rgba(201,168,76,0.08)' }}>
             🌿 CLINICAL LONGEVITY PROTOCOL
           </div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: fg('#fff', '#0f172a'), marginBottom: '1.5rem', fontWeight: 900, lineHeight: 1.25, maxWidth: '900px' }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: '#ffffff', marginBottom: '1.5rem', fontWeight: 900, lineHeight: 1.25, maxWidth: '900px' }}>
             {article.title}
           </h1>
 

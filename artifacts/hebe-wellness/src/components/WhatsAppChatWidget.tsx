@@ -49,20 +49,14 @@ export default function WhatsAppChatWidget({
     scrollToBottom();
   }, [messages]);
 
-  // Auto-reply simulation
+  // Auto-reply simulation (only reply once locally)
   useEffect(() => {
-    if (messages.length > 0 && messages[messages.length - 1].sender === "user") {
+    const userMessagesCount = messages.filter(m => m.sender === "user").length;
+    if (userMessagesCount === 1 && messages[messages.length - 1].sender === "user") {
       setIsTyping(true);
       const timer = setTimeout(() => {
-        const replies = [
-          "Thank you for reaching out! Our team will get back to you within 24 hours. 🌿",
-          "Great question! Let me connect you with our wellness specialist.",
-          "I'd be happy to help you with that! Could you please share your order ID?",
-          "Thanks for your interest in ZenAndZest! We have some exciting offers this week. Would you like to know more?",
-        ];
-        const randomReply = replies[Math.floor(Math.random() * replies.length)];
         setMessages(prev => [...prev, {
-          text: randomReply,
+          text: "Thank you for reaching out! Our wellness specialist will connect with you shortly. 🌿",
           sender: "bot",
           time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         }]);

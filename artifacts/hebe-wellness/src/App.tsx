@@ -147,6 +147,7 @@ function App() {
         <TalkingAvatar
           name="Zara"
           role="Wellness Guide"
+          avatarImage="/avatar-zara.png"
           size="small"
           position="bottom-left"
           onHandoff={(reason) => {
