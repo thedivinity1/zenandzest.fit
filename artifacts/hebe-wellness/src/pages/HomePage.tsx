@@ -392,6 +392,22 @@ export default function HomePage() {
   // ── Theme-aware background helpers ───────────────────────────────────────
   const bg = (dark: string, light: string) => isDark ? dark : light;
   const fg = (dark: string, light: string) => isDark ? dark : light;
+
+  const getArticleColor = (color: string) => {
+    if (isDark) return color;
+    switch (color.toLowerCase()) {
+      case '#e5c575': return '#a0620e'; // var(--lm-gold-deep)
+      case '#a78bfa': return '#6d28d9'; // rich purple
+      case '#34d399': return '#065f46'; // rich green
+      case '#38bdf8': return '#0369a1'; // rich blue
+      case '#f59e0b': return '#b45309'; // rich amber/orange
+      case '#fb923c': return '#c2410c'; // rich dark orange
+      case '#c084fc': return '#7e22ce'; // rich violet
+      case '#4ade80': return '#15803d'; // rich dark green
+      case '#f472b6': return '#be185d'; // rich dark pink
+      default: return '#1a5c3a'; // var(--lm-accent)
+    }
+  };
   
   // Circadian Simulator
   const [sunExposure, setSunExposure] = useState(15);
@@ -524,7 +540,7 @@ export default function HomePage() {
             }} onClick={() => goToSlide(i)}>
               <span style={{ fontSize: '1.2rem' }}>{s.icon}</span>
               <div>
-                <div style={{ fontSize: '0.68rem', color: i === currentSlide ? slide.color : fg('rgba(255,255,255,0.4)', '#64748b'), fontWeight: 700, transition: 'color 0.3s' }}>
+                <div style={{ fontSize: '0.68rem', color: i === currentSlide ? (isDark ? slide.color : (slide.id === 0 ? '#b8860b' : slide.id === 1 ? '#b45309' : '#047857')) : fg('rgba(255,255,255,0.4)', '#64748b'), fontWeight: 700, transition: 'color 0.3s' }}>
                   {s.badge}
                 </div>
               </div>
@@ -546,9 +562,9 @@ export default function HomePage() {
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               padding: '0.4rem 1.1rem',
               background: slide.accentBg,
-              border: `1px solid ${slide.color}44`,
+              border: `1px solid ${isDark ? slide.color : (slide.id === 0 ? '#a16207' : slide.id === 1 ? '#b45309' : '#047857')}44`,
               borderRadius: 100,
-              color: slide.color,
+              color: isDark ? slide.color : (slide.id === 0 ? '#a16207' : slide.id === 1 ? '#b45309' : '#047857'),
               fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.06em',
               textTransform: 'uppercase', marginBottom: '2rem',
               transition: 'all 0.5s ease'
@@ -646,7 +662,7 @@ export default function HomePage() {
                     fontSize: 'clamp(1.4rem, 3vw, 2rem)',
                     fontWeight: 900,
                     fontFamily: 'var(--font-serif)',
-                    color: slide.color,
+                    color: isDark ? slide.color : (slide.id === 0 ? '#a16207' : slide.id === 1 ? '#b45309' : '#047857'),
                     transition: 'color 0.5s ease'
                   }}>
                     {stat.num}
@@ -674,7 +690,7 @@ export default function HomePage() {
                 width: i === currentSlide ? 40 : 8,
                 height: 8,
                 borderRadius: 100,
-                background: i === currentSlide ? slide.color : 'rgba(255,255,255,0.2)',
+                background: i === currentSlide ? (isDark ? slide.color : (slide.id === 0 ? '#a16207' : slide.id === 1 ? '#b45309' : '#047857')) : (isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)'),
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.4s ease',
@@ -730,7 +746,7 @@ export default function HomePage() {
                     display: 'block',
                     marginBottom: '0.25rem'
                   }}>{metric.num}</strong>
-                  <span style={{ fontSize: '0.8rem', color: fg('rgba(255,255,255,0.5)', '#475569'), textTransform: 'uppercase', letterSpacing: '0.05em' }}>{metric.label}</span>
+                  <span style={{ fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.6)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{metric.label}</span>
                 </div>
               </Reveal>
             ))}
@@ -809,9 +825,9 @@ export default function HomePage() {
                   style={{
                     padding: '0.7rem 1.4rem',
                     borderRadius: 100,
-                    border: `1px solid ${selectedConcern === key ? 'var(--gold)' : 'rgba(255,255,255,0.1)'}`,
-                    background: selectedConcern === key ? 'rgba(229,197,117,0.12)' : 'rgba(255,255,255,0.03)',
-                    color: selectedConcern === key ? 'var(--gold)' : 'rgba(255,255,255,0.6)',
+                    border: `1px solid ${selectedConcern === key ? 'var(--gold)' : bg('rgba(255,255,255,0.1)', 'rgba(0,0,0,0.15)')}`,
+                    background: selectedConcern === key ? 'rgba(229,197,117,0.12)' : bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'),
+                    color: selectedConcern === key ? 'var(--gold)' : fg('rgba(255,255,255,0.6)', '#475569'),
                     fontWeight: 700,
                     fontSize: '0.82rem',
                     cursor: 'pointer',
@@ -871,7 +887,7 @@ export default function HomePage() {
                 <h4 style={{ fontFamily: 'var(--font-serif)', color: fg(fg('white', '#0f172a'), '#0f172a'), fontSize: '1.1rem', fontWeight: 800, marginBottom: '0.5rem' }}>
                   Our Recommended Remedy
                 </h4>
-                <p style={{ color: 'var(--gold-light)', fontSize: '0.88rem', fontWeight: 600, marginBottom: '0.75rem' }}>
+                <p style={{ color: isDark ? 'var(--gold-light)' : 'var(--lm-accent)', fontSize: '0.88rem', fontWeight: 600, marginBottom: '0.75rem' }}>
                   {concern.stack}
                 </p>
                 <p style={{ color: fg('rgba(255,255,255,0.45)', '#475569'), fontSize: '0.78rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
@@ -986,7 +1002,7 @@ export default function HomePage() {
 
                 <div style={{ padding: '3rem 3rem 3rem 3.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                    <span style={{ background: 'rgba(229,197,117,0.12)', border: '1px solid rgba(229,197,117,0.25)', borderRadius: 100, padding: '0.3rem 0.9rem', fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                    <span style={{ background: isDark ? 'rgba(229,197,117,0.12)' : 'var(--lm-gold-pale)', border: isDark ? '1px solid rgba(229,197,117,0.25)' : '1px solid rgba(196,127,23,0.2)', borderRadius: 100, padding: '0.3rem 0.9rem', fontSize: '0.72rem', color: isDark ? 'var(--gold)' : 'var(--lm-gold-deep)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                       🌙 Sleep & Hormones
                     </span>
                     <span style={{ fontSize: '0.75rem', color: fg('rgba(255,255,255,0.35)', '#64748b') }}>7 min read</span>
@@ -1008,8 +1024,8 @@ export default function HomePage() {
                     Waking at 2–4 AM is not bad luck — it's your stress hormones spiking at the wrong time. Learn how your body clock works, and the gentle plant-based remedies that help it reset naturally and permanently.
                   </p>
 
-                  <div style={{ background: 'rgba(229,197,117,0.06)', border: '1px dashed rgba(229,197,117,0.25)', borderRadius: 14, padding: '1.1rem', marginBottom: '2rem' }}>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--gold-light)', fontWeight: 700, marginBottom: '0.5rem' }}>
+                  <div style={{ background: isDark ? 'rgba(229,197,117,0.06)' : 'var(--lm-gold-pale)', border: isDark ? '1px dashed rgba(229,197,117,0.25)' : '1px dashed rgba(196,127,23,0.4)', borderRadius: 14, padding: '1.1rem', marginBottom: '2rem' }}>
+                    <div style={{ fontSize: '0.78rem', color: isDark ? 'var(--gold-light)' : 'var(--lm-gold-deep)', fontWeight: 700, marginBottom: '0.5rem' }}>
                       ✨ What you'll learn in this article:
                     </div>
                     <ul style={{ fontSize: '0.8rem', color: fg('rgba(255,255,255,0.65)', '#334155'), paddingLeft: '1rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
@@ -1035,14 +1051,14 @@ export default function HomePage() {
                 }}>
                   <div style={{ fontSize: '4rem', filter: 'drop-shadow(0 0 20px rgba(229,197,117,0.3))' }}>🌙</div>
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
+                    <div style={{ fontSize: '0.72rem', color: isDark ? 'var(--gold)' : 'var(--lm-gold-deep)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem' }}>
                       Recommended Protocol
                     </div>
                     <p style={{ fontFamily: 'var(--font-serif)', color: fg(fg('white', '#0f172a'), '#0f172a'), fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem' }}>Botanical Sleep Drops</p>
                     <p style={{ color: fg('rgba(255,255,255,0.45)', '#475569'), fontSize: '0.78rem', lineHeight: 1.5 }}>Ashwagandha KSM-66 · Brahmi · Passionflower</p>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', width: '100%' }}>
-                    <span style={{ display: 'block', textAlign: 'center', background: bg('rgba(255,255,255,0.05)', 'rgba(0,0,0,0.05)'), border: '1px solid rgba(229,197,117,0.25)', color: 'var(--gold-light)', borderRadius: 100, padding: '0.7rem 1rem', fontSize: '0.82rem', fontWeight: 700 }}>
+                    <span style={{ display: 'block', textAlign: 'center', background: bg('rgba(255,255,255,0.05)', 'rgba(0,0,0,0.05)'), border: isDark ? '1px solid rgba(229,197,117,0.25)' : '1px solid rgba(196,127,23,0.35)', color: isDark ? 'var(--gold-light)' : 'var(--lm-gold-deep)', borderRadius: 100, padding: '0.7rem 1rem', fontSize: '0.82rem', fontWeight: 700 }}>
                       📖 Read Full Article →
                     </span>
                   </div>
@@ -1053,74 +1069,77 @@ export default function HomePage() {
 
           {/* 6-CARD BLOG GRID */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.75rem' }} className="three-col-grid">
-            {editorialArticles.slice(1).map((article, idx) => (
-              <Reveal key={idx} delay={idx * 0.1}>
-                <Link href={`/blog/${article.id}`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
-                  <div style={{
-                    background: bg(article.bgGradient, '#ffffff'),
-                    border: `1px solid ${article.borderColor}`,
-                    borderRadius: 20,
-                    padding: '1.75rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    height: '100%',
-                    minHeight: 280,
-                    transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 15px 40px ${article.color}20`;
-                    (e.currentTarget as HTMLElement).style.borderColor = article.color + '55';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                    (e.currentTarget as HTMLElement).style.borderColor = article.borderColor;
-                  }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                        <span style={{ fontSize: '2rem', filter: `drop-shadow(0 0 12px ${article.color}50)` }}>{article.icon}</span>
-                        <span style={{ background: `${article.color}18`, border: `1px solid ${article.color}30`, borderRadius: 100, padding: '0.2rem 0.65rem', fontSize: '0.65rem', color: article.color, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                          {article.category}
+            {editorialArticles.slice(1).map((article, idx) => {
+              const artColor = getArticleColor(article.color);
+              return (
+                <Reveal key={idx} delay={idx * 0.1}>
+                  <Link href={`/blog/${article.id}`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
+                    <div style={{
+                      background: bg(article.bgGradient, '#ffffff'),
+                      border: bg(`1px solid ${article.borderColor}`, '1px solid rgba(0,0,0,0.06)'),
+                      borderRadius: 20,
+                      padding: '1.75rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      height: '100%',
+                      minHeight: 280,
+                      transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
+                      cursor: 'pointer'
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)';
+                      (e.currentTarget as HTMLElement).style.boxShadow = isDark ? `0 15px 40px ${article.color}20` : `0 15px 40px ${artColor}15`;
+                      (e.currentTarget as HTMLElement).style.borderColor = artColor + '55';
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                      (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+                      (e.currentTarget as HTMLElement).style.borderColor = isDark ? article.borderColor : 'rgba(0,0,0,0.06)';
+                    }}
+                    >
+                      <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                          <span style={{ fontSize: '2rem', filter: `drop-shadow(0 0 12px ${article.color}50)` }}>{article.icon}</span>
+                          <span style={{ background: `${artColor}18`, border: `1px solid ${artColor}30`, borderRadius: 100, padding: '0.2rem 0.65rem', fontSize: '0.65rem', color: artColor, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                            {article.category}
+                          </span>
+                        </div>
+                        
+                        <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: fg(fg('white', '#0f172a'), '#0f172a'), fontWeight: 800, marginBottom: '0.35rem', lineHeight: 1.3 }}>
+                          {article.title}
+                        </h4>
+                        <p style={{ fontFamily: 'var(--font-serif)', fontSize: '0.82rem', color: isDark ? `${article.color}99` : `${artColor}cc`, fontStyle: 'italic', marginBottom: '0.85rem' }}>
+                          {article.subtitle}
+                        </p>
+                        
+                        <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.82rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>
+                          {article.excerpt}
+                        </p>
+                      </div>
+
+                      <div style={{ borderTop: `1px solid ${artColor}18`, paddingTop: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div>
+                          <div style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.5)', '#475569'), fontWeight: 600 }}>{article.author}</div>
+                          <div style={{ fontSize: '0.65rem', color: fg('rgba(255,255,255,0.3)', '#94a3b8') }}>{article.readTime}</div>
+                        </div>
+                        <span style={{ color: artColor, fontSize: '0.8rem', fontWeight: 700 }}>
+                          Read →
                         </span>
                       </div>
-                      
-                      <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: fg(fg('white', '#0f172a'), '#0f172a'), fontWeight: 800, marginBottom: '0.35rem', lineHeight: 1.3 }}>
-                        {article.title}
-                      </h4>
-                      <p style={{ fontFamily: 'var(--font-serif)', fontSize: '0.82rem', color: `${article.color}99`, fontStyle: 'italic', marginBottom: '0.85rem' }}>
-                        {article.subtitle}
-                      </p>
-                      
-                      <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.82rem', lineHeight: 1.65, marginBottom: '1.25rem' }}>
-                        {article.excerpt}
-                      </p>
                     </div>
-
-                    <div style={{ borderTop: `1px solid ${article.color}18`, paddingTop: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <div style={{ fontSize: '0.72rem', color: fg('rgba(255,255,255,0.5)', '#475569'), fontWeight: 600 }}>{article.author}</div>
-                        <div style={{ fontSize: '0.65rem', color: fg('rgba(255,255,255,0.3)', '#94a3b8') }}>{article.readTime}</div>
-                      </div>
-                      <span style={{ color: article.color, fontSize: '0.8rem', fontWeight: 700 }}>
-                        Read →
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
 
           <Reveal>
             <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
               <Link href="/blog" style={{
                 background: 'transparent',
-                border: '1px solid rgba(229,197,117,0.3)',
-                color: 'var(--gold-light)',
+                border: isDark ? '1px solid rgba(229,197,117,0.3)' : '1px solid rgba(196,127,23,0.5)',
+                color: isDark ? 'var(--gold-light)' : 'var(--lm-gold-deep)',
                 padding: '0.85rem 2.25rem',
                 borderRadius: 100,
                 fontWeight: 700,
@@ -1129,7 +1148,7 @@ export default function HomePage() {
                 transition: 'all 0.2s',
                 display: 'inline-block'
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(229,197,117,0.08)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = isDark ? 'rgba(229,197,117,0.08)' : 'rgba(196,127,23,0.08)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
               >
                 📚 Browse All Wellness Articles →
@@ -1235,7 +1254,7 @@ export default function HomePage() {
                         </div>
                         <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', color: fg('#fff', '#0f172a'), marginBottom: '0.75rem', fontWeight: 800 }}>{p.name}</h3>
                         <p style={{ color: fg('rgba(255,255,255,0.65)', '#334155'), fontSize: '0.84rem', lineHeight: 1.65 }}>{p.desc}</p>
-                        <div style={{ marginTop: '1rem', background: bg('rgba(255,255,255,0.04)', 'rgba(255,255,255,0.82)'), border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: '0.4rem 0.7rem', fontSize: '0.7rem', color: 'var(--gold-light)', display: 'inline-block' }}>
+                        <div style={{ marginTop: '1rem', background: bg('rgba(255,255,255,0.04)', 'var(--lm-bg-forest)'), border: bg('1px solid rgba(255,255,255,0.06)', '1px solid var(--lm-border)'), borderRadius: 8, padding: '0.4rem 0.7rem', fontSize: '0.7rem', color: isDark ? 'var(--gold-light)' : 'var(--lm-accent)', display: 'inline-block' }}>
                           🌿 {p.extracts}
                         </div>
                       </div>
@@ -1257,7 +1276,7 @@ export default function HomePage() {
                     {/* Back */}
                     <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', transform: 'rotateY(180deg)', background: bg('linear-gradient(135deg, #0a1a0f, #1a3d2e)', '#ffffff'), borderRadius: 20, padding: '2rem', border: bg('1px solid rgba(229,197,117,0.25)', '1px solid rgba(203,213,225,0.8)'), display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                       <div>
-                        <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>🔬 What's Inside</div>
+                        <div style={{ color: isDark ? 'var(--gold)' : 'var(--lm-gold-deep)', fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>🔬 What's Inside</div>
                         <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 800 }}>{p.name}</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.8rem' }}>
                           {[
@@ -1340,8 +1359,8 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <Link href="/tools" style={{ display: 'inline-block', background: 'transparent', border: '1px solid rgba(229,197,117,0.35)', color: 'var(--gold-light)', padding: '0.75rem 1.75rem', borderRadius: 100, fontWeight: 700, textDecoration: 'none', fontSize: '0.85rem', transition: 'all 0.2s' }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'rgba(229,197,117,0.08)'}
+                <Link href="/tools" style={{ display: 'inline-block', background: 'transparent', border: isDark ? '1px solid rgba(229,197,117,0.35)' : '1px solid rgba(196,127,23,0.5)', color: isDark ? 'var(--gold-light)' : 'var(--lm-gold-deep)', padding: '0.75rem 1.75rem', borderRadius: 100, fontWeight: 700, textDecoration: 'none', fontSize: '0.85rem', transition: 'all 0.2s' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = isDark ? 'rgba(229,197,117,0.08)' : 'rgba(196,127,23,0.08)'}
                 onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
                 >
                   🧰 Explore All Wellness Tools →

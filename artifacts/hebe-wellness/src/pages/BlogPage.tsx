@@ -6,6 +6,7 @@ import { articleDataList } from './articlesData';
 export const allArticles = [
   ...Object.values(articleDataList).map(art => ({
     id: art.id,
+    slug: art.slug,
     title: art.title,
     category: art.category,
     excerpt: art.excerpt,
@@ -95,7 +96,7 @@ export default function BlogPage() {
           ) : (
             <div className="blog-grid">
               {filtered.map((a) => (
-                <Link key={a.id} href={`/blog/${a.id}`} style={{ textDecoration: 'none', display: 'flex' }}>
+                <Link key={a.id} href={`/blog/${a.slug}`} style={{ textDecoration: 'none', display: 'flex' }}>
                   <div className="blog-card" style={{ width: '100%', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', background: bg('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.02)'), transition: 'transform 0.3s ease, border-color 0.3s ease', cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-6px)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(201,168,76,0.25)'; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.07)'; }}>

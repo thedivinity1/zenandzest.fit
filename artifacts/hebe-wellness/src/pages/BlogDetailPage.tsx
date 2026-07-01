@@ -7,6 +7,7 @@ import { articleDataList as compiledArticles } from './articlesData';
 
 interface ArticleData {
   id: number;
+  slug: string;
   title: string;
   category: string;
   excerpt: string;
@@ -52,8 +53,8 @@ const glossaryDefinitions: Record<string, GlossaryDef> = {
   'bdnf': { term: 'BDNF', definition: 'Brain-Derived Neurotrophic Factor. A vital protein that stimulates neurogenesis — the growth, differentiation, and preservation of new synapses and neurons in the brain.' }
 };
 
-const getArticleDetail = (id: number): ArticleData => {
-  let art = articleDataList[id];
+const getArticleDetailBySlug = (slug: string): ArticleData => {
+  let art = Object.values(articleDataList).find(a => a.slug === slug);
   if (art) {
     if (!art.reviewedBy) {
       let reviewer = {
@@ -105,7 +106,7 @@ const getArticleDetail = (id: number): ArticleData => {
     }
     return art;
   }
-  const meta = allArticles.find(a => a.id === id) || allArticles[0];
+  const meta = allArticles.find(a => a.slug === slug) || allArticles[0];
   
   let reviewer = {
     name: 'Dr. Sarah Chen, MD',
@@ -184,7 +185,8 @@ const getArticleDetail = (id: number): ArticleData => {
   ];
   
   return {
-    id,
+    id: meta.id,
+    slug: meta.slug,
     title: meta.title,
     category: meta.category,
     excerpt: meta.excerpt,
@@ -201,10 +203,10 @@ const getArticleDetail = (id: number): ArticleData => {
 };
 
 interface BlogDetailPageProps {
-  id: number;
+  slug: string;
 }
 
-export default function BlogDetailPage({ id }: BlogDetailPageProps) {
+export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
   const { isDark } = useTheme();
   const bg = (dark: string, light: string) => isDark ? dark : light;
   const fg = (dark: string, light: string) => isDark ? dark : light;
@@ -215,7 +217,7 @@ export default function BlogDetailPage({ id }: BlogDetailPageProps) {
   const [hoveredTerm, setHoveredTerm] = useState<string | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
-  const article = getArticleDetail(id);
+  const article = getArticleDetailBySlug(slug);
   const product = productsList.find((p: Product) => p.name === article.recommendedProduct);
 
   const handleTextHover = (e: React.MouseEvent<HTMLSpanElement>, term: string) => {

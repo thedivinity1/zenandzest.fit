@@ -1,4 +1,4 @@
-﻿
+
 /* ═══════════════════════════════════════════════════════════════════ */
 /* ZEN AND ZEST — 2026 PREMIUM LIGHT MODE DESIGN SYSTEM               */
 /* Concept: Warm Parchment · Liquid Glass · Dopamine Pops · Bento     */
@@ -89,8 +89,8 @@
 /* BASE ELEMENTS                                                        */
 /* ─────────────────────────────────────────────────────────────────── */
 [data-theme="light"] body {
-  background-color: var(--lm-bg) !important;
-  color: var(--lm-ink-primary) !important;
+  background-color: var(--lm-bg);
+  color: var(--lm-ink-primary);
 }
 
 [data-theme="light"] h1,
@@ -99,11 +99,11 @@
 [data-theme="light"] h4,
 [data-theme="light"] h5,
 [data-theme="light"] h6 {
-  color: var(--lm-ink-primary) !important;
+  color: var(--lm-ink-primary);
 }
 
 [data-theme="light"] p {
-  color: var(--lm-ink-secondary) !important;
+  color: var(--lm-ink-secondary);
 }
 
 /* ─────────────────────────────────────────────────────────────────── */

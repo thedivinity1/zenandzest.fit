@@ -1,4 +1,4 @@
-﻿import { useTheme } from '../context/ThemeContext';
+import { useTheme, ThemeContext } from '../context/ThemeContext';
 import { useState } from 'react';
 import { useRoute, Link } from 'wouter';
 import { ArrowRight } from 'lucide-react';
@@ -1013,22 +1013,24 @@ export default function ToolsPage() {
     return (
       <div style={{ background: bg('var(--darkest)', '#f8fafc'), minHeight: '100vh', padding: '8rem 0 6rem 0', color: fg('white', '#0f172a') }}>
         <div className="container" style={{ maxWidth: '800px' }}>
-          <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--gold-light)', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', fontSize: '0.9rem', transition: 'color 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'var(--gold-light)'; }}>
+          <Link href="/tools" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: isDark ? 'var(--gold-light)' : 'var(--lm-accent)', textDecoration: 'none', fontWeight: 600, marginBottom: '2rem', fontSize: '0.9rem', transition: 'color 0.2s' }}
+            onMouseEnter={e => { e.currentTarget.style.color = isDark ? '#fff' : 'var(--lm-accent-mid)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = isDark ? 'var(--gold-light)' : 'var(--lm-accent)'; }}>
             ← Back to All Tools
           </Link>
           
-          <div style={{ background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(201,168,76,0.2)', borderRadius: '24px', padding: '2.5rem', backdropFilter: 'blur(10px)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-              <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `${active.color}ee`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem', border: '1px solid rgba(201,168,76,0.2)' }}>{active.icon}</div>
-              <div>
-                <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: fg('#fff', '#0f172a'), marginBottom: '0.25rem', fontWeight: 800 }}>{active.name}</h1>
-                <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem' }}>{active.desc}</p>
+          <ThemeContext.Provider value={{ theme: 'dark', isDark: true, toggleTheme: () => {} }}>
+            <div style={{ background: 'linear-gradient(135deg, #0a1a0f 0%, #102a18 100%)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: '24px', padding: '2.5rem', backdropFilter: 'blur(10px)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `${active.color}ee`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem', border: '1px solid rgba(201,168,76,0.2)' }}>{active.icon}</div>
+                <div>
+                  <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: '#fff', marginBottom: '0.25rem', fontWeight: 800 }}>{active.name}</h1>
+                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.9rem' }}>{active.desc}</p>
+                </div>
               </div>
+              <div style={{ maxWidth: '680px' }}>{active.component}</div>
             </div>
-            <div style={{ maxWidth: '680px' }}>{active.component}</div>
-          </div>
+          </ThemeContext.Provider>
         </div>
       </div>
     );
@@ -1099,7 +1101,7 @@ export default function ToolsPage() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1rem', borderRadius: '100px', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '1.5rem', background: 'rgba(201,168,76,0.08)' }}>FREE WELLNESS TOOLS</div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 900 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#fff', marginBottom: '1rem', fontWeight: 900 }}>
             Know Your Body. <span style={{ color: 'var(--gold)' }}>Optimize Your Life.</span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '680px', margin: '0 auto', lineHeight: 1.75 }}>
@@ -1119,8 +1121,8 @@ export default function ToolsPage() {
                   style={{ 
                     width: '100%', 
                     padding: '2rem', 
-                    background: `${tool.color}55`, 
-                    border: '1px solid rgba(201,168,76,0.12)', 
+                    background: bg(`${tool.color}55`, `${tool.color}12`), 
+                    border: bg('1px solid rgba(201,168,76,0.12)', '1px solid rgba(201,168,76,0.25)'), 
                     borderRadius: '20px', 
                     cursor: 'pointer', 
                     textAlign: 'left', 
@@ -1134,20 +1136,20 @@ export default function ToolsPage() {
                   onMouseEnter={e => { 
                     e.currentTarget.style.transform = 'translateY(-4px)'; 
                     e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)'; 
-                    e.currentTarget.style.background = `${tool.color}88`;
+                    e.currentTarget.style.background = isDark ? `${tool.color}88` : `${tool.color}22`;
                   }}
                   onMouseLeave={e => { 
                     e.currentTarget.style.transform = 'translateY(0)'; 
-                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.12)'; 
-                    e.currentTarget.style.background = `${tool.color}55`;
+                    e.currentTarget.style.borderColor = isDark ? 'rgba(201,168,76,0.12)' : 'rgba(201,168,76,0.25)'; 
+                    e.currentTarget.style.background = isDark ? `${tool.color}55` : `${tool.color}12`;
                   }}
                 >
                   <div>
                     <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: bg('rgba(0,0,0,0.3)', 'rgba(255,255,255,0.8)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', marginBottom: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>{tool.icon}</div>
                     <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', color: fg('#fff', '#0f172a'), marginBottom: '0.5rem', textAlign: 'left', fontWeight: 700 }}>{tool.name}</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.82rem', lineHeight: 1.6, textAlign: 'left' }}>{tool.desc}</p>
+                    <p style={{ color: fg('rgba(255,255,255,0.55)', '#475569'), fontSize: '0.82rem', lineHeight: 1.6, textAlign: 'left' }}>{tool.desc}</p>
                   </div>
-                  <div style={{ color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, marginTop: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <div style={{ color: isDark ? 'var(--gold)' : 'var(--lm-gold-deep)', fontSize: '0.8rem', fontWeight: 600, marginTop: '1.25rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                     Launch Tool <ArrowRight size={12} />
                   </div>
                 </div>
@@ -1158,10 +1160,10 @@ export default function ToolsPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg, #0a1f12, #1a3d2e)', padding: '5rem 0', textAlign: 'center', borderTop: '1px solid rgba(229, 197, 117, 0.15)' }}>
+      <section style={{ background: bg('linear-gradient(135deg, #0a1f12, #1a3d2e)', 'linear-gradient(135deg, #e8f4ee, #faf3df)'), padding: '5rem 0', textAlign: 'center', borderTop: isDark ? '1px solid rgba(229, 197, 117, 0.15)' : '1px solid rgba(26,92,58,0.1)' }}>
         <div className="container" style={{ maxWidth: '600px' }}>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: fg('#fff', '#0f172a'), marginBottom: '1rem' }}>Want a Deeper <span style={{ color: 'var(--gold)' }}>Clinical Analysis?</span></h2>
-          <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, marginBottom: '2rem' }}>Book a free 45-minute expert consultation. Our integrative medicine physicians will create a comprehensive botanical protocol tailored to your biology.</p>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', color: fg('#fff', '#0f172a'), marginBottom: '1rem' }}>Want a Deeper <span style={{ color: isDark ? 'var(--gold)' : 'var(--lm-accent)' }}>Clinical Analysis?</span></h2>
+          <p style={{ color: fg('rgba(255,255,255,0.65)', '#334155'), lineHeight: 1.75, marginBottom: '2rem' }}>Book a free 45-minute expert consultation. Our integrative medicine physicians will create a comprehensive botanical protocol tailored to your biology.</p>
           <a href="/consult" style={{ display: 'inline-block', padding: '0.875rem 2rem', background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', borderRadius: '100px', color: '#000', fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem' }}>Book Free Consultation →</a>
         </div>
       </section>

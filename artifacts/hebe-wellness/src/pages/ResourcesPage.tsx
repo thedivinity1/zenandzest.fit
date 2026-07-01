@@ -98,7 +98,7 @@ export default function ResourcesPage() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1rem', borderRadius: '100px', border: '1px solid rgba(201,168,76,0.3)', color: 'var(--gold)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '1.5rem', background: 'rgba(201,168,76,0.08)' }}>KNOWLEDGE LIBRARY</div>
-          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: fg('#fff', '#0f172a'), marginBottom: '1rem', fontWeight: 900 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 5vw, 3.5rem)', color: '#fff', marginBottom: '1rem', fontWeight: 900 }}>
             Free Wellness <span style={{ color: 'var(--gold)' }}>Knowledge Library</span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1.05rem', maxWidth: '700px', margin: '0 auto', lineHeight: 1.75 }}>
@@ -170,8 +170,8 @@ export default function ResourcesPage() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontFamily: 'var(--font-serif)', color: fg('#fff', '#0f172a'), fontSize: '0.975rem', lineHeight: 1.5, marginBottom: '0.5rem' }}>{cite.title}</div>
-                        <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.8rem' }}>{cite.author} ({cite.year}) · <span style={{ fontStyle: 'italic' }}>{cite.journal}</span></div>
-                        <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.25rem' }}>DOI: {cite.doi}</div>
+                        <div style={{ color: fg('rgba(255,255,255,0.45)', '#64748b'), fontSize: '0.8rem' }}>{cite.author} ({cite.year}) · <span style={{ fontStyle: 'italic' }}>{cite.journal}</span></div>
+                        <div style={{ color: fg('rgba(255,255,255,0.35)', '#94a3b8'), fontSize: '0.75rem', marginTop: '0.25rem' }}>DOI: {cite.doi}</div>
                       </div>
                       <span style={{ background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', padding: '0.25rem 0.75rem', borderRadius: '100px', fontSize: '0.72rem', fontWeight: 700, flexShrink: 0 }}>{cite.category}</span>
                     </div>
@@ -190,11 +190,11 @@ export default function ResourcesPage() {
               <div style={{ marginBottom: '2rem' }}>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: fg('#fff', '#0f172a'), marginBottom: '0.5rem' }}>Botanical & Wellness <span style={{ color: 'var(--gold)' }}>Glossary</span></h2>
                 <p style={{ color: fg('rgba(255,255,255,0.5)', '#475569'), fontSize: '0.9rem', marginBottom: '1.5rem' }}>A-Z reference guide to botanical, Ayurvedic, and clinical wellness terminology.</p>
-                <input type="text" value={glossarySearch} onChange={e => setGlossarySearch(e.target.value)} placeholder="Search terms..." style={{ width: '100%', maxWidth: '400px', padding: '0.75rem 1.25rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '100px', color: fg('#fff', '#0f172a'), outline: 'none', fontSize: '0.9rem' }} />
+                <input type="text" value={glossarySearch} onChange={e => setGlossarySearch(e.target.value)} placeholder="Search terms..." style={{ width: '100%', maxWidth: '400px', padding: '0.75rem 1.25rem', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '100px', color: '#fff', outline: 'none', fontSize: '0.9rem' }} />
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '2rem' }}>
                 {alphabet.map(l => (
-                  <button key={l} onClick={() => setActiveLetter(l)} style={{ width: '36px', height: '36px', borderRadius: '8px', border: `1px solid ${activeLetter === l ? 'var(--gold)' : 'rgba(255,255,255,0.1)'}`, background: activeLetter === l ? 'rgba(201,168,76,0.15)' : 'transparent', color: activeLetter === l ? 'var(--gold)' : 'rgba(255,255,255,0.4)', fontSize: '0.8rem', cursor: 'pointer', fontWeight: activeLetter === l ? 700 : 400 }}>{l}</button>
+                  <button key={l} onClick={() => setActiveLetter(l)} style={{ width: '36px', height: '36px', borderRadius: '8px', border: `1px solid ${activeLetter === l ? 'var(--gold)' : bg('rgba(255,255,255,0.1)', 'rgba(0,0,0,0.12)')}`, background: activeLetter === l ? 'rgba(201,168,76,0.15)' : 'transparent', color: activeLetter === l ? 'var(--gold)' : fg('rgba(255,255,255,0.4)', '#475569'), fontSize: '0.8rem', cursor: 'pointer', fontWeight: activeLetter === l ? 700 : 400 }}>{l}</button>
                 ))}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
@@ -202,13 +202,13 @@ export default function ResourcesPage() {
                   <div key={i} style={{ padding: '1.25rem 1.5rem', background: bg('rgba(255,255,255,0.03)', 'rgba(0,0,0,0.03)'), border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px' }}>
                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                       <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--gold)', fontWeight: 700, flexShrink: 0 }}>{item.term}</span>
-                      <span style={{ background: 'rgba(255,255,255,0.06)', padding: '0.15rem 0.5rem', borderRadius: '6px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', flexShrink: 0 }}>{item.category}</span>
+                      <span style={{ background: bg('rgba(255,255,255,0.06)', 'rgba(0,0,0,0.06)'), padding: '0.15rem 0.5rem', borderRadius: '6px', fontSize: '0.7rem', color: fg('rgba(255,255,255,0.4)', '#64748b'), flexShrink: 0 }}>{item.category}</span>
                     </div>
                     <p style={{ color: fg('rgba(255,255,255,0.6)', '#334155'), fontSize: '0.875rem', lineHeight: 1.7, marginTop: '0.5rem' }}>{item.definition}</p>
                   </div>
                 ))}
                 {filteredGlossary.length === 0 && (
-                  <div style={{ textAlign: 'center', padding: '3rem', color: 'rgba(255,255,255,0.4)' }}>No terms found. Try a different search.</div>
+                  <div style={{ textAlign: 'center', padding: '3rem', color: fg('rgba(255,255,255,0.4)', '#64748b') }}>No terms found. Try a different search.</div>
                 )}
               </div>
             </div>
@@ -233,12 +233,12 @@ export default function ResourcesPage() {
                         onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = '0'}>
                         <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(201,168,76,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', paddingLeft: '4px' }}>▶</div>
                       </div>
-                      <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', background: 'rgba(0,0,0,0.6)', padding: '0.2rem 0.5rem', borderRadius: '6px', fontSize: '0.72rem', color: fg('#fff', '#0f172a') }}>{video.duration}</div>
+                      <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', background: 'rgba(0,0,0,0.6)', padding: '0.2rem 0.5rem', borderRadius: '6px', fontSize: '0.72rem', color: '#fff' }}>{video.duration}</div>
                     </div>
                     <div style={{ padding: '1.25rem' }}>
                       <span style={{ background: 'rgba(201,168,76,0.12)', color: 'var(--gold)', padding: '0.2rem 0.6rem', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 700 }}>{video.category}</span>
                       <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '0.975rem', color: fg('#fff', '#0f172a'), marginTop: '0.75rem', lineHeight: 1.4 }}>{video.title}</h3>
-                      <div style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.75rem', marginTop: '0.5rem' }}>{video.views} views</div>
+                      <div style={{ color: fg('rgba(255,255,255,0.35)', '#64748b'), fontSize: '0.75rem', marginTop: '0.5rem' }}>{video.views} views</div>
                     </div>
                   </div>
                 ))}

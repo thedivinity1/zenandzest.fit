@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 interface LocalAdvice {
   city: string;
@@ -41,6 +42,10 @@ const localizedAdviceDatabase: Record<string, LocalAdvice> = {
 };
 
 export default function GeoOptimizer() {
+  const { isDark } = useTheme();
+  const bg = (dark: string, light: string) => isDark ? dark : light;
+  const fg = (dark: string, light: string) => isDark ? dark : light;
+
   const [selectedCity, setSelectedCity] = useState<string>('Mumbai');
   const [pincode, setPincode] = useState('');
   const [pincodeStatus, setPincodeStatus] = useState<string | null>(null);
@@ -66,8 +71,9 @@ export default function GeoOptimizer() {
 
   return (
     <div style={{
-      background: 'rgba(255, 255, 255, 0.02)',
-      border: '1px solid rgba(201, 168, 76, 0.15)',
+      background: bg('rgba(255, 255, 255, 0.02)', 'rgba(255, 255, 255, 0.7)'),
+      border: bg('1px solid rgba(201, 168, 76, 0.15)', '1px solid rgba(26, 92, 58, 0.1)'),
+      boxShadow: isDark ? 'none' : '0 20px 40px rgba(26,92,58,0.05)',
       borderRadius: '24px',
       padding: '2.5rem',
       maxWidth: '100%',
@@ -84,8 +90,8 @@ export default function GeoOptimizer() {
         {/* Left: Seasonal Regional Wellness advice */}
         <div>
           <div className="section-tag" style={{ marginBottom: '1rem' }}>📍 GEO-TARGETED WELLNESS ADVISOR</div>
-          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'white', marginBottom: '1rem' }}>
-            Regional Bio-Climate Protocol for <span style={{ color: 'var(--gold)' }}>{advice.city}</span>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: fg('white', '#0f172a'), marginBottom: '1rem' }}>
+            Regional Bio-Climate Protocol for <span style={{ color: isDark ? 'var(--gold)' : 'var(--lm-gold-deep)' }}>{advice.city}</span>
           </h3>
           
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
@@ -96,9 +102,9 @@ export default function GeoOptimizer() {
                 style={{
                   padding: '0.35rem 0.85rem',
                   borderRadius: '100px',
-                  border: `1px solid ${selectedCity === city ? 'var(--gold)' : 'rgba(255,255,255,0.12)'}`,
+                  border: `1px solid ${selectedCity === city ? 'var(--gold)' : bg('rgba(255,255,255,0.12)', 'rgba(26,92,58,0.18)')}`,
                   background: selectedCity === city ? 'var(--gold)' : 'transparent',
-                  color: selectedCity === city ? '#000' : 'rgba(255,255,255,0.7)',
+                  color: selectedCity === city ? '#000' : fg('rgba(255,255,255,0.7)', '#334155'),
                   fontSize: '0.78rem',
                   fontWeight: selectedCity === city ? 700 : 400,
                   cursor: 'pointer',
@@ -110,30 +116,30 @@ export default function GeoOptimizer() {
             ))}
           </div>
 
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+          <p style={{ color: fg('rgba(255,255,255,0.75)', '#334155'), fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
             {advice.seasonAdvice}
           </p>
 
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', fontWeight: 600 }}>RECOMMENDED STACK:</span>
-            <span style={{ fontSize: '0.85rem', color: 'var(--gold-light)', fontWeight: 700, borderBottom: '1px solid rgba(201,168,76,0.3)', paddingBottom: '0.1rem' }}>{advice.recommendedProduct}</span>
+            <span style={{ fontSize: '0.8rem', color: fg('rgba(255,255,255,0.4)', '#475569'), textTransform: 'uppercase', fontWeight: 600 }}>RECOMMENDED STACK:</span>
+            <span style={{ fontSize: '0.85rem', color: isDark ? 'var(--gold-light)' : 'var(--lm-accent)', fontWeight: 700, borderBottom: isDark ? '1px solid rgba(201,168,76,0.3)' : '1px solid rgba(26,92,58,0.3)', paddingBottom: '0.1rem' }}>{advice.recommendedProduct}</span>
           </div>
         </div>
 
         {/* Right: Pincode Express dispatch checker */}
         <div style={{
           padding: '2rem',
-          background: 'rgba(255, 255, 255, 0.02)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          background: bg('rgba(255, 255, 255, 0.02)', 'rgba(0,0,0,0.02)'),
+          border: bg('1px solid rgba(255,255,255,0.06)', '1px solid rgba(26,92,58,0.08)'),
           borderRadius: '16px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center'
         }}>
-          <h4 style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h4 style={{ color: fg('white', '#0f172a'), fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             🚚 Dispatch Speed Checker
           </h4>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.78rem', marginBottom: '1.25rem', lineHeight: 1.4 }}>
+          <p style={{ color: fg('rgba(255,255,255,0.5)', '#334155'), fontSize: '0.78rem', marginBottom: '1.25rem', lineHeight: 1.4 }}>
             Enter your 6-digit Indian shipping pincode to check real-time courier dispatch speeds.
           </p>
 
@@ -147,10 +153,10 @@ export default function GeoOptimizer() {
               style={{
                 flex: 1,
                 padding: '0.6rem 1rem',
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(201,168,76,0.2)',
+                background: bg('rgba(255,255,255,0.06)', '#ffffff'),
+                border: bg('1px solid rgba(201,168,76,0.2)', '1px solid rgba(26,92,58,0.2)'),
                 borderRadius: '8px',
-                color: 'white',
+                color: fg('white', '#0f172a'),
                 fontSize: '0.85rem',
                 outline: 'none'
               }}
@@ -158,8 +164,8 @@ export default function GeoOptimizer() {
             <button
               type="submit"
               style={{
-                background: 'var(--gold)',
-                color: 'var(--darkest)',
+                background: bg('var(--gold)', 'var(--lm-accent)'),
+                color: fg('var(--darkest)', '#ffffff'),
                 border: 'none',
                 borderRadius: '8px',
                 padding: '0.6rem 1.25rem',
@@ -176,14 +182,14 @@ export default function GeoOptimizer() {
             <div style={{
               fontSize: '0.8rem',
               fontWeight: 600,
-              color: pincodeStatus.startsWith('⚡') || pincodeStatus.startsWith('🚚') ? '#4cc987' : '#ef4444',
+              color: pincodeStatus.startsWith('⚡') || pincodeStatus.startsWith('🚚') ? (isDark ? '#4cc987' : 'var(--lm-accent)') : '#ef4444',
               lineHeight: 1.4,
               animation: 'fade-in 0.2s'
             }}>
               {pincodeStatus}
             </div>
           ) : (
-            <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.3)', fontStyle: 'italic' }}>
+            <div style={{ fontSize: '0.78rem', color: fg('rgba(255,255,255,0.3)', '#64748b'), fontStyle: 'italic' }}>
               💡 Courier partnerships active: Delhivery, BlueDart, Xpressbees.
             </div>
           )}

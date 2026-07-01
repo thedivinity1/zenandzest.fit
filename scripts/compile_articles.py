@@ -218,6 +218,7 @@ def parse_markdown_article(filepath):
 
     return {
         "id": article_id,
+        "slug": slug,
         "title": title,
         "category": category,
         "excerpt": description,
@@ -252,6 +253,7 @@ def main():
     # Construct TS Content
     ts_output = """export interface ArticleData {
   id: number;
+  slug: string;
   title: string;
   category: string;
   excerpt: string;
@@ -280,6 +282,7 @@ export const articleDataList: Record<number, ArticleData> = {
     for art in articles:
         ts_output += f"  {art['id']}: {{\n"
         ts_output += f"    id: {art['id']},\n"
+        ts_output += f"    slug: {json.dumps(art['slug'])},\n"
         ts_output += f"    title: {json.dumps(art['title'])},\n"
         ts_output += f"    category: {json.dumps(art['category'])},\n"
         ts_output += f"    excerpt: {json.dumps(art['excerpt'])},\n"
@@ -358,7 +361,7 @@ export const articleDataList: Record<number, ArticleData> = {
         url_node = ET.Element('{http://www.sitemaps.org/schemas/sitemap/0.9}url')
         
         loc_node = ET.SubElement(url_node, '{http://www.sitemaps.org/schemas/sitemap/0.9}loc')
-        loc_node.text = f"https://zenandzest.fit/blog/{art['id']}"
+        loc_node.text = f"https://zenandzest.fit/blog/{art['slug']}"
         
         lastmod_node = ET.SubElement(url_node, '{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod')
         lastmod_node.text = "2026-06-30"

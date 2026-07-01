@@ -42,6 +42,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import CartDrawer from "./components/CartDrawer";
 import TalkingAvatar from "./components/TalkingAvatar";
 import WhatsAppChatWidget from "./components/WhatsAppChatWidget";
+import WhatsAppOptIn from "./components/WhatsAppOptIn";
 
 function NotFound() {
   return (
@@ -79,7 +80,7 @@ function Router() {
     <Switch>
       <Route path="/" component={() => <Layout><HomePage /></Layout>} />
       <Route path="/blog" component={() => <Layout><BlogPage /></Layout>} />
-      <Route path="/blog/:id" component={({ params }) => <Layout><BlogDetailPage id={parseInt(params.id)} /></Layout>} />
+      <Route path="/blog/:slug" component={({ params }) => <Layout><BlogDetailPage slug={params.slug} /></Layout>} />
       <Route path="/case-studies" component={() => <Layout><CaseStudiesPage /></Layout>} />
       <Route path="/tools" component={() => <Layout><ToolsPage /></Layout>} />
       <Route path="/tools/:id" component={() => <Layout><ToolsPage /></Layout>} />
@@ -137,6 +138,11 @@ function App() {
           <Router />
         </WouterRouter>
         <CartDrawer />
+        {/* WhatsApp Opt-In Consent Banner */}
+        <WhatsAppOptIn
+          onConsentGiven={() => console.log("WhatsApp opt-in accepted")}
+          onConsentDeclined={() => console.log("WhatsApp opt-in declined")}
+        />
         {/* Brand Avatar - appears globally */}
         <TalkingAvatar
           name="Zara"
@@ -145,7 +151,6 @@ function App() {
           position="bottom-right"
           onHandoff={(reason) => {
             console.log("Avatar handoff:", reason);
-            // Analytics tracking would go here
           }}
         />
         {/* WhatsApp Chat Widget - appears globally */}

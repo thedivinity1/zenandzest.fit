@@ -63,6 +63,7 @@ export default function Navbar() {
     { href: '/quiz', label: 'Quiz' },
     { href: '/case-studies', label: 'Case Studies' },
     { href: '/shop', label: 'The Apothecary' },
+    { href: 'https://wa.me/919876543210', label: 'WhatsApp', external: true },
   ];
 
   const portalLinks = [
@@ -198,10 +199,12 @@ export default function Navbar() {
 
             {/* Rest of nav links */}
             {navLinks.slice(1).filter(link => link.href !== '/longevity-hub').map(link => (
-              <Link key={link.href} href={link.href} className="nav-link" style={{
+              <Link key={link.href} href={link.href} className="nav-link" target={link.external ? "_blank" : undefined} rel={link.external ? "noopener noreferrer" : undefined} style={{
                 color: link.href === '/shop' ? 'var(--gold)' : navTextColor,
-                fontWeight: link.href === '/shop' ? 700 : 600
+                fontWeight: link.href === '/shop' ? 700 : 600,
+                display: 'flex', alignItems: 'center', gap: '0.3rem'
               }}>
+                {link.external && '💬 '}
                 {link.label}
               </Link>
             ))}

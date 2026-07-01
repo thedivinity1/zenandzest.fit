@@ -20,7 +20,7 @@ def launch_chrome_with_cdp(port=9222):
         return
         
     chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-    user_data_dir = r"c:\MASTER_WORKSPACE\HebeWellness\hebewellness-replit\scratch\chrome_profile"
+    user_data_dir = r"c:\MASTER_WORKSPACE\zenandzest\website\scratch\chrome_profile"
     
     # Ensure directory exists
     os.makedirs(user_data_dir, exist_ok=True)
@@ -54,7 +54,7 @@ def main():
     sys.stderr.reconfigure(encoding='utf-8')
     target_domain = "hebe-wellness.surge.sh"
     target_url = f"https://{target_domain}/"
-    project_dir = r"c:\MASTER_WORKSPACE\HebeWellness\hebewellness-replit\artifacts\hebe-wellness"
+    project_dir = r"c:\MASTER_WORKSPACE\zenandzest\website\artifacts\hebe-wellness"
     
     print("==================================================")
     print("      HEBE WELLNESS TECHNICAL SEO AUTOMATOR      ")
